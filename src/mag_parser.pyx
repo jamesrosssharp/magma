@@ -54,9 +54,13 @@ cdef class MagParser:
 
         try:
             while fgets(line, sizeof(line), fp) != NULL:
+                print(f"{line}")
+
                 if strncmp(line, "<< ", 3) == 0:
+                    print("Got layer...")
                     if sscanf(line, "<< %255s >>", layer_buf) == 1:
                         cur_layer = layer_buf.decode('utf-8').lower()
+                        print(f"Layer = {cur_layer}")
                     continue
 
                 if strncmp(line, "rect ", 5) == 0:
@@ -99,4 +103,14 @@ cdef class MagParser:
         finally:
             fclose(fp)
 
+    cpdef load(self, str root_file_path):
 
+        base_dir = os.path.dirname(os.path.abspath(root_file_path))
+        cdef float identity[6]
+        identity[0] = 1.0; identity[1] = 0.0; identity[2] = 0.0
+        identity[3] = 0.0; identity[4] = 1.0; identity[5] = 0.0
+
+        cdef dict all_layers = {}
+        self.parse_file_recursive(root_file_path, identity, all_layers, base_dir)
+
+        return all_layers
