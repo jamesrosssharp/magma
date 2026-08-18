@@ -1,7 +1,7 @@
-from mag_parser import MagParser
+import MagParser
+import MagDatabase
 
-parser = MagParser()
+p = MagParser.MagParser()
+db = MagDatabase.MagDatabase()
 
-layers = parser.load("magic/top.mag")
-
-print(layers)
+p.parse("magic/fet.mag", db)
