@@ -8,20 +8,71 @@ from libc.stdio cimport FILE, fopen, fclose, getline, fwrite
 from libc.stdlib cimport free, atoi
 from cython.operator cimport dereference as deref, preincrement as inc
 
-cdef class MagDatabase:
+cdef class Rect:
+    cdef public int xbot
+    cdef public int ybot
+    cdef public int xtop
+    cdef public int ytop
+
+    
+cdef class Cell:
+    cdef dict layers
+    cdef str name
+    cdef str tech
 
     def __init__(self):
-        pass
+        self.layers = {}
+
+    def setTech(self, str tech):
+        self.tech = tech
+
+    def addRect(self, str layer, int xbot, int ybot, int xtop, int ytop):
+
+        r = Rect()
+
+        r.xbot = xbot
+        r.ybot = ybot
+        r.xtop = xtop
+        r.ytop = ytop
+
+        if layer not in self.layers:
+            self.layers[layer] = []
+
+        self.layers[layer].append(r)
+
+    def dump(self):
+        print(f"cell {self.name}")
+        for l in self.layers:
+            print(f" layer {l}")
+            for r in self.layers[l]:
+                print(f"  ({r.xbot} {r.ybot}) ({r.xtop} {r.ytop})")
+
+
+cdef class MagDatabase:
+
+    cdef dict cells
+
+    def __init__(self):
+        self.cells = {}
 
     def createCell(self, str name):
         
         c = Cell()
 
-        cdef string name_str = name.encode('utf-8')
+        c.name = name 
 
-        c.name = name_str 
+        self.cells[name] = c
 
-        self.cells[name_str] = c
+    def addRectToCell(self, str name, str layer, int xbot, int ybot, int xtop, int ytop):
 
-        
+        self.cells[name].addRect(layer, xbot, ybot, xtop, ytop)
+
+    def setCellTech(self, str name, str tech):
+
+        self.cells[name].setTech(tech)
+
+    def dump(self):
+
+        for c in self.cells:
+            self.cells[c].dump()
 

@@ -36,13 +36,13 @@ cdef class MagParser:
                 elif s.startswith("magscale"):
                     nums = s.split()
 
-                    print(f"Magscale: {nums[1]} {nums[2]}")
+                    #print(f"Magscale: {nums[1]} {nums[2]}")
 
                 elif s.startswith("tech"):
                     tech = s.split()[1]
                     print(f"Tech: {tech}")
 
-                    # db.
+                    db.setCellTech(cell_name_str, tech)
 
                 elif s.startswith("<<"):
 
@@ -53,15 +53,17 @@ cdef class MagParser:
                         break
 
                     cur_layer = s.split()[1]
-                    print(f"Layer: {cur_layer}")
+                    #print(f"Layer: {cur_layer}")
 
                 elif s.startswith("rect"):
 
                     ss = s.split()
 
-                    xbot = ss[1]
-                    ybot = ss[2]
-                    xtop = ss[3]
-                    ytop = ss[4]
+                    xbot = int(ss[1])
+                    ybot = int(ss[2])
+                    xtop = int(ss[3])
+                    ytop = int(ss[4])
 
-                    print(f"Rect: coords ({xbot},{ybot}) ({xtop},{ytop})")
+                    #print(f"Rect: coords ({xbot},{ybot}) ({xtop},{ytop})")
+
+                    db.addRectToCell(cell_name_str, cur_layer, xbot, ybot, xtop, ytop)
