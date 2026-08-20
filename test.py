@@ -11,3 +11,5 @@ db = MagDatabase.MagDatabase()
 p.parse("magic/fet.mag", db)
 
 db.dump()
+
+db.findAllTransistors()
