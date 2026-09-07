@@ -40,6 +40,27 @@ cdef class Rect:
 
         return (touch_horizontal and overlap_y) or (touch_vertical and overlap_x)
 
+    def overlaps(self, Rect r):
+       
+        # If the rects are identical, don't return true
+        #if self.xtop == r.xtop and self.xbot == r.xbot and self.ytop == r.ytop and self.ybot == r.ybot:
+        #    return False
+
+        overlap_top = self.xbot <= r.xtop and self.xtop >= r.xtop and self.ybot <= r.ytop and self.ytop >= r.ytop
+        overlap_bot = self.xbot <= r.xbot and self.xtop >= r.xbot and self.ybot <= r.ybot and self.ytop >= r.ybot
+
+        if overlap_top or overlap_bot:
+            return True
+
+        overlap_top = r.xbot <= self.xtop and r.xtop >= self.xtop and r.ybot <= self.ytop and r.ytop >= self.ytop
+        overlap_bot = r.xbot <= self.xbot and r.xtop >= self.xbot and r.ybot <= self.ybot and r.ytop >= self.ybot
+
+        if overlap_top or overlap_bot:
+            return True
+
+        return False
+
+
 cdef class Transistor:
 
     cdef list gates
@@ -85,19 +106,35 @@ cdef class Cell:
 
         if self.layers['nmos'] is not None:
             for r in self.layers['nmos']:
+            
+                # Find all polysilicon rects which abut the nmos rects
 
                 poly_r = []
 
                 for rp in self.layers['poly']:
                     if rp.abuts(r):
                         poly_r.append(rp)
+
+
+                for rp in self.layers['poly']:
                     for i in range(0, len(poly_r)):
-                        if rp.abuts(poly_r[i]):
+                        if poly_r[i].abuts(rp):
                             poly_r.append(rp)
 
                 print(poly_r)
+                
+                # Find all polycont rects which overlap poly_r
+                
+                poly_c = []
 
-            # Find all polysilicon rects which abut the nmos rects
+                for pc in self.layers['polycont']:
+                    for pr in poly_r:
+                        print(f"{pc} {pr}")
+                        if pc.overlaps(pr):
+                            poly_c.append(pc)
+                            break
+
+                print(poly_c)
 
 
 cdef class MagDatabase:
