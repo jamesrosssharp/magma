@@ -1,13 +1,6 @@
 # cython: language_level=3
 # distutils: language = c++
 
-from libcpp.vector cimport vector
-from libcpp.string cimport string
-from libcpp.unordered_map cimport unordered_map
-from libc.stdio cimport FILE, fopen, fclose, getline, fwrite
-from libc.stdlib cimport free, atoi
-from cython.operator cimport dereference as deref, preincrement as inc
-
 cdef class Rect:
     cdef public int xbot
     cdef public int ybot
@@ -58,7 +51,13 @@ cdef class Rect:
         if overlap_top or overlap_bot:
             return True
 
+        # TODO: Rects which completely straddle each other
+
         return False
+
+    def centroid(self):
+
+        return ((self.xbot + self.xtop) // 2, (self.ybot + self.ytop) // 2)
 
 
 cdef class Transistor:
@@ -70,13 +69,18 @@ cdef class Transistor:
         self.gates         = []
         self.source_drains = []
 
+    def __repr__(self):
+        return f"sources: {self.source_drains} gates: {self.gates}"
+
 cdef class Cell:
     cdef dict layers
     cdef str name
     cdef str tech
+    cdef list transistors
 
     def __init__(self):
         self.layers = {}
+        self.transistors = []
 
     def setTech(self, str tech):
         self.tech = tech
@@ -121,7 +125,6 @@ cdef class Cell:
                         if poly_r[i].abuts(rp):
                             poly_r.append(rp)
 
-                print(poly_r)
                 
                 # Find all polycont rects which overlap poly_r
                 
@@ -129,12 +132,49 @@ cdef class Cell:
 
                 for pc in self.layers['polycont']:
                     for pr in poly_r:
-                        print(f"{pc} {pr}")
                         if pc.overlaps(pr):
                             poly_c.append(pc)
                             break
 
-                print(poly_c)
+
+                # Find source and drain contacts
+
+                ndiff_r = []
+
+                for rp in self.layers['ndiff']:
+                    if rp.abuts(r):
+                        ndiff_r.append(rp)
+
+
+                for rp in self.layers['ndiff']:
+                    for i in range(0, len(ndiff_r)):
+                        if ndiff_r[i].abuts(rp):
+                            ndiff_r.append(rp)
+
+                # Find all ndiffc rects which overlap ndiff_r
+                
+                ndiff_c = []
+
+                for nc in self.layers['ndiffc']:
+                    for nr in ndiff_r:
+                        if nc.overlaps(nr):
+                            ndiff_c.append(nc)
+                            break
+
+                print(ndiff_c)
+
+                t = Transistor() 
+
+                for r in poly_c:
+                    t.gates.append(r.centroid())
+
+                for r in ndiff_c:
+                    t.source_drains.append(r.centroid())
+
+                print(f"Found transistor {t}")
+
+                self.transistors.append(t)
+
 
 
 cdef class MagDatabase:
