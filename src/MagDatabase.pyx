@@ -1,6 +1,8 @@
 # cython: language_level=3
 # distutils: language = c++
 
+import numpy as np
+
 cdef class Rect:
     cdef public int xbot
     cdef public int ybot
@@ -72,15 +74,60 @@ cdef class Transistor:
     def __repr__(self):
         return f"sources: {self.source_drains} gates: {self.gates}"
 
+    def dump_with_transform(self, transform):
+        for g in self.gates:
+            p = transform.transform_point(g)
+            print(f"\tgate: {p}")
+
+        for sd in self.source_drains:
+            p = transform.transform_point(sd)
+            print(f"\tsource/drain: {p}")
+
+
+
+cdef class Transform:
+
+    cdef int a
+    cdef int b
+    cdef int c
+    cdef int d
+    cdef int e
+    cdef int f
+
+    def __init__(self, _a, _b, _c, _d, _e, _f):
+        self.a = _a
+        self.b = _b
+        self.c = _c
+        self.d = _d
+        self.e = _e
+        self.f = _f
+
+    def toMatrix(self):
+        return np.array([[self.a, self.b, self.c], [self.d, self.e, self.f], [0, 0, 1]])
+
+    def Transform(self, Transform t):
+
+        tt = np.matmul(self.toMatrix(), t.toMatrix())
+
+        return Transform(tt[0][0], tt[0][1], tt[0][2], tt[1][0], tt[1][1], tt[1][2])
+
+    def transform_point(self, p):
+
+        pp = np.matmul(self.toMatrix(), np.array([p[0], p[1], 1]))
+
+        return (pp[0], pp[1])
+
 cdef class Cell:
     cdef dict layers
     cdef str name
     cdef str tech
     cdef list transistors
-
+    cdef list uses
+    
     def __init__(self):
         self.layers = {}
         self.transistors = []
+        self.uses = []
 
     def setTech(self, str tech):
         self.tech = tech
@@ -101,6 +148,35 @@ cdef class Cell:
             for r in self.layers[l]:
                 r.dump()
 
+        for u in self.uses:
+            print(f" uses {u}")
+
+    def addUse(self, name):
+
+        handle = len(self.uses)
+        self.uses.append({'name': name, 'transform': None})
+
+        return handle
+
+    def setUseTransform(self, use, a, b, c, d, e, f):
+        self.uses[use]['transform'] = Transform(a, b, c, d, e, f)
+
+    def dump_transistors_with_transform(self, db, transform):    
+        """
+        Dump transistors in this cell and in child cells
+        """
+        print(f"Dumping transistors in cell {self.name}")
+
+        for i, t in enumerate(self.transistors):
+            print(f"Dumping transistor {i}")
+            t.dump_with_transform(transform)
+
+        for u in self.uses:
+            db.cells[u['name']].dump_transistors_with_transform(db, u['transform'].Transform(transform))
+
+    def dump_transistors(self, db):
+        self.dump_transistors_with_transform(db, Transform(1, 0, 0, 0, 1, 0))
+
     def find_transistors(self):
         """
         Returns a list of Transistor objects for all transistors in the cell
@@ -108,7 +184,7 @@ cdef class Cell:
 
         # 1. First, find all nmos rects. This is the active region of an nmos transistor.
 
-        if self.layers['nmos'] is not None:
+        if 'nmos' in self.layers:
             for r in self.layers['nmos']:
             
                 # Find all polysilicon rects which abut the nmos rects
@@ -179,12 +255,10 @@ cdef class Cell:
 
 cdef class MagDatabase:
 
-    cdef dict cells
-    cdef dict cell_transistors
+    cdef public dict cells
 
     def __init__(self):
         self.cells = {}
-        self.cell_transistors = {}
 
     def createCell(self, str name):
         
@@ -202,6 +276,14 @@ cdef class MagDatabase:
 
         self.cells[name].setTech(tech)
 
+    def setCellUse(self, str name, str new_cell):
+
+       return self.cells[name].addUse(new_cell)
+
+    def setCellUseTransform(self, name, cell_inst, a, b, c, d, e, f):
+    
+        self.cells[name].setUseTransform(cell_inst, a, b, c, d, e, f)
+
     def dump(self):
 
         for c in self.cells:
@@ -211,9 +293,14 @@ cdef class MagDatabase:
 
         t = self.cells[name].find_transistors()
         
-        self.cell_transistors[name] = t
-
     def findAllTransistors(self):
 
         for c in self.cells:
             self.findCellTransistors(c)
+
+    def dumpCellTransistors(self, str name):
+
+        cell = self.cells[name]
+
+        cell.dump_transistors(self)
+

@@ -8,6 +8,8 @@ from libc.stdio cimport FILE, fopen, fclose, getline, fwrite
 from libc.stdlib cimport free, atoi
 from cython.operator cimport dereference as deref, preincrement as inc
 
+import os
+
 from MagDatabase import MagDatabase
 
 cdef class MagParser:
@@ -43,6 +45,28 @@ cdef class MagParser:
                     print(f"Tech: {tech}")
 
                     db.setCellTech(cell_name_str, tech)
+
+                elif s.startswith("use"):
+                    new_cell = s.split()[1]
+
+                    newfile = os.path.dirname(filename) + "/" + new_cell + ".mag"
+
+                    self.parse(newfile, db)
+
+                    cell_inst = db.setCellUse(cell_name_str, new_cell)
+
+                elif s.startswith("transform"):
+
+                    parms = s.split()
+
+                    a = int(parms[1])
+                    b = int(parms[2])
+                    c = int(parms[3])
+                    d = int(parms[4])
+                    e = int(parms[5])
+                    f = int(parms[6])
+
+                    db.setCellUseTransform(cell_name_str, cell_inst, a, b, c, d, e, f)
 
                 elif s.startswith("<<"):
 

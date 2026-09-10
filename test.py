@@ -8,8 +8,10 @@ import MagDatabase
 p = MagParser.MagParser()
 db = MagDatabase.MagDatabase()
 
-p.parse("magic/fet.mag", db)
+p.parse("magic/top.mag", db)
 
-db.dump()
+#db.dump()
 
 db.findAllTransistors()
+
+db.dumpCellTransistors('top')
