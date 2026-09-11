@@ -2,6 +2,7 @@
 # distutils: language = c++
 
 import numpy as np
+import time
 
 cdef class Rect:
     cdef public int xbot
@@ -64,8 +65,8 @@ cdef class Rect:
 
 cdef class Transistor:
 
-    cdef list gates
-    cdef list source_drains
+    cdef public list gates
+    cdef public list source_drains
 
     def __init__(self):
         self.gates         = []
@@ -83,16 +84,30 @@ cdef class Transistor:
             p = transform.transform_point(sd)
             print(f"\tsource/drain: {p}")
 
+    def transform(self, transform):
+
+        t = Transistor()
+
+        for g in self.gates:
+            p = transform.transform_point(g)
+            t.gates.append(p)
+
+        for sd in self.source_drains:
+            p = transform.transform_point(sd)
+            t.source_drains.append(p)
+
+        return t
+
 
 
 cdef class Transform:
 
-    cdef int a
-    cdef int b
-    cdef int c
-    cdef int d
-    cdef int e
-    cdef int f
+    cdef public int a
+    cdef public int b
+    cdef public int c
+    cdef public int d
+    cdef public int e
+    cdef public int f
 
     def __init__(self, _a, _b, _c, _d, _e, _f):
         self.a = _a
@@ -118,11 +133,11 @@ cdef class Transform:
         return (pp[0], pp[1])
 
 cdef class Cell:
-    cdef dict layers
-    cdef str name
-    cdef str tech
-    cdef list transistors
-    cdef list uses
+    cdef public dict layers
+    cdef public str name
+    cdef public str tech
+    cdef public list transistors
+    cdef public list uses
     
     def __init__(self):
         self.layers = {}
@@ -151,10 +166,10 @@ cdef class Cell:
         for u in self.uses:
             print(f" uses {u}")
 
-    def addUse(self, name):
+    def addUse(self, name, inst_name):
 
         handle = len(self.uses)
-        self.uses.append({'name': name, 'transform': None})
+        self.uses.append({'name': name, 'inst_name': inst_name, 'transform': None})
 
         return handle
 
@@ -176,6 +191,20 @@ cdef class Cell:
 
     def dump_transistors(self, db):
         self.dump_transistors_with_transform(db, Transform(1, 0, 0, 0, 1, 0))
+
+    def get_transistors_with_transform(self, db, transform):    
+        """
+        Get transistors in this cell and in child cells
+        """
+        t = [tt.transform(transform) for tt in self.transistors]
+
+        for u in self.uses:
+            t += db.cells[u['name']].get_transistors_with_transform(db, u['transform'].Transform(transform))
+
+        return t
+
+    def get_transistors(self, db):
+        return self.get_transistors_with_transform(db, Transform(1, 0, 0, 0, 1, 0))
 
     def find_transistors(self):
         """
@@ -237,8 +266,6 @@ cdef class Cell:
                             ndiff_c.append(nc)
                             break
 
-                print(ndiff_c)
-
                 t = Transistor() 
 
                 for r in poly_c:
@@ -251,6 +278,73 @@ cdef class Cell:
 
                 self.transistors.append(t)
 
+    def getBbox(self, db):
+
+        xbot = 1e10
+        ybot = 1e10
+        xtop = -1e10
+        ytop = -1e10
+
+        for k, v in self.layers.items():
+            for r in v:
+                if r.xbot < xbot:
+                    xbot = r.xbot
+                if r.ybot < ybot:
+                    ybot = r.ybot
+                if r.xtop > xtop:
+                    xtop = r.xtop
+                if r.ytop > ytop:
+                    ytop = r.ytop
+
+        for u in self.uses:
+            r = db.getCell(u['name']).getBbox(db)
+            if r.xbot < xbot:
+                xbot = r.xbot
+            if r.ybot < ybot:
+                ybot = r.ybot
+            if r.xtop > xtop:
+                xtop = r.xtop
+            if r.ytop > ytop:
+                ytop = r.ytop
+
+        return Rect(xbot, ybot, xtop, ytop)
+
+
+
+    def writeMagFile(self, db, fname):
+
+        with open(fname, "w") as f:
+
+            f.write("magic\n")
+
+            f.write(f"tech {self.tech}\n")
+
+            # FIXME: Load from file when parsing
+            f.write(f"magscale 1 2\n")
+
+            f.write(f"timestamp {int(time.time())}\n")
+
+            f.write(f"<< checkpaint >>\n")
+
+            r = self.getBbox(db)
+
+            f.write(f"rect {r.xbot} {r.ybot} {r.xtop} {r.ytop}\n")
+
+            for k, v in self.layers.items():
+                f.write(f"<< {k} >>\n")
+                
+                for r in v:
+                    f.write(f"rect {r.xbot} {r.ybot} {r.xtop} {r.ytop}\n")
+
+            for inst in self.uses:
+                f.write(f"use {inst['name']}  {inst['inst_name']}\n")
+                f.write(f"timestamp {int(time.time() - 100)}\n")
+                f.write(f"transform {inst['transform'].a} {inst['transform'].b} {inst['transform'].c} {inst['transform'].d} {inst['transform'].e} {inst['transform'].f}\n")
+                r = db.getCell(inst['name']).getBbox(db)
+                f.write(f"box {r.xbot} {r.ybot} {r.xtop} {r.ytop}\n")
+
+
+            f.write("<< end >>\n")
 
 
 cdef class MagDatabase:
@@ -276,9 +370,9 @@ cdef class MagDatabase:
 
         self.cells[name].setTech(tech)
 
-    def setCellUse(self, str name, str new_cell):
+    def setCellUse(self, str name, str new_cell, str inst_name):
 
-       return self.cells[name].addUse(new_cell)
+       return self.cells[name].addUse(new_cell, inst_name)
 
     def setCellUseTransform(self, name, cell_inst, a, b, c, d, e, f):
     
@@ -303,4 +397,18 @@ cdef class MagDatabase:
         cell = self.cells[name]
 
         cell.dump_transistors(self)
+
+    def getCellTransistors(self, str name):
+        """
+        Returns all transistors in the cell and in all child cells.
+        """
+
+        cell = self.cells[name]
+
+        return cell.get_transistors(self)
+
+    def getCell(self, str name):
+
+        return self.cells[name]
+
 

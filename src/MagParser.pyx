@@ -42,7 +42,7 @@ cdef class MagParser:
 
                 elif s.startswith("tech"):
                     tech = s.split()[1]
-                    print(f"Tech: {tech}")
+                    #print(f"Tech: {tech}")
 
                     db.setCellTech(cell_name_str, tech)
 
@@ -53,7 +53,7 @@ cdef class MagParser:
 
                     self.parse(newfile, db)
 
-                    cell_inst = db.setCellUse(cell_name_str, new_cell)
+                    cell_inst = db.setCellUse(cell_name_str, new_cell, s.split()[2])
 
                 elif s.startswith("transform"):
 
