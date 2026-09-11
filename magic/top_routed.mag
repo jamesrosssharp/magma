@@ -1,9 +1,9 @@
 magic
 tech sky130A
 magscale 1 2
-timestamp 1789097141
+timestamp 1789108973
 << checkpaint >>
-rect -694 -252 211 477
+rect -684 -252 211 584
 << error_s >>
 rect -683 471 -625 477
 rect -367 471 -309 477
@@ -18,13 +18,18 @@ rect -367 243 -355 277
 rect -683 237 -625 243
 rect -367 237 -309 243
 << metal1 >>
-rect -694 160 -614 270
+rect -674 140 -634 280
+rect -684 130 -308 190
+rect -358 140 -318 280
+rect -674 434 -634 574
+rect -684 524 -308 584
+rect -358 434 -318 574
 use fet  fet_0
-timestamp 1789097041
+timestamp 1789108873
 transform 1 0 -654 0 1 357
 box -211 -252 211 252
 use fet  fet_1
-timestamp 1789097041
+timestamp 1789108873
 transform 1 0 -338 0 1 357
 box -211 -252 211 252
 << end >>
