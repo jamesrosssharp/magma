@@ -25,7 +25,7 @@ cy = t[0].gates[1][1]
 
 top = db.getCell('top')
 
-top.addRect('metal1', cx - 40, cy - 100, cx + 40, cy + 40)
+top.addRect('metal1', cx - 40, cy - 100, cx + 40, cy + 10)
 
 top.dump()
 
