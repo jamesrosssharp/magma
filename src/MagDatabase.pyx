@@ -36,27 +36,35 @@ cdef class Rect:
 
         return (touch_horizontal and overlap_y) or (touch_vertical and overlap_x)
 
+    # TODO: Fix this
     def overlaps(self, Rect r):
        
         # If the rects are identical, don't return true
         #if self.xtop == r.xtop and self.xbot == r.xbot and self.ytop == r.ytop and self.ybot == r.ybot:
         #    return False
 
-        overlap_top = self.xbot <= r.xtop and self.xtop >= r.xtop and self.ybot <= r.ytop and self.ytop >= r.ytop
-        overlap_bot = self.xbot <= r.xbot and self.xtop >= r.xbot and self.ybot <= r.ybot and self.ytop >= r.ybot
+        #overlap_top = self.xbot <= r.xtop and self.xtop >= r.xtop and self.ybot <= r.ytop and self.ytop >= r.ytop
+        #overlap_bot = self.xbot <= r.xbot and self.xtop >= r.xbot and self.ybot <= r.ybot and self.ytop >= r.ybot
 
-        if overlap_top or overlap_bot:
-            return True
+        #if overlap_top or overlap_bot:
+        #    return True
 
-        overlap_top = r.xbot <= self.xtop and r.xtop >= self.xtop and r.ybot <= self.ytop and r.ytop >= self.ytop
-        overlap_bot = r.xbot <= self.xbot and r.xtop >= self.xbot and r.ybot <= self.ybot and r.ytop >= self.ybot
+        #overlap_top = r.xbot <= self.xtop and r.xtop >= self.xtop and r.ybot <= self.ytop and r.ytop >= self.ytop
+        #overlap_bot = r.xbot <= self.xbot and r.xtop >= self.xbot and r.ybot <= self.ybot and r.ytop >= self.ybot
 
-        if overlap_top or overlap_bot:
-            return True
+        #if overlap_top or overlap_bot:
+        #    return True
 
         # TODO: Rects which completely straddle each other
 
-        return False
+        if r.xtop < self.xbot or r.xbot > self.xtop:
+            return False
+
+        if r.ybot > self.ytop or r.ytop < self.ybot:
+            return False
+
+
+        return True
 
     def centroid(self):
 
@@ -198,10 +206,11 @@ cdef class Cell:
         """
         t = [tt.transform(transform) for tt in self.transistors]
 
+        tt = {}
         for u in self.uses:
-            t += db.cells[u['name']].get_transistors_with_transform(db, u['transform'].Transform(transform))
+            tt[u['inst_name']] = db.cells[u['name']].get_transistors_with_transform(db, u['transform'].Transform(transform))
 
-        return t
+        return {self.name: t, 'children': tt}
 
     def get_transistors(self, db):
         return self.get_transistors_with_transform(db, Transform(1, 0, 0, 0, 1, 0))

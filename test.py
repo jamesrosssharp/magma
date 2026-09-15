@@ -19,19 +19,25 @@ t = db.getCellTransistors('top')
 
 #print(t[0])
 
-print(t[0].gates[0])
+print(t)
 
-cx = t[0].gates[1][0]
-cy = t[0].gates[1][1]
+cx = t['children']['fet_0']['fet'][0].gates[1][0]
+cy = t['children']['fet_0']['fet'][0].gates[1][1]
 
-dx = t[1].gates[1][0]
-dy = t[1].gates[1][1]
+dx = t['children']['fet_1']['fet'][0].gates[1][0]
+dy = t['children']['fet_1']['fet'][0].gates[1][1]
 
-cx2 = t[0].gates[0][0]
-cy2 = t[0].gates[0][1]
+cx2 = t['children']['fet_0']['fet'][0].gates[0][0]
+cy2 = t['children']['fet_0']['fet'][0].gates[0][1]
 
-dx2 = t[1].gates[0][0]
-dy2 = t[1].gates[0][1]
+dx2 = t['children']['fet_1']['fet'][0].gates[0][0]
+dy2 = t['children']['fet_1']['fet'][0].gates[0][1]
+
+sx = t['children']['fet_0']['fet'][0].source_drains[0][0]
+sy = t['children']['fet_0']['fet'][0].source_drains[0][1]
+
+sx2 = t['children']['fet_1']['fet'][0].source_drains[1][0]
+sy2 = t['children']['fet_1']['fet'][0].source_drains[1][1]
 
 
 
@@ -51,6 +57,14 @@ r.route('n', 100, 40)
 r.route('e', dx2 - cx2,  60)
 r.route('s', 100, 40)
 
+r.begin(sx - 40, sy, 'metal1')
+r.route('w', 80, 80)
+r.via('metal2', 60, 60)
+r.route('s', 200, 100)
+r.route('e', 644, 100)
+r.route('n', 200, 100)
+r.via('metal1', 60, 60)
+r.routeTo('w', sx2 + 40, 80)
 
 top.dump()
 

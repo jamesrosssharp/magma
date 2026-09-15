@@ -64,3 +64,29 @@ class Router:
         self.cursor_y = new_y
         self.width = width
 
+    def routeTo(self, direction, dest, width):
+
+        if direction == 'n':
+            self.route(direction, dest - self.cursor_y, width)
+        elif direction == 's':
+            self.route(direction, self.cursor_y - dest, width)
+        elif direction == 'e':
+            self.route(direction, dest - self.cursor_x, width)
+        elif direction == 'w':
+            self.route(direction, self.cursor_x - dest, width)
+       
+
+
+    def via(self, layer, w, h):
+
+        if (self.layer == 'metal1' and layer == 'metal2') or (self.layer == 'metal2' and layer == 'metal1'):
+            l = 'via1'
+
+            self.cell.addRect(l, self.cursor_x - w / 2, self.cursor_y - h / 2, self.cursor_x + w / 2, self.cursor_y + w / 2)
+
+            self.layer = layer
+    
+        else:
+
+            raise ValueError(f"Unknown layer pair: {self.layer} {layer}")
+
