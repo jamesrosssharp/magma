@@ -91,3 +91,38 @@ cdef class MagParser:
                     #print(f"Rect: coords ({xbot},{ybot}) ({xtop},{ytop})")
 
                     db.addRectToCell(cell_name_str, cur_layer, xbot, ybot, xtop, ytop)
+
+                # flabel metal1 1826 222 2026 422 0 FreeSans 256 0 0 0 VDD
+                # port 0 nsew
+
+                elif s.startswith("flabel"):
+
+                    ss = s.split()
+
+                    layer = ss[1] 
+                    xbot = int(ss[2])
+                    ybot = int(ss[3])
+                    xtop = int(ss[4])
+                    ytop = int(ss[5])
+
+                    pos  = int(ss[6])
+                    font = ss[7]
+                    a    = int(ss[8])
+                    b    = int(ss[9])
+                    c    = int(ss[10])
+                    d    = int(ss[11])
+
+                    labname = ss[12]
+
+                    db.addLabelToCell(cell_name_str, layer, xbot, ybot, xtop, ytop, pos, font, a, b, c, d, labname)
+
+                elif s.startswith("port"):
+
+                    ss = s.split()
+
+                    port = int(ss[1])
+                    directions = ss[2]
+                    
+                    db.setLabelPort(cell_name_str, labname, port, directions)
+
+

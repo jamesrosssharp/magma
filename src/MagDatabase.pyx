@@ -75,13 +75,15 @@ cdef class Transistor:
 
     cdef public list gates
     cdef public list source_drains
+    cdef public str  ttype
 
     def __init__(self):
         self.gates         = []
         self.source_drains = []
+        self.ttype         = ""
 
     def __repr__(self):
-        return f"sources: {self.source_drains} gates: {self.gates}"
+        return f"type: {self.ttype} sources: {self.source_drains} gates: {self.gates}"
 
     def dump_with_transform(self, transform):
         for g in self.gates:
@@ -95,6 +97,8 @@ cdef class Transistor:
     def transform(self, transform):
 
         t = Transistor()
+
+        t.ttype = self.ttype
 
         for g in self.gates:
             p = transform.transform_point(g)
@@ -140,17 +144,44 @@ cdef class Transform:
 
         return (pp[0], pp[1])
 
+# l = Label(layer, xbot, ybot, xtop, ytop, font, a, b, c, d, labname)
+
+class Label:
+
+    def __init__(self, layer, xbot, ybot, xtop, ytop, pos, font, a, b, c, d, labname):
+
+        self.layer  = layer
+        self.r      = Rect(xbot, ybot, xtop, ytop)
+        self.pos    = pos
+        self.font   = font
+        self.r2     = Rect(a, b, c, d)
+        self.name   = labname
+        self.port   = 0
+        self.directions = "nsew"
+
+    def setPort(self, port, directions):
+        self.port = port
+        self.directions = directions
+
+    def __repr__(self):
+        return f"{self.layer} {self.r} {self.pos} {self.font} {self.r2} {self.name} {self.port} {self.directions}"
+    
+
+
+
 cdef class Cell:
     cdef public dict layers
     cdef public str name
     cdef public str tech
     cdef public list transistors
     cdef public list uses
+    cdef public dict labels
     
     def __init__(self):
         self.layers = {}
         self.transistors = []
         self.uses = []
+        self.labels = {}
 
     def setTech(self, str tech):
         self.tech = tech
@@ -173,6 +204,9 @@ cdef class Cell:
 
         for u in self.uses:
             print(f" uses {u}")
+
+        for k, v in self.labels.items():
+            print(f" label {v}")
 
     def addUse(self, name, inst_name):
 
@@ -210,7 +244,7 @@ cdef class Cell:
         for u in self.uses:
             tt[u['inst_name']] = db.cells[u['name']].get_transistors_with_transform(db, u['transform'].Transform(transform))
 
-        return {self.name: t, 'children': tt}
+        return {'self': t, 'children': tt}
 
     def get_transistors(self, db):
         return self.get_transistors_with_transform(db, Transform(1, 0, 0, 0, 1, 0))
@@ -277,15 +311,84 @@ cdef class Cell:
 
                 t = Transistor() 
 
+                t.ttype = "nmos"
+
                 for r in poly_c:
                     t.gates.append(r.centroid())
 
                 for r in ndiff_c:
                     t.source_drains.append(r.centroid())
 
-                print(f"Found transistor {t}")
+                self.transistors.append(t)
+
+        if 'pmos' in self.layers:
+            for r in self.layers['pmos']:
+            
+                # Find all polysilicon rects which abut the nmos rects
+
+                poly_r = []
+
+                for rp in self.layers['poly']:
+                    if rp.abuts(r):
+                        poly_r.append(rp)
+
+
+                for rp in self.layers['poly']:
+                    for i in range(0, len(poly_r)):
+                        if poly_r[i].abuts(rp):
+                            poly_r.append(rp)
+
+                
+                # Find all polycont rects which overlap poly_r
+                
+                poly_c = []
+
+                for pc in self.layers['polycont']:
+                    for pr in poly_r:
+                        if pc.overlaps(pr):
+                            poly_c.append(pc)
+                            break
+
+
+                # Find source and drain contacts
+
+                ndiff_r = []
+
+                for rp in self.layers['pdiff']:
+                    if rp.abuts(r):
+                        ndiff_r.append(rp)
+
+
+                for rp in self.layers['pdiff']:
+                    for i in range(0, len(ndiff_r)):
+                        if ndiff_r[i].abuts(rp):
+                            ndiff_r.append(rp)
+
+                # Find all ndiffc rects which overlap ndiff_r
+                
+                ndiff_c = []
+
+                for nc in self.layers['pdiffc']:
+                    for nr in ndiff_r:
+                        if nc.overlaps(nr):
+                            ndiff_c.append(nc)
+                            break
+
+                t = Transistor() 
+
+                t.ttype = "pmos"
+
+                for r in poly_c:
+                    t.gates.append(r.centroid())
+
+                for r in ndiff_c:
+                    t.source_drains.append(r.centroid())
 
                 self.transistors.append(t)
+
+
+
+
 
     def getBbox(self, db):
 
@@ -356,6 +459,20 @@ cdef class Cell:
             f.write("<< end >>\n")
 
 
+    def addLabel(self, layer, xbot, ybot, xtop, ytop, pos, font, a, b, c, d, labname):
+
+        l = Label(layer, xbot, ybot, xtop, ytop, pos, font, a, b, c, d, labname)
+
+        self.labels[labname] = l
+
+
+    def setLabelPort(self, labname, port, directions):
+
+        self.labels[labname].setPort(port, directions)
+
+
+
+
 cdef class MagDatabase:
 
     cdef public dict cells
@@ -419,5 +536,15 @@ cdef class MagDatabase:
     def getCell(self, str name):
 
         return self.cells[name]
+
+
+    def addLabelToCell(self, cell_name_str, layer, xbot, ybot, xtop, ytop, pos, font, a, b, c, d, labname):
+
+        self.cells[cell_name_str].addLabel(layer, xbot, ybot, xtop, ytop, pos, font, a, b, c, d, labname)
+
+
+    def setLabelPort(self, cell_name_str, labname, port, directions):
+
+        self.cells[cell_name_str].setLabelPort(labname, port, directions)
 
 
