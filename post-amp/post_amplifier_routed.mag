@@ -1,9 +1,9 @@
 magic
 tech sky130A
 magscale 1 2
-timestamp 1790074550
+timestamp 1790159598
 << checkpaint >>
-rect -211 -969 2439 284
+rect -211 -1361 2439 284
 << error_s >>
 rect 1433 -285 1491 -279
 rect 1749 -285 1807 -279
@@ -29,36 +29,55 @@ rect 1746 -963 1758 -929
 rect 2062 -963 2074 -929
 rect 1746 -969 1804 -963
 rect 2062 -969 2120 -963
+<< metal1 >>
+rect 1755 -1281 1795 -926
+rect 1744 -1281 1795 -1241
+rect 1664 -1361 1864 -1161
+rect 2071 -1276 2111 -926
+rect 2078 -1276 2111 -1236
+rect 1998 -1356 2198 -1156
+rect 2387 -718 2427 -282
 use sky130_fd_pr__nfet_01v8_CQH6Q5  XM1
-timestamp 1790074450
+timestamp 1790159498
 transform 1 0 1775 0 1 -822
 box -211 -279 211 279
 use sky130_fd_pr__nfet_01v8_CQH6Q5  XM2
-timestamp 1790074450
+timestamp 1790159498
 transform 1 0 2091 0 1 -822
 box -211 -279 211 279
 use sky130_fd_pr__nfet_01v8_D6NL62  XM3
-timestamp 1790074450
+timestamp 1790159498
 transform 1 0 1459 0 1 -822
 box -211 -279 211 279
 use sky130_fd_pr__pfet_01v8_5ETXLA  XM4
-timestamp 1790074450
+timestamp 1790159498
 transform 1 0 1778 0 1 -174
 box -211 -284 211 284
 use sky130_fd_pr__pfet_01v8_5ETXLA  XM5
-timestamp 1790074450
+timestamp 1790159498
 transform 1 0 2094 0 1 -174
 box -211 -284 211 284
 use sky130_fd_pr__pfet_01v8_5ETXLA  XM6
-timestamp 1790074450
+timestamp 1790159498
 transform 1 0 1462 0 1 -174
 box -211 -284 211 284
 use sky130_fd_pr__nfet_01v8_D6NL62  XM7
-timestamp 1790074450
+timestamp 1790159498
 transform 1 0 2407 0 1 -822
 box -211 -279 211 279
 use sky130_fd_pr__pfet_01v8_5ETXLA  XM8
-timestamp 1790074450
+timestamp 1790159498
 transform 1 0 2410 0 1 -174
 box -211 -284 211 284
+<< labels >>
+flabel metal1 1826 222 2026 422 0 FreeSans 256 0 0 0 VDD
+port 0 nsew
+flabel metal1 2660 -558 2860 -358 0 FreeSans 256 0 0 0 VOUT
+port 3 nsew
+flabel metal1 1145 -1367 1345 -1167 0 FreeSans 256 0 0 0 VSS
+port 4 nsew
+flabel metal1 1664 -1361 1864 -1161 0 FreeSans 256 0 0 0 VLAT_PLUS
+port 1 nsew
+flabel metal1 1998 -1356 2198 -1156 0 FreeSans 256 0 0 0 VLAT_MINUS
+port 2 nsew
 << end >>

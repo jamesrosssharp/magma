@@ -166,7 +166,8 @@ class Label:
     def __repr__(self):
         return f"{self.layer} {self.r} {self.pos} {self.font} {self.r2} {self.name} {self.port} {self.directions}"
     
-
+    def centroid(self):
+        return self.r.centroid()
 
 
 cdef class Cell:
@@ -249,6 +250,18 @@ cdef class Cell:
     def get_transistors(self, db):
         return self.get_transistors_with_transform(db, Transform(1, 0, 0, 0, 1, 0))
 
+    def getPins(self, db):
+        """
+        Get pins hierarchy
+        """
+
+        p = {}
+
+        for u in self.uses:
+            p[u['inst_name']] = db.cells[u['name']].getPins(db)
+
+        return {'self': self.labels, 'children': p}
+
     def find_transistors(self):
         """
         Returns a list of Transistor objects for all transistors in the cell
@@ -324,7 +337,7 @@ cdef class Cell:
         if 'pmos' in self.layers:
             for r in self.layers['pmos']:
             
-                # Find all polysilicon rects which abut the nmos rects
+                # Find all polysilicon rects which abut the pmos rects
 
                 poly_r = []
 
@@ -352,26 +365,26 @@ cdef class Cell:
 
                 # Find source and drain contacts
 
-                ndiff_r = []
+                pdiff_r = []
 
                 for rp in self.layers['pdiff']:
                     if rp.abuts(r):
-                        ndiff_r.append(rp)
+                        pdiff_r.append(rp)
 
 
                 for rp in self.layers['pdiff']:
-                    for i in range(0, len(ndiff_r)):
-                        if ndiff_r[i].abuts(rp):
-                            ndiff_r.append(rp)
+                    for i in range(0, len(pdiff_r)):
+                        if pdiff_r[i].abuts(rp):
+                            pdiff_r.append(rp)
 
                 # Find all ndiffc rects which overlap ndiff_r
                 
-                ndiff_c = []
+                pdiff_c = []
 
                 for nc in self.layers['pdiffc']:
-                    for nr in ndiff_r:
+                    for nr in pdiff_r:
                         if nc.overlaps(nr):
-                            ndiff_c.append(nc)
+                            pdiff_c.append(nc)
                             break
 
                 t = Transistor() 
@@ -381,7 +394,7 @@ cdef class Cell:
                 for r in poly_c:
                     t.gates.append(r.centroid())
 
-                for r in ndiff_c:
+                for r in pdiff_c:
                     t.source_drains.append(r.centroid())
 
                 self.transistors.append(t)
@@ -455,6 +468,11 @@ cdef class Cell:
                 r = db.getCell(inst['name']).getBbox(db)
                 f.write(f"box {r.xbot} {r.ybot} {r.xtop} {r.ytop}\n")
 
+            f.write("<< labels >>\n")
+
+            for k, v in self.labels.items():
+                f.write(f"flabel {v.layer} {v.r.xbot} {v.r.ybot} {v.r.xtop} {v.r.ytop} {v.pos} {v.font} {v.r2.xbot} {v.r2.ybot} {v.r2.xtop} {v.r2.ytop} {v.name}\n")
+                f.write(f"port {v.port} {v.directions}\n")
 
             f.write("<< end >>\n")
 
@@ -547,4 +565,6 @@ cdef class MagDatabase:
 
         self.cells[cell_name_str].setLabelPort(labname, port, directions)
 
+    def getCellPins(self, cell_name_str):
 
+        return self.cells[cell_name_str].getPins(self)
