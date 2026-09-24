@@ -1,9 +1,9 @@
 magic
 tech sky130A
 magscale 1 2
-timestamp 1790159598
+timestamp 1790247598
 << checkpaint >>
-rect -211 -1361 2439 284
+rect -211 -1361 2860 284
 << error_s >>
 rect 1433 -285 1491 -279
 rect 1749 -285 1807 -279
@@ -34,39 +34,62 @@ rect 1755 -1281 1795 -926
 rect 1744 -1281 1795 -1241
 rect 1664 -1361 1864 -1161
 rect 2071 -1276 2111 -926
-rect 2078 -1276 2111 -1236
+rect 2071 -1276 2118 -1236
 rect 1998 -1356 2198 -1156
 rect 2387 -718 2427 -282
+rect 2431 -873 2551 -833
+rect 2511 -873 2551 -438
+rect 2511 -478 2780 -438
+rect 2511 -478 2551 -118
+rect 2434 -158 2551 -118
+rect 2118 -158 2238 -118
+rect 2198 -485 2238 -118
+rect 2198 -485 2427 -445
+rect 2198 -811 2238 -445
+rect 2115 -811 2238 -771
+rect 2054 -462 2134 -302
+rect 2054 -1066 2134 -946
+rect 1738 -462 1818 -302
+rect 1738 -1066 1818 -946
+rect 2660 -558 2860 -358
+<< via1 >>
+rect 2064 -452 2124 -392
+rect 2064 -1056 2124 -996
+rect 1748 -452 1808 -392
+rect 1748 -1056 1808 -996
+<< metal2 >>
+rect 2044 -1076 2144 -372
+rect 1728 -1076 1828 -372
 use sky130_fd_pr__nfet_01v8_CQH6Q5  XM1
-timestamp 1790159498
+timestamp 1790247498
 transform 1 0 1775 0 1 -822
 box -211 -279 211 279
 use sky130_fd_pr__nfet_01v8_CQH6Q5  XM2
-timestamp 1790159498
+timestamp 1790247498
 transform 1 0 2091 0 1 -822
 box -211 -279 211 279
 use sky130_fd_pr__nfet_01v8_D6NL62  XM3
-timestamp 1790159498
+timestamp 1790247498
 transform 1 0 1459 0 1 -822
 box -211 -279 211 279
 use sky130_fd_pr__pfet_01v8_5ETXLA  XM4
-timestamp 1790159498
+timestamp 1790247498
 transform 1 0 1778 0 1 -174
 box -211 -284 211 284
 use sky130_fd_pr__pfet_01v8_5ETXLA  XM5
-timestamp 1790159498
+timestamp 1790247498
 transform 1 0 2094 0 1 -174
 box -211 -284 211 284
 use sky130_fd_pr__pfet_01v8_5ETXLA  XM6
-timestamp 1790159498
+timestamp 1790247498
 transform 1 0 1462 0 1 -174
 box -211 -284 211 284
 use sky130_fd_pr__nfet_01v8_D6NL62  XM7
-timestamp 1790159498
+timestamp 1790247498
 transform 1 0 2407 0 1 -822
 box -211 -279 211 279
 use sky130_fd_pr__pfet_01v8_5ETXLA  XM8
-timestamp 1790159498
+timestamp 1790247498
 transform 1 0 2410 0 1 -174
 box -211 -284 211 284
 << labels >>

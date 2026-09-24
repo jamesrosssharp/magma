@@ -1,6 +1,7 @@
 
 
 cimport MagDatabase
+from collections import deque
 
 class Router:
 
@@ -9,6 +10,7 @@ class Router:
         self.db     = db
         self.cell   = db.getCell(cellname)
         self.layer  = 'metal1'
+        self.stack  = deque([])
 
     def begin(self, int x, int y, str layer, int width = 20):
 
@@ -31,7 +33,7 @@ class Router:
             xtop = self.cursor_x + width // 2
             ytop = new_y + width // 2
 
-        if direction == 's':
+        elif direction == 's':
             new_y -= length
 
             xbot = self.cursor_x - width // 2
@@ -40,7 +42,7 @@ class Router:
             xtop = self.cursor_x + width // 2
             ytop = self.cursor_y + width // 2
 
-        if direction == 'e':
+        elif direction == 'e':
             new_x += length
 
             xbot = self.cursor_x - width // 2
@@ -49,7 +51,7 @@ class Router:
             xtop = new_x + width // 2
             ytop = new_y + width // 2
 
-        if direction == 'w':
+        elif direction == 'w':
             new_x -= length
 
             xbot = new_x - width // 2
@@ -66,14 +68,20 @@ class Router:
 
     def routeTo(self, direction, dest, width):
 
-        if direction == 'n':
-            self.route(direction, dest - self.cursor_y, width)
-        elif direction == 's':
-            self.route(direction, self.cursor_y - dest, width)
-        elif direction == 'e':
-            self.route(direction, dest - self.cursor_x, width)
-        elif direction == 'w':
-            self.route(direction, self.cursor_x - dest, width)
+        if direction == 'n' or direction == 's':
+            d = dest - self.cursor_y
+
+            if (d < 0):
+                self.route('s', -d, width)
+            else:
+                self.route('n', d, width)
+        elif direction == 'e' or direction == 'w': 
+            d = dest - self.cursor_x
+
+            if (d < 0):
+                self.route('w', -d, width)
+            else:
+                self.route('e', d, width)
        
 
 
@@ -89,4 +97,12 @@ class Router:
         else:
 
             raise ValueError(f"Unknown layer pair: {self.layer} {layer}")
+
+    def push(self):
+        self.stack.append((self.cursor_x, self.cursor_y, self.layer, self.width))
+
+    def pop(self):
+        self.cursor_x, self.cursor_y, self.layer, self.width = self.stack.pop()
+
+
 
