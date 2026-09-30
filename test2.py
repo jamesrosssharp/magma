@@ -34,11 +34,14 @@ rwidth_metal1 = 40
 
 # Route inputs
 
-routes_inp = [('XM1', 'VLAT_PLUS'), ('XM2', 'VLAT_MINUS')]
+r = Router.Router(db, "post_amplifier")
 
-for tr, prt in routes_inp:
+routes_inp = [('XM1', 'XM4', 'VLAT_PLUS'), ('XM2', 'XM5', 'VLAT_MINUS')]
+
+for tr, trb, prt in routes_inp:
 
     a = t['children'][tr]['self'][0].gates[0]
+    aa = t['children'][trb]['self'][0].gates[0]
     b = p['self'][prt].centroid()
 
     print(a)
@@ -46,9 +49,14 @@ for tr, prt in routes_inp:
 
     r = Router.Router(db, "post_amplifier")
 
-    r.begin(a[0], a[1], 'metal1')
-    r.routeTo('s', b[1], rwidth_metal1)
-    r.routeTo('w', b[0],  rwidth_metal1)
+    r.begin(a[0], (a[1] + aa[1]) / 2, 'metal1')
+    r.routeTo(a[0], (a[1] + aa[1]) / 2, 80)
+    r.via('metal2', 60, 60)
+    r.routeTo('s', b[1] + 200, 80)
+    r.via('metal1', 60, 60)
+    r.routeTo('s', b[1],  80)
+    r.routeTo('w', b[0],  80)
+
 
     top.addRect('metal1', p['self'][prt].r.xbot, p['self'][prt].r.ybot, p['self'][prt].r.xtop, p['self'][prt].r.ytop)
 
@@ -99,17 +107,56 @@ for ta, tb in tr:
     a = t['children'][ta]['self'][0].gates[0]
     b = t['children'][tb]['self'][0].gates[0]
 
-    r.begin(a[0], a[1] - 40, 'metal1')
-    r.route('s', 80, 80)
-    r.via('metal2', 60, 60)
-    r.routeTo('s', b[1] - 80, 100)
-    r.via('metal1', 60, 60)
-    r.routeTo('n', b[1] - 40, 80) 
+    r.begin(a[0], a[1] + 60, 'metal1')
+    r.routeTo('n', b[1] - 60, 80) 
+
+# Connect gates of XM6 and XM3
+tr = [('XM6', 'XM3')]
+
+for ta, tb in tr:
+    a = t['children'][ta]['self'][0].gates[0]
+    b = t['children'][tb]['self'][0].gates[0]
+
+    r.begin(a[0], a[1], 'metal1')
+    r.routeTo('n', b[1], rwidth_metal1) 
+
+
+# Route drains of XM4 and XM1 to gates of XM3 and XM6
+
+a = t['children']['XM6']['self'][0].gates[0]
+b = t['children']['XM3']['self'][0].gates[0]
+c = t['children']['XM4']['self'][0].source_drains[0]
+d = t['children']['XM1']['self'][0].source_drains[0]
+
+r.begin(c[0], c[1], 'metal1')
+r.route('w', 80, rwidth_metal1)
+r.routeTo('s', (c[1] + d[1]) // 2, rwidth_metal1)
+r.push()
+r.routeTo('w', a[0], rwidth_metal1)
+r.pop()
+r.routeTo('s', d[1], rwidth_metal1)
+r.routeTo('e', d[0], rwidth_metal1)
+
 
 
 # Add pad to label
 prt = 'VOUT'
 top.addRect('metal1', p['self'][prt].r.xbot, p['self'][prt].r.ybot, p['self'][prt].r.xtop, p['self'][prt].r.ytop)
+
+# Add ground connection in li to XM7 source
+# Add vdd connection in li to XM8 source
+# etc
+
+tr = [('XM7', 'XM8'), ('XM3', 'XM6')]
+
+for aa, bb in tr:
+
+    a = t['children'][aa]['self'][0].source_drains[0]
+    top.addRect('li', a[0] - 138, a[1] - 200, a[0] + 20, a[1] + 100)
+
+    a = t['children'][bb]['self'][0].source_drains[0]
+    top.addRect('li', a[0] - 138, a[1] - 100, a[0] + 20, a[1] + 200)
+
 
 top.dump()
 
