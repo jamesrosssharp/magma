@@ -94,6 +94,13 @@ class Router:
 
             self.layer = layer
     
+        elif (self.layer == 'metal2' and layer == 'metal3') or (self.layer == 'metal3' and layer == 'metal2'):
+            l = 'via2'
+
+            self.cell.addRect(l, self.cursor_x - w / 2, self.cursor_y - h / 2, self.cursor_x + w / 2, self.cursor_y + w / 2)
+
+            self.layer = layer
+    
         else:
 
             raise ValueError(f"Unknown layer pair: {self.layer} {layer}")
