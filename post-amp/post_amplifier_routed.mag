@@ -1,9 +1,9 @@
 magic
 tech sky130A
 magscale 1 2
-timestamp 1791106884
+timestamp 1791164285
 << checkpaint >>
-rect -211 -1361 2860 284
+rect -211 -1361 2860 382
 << error_s >>
 rect 1433 -285 1491 -279
 rect 1749 -285 1807 -279
@@ -58,16 +58,26 @@ rect 1442 -516 1674 -476
 rect 1634 -873 1674 -476
 rect 1634 -873 1751 -833
 rect 2660 -558 2860 -358
+rect 1822 -178 2050 -98
+rect 1819 -893 2047 -813
+rect 1506 -178 1606 -98
+rect 1503 -893 1603 -813
 << via1 >>
 rect 1745 -530 1805 -470
 rect 1745 -1091 1805 -1031
 rect 2061 -530 2121 -470
 rect 2061 -1086 2121 -1026
+rect 1536 -168 1596 -108
+rect 1906 -168 1966 -108
+rect 1533 -883 1593 -823
+rect 1903 -883 1963 -823
 << metal2 >>
 rect 1725 -550 1825 -450
 rect 1725 -1111 1825 -1011
 rect 2041 -550 2141 -450
 rect 2041 -1106 2141 -1006
+rect 1526 -178 1976 -98
+rect 1523 -893 1973 -813
 << via2 >>
 rect 1735 -540 1815 -460
 rect 1735 -1101 1815 -1021
@@ -81,36 +91,38 @@ rect 2225 -1053 2383 -753
 rect 2228 -238 2386 62
 rect 1277 -1053 1435 -753
 rect 1280 -238 1438 62
+rect 1274 54 2578 382
+rect 1274 -1356 2578 -1034
 use sky130_fd_pr__nfet_01v8_D6NL62  XM1
-timestamp 1791106784
+timestamp 1791164185
 transform 1 0 1775 0 1 -822
 box -211 -279 211 279
 use sky130_fd_pr__nfet_01v8_D6NL62  XM2
-timestamp 1791106784
+timestamp 1791164185
 transform 1 0 2091 0 1 -822
 box -211 -279 211 279
 use sky130_fd_pr__nfet_01v8_D6NL62  XM3
-timestamp 1791106784
+timestamp 1791164185
 transform 1 0 1459 0 1 -822
 box -211 -279 211 279
 use sky130_fd_pr__pfet_01v8_5ETXLA  XM4
-timestamp 1791106784
+timestamp 1791164185
 transform 1 0 1778 0 1 -174
 box -211 -284 211 284
 use sky130_fd_pr__pfet_01v8_5ETXLA  XM5
-timestamp 1791106784
+timestamp 1791164185
 transform 1 0 2094 0 1 -174
 box -211 -284 211 284
 use sky130_fd_pr__pfet_01v8_5ETXLA  XM6
-timestamp 1791106784
+timestamp 1791164185
 transform 1 0 1462 0 1 -174
 box -211 -284 211 284
 use sky130_fd_pr__nfet_01v8_D6NL62  XM7
-timestamp 1791106784
+timestamp 1791164185
 transform 1 0 2407 0 1 -822
 box -211 -279 211 279
 use sky130_fd_pr__pfet_01v8_5ETXLA  XM8
-timestamp 1791106784
+timestamp 1791164185
 transform 1 0 2410 0 1 -174
 box -211 -284 211 284
 << labels >>

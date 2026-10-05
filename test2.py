@@ -162,6 +162,38 @@ for aa, bb in tr:
     top.addRect('li', a[0] - 138, a[1] - 100, a[0] + 20, a[1] + 200)
 
 
+# Connect drains of XM4,XM5 and XM1,XM2 together
+
+tr = [('XM4', 'XM5'), ('XM1', 'XM2')]
+
+for aa, bb in tr:
+    a = t['children'][aa]['self'][0].source_drains[1]
+    b = t['children'][bb]['self'][0].source_drains[0]
+
+    r.begin(a[0] + 40, a[1], 'metal1')
+    r.routeTo('e', b[0] - 40, 80)
+
+# Connect source of XM6 to drains of XM4 and XM5 etc.
+#
+
+tr = [('XM6', 'XM4', 'XM5'), ('XM3', 'XM1', 'XM2')]
+
+for aa, bb, cc in tr:
+    a = t['children'][aa]['self'][0].source_drains[1]
+    b = t['children'][bb]['self'][0].source_drains[1]
+    c = t['children'][cc]['self'][0].source_drains[0]
+
+    r.begin(a[0] + 40, a[1], 'metal1')
+    r.route('e', 20, 80)
+    r.via('metal2', 60, 60)
+    r.routeTo('e', (b[0] + c[0]) / 2, 80)
+    r.via('metal1', 60, 60)
+
+#1274,  54   ), (  2578,  382
+
+top.addRect('li', 1274, 54, 2578, 382)
+top.addRect('li', 1274, -1356, 2578, -1034)
+
 top.dump()
 
 top.writeMagFile(db, "post-amp/post_amplifier_routed.mag")
