@@ -1,0 +1,28 @@
+
+Magic 8.3 revision 676 - Compiled on Mon Jul 20 10:33:11 UTC 2026.
+Starting magic under Tcl interpreter
+Using the terminal as the console.
+Using NULL graphics device.
+Processing system .magicrc file
+Switching to WIRING tool.
+Switching to NETLIST tool.
+Switching to PICK tool.
+Switching to BOX tool.
+Sourcing design .magicrc for technology sky130A ...
+2 Magic internal units = 1 Lambda
+Input style sky130(): scaleFactor=2, multiplier=2
+The following types are not handled by extraction and will be treated as non-electrical types:
+    ubm 
+Scaled tech values by 2 / 1 to match internal grid scaling
+Loading sky130A Device Generator Menu ...
+Using technology "sky130A", version 1.0.495-0-ga918dc7
+Cell post_amplifier_routed read from current working directory
+Cell sky130_fd_pr__pfet_01v8_5ETXLA read from current working directory
+Cell sky130_fd_pr__nfet_01v8_D6NL62 read from current working directory
+Extracting sky130_fd_pr__pfet_01v8_5ETXLA into sky130_fd_pr__pfet_01v8_5ETXLA.ext:
+Processing sky130_fd_pr__pfet_01v8_5ETXLA
+Extracting sky130_fd_pr__nfet_01v8_D6NL62 into sky130_fd_pr__nfet_01v8_D6NL62.ext:
+Processing sky130_fd_pr__nfet_01v8_D6NL62
+Extracting post_amplifier_routed into post_amplifier_routed.ext:
+Processing post_amplifier_routed
+exttospice finished.

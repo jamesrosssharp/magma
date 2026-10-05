@@ -1,0 +1,13 @@
+** sch_path: /home/jrsharp/old_home_mnt/asic/high_speed_comparator/xschem/post_amplifier.sch
+.subckt post_amplifier_routed VLAT_PLUS VLAT_MINUS VDD VSS VOUT
+*.PININFO VLAT_PLUS:I VLAT_MINUS:I VDD:I VSS:I VOUT:O
+XM1 net1 VLAT_PLUS net4 VSS sky130_fd_pr__nfet_01v8 L=0.15 W=1 nf=1 m=1
+XM2 net3 VLAT_MINUS net4 VSS sky130_fd_pr__nfet_01v8 L=0.15 W=1 nf=1 m=1
+XM3 net4 net1 VSS VSS sky130_fd_pr__nfet_01v8 L=0.15 W=1 nf=1 m=1
+XM4 net1 VLAT_PLUS net2 VDD sky130_fd_pr__pfet_01v8 L=0.15 W=1 nf=1 m=1
+XM5 net3 VLAT_MINUS net2 VDD sky130_fd_pr__pfet_01v8 L=0.15 W=1 nf=1 m=1
+XM6 net2 net1 VDD VDD sky130_fd_pr__pfet_01v8 L=0.15 W=1 nf=1 m=1
+XM7 VOUT net3 VSS VSS sky130_fd_pr__nfet_01v8 L=0.15 W=1 nf=1 m=1
+XM8 VOUT net3 VDD VDD sky130_fd_pr__pfet_01v8 L=0.15 W=1 nf=1 m=1
+.ends
+.end

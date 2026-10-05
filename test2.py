@@ -111,8 +111,8 @@ for ta, tb in tr:
     a = t['children'][ta]['self'][0].gates[0]
     b = t['children'][tb]['self'][0].gates[0]
 
-    r.begin(a[0], a[1] + 60, 'metal1')
-    r.routeTo('n', b[1] - 60, 80) 
+    r.begin(a[0], a[1] - 60, 'metal1')
+    r.routeTo('n', b[1] + 60, 80) 
 
 # Connect gates of XM6 and XM3
 tr = [('XM6', 'XM3')]
@@ -156,10 +156,10 @@ tr = [('XM7', 'XM8'), ('XM3', 'XM6')]
 for aa, bb in tr:
 
     a = t['children'][aa]['self'][0].source_drains[0]
-    top.addRect('li', a[0] - 138, a[1] - 200, a[0] + 20, a[1] + 100)
+    top.addRect('locali', a[0] - 138, a[1] - 200, a[0] + 20, a[1] + 100)
 
     a = t['children'][bb]['self'][0].source_drains[0]
-    top.addRect('li', a[0] - 138, a[1] - 100, a[0] + 20, a[1] + 200)
+    top.addRect('locali', a[0] - 138, a[1] - 100, a[0] + 20, a[1] + 200)
 
 
 # Connect drains of XM4,XM5 and XM1,XM2 together
@@ -191,8 +191,45 @@ for aa, bb, cc in tr:
 
 #1274,  54   ), (  2578,  382
 
-top.addRect('li', 1274, 54, 2578, 382)
-top.addRect('li', 1274, -1356, 2578, -1034)
+top.addRect('locali', 1274, 54, 2578, 382)
+top.addRect('locali', 1274, -1356, 2578, -1034)
+
+prt = 'VDD'
+top.addRect('metal1', p['self'][prt].r.xbot, p['self'][prt].r.ybot, p['self'][prt].r.xtop, p['self'][prt].r.ytop)
+a = p['self'][prt].centroid()
+r.begin(a[0], a[1], 'metal1')
+r.route('s', 200, 100)
+r.push()
+r.push()
+r.via('locali', 60, 60)
+r.pop()
+for i in range(0,3):
+    r.route('w', 200, 100)
+    r.push()
+    r.via('locali', 60, 60)
+    r.pop()
+r.pop()
+
+for i in range(0,3):
+    r.route('e', 200, 100)
+    r.push()
+    r.via('locali', 60, 60)
+    r.pop()
+
+prt = 'VSS'
+top.addRect('metal1', p['self'][prt].r.xbot, p['self'][prt].r.ybot, p['self'][prt].r.xtop, p['self'][prt].r.ytop)
+a = p['self'][prt].centroid()
+r.begin(a[0], a[1], 'metal1')
+r.route('n', 200, 100)
+r.push()
+
+for i in range(0,2):
+    r.route('e', 200, 100)
+    r.push()
+    r.via('locali', 60, 60)
+    r.pop()
+
+
 
 top.dump()
 

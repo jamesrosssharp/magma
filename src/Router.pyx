@@ -100,6 +100,13 @@ class Router:
             self.cell.addRect(l, self.cursor_x - w / 2, self.cursor_y - h / 2, self.cursor_x + w / 2, self.cursor_y + w / 2)
 
             self.layer = layer
+ 
+        elif (self.layer == 'metal1' and layer == 'locali') or (self.layer == 'locali' and layer == 'metal1'):
+            l = 'viali'
+
+            self.cell.addRect(l, self.cursor_x - w / 2, self.cursor_y - h / 2, self.cursor_x + w / 2, self.cursor_y + w / 2)
+
+            self.layer = layer
     
         else:
 
