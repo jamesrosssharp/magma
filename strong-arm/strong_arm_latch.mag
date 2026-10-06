@@ -1,0 +1,101 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 1791247675
+<< error_s >>
+rect 1164 116 1222 122
+rect 1584 116 1642 122
+rect 2540 116 2598 122
+rect 2960 116 3018 122
+rect 1164 82 1176 116
+rect 1584 82 1596 116
+rect 2540 82 2552 116
+rect 2960 82 2972 116
+rect 1164 76 1222 82
+rect 1584 76 1642 82
+rect 2540 76 2598 82
+rect 2960 76 3018 82
+rect 2220 -756 2278 -750
+rect 2220 -790 2232 -756
+rect 2220 -796 2278 -790
+rect 1068 -1012 1126 -1006
+rect 1488 -1012 1546 -1006
+rect 1904 -1012 1962 -1006
+rect 2636 -1012 2694 -1006
+rect 3056 -1012 3114 -1006
+rect 1068 -1046 1080 -1012
+rect 1488 -1046 1500 -1012
+rect 1904 -1046 1916 -1012
+rect 2636 -1046 2648 -1012
+rect 3056 -1046 3068 -1012
+rect 1068 -1052 1126 -1046
+rect 1488 -1052 1546 -1046
+rect 1904 -1052 1962 -1046
+rect 2636 -1052 2694 -1046
+rect 3056 -1052 3114 -1046
+rect 1944 -1216 2002 -1210
+rect 1944 -1250 1956 -1216
+rect 1944 -1256 2002 -1250
+rect 1665 -1526 1723 -1520
+rect 1665 -1560 1677 -1526
+rect 1665 -1566 1723 -1560
+use sky130_fd_pr__nfet_01v8_lvt_6A2LN6  XM1
+timestamp 1785150665
+transform 1 0 1033 0 1 -2259
+box -287 -557 287 557
+use sky130_fd_pr__nfet_01v8_lvt_6A2LN6  XM2
+timestamp 1785150665
+transform 1 0 2624 0 1 -2259
+box -287 -557 287 557
+use sky130_fd_pr__nfet_01v8_lvt_XF63F2  XM3
+timestamp 1785150665
+transform 1 0 1829 0 1 -2202
+box -287 -557 287 557
+use sky130_fd_pr__nfet_01v8_9XUEHQ  XM4
+timestamp 1785754827
+transform 1 0 1694 0 1 -1419
+box -73 -157 73 157
+use sky130_fd_pr__nfet_01v8_VEAVJH  XM5
+timestamp 1785754827
+transform 1 0 1973 0 1 -1357
+box -73 -157 73 157
+use sky130_fd_pr__pfet_01v8_CZ2BPM  XM6
+timestamp 1791247675
+transform 1 0 1933 0 1 -901
+box -211 -284 211 284
+use sky130_fd_pr__pfet_01v8_NRXS53  XM7
+timestamp 1791247675
+transform 1 0 2249 0 1 -901
+box -211 -284 211 284
+use sky130_fd_pr__pfet_01v8_7PVLUA  XM8
+timestamp 1791247675
+transform 1 0 1565 0 1 -465
+box -263 -719 263 719
+use sky130_fd_pr__pfet_01v8_MV5BJT  XM9
+timestamp 1791247675
+transform 1 0 1145 0 1 -465
+box -263 -719 263 719
+use sky130_fd_pr__pfet_01v8_MV5BJT  XM10
+timestamp 1791247675
+transform -1 0 2617 0 1 -465
+box -263 -719 263 719
+use sky130_fd_pr__pfet_01v8_MV5BJT  XM11
+timestamp 1791247675
+transform -1 0 3037 0 1 -465
+box -263 -719 263 719
+<< labels >>
+flabel space 678 -742 878 -542 0 FreeSans 256 0 0 0 CLK
+port 1 nsew
+flabel space 688 -136 888 64 0 FreeSans 256 0 0 0 VDD
+port 0 nsew
+flabel metal1 698 -1460 898 -1260 0 FreeSans 256 0 0 0 VOUT_PLUS
+port 2 nsew
+flabel metal1 2756 -1466 2956 -1266 0 FreeSans 256 0 0 0 VOUT_MINUS
+port 3 nsew
+flabel metal1 1728 -3078 1928 -2878 0 FreeSans 256 0 0 0 VSS
+port 4 nsew
+flabel metal1 931 -3084 1131 -2884 0 FreeSans 256 0 0 0 VINP
+port 5 nsew
+flabel metal1 2502 -3082 2702 -2882 0 FreeSans 256 0 0 0 VINN
+port 6 nsew
+<< end >>
