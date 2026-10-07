@@ -19,6 +19,8 @@ Using technology "sky130A", version 1.0.495-0-ga918dc7
 Cell post_amplifier_routed read from current working directory
 Cell sky130_fd_pr__pfet_01v8_5ETXLA read from current working directory
 Cell sky130_fd_pr__nfet_01v8_D6NL62 read from current working directory
+Processing timestamp mismatches.
+Timestamp mismatches found in these cells: sky130_fd_pr__pfet_01v8_5ETXLA, sky130_fd_pr__nfet_01v8_D6NL62.
 Extracting sky130_fd_pr__pfet_01v8_5ETXLA into sky130_fd_pr__pfet_01v8_5ETXLA.ext:
 Processing sky130_fd_pr__pfet_01v8_5ETXLA
 Extracting sky130_fd_pr__nfet_01v8_D6NL62 into sky130_fd_pr__nfet_01v8_D6NL62.ext:

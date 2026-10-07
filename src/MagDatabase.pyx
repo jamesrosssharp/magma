@@ -269,8 +269,15 @@ cdef class Cell:
 
         # 1. First, find all nmos rects. This is the active region of an nmos transistor.
 
+        l = []
+
         if 'nmos' in self.layers:
-            for r in self.layers['nmos']:
+            l += self.layers['nmos']
+        if 'nmoslvt' in self.layers:
+            l += self.layers['nmoslvt']
+
+        if l != []:
+            for r in l:
             
                 # Find all polysilicon rects which abut the nmos rects
 
@@ -279,6 +286,8 @@ cdef class Cell:
                 for rp in self.layers['poly']:
                     if rp.abuts(r):
                         poly_r.append(rp)
+
+                
 
 
                 for rp in self.layers['poly']:
@@ -296,7 +305,6 @@ cdef class Cell:
                         if pc.overlaps(pr):
                             poly_c.append(pc)
                             break
-
 
                 # Find source and drain contacts
 
