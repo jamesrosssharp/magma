@@ -45,7 +45,14 @@ for tt in tr:
     r.via('metal1', vw, vw)
     r.route('e', 0, m1w)
 
+prt = p['self']['CLK'].centroid()
+a = t['children']['XM9']['self'][0].gates[0]
+b = t['children']['XM11']['self'][0].gates[0]
 
+r.begin(prt[0], prt[1], 'metal1')
+r.routeTo('s', a[1] - 20, 80)
+r.routeTo('e', a[0], 80)
+r.routeTo('e', b[0], 80)
 
 
 top.dump()
