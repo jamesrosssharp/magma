@@ -120,6 +120,28 @@ r.push()
 r.routeTo('s', h[1], m1w)
 r.pop()
 
+# Route VSS
+
+prt = p['self']['VSS'].centroid()
+a = t['children']['XM3']['self'][0].source_drains[1]
+
+r.begin(prt[0], prt[1], 'metal1')
+r.push()
+r.route('n', 170, 100)
+r.via('locali', 60, 60)
+r.pop()
+
+r.routeTo('n', a[1], 100)
+
+# 1004, -3320 ), (  3282, -3062
+
+top.addRect('locali', 1000, -3320, 3280, -3060)
+
+#1756, -500  ), (  2416,  208 
+top.addRect('locali', 1756, -500, 2416, 208)
+
+top.addRect('locali', 906,  180, 3258,  374)
+
 top.dump()
 
 top.writeMagFile(db, "strong-arm/strong_arm_latch_routed.mag")
