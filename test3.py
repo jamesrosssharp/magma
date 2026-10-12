@@ -5,6 +5,7 @@ sys.path.append("build/lib.linux-x86_64-cpython-314/")
 import MagParser
 import MagDatabase
 import Router
+import numpy as np
 
 p = MagParser.MagParser()
 db = MagDatabase.MagDatabase()
@@ -79,8 +80,8 @@ c = t['children']['XM8']['self'][0].source_drains[0]
 d = t['children']['XM8']['self'][1].source_drains[1]
 e = t['children']['XM10']['self'][0].source_drains[0]
 f = t['children']['XM10']['self'][1].source_drains[1]
-g = t['children']['XM11']['self'][0].source_drains[0]
-h = t['children']['XM11']['self'][1].source_drains[1]
+g = t['children']['XM11']['self'][1].source_drains[1]
+h = t['children']['XM11']['self'][0].source_drains[0]
  
  
 m1w = 80
@@ -120,6 +121,15 @@ r.push()
 r.routeTo('s', h[1], m1w)
 r.pop()
 
+
+
+for x in np.linspace(a[0], h[0], 8):
+    print(x)
+    r.begin(x, prt[1] + 280, 'metal1')
+    r.via('locali', 50, 50)
+        
+
+
 # Route VSS
 
 prt = p['self']['VSS'].centroid()
@@ -128,7 +138,7 @@ a = t['children']['XM3']['self'][0].source_drains[1]
 r.begin(prt[0], prt[1], 'metal1')
 r.push()
 r.route('n', 170, 100)
-r.via('locali', 60, 60)
+r.via('locali', 50, 50)
 r.pop()
 
 r.routeTo('n', a[1], 100)
@@ -141,6 +151,27 @@ top.addRect('locali', 1000, -3320, 3280, -3060)
 top.addRect('locali', 1756, -500, 2416, 208)
 
 top.addRect('locali', 906,  180, 3258,  374)
+
+# Route VINP
+
+tr = [('VINP', 'XM1'), ('VINN', 'XM2')]
+
+for pp, tt in tr:
+
+    prt = p['self'][pp].centroid()
+    a = t['children'][tt]['self'][0].gates[0]
+    b = t['children'][tt]['self'][1].gates[0]
+
+    m1w = 150
+
+    r.begin(prt[0], prt[1], 'metal1')
+    r.routeTo('n', a[1] - 150, m1w)
+    r.push()
+    r.routeTo('e', a[0], m1w)
+    r.routeTo('n', a[1], m1w)
+    r.pop()
+    r.routeTo('w', b[0], m1w)
+    r.routeTo('n', b[1], m1w)
 
 top.dump()
 
