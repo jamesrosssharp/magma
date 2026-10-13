@@ -173,6 +173,35 @@ for pp, tt in tr:
     r.routeTo('w', b[0], m1w)
     r.routeTo('n', b[1], m1w)
 
+# Route drain of XM3 to source of XM1
+
+a = t['children']['XM1']['self'][0].source_drains[1]
+b = t['children']['XM3']['self'][0].source_drains[0]
+
+mw1 = 100
+
+r.begin(a[0], a[1], 'metal1')
+r.route('n', 650, mw1)
+r.routeTo('e', b[0] - 100, mw1)
+r.route('s', 260, mw1)
+r.routeTo('e', b[0], mw1)
+r.routeTo('s', b[1], mw1)
+
+# Route drain of XM3 to source of XM2
+
+a = t['children']['XM2']['self'][0].source_drains[1]
+b = t['children']['XM3']['self'][1].source_drains[1]
+
+mw1 = 100
+
+r.begin(a[0], a[1], 'metal1')
+r.route('n', 650, mw1)
+r.routeTo('w', b[0] + 100, mw1)
+r.route('s', 260, mw1)
+r.routeTo('w', b[0], mw1)
+r.routeTo('s', b[1], mw1)
+
+
 top.dump()
 
 top.writeMagFile(db, "strong-arm/strong_arm_latch_routed.mag")

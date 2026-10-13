@@ -1,7 +1,7 @@
 magic
 tech sky130A
 magscale 1 2
-timestamp 1791798342
+timestamp 1791855754
 << checkpaint >>
 rect -425 -3363 3517 719
 << error_s >>
@@ -85,6 +85,16 @@ rect 2684 -3195 2967 -3045
 rect 2684 -3195 2834 -2895
 rect 2817 -3195 3092 -3045
 rect 2942 -3195 3092 -2895
+rect 1347 -2465 1447 -1715
+rect 1347 -1815 1835 -1715
+rect 1735 -2075 1835 -1715
+rect 1735 -2075 1935 -1975
+rect 1835 -2527 1935 -1975
+rect 2838 -2465 2938 -1715
+rect 2451 -1815 2938 -1715
+rect 2451 -2075 2551 -1715
+rect 2351 -2075 2551 -1975
+rect 2351 -2527 2451 -1975
 << via1 >>
 rect 1163 89 1223 149
 rect 1583 89 1643 149
@@ -112,47 +122,47 @@ rect 1000 -3320 3280 -3060
 rect 1756 -500 2416 208
 rect 906 180 3258 374
 use sky130_fd_pr__nfet_01v8_lvt_GVGYYV  XM1
-timestamp 1791798242
+timestamp 1791855654
 transform 1 0 1397 0 1 -2446
 box -425 -679 425 679
 use sky130_fd_pr__nfet_01v8_lvt_GVGYYV  XM2
-timestamp 1791798242
+timestamp 1791855654
 transform 1 0 2888 0 1 -2446
 box -425 -679 425 679
 use sky130_fd_pr__nfet_01v8_lvt_URSRNG  XM3
-timestamp 1791798242
+timestamp 1791855654
 transform 1 0 2143 0 1 -2446
 box -425 -679 425 679
 use sky130_fd_pr__nfet_01v8_CQH6Q5  XM4
-timestamp 1791798242
+timestamp 1791855654
 transform 1 0 1939 0 1 -1502
 box -211 -279 211 279
 use sky130_fd_pr__nfet_01v8_WXMB3T  XM5
-timestamp 1791798242
+timestamp 1791855654
 transform 1 0 2256 0 1 -1502
 box -211 -279 211 279
 use sky130_fd_pr__pfet_01v8_CZ2BPM  XM6
-timestamp 1791798242
+timestamp 1791855654
 transform 1 0 1933 0 1 -725
 box -211 -284 211 284
 use sky130_fd_pr__pfet_01v8_NRXS53  XM7
-timestamp 1791798242
+timestamp 1791855654
 transform 1 0 2249 0 1 -725
 box -211 -284 211 284
 use sky130_fd_pr__pfet_01v8_7PVLUA  XM8
-timestamp 1791798242
+timestamp 1791855654
 transform 1 0 1565 0 1 -465
 box -263 -719 263 719
 use sky130_fd_pr__pfet_01v8_MV5BJT  XM9
-timestamp 1791798242
+timestamp 1791855654
 transform 1 0 1145 0 1 -465
 box -263 -719 263 719
 use sky130_fd_pr__pfet_01v8_MV5BJT  XM10
-timestamp 1791798242
+timestamp 1791855654
 transform -1 0 2617 0 1 -465
 box -263 -719 263 719
 use sky130_fd_pr__pfet_01v8_MV5BJT  XM11
-timestamp 1791798242
+timestamp 1791855654
 transform -1 0 3037 0 1 -465
 box -263 -719 263 719
 << labels >>
