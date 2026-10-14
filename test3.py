@@ -201,8 +201,68 @@ r.route('s', 260, mw1)
 r.routeTo('w', b[0], mw1)
 r.routeTo('s', b[1], mw1)
 
+# Route drains of XM1 and XM2 together
+
+tr = ['XM1', 'XM2']
+
+for tt in tr:
+    a = t['children'][tt]['self'][0].source_drains[0]
+    b = t['children'][tt]['self'][1].source_drains[1]
+
+    mw1 = 80
+    mw2 = 100
+    h = 650
+
+    r.begin(a[0], a[1], 'metal1')
+    r.route('n', 0, mw1)
+    r.via('metal2', 60, 60)
+    r.route('n', h, mw2)
+    r.routeTo('e', b[0], mw2)
+    r.route('s', h, mw2)
+    r.via('metal1', 60, 60)
+    r.route('s', 0, mw1)
 
 top.dump()
+
+# Route drains of XM1 and XM2 to source of XM4 and XM5
+
+tr = [('XM1', 'XM4', 0, 50), ('XM2', 'XM5', 1, -50)]
+
+for tt, tt2, i, pp in tr:
+
+    h = 650
+    mw1 = 80
+    mw2 = 100
+
+    a = t['children'][tt]['self'][0].source_drains[0]
+    b = t['children'][tt]['self'][1].source_drains[1]
+    c = t['children'][tt2]['self'][0].source_drains[i]
+ 
+    r.begin((a[0]+b[0])/2, a[1] + h, 'metal2')
+    r.route('n', 250, mw2)
+    r.via('metal1', 60, 60)
+    r.routeTo('n', c[1], mw1)
+    r.routeTo('w', c[0] - pp, mw1)
+
+# Route gate of XM4 to drain of XM5
+
+a   = t['children']['XM4']['self'][0].gates[0]
+b   = t['children']['XM5']['self'][0].source_drains[0]
+prt = p['self']['VOUT_MINUS'].centroid()
+
+mw1 = 60
+
+r.begin(a[0], a[1] - 40, 'metal1')
+r.route('s', 120, mw1)
+r.routeTo('e', b[0], mw1)
+#r.route('n', 20, mw1)
+r.push()
+r.routeTo('n', b[1], mw1)
+r.pop()
+r.route('e', 170, mw1)
+r.route('n', 130, mw1)
+r.routeTo('e', prt[0] - 40, mw1)
+r.routeTo('n', prt[1], mw1)
 
 top.writeMagFile(db, "strong-arm/strong_arm_latch_routed.mag")
 
