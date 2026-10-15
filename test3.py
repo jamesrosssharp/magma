@@ -264,5 +264,47 @@ r.route('n', 130, mw1)
 r.routeTo('e', prt[0] - 40, mw1)
 r.routeTo('n', prt[1], mw1)
 
+# Route gate of XM5 to drain of XM4
+
+a   = t['children']['XM5']['self'][0].gates[0]
+b   = t['children']['XM4']['self'][0].source_drains[1]
+prt = p['self']['VOUT_PLUS'].centroid()
+
+mw1 = 60
+
+r.begin(a[0], a[1] + 40, 'metal1')
+r.route('n', 120, mw1)
+r.routeTo('w', b[0], mw1)
+#r.route('n', 20, mw1)
+r.push()
+r.routeTo('s', b[1], mw1)
+r.pop()
+r.route('w', 170, mw1)
+r.route('s', 100, mw1)
+r.routeTo('w', prt[0] - 40, mw1)
+r.routeTo('s', prt[1], mw1)
+
+# Route gates of XM3 together and to CLK
+
+a   = t['children']['XM3']['self'][0].gates[0]
+b   = t['children']['XM3']['self'][1].gates[0]
+
+mw1 = 80
+
+r.begin(a[0], a[1], 'metal1')
+r.route('n', 30, mw1)
+r.routeTo('e', (a[0] + b[0]) // 2, mw1)
+r.push()
+r.routeTo('e', b[0], mw1)
+r.route('s', 30, mw1)
+r.pop()
+r.via('metal2', 60, 60)
+r.route('n', 0, 100)
+r.via('metal3', 80, 80)
+r.routeTo('n', -1050, 120)
+r.via('metal2', 80, 80)
+r.route('n', 0, 100)
+r.via('metal1', 60, 60)
+
 top.writeMagFile(db, "strong-arm/strong_arm_latch_routed.mag")
 
