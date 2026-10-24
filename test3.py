@@ -82,6 +82,8 @@ e = t['children']['XM10']['self'][0].source_drains[0]
 f = t['children']['XM10']['self'][1].source_drains[1]
 g = t['children']['XM11']['self'][1].source_drains[1]
 h = t['children']['XM11']['self'][0].source_drains[0]
+i = t['children']['XM6']['self'][0].source_drains[0]
+j = t['children']['XM7']['self'][0].source_drains[1]
  
  
 m1w = 80
@@ -104,6 +106,11 @@ r.routeTo('e', d[0], m1w)
 r.push()
 r.routeTo('s', d[1], m1w)
 r.pop()
+r.routeTo('e', i[0] - 100, m1w)
+r.push()
+r.routeTo('s', i[1], 60)
+r.routeTo('e', i[0], 60)
+r.pop()
 r.routeTo('e', e[0], m1w)
 r.push()
 r.routeTo('s', e[1], m1w)
@@ -119,6 +126,11 @@ r.pop()
 r.routeTo('e', h[0], m1w)
 r.push()
 r.routeTo('s', h[1], m1w)
+r.pop()
+r.routeTo('e', j[0] + 100, m1w)
+r.push()
+r.routeTo('s', j[1], 60)
+r.routeTo('w', j[0], 60)
 r.pop()
 
 
@@ -305,6 +317,30 @@ r.routeTo('n', -1050, 120)
 r.via('metal2', 80, 80)
 r.route('n', 0, 100)
 r.via('metal1', 60, 60)
+
+# Route gate of XM7 to drain of XM6
+
+a   = t['children']['XM7']['self'][0].gates[0]
+b   = t['children']['XM6']['self'][0].source_drains[1]
+
+mw1 = 60
+
+r.begin(a[0], a[1], 'metal1')
+r.routeTo('w', b[0], mw1)
+r.routeTo('s', b[1], mw1)
+
+# Route gate of XM6 to drain of XM7
+
+a   = t['children']['XM6']['self'][0].gates[0]
+b   = t['children']['XM7']['self'][0].source_drains[0]
+
+mw1 = 60
+
+r.begin(a[0], a[1], 'metal1')
+r.routeTo('e', b[0], mw1)
+r.routeTo('n', b[1], mw1)
+
+
 
 top.writeMagFile(db, "strong-arm/strong_arm_latch_routed.mag")
 
