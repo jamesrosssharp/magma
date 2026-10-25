@@ -1,7 +1,7 @@
 magic
 tech sky130A
 magscale 1 2
-timestamp 1791366172
+timestamp 1792921438
 << error_s >>
 rect 1164 116 1222 122
 rect 1584 116 1642 122
@@ -41,23 +41,23 @@ rect 1910 -1643 1922 -1609
 rect 1910 -1649 1968 -1643
 << metal1 >>
 rect 501 -136 701 64
-rect 521 -742 721 -542
-rect 524 -1460 724 -1260
+rect 506 -742 706 -542
+rect 506 -1460 706 -1260
 rect 3317 -1466 3517 -1266
-rect 1300 -3360 1500 -3160
-rect 2046 -3363 2246 -3163
-rect 2792 -3349 2992 -3149
+rect 1245 -3360 1445 -3160
+rect 1986 -3363 2186 -3163
+rect 2726 -3349 2926 -3149
 use sky130_fd_pr__nfet_01v8_lvt_GVGYYV  XM1
 timestamp 1791277098
-transform 1 0 1397 0 1 -2446
+transform 1 0 1354 0 1 -2446
 box -425 -679 425 679
 use sky130_fd_pr__nfet_01v8_lvt_GVGYYV  XM2
 timestamp 1791277098
-transform 1 0 2888 0 1 -2446
+transform 1 0 2841 0 1 -2446
 box -425 -679 425 679
 use sky130_fd_pr__nfet_01v8_lvt_URSRNG  XM3
 timestamp 1791277098
-transform 1 0 2143 0 1 -2446
+transform 1 0 2095 0 1 -2446
 box -425 -679 425 679
 use sky130_fd_pr__nfet_01v8_CQH6Q5  XM4
 timestamp 1791277098
@@ -94,16 +94,16 @@ box -263 -719 263 719
 << labels >>
 flabel metal1 3317 -1466 3517 -1266 0 FreeSans 256 0 0 0 VOUT_MINUS
 port 3 nsew
-flabel metal1 524 -1460 724 -1260 0 FreeSans 256 0 0 0 VOUT_PLUS
-port 2 nsew
 flabel metal1 501 -136 698 64 0 FreeSans 256 0 0 0 VDD
 port 0 nsew
-flabel metal1 525 -742 718 -542 0 FreeSans 256 0 0 0 CLK
-port 1 nsew
-flabel metal1 1300 -3360 1500 -3160 0 FreeSans 256 0 0 0 VINP
+flabel metal1 1245 -3360 1445 -3160 0 FreeSans 256 0 0 0 VINP
 port 5 nsew
-flabel metal1 2792 -3349 2992 -3149 0 FreeSans 256 0 0 0 VINN
-port 6 nsew
-flabel metal1 2046 -3363 2246 -3163 0 FreeSans 256 0 0 0 VSS
+flabel metal1 1986 -3363 2186 -3163 0 FreeSans 256 0 0 0 VSS
 port 4 nsew
+flabel metal1 2726 -3349 2926 -3149 0 FreeSans 256 0 0 0 VINN
+port 6 nsew
+flabel metal1 506 -1460 706 -1260 0 FreeSans 256 0 0 0 VOUT_PLUS
+port 2 nsew
+flabel metal1 510 -742 703 -542 0 FreeSans 256 0 0 0 CLK
+port 1 nsew
 << end >>

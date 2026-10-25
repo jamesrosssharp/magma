@@ -340,6 +340,34 @@ r.begin(a[0], a[1], 'metal1')
 r.routeTo('e', b[0], mw1)
 r.routeTo('n', b[1], mw1)
 
+# Route drain of XM5 to drain of XM7
+
+a   = t['children']['XM5']['self'][0].source_drains[0]
+b   = t['children']['XM7']['self'][0].source_drains[0]
+
+mw1 = 70
+
+r.begin(a[0], a[1], "metal1")
+r.route('w', 50, mw1)
+r.via('metal2', 55, 55)
+r.route('e', 100, 80)
+r.routeTo('n', -852, 80)
+r.route('w', 100, 80)
+r.via('metal1', 55, 55)
+
+# Route drain of XM4 to drain of XM6
+
+a   = t['children']['XM4']['self'][0].source_drains[1]
+b   = t['children']['XM6']['self'][0].source_drains[1]
+
+r.begin(a[0], a[1] + 170, "metal1")
+r.via('metal2', 55, 55)
+r.route('w',100,80)
+r.routeTo('n', -595, 80)
+r.route('e', 180, 80)
+r.via('metal1', 55, 55)
+
+
 
 
 top.writeMagFile(db, "strong-arm/strong_arm_latch_routed.mag")
