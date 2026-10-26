@@ -1,0 +1,57 @@
+
+Magic 8.3 revision 676 - Compiled on Mon Jul 20 10:33:11 UTC 2026.
+Starting magic under Tcl interpreter
+Using the terminal as the console.
+Using NULL graphics device.
+Processing system .magicrc file
+Switching to WIRING tool.
+Switching to NETLIST tool.
+Switching to PICK tool.
+Switching to BOX tool.
+Sourcing design .magicrc for technology sky130A ...
+2 Magic internal units = 1 Lambda
+Input style sky130(): scaleFactor=2, multiplier=2
+The following types are not handled by extraction and will be treated as non-electrical types:
+    ubm 
+Scaled tech values by 2 / 1 to match internal grid scaling
+Loading sky130A Device Generator Menu ...
+Using technology "sky130A", version 1.0.495-0-ga918dc7
+File <strong_arm_latch_routed.mag> is already locked by pid 6169.  Opening read-only.
+Cell strong_arm_latch_routed read from current working directory
+File <sky130_fd_pr__pfet_01v8_MV5BJT.mag> is already locked by pid 6169.  Opening read-only.
+Cell sky130_fd_pr__pfet_01v8_MV5BJT read from current working directory
+File <sky130_fd_pr__pfet_01v8_7PVLUA.mag> is already locked by pid 6169.  Opening read-only.
+Cell sky130_fd_pr__pfet_01v8_7PVLUA read from current working directory
+File <sky130_fd_pr__pfet_01v8_NRXS53.mag> is already locked by pid 6169.  Opening read-only.
+Cell sky130_fd_pr__pfet_01v8_NRXS53 read from current working directory
+File <sky130_fd_pr__pfet_01v8_CZ2BPM.mag> is already locked by pid 6169.  Opening read-only.
+Cell sky130_fd_pr__pfet_01v8_CZ2BPM read from current working directory
+File <sky130_fd_pr__nfet_01v8_WXMB3T.mag> is already locked by pid 6169.  Opening read-only.
+Cell sky130_fd_pr__nfet_01v8_WXMB3T read from current working directory
+File <sky130_fd_pr__nfet_01v8_CQH6Q5.mag> is already locked by pid 6169.  Opening read-only.
+Cell sky130_fd_pr__nfet_01v8_CQH6Q5 read from current working directory
+File <sky130_fd_pr__nfet_01v8_lvt_URSRNG.mag> is already locked by pid 6169.  Opening read-only.
+Cell sky130_fd_pr__nfet_01v8_lvt_URSRNG read from current working directory
+File <sky130_fd_pr__nfet_01v8_lvt_GVGYYV.mag> is already locked by pid 6169.  Opening read-only.
+Cell sky130_fd_pr__nfet_01v8_lvt_GVGYYV read from current working directory
+Processing timestamp mismatches.
+Timestamp mismatches found in these cells: sky130_fd_pr__pfet_01v8_MV5BJT, sky130_fd_pr__pfet_01v8_7PVLUA, sky130_fd_pr__pfet_01v8_NRXS53, sky130_fd_pr__pfet_01v8_CZ2BPM, sky130_fd_pr__nfet_01v8_WXMB3T, sky130_fd_pr__nfet_01v8_CQH6Q5, sky130_fd_pr__nfet_01v8_lvt_URSRNG, sky130_fd_pr__nfet_01v8_lvt_GVGYYV.
+Extracting sky130_fd_pr__pfet_01v8_MV5BJT into sky130_fd_pr__pfet_01v8_MV5BJT.ext:
+Processing sky130_fd_pr__pfet_01v8_MV5BJT
+Extracting sky130_fd_pr__pfet_01v8_7PVLUA into sky130_fd_pr__pfet_01v8_7PVLUA.ext:
+Processing sky130_fd_pr__pfet_01v8_7PVLUA
+Extracting sky130_fd_pr__pfet_01v8_NRXS53 into sky130_fd_pr__pfet_01v8_NRXS53.ext:
+Processing sky130_fd_pr__pfet_01v8_NRXS53
+Extracting sky130_fd_pr__pfet_01v8_CZ2BPM into sky130_fd_pr__pfet_01v8_CZ2BPM.ext:
+Processing sky130_fd_pr__pfet_01v8_CZ2BPM
+Extracting sky130_fd_pr__nfet_01v8_WXMB3T into sky130_fd_pr__nfet_01v8_WXMB3T.ext:
+Processing sky130_fd_pr__nfet_01v8_WXMB3T
+Extracting sky130_fd_pr__nfet_01v8_CQH6Q5 into sky130_fd_pr__nfet_01v8_CQH6Q5.ext:
+Processing sky130_fd_pr__nfet_01v8_CQH6Q5
+Extracting sky130_fd_pr__nfet_01v8_lvt_URSRNG into sky130_fd_pr__nfet_01v8_lvt_URSRNG.ext:
+Processing sky130_fd_pr__nfet_01v8_lvt_URSRNG
+Extracting sky130_fd_pr__nfet_01v8_lvt_GVGYYV into sky130_fd_pr__nfet_01v8_lvt_GVGYYV.ext:
+Processing sky130_fd_pr__nfet_01v8_lvt_GVGYYV
+Extracting strong_arm_latch_routed into strong_arm_latch_routed.ext:
+Processing strong_arm_latch_routed
+exttospice finished.

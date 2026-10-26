@@ -1,0 +1,56 @@
+* NGSPICE file created from strong_arm_latch_routed.ext - technology: sky130A
+
+.subckt sky130_fd_pr__nfet_01v8_lvt_GVGYYV a_n229_n557# a_229_n469# a_n389_n643# a_n29_n469#
++ a_29_n557# a_n287_n469#
+X0 a_n29_n469# a_n229_n557# a_n287_n469# a_n389_n643# sky130_fd_pr__nfet_01v8_lvt ad=0.725 pd=5.29 as=1.45 ps=10.58 w=5 l=1
+X1 a_229_n469# a_29_n557# a_n29_n469# a_n389_n643# sky130_fd_pr__nfet_01v8_lvt ad=1.45 pd=10.58 as=0.725 ps=5.29 w=5 l=1
+.ends
+
+.subckt sky130_fd_pr__nfet_01v8_lvt_URSRNG a_229_n531# a_n229_n557# a_n389_n643# a_n29_n531#
++ a_n287_n531# a_29_n557#
+X0 a_n29_n531# a_n229_n557# a_n287_n531# a_n389_n643# sky130_fd_pr__nfet_01v8_lvt ad=0.725 pd=5.29 as=1.45 ps=10.58 w=5 l=1
+X1 a_229_n531# a_29_n557# a_n29_n531# a_n389_n643# sky130_fd_pr__nfet_01v8_lvt ad=1.45 pd=10.58 as=0.725 ps=5.29 w=5 l=1
+.ends
+
+.subckt sky130_fd_pr__nfet_01v8_CQH6Q5 a_n73_n69# a_n175_n243# a_n33_n157# a_15_n69#
+X0 a_15_n69# a_n33_n157# a_n73_n69# a_n175_n243# sky130_fd_pr__nfet_01v8 ad=0.29 pd=2.58 as=0.29 ps=2.58 w=1 l=0.15
+.ends
+
+.subckt sky130_fd_pr__nfet_01v8_WXMB3T a_15_n131# a_n175_n243# a_n33_91# a_n73_n131#
+X0 a_15_n131# a_n33_91# a_n73_n131# a_n175_n243# sky130_fd_pr__nfet_01v8 ad=0.29 pd=2.58 as=0.29 ps=2.58 w=1 l=0.15
+.ends
+
+.subckt sky130_fd_pr__pfet_01v8_CZ2BPM a_n73_n64# a_n33_n161# a_15_n64# w_n211_n284#
+X0 a_15_n64# a_n33_n161# a_n73_n64# w_n211_n284# sky130_fd_pr__pfet_01v8 ad=0.29 pd=2.58 as=0.29 ps=2.58 w=1 l=0.15
+.ends
+
+.subckt sky130_fd_pr__pfet_01v8_NRXS53 a_15_n136# a_n33_95# w_n211_n284# a_n73_n136#
+X0 a_15_n136# a_n33_95# a_n73_n136# w_n211_n284# sky130_fd_pr__pfet_01v8 ad=0.29 pd=2.58 as=0.29 ps=2.58 w=1 l=0.15
+.ends
+
+.subckt sky130_fd_pr__pfet_01v8_7PVLUA a_63_n500# a_15_531# a_n33_n500# w_n263_n719#
++ a_n81_n597# a_n125_n500#
+X0 a_n33_n500# a_n81_n597# a_n125_n500# w_n263_n719# sky130_fd_pr__pfet_01v8 ad=0.825 pd=5.33 as=1.55 ps=10.62 w=5 l=0.15
+X1 a_63_n500# a_15_531# a_n33_n500# w_n263_n719# sky130_fd_pr__pfet_01v8 ad=1.55 pd=10.62 as=0.825 ps=5.33 w=5 l=0.15
+.ends
+
+.subckt sky130_fd_pr__pfet_01v8_MV5BJT a_63_n500# a_15_531# a_n33_n500# w_n263_n719#
++ a_n81_n597# a_n125_n500#
+X0 a_n33_n500# a_n81_n597# a_n125_n500# w_n263_n719# sky130_fd_pr__pfet_01v8 ad=0.825 pd=5.33 as=1.55 ps=10.62 w=5 l=0.15
+X1 a_63_n500# a_15_531# a_n33_n500# w_n263_n719# sky130_fd_pr__pfet_01v8 ad=1.55 pd=10.62 as=0.825 ps=5.33 w=5 l=0.15
+.ends
+
+.subckt strong_arm_latch_routed VDD CLK VOUT_PLUS VOUT_MINUS VSS VINP VINN
+XXM1 VINP m1_1056_n2455# VSS m1_1324_n2445# VINP m1_1056_n2455# sky130_fd_pr__nfet_01v8_lvt_GVGYYV
+XXM2 VINN m1_2310_n1573# VSS m1_1324_n2445# VINN m1_2310_n1573# sky130_fd_pr__nfet_01v8_lvt_GVGYYV
+XXM3 m1_1324_n2445# CLK VSS VSS m1_1324_n2445# CLK sky130_fd_pr__nfet_01v8_lvt_URSRNG
+XXM4 m1_1056_n2455# VSS VOUT_MINUS VOUT_PLUS sky130_fd_pr__nfet_01v8_CQH6Q5
+XXM5 m1_2310_n1573# VSS VOUT_PLUS VOUT_MINUS sky130_fd_pr__nfet_01v8_WXMB3T
+XXM6 VDD VOUT_MINUS VOUT_PLUS VDD sky130_fd_pr__pfet_01v8_CZ2BPM
+XXM7 VDD VOUT_PLUS VDD VOUT_MINUS sky130_fd_pr__pfet_01v8_NRXS53
+XXM8 VDD CLK VOUT_PLUS VDD CLK VDD sky130_fd_pr__pfet_01v8_7PVLUA
+XXM9 VDD CLK m1_1056_n2455# VDD CLK VDD sky130_fd_pr__pfet_01v8_MV5BJT
+XXM10 VDD CLK VOUT_MINUS VDD CLK VDD sky130_fd_pr__pfet_01v8_MV5BJT
+XXM11 VDD CLK m1_2310_n1573# VDD CLK VDD sky130_fd_pr__pfet_01v8_MV5BJT
+.ends
+

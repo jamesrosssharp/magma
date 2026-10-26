@@ -54,9 +54,13 @@ b = t['children']['XM11']['self'][0].gates[0]
 
 r.begin(prt[0], prt[1], 'metal1')
 r.routeTo('s', a[1] - 20, 80)
-r.routeTo('e', a[0], 80)
-r.routeTo('e', b[0], 80)
+r.via('metal2', 60, 60)
+r.route('s', 0, 100)
+r.via('metal3', 80, 80)
+r.routeTo('e', (a[0] + b[0]) / 2, 120)
 
+r.begin(a[0], a[1] - 20, 'metal1')
+r.routeTo('e', b[0], 80)
 
 tr = [('XM8', 'XM9'), ('XM10', 'XM11')]
 
@@ -94,17 +98,19 @@ r.routeTo('e', a[0], m1w)
 r.push()
 r.routeTo('s', a[1], m1w)
 r.pop()
-r.routeTo('e', b[0], m1w)
+r.routeTo('e', b[0] + 110, m1w)
 r.push()
 r.routeTo('s', b[1], m1w)
+r.routeTo('w', b[0], m1w)
 r.pop()
 r.routeTo('e', c[0], m1w)
 r.push()
 r.routeTo('s', c[1], m1w)
 r.pop()
-r.routeTo('e', d[0], m1w)
+r.routeTo('e', d[0] + 110, m1w)
 r.push()
 r.routeTo('s', d[1], m1w)
+r.routeTo('w', d[0], m1w)
 r.pop()
 r.routeTo('e', i[0] - 100, m1w)
 r.push()
@@ -115,13 +121,15 @@ r.routeTo('e', e[0], m1w)
 r.push()
 r.routeTo('s', e[1], m1w)
 r.pop()
-r.routeTo('e', f[0], m1w)
+r.routeTo('e', f[0] - 110, m1w)
 r.push()
 r.routeTo('s', f[1], m1w)
+r.routeTo('e', f[0], m1w)
 r.pop()
-r.routeTo('e', g[0], m1w)
+r.routeTo('e', g[0] - 110, m1w)
 r.push()
 r.routeTo('s', g[1], m1w)
+r.routeTo('e', g[0], m1w)
 r.pop()
 r.routeTo('e', h[0], m1w)
 r.push()
@@ -148,21 +156,37 @@ prt = p['self']['VSS'].centroid()
 a = t['children']['XM3']['self'][0].source_drains[1]
 
 r.begin(prt[0], prt[1], 'metal1')
-r.push()
 r.route('n', 170, 100)
+r.push()
 r.via('locali', 50, 50)
 r.pop()
-
+r.push()
+r.route('e', 200, 75)
+r.via('locali', 50, 50)
+r.pop()
+r.push()
+r.route('w', 200, 75)
+r.via('locali', 50, 50)
+r.pop()
 r.routeTo('n', a[1], 100)
 
 # 1004, -3320 ), (  3282, -3062
-
-top.addRect('locali', 1000, -3320, 3280, -3060)
+#962, -3318 ), (  3240, -3088
+top.addRect('locali', 960, -3320, 3240, -3060)
 
 #1756, -500  ), (  2416,  208 
 top.addRect('locali', 1756, -500, 2416, 208)
 
 top.addRect('locali', 906,  180, 3258,  374)
+
+# 978, -1802 ), (  1762, -1238
+# 966, -1800 ), (  1792, -1262
+top.addRect('locali', 966, -1820, 1792, -1262)
+
+# 966, -1800 ), (  1792, -1262
+top.addRect('locali',  1770, -1832, 2432, -1714)
+
+top.addRect('locali',   2400, -1820, 3228, -1262)
 
 # Route VINP
 
@@ -190,12 +214,12 @@ for pp, tt in tr:
 a = t['children']['XM1']['self'][0].source_drains[1]
 b = t['children']['XM3']['self'][0].source_drains[0]
 
-mw1 = 100
+mw1 = 60
 
 r.begin(a[0], a[1], 'metal1')
-r.route('n', 650, mw1)
-r.routeTo('e', b[0] - 100, mw1)
-r.route('s', 260, mw1)
+r.route('n', 560, mw1)
+r.routeTo('e', b[0] - 120, mw1)
+r.route('s', 170, mw1)
 r.routeTo('e', b[0], mw1)
 r.routeTo('s', b[1], mw1)
 
@@ -204,12 +228,12 @@ r.routeTo('s', b[1], mw1)
 a = t['children']['XM2']['self'][0].source_drains[1]
 b = t['children']['XM3']['self'][1].source_drains[1]
 
-mw1 = 100
+mw1 = 60
 
 r.begin(a[0], a[1], 'metal1')
-r.route('n', 650, mw1)
-r.routeTo('w', b[0] + 100, mw1)
-r.route('s', 260, mw1)
+r.route('n', 560, mw1)
+r.routeTo('w', b[0] + 120, mw1)
+r.route('s', 170, mw1)
 r.routeTo('w', b[0], mw1)
 r.routeTo('s', b[1], mw1)
 
@@ -367,8 +391,61 @@ r.routeTo('n', -595, 80)
 r.route('e', 180, 80)
 r.via('metal1', 55, 55)
 
+# Route drain of XM11 to sources of XM2
 
+a   = t['children']['XM11']['self'][0].source_drains[1]
+b   = t['children']['XM2']['self'][0].source_drains[1] # take the drain for alignment
 
+r.begin(a[0], a[1] - 100, "metal1")
+r.route('s', 50, mw1)
+r.via('metal2', 55, 55)
+r.routeTo('s', b[1] + 900, 80)
+r.routeTo('w', b[0], 80)
+
+# Route drain of XM9 to sources of XM1
+
+a   = t['children']['XM9']['self'][0].source_drains[1]
+b   = t['children']['XM1']['self'][0].source_drains[1] # take the drain for alignment
+
+r.begin(a[0], a[1] - 100, "metal1")
+r.route('s', 50, mw1)
+r.via('metal2', 55, 55)
+r.routeTo('s', b[1] + 900, 80)
+r.routeTo('e', b[0], 80)
+
+# Route drain of XM10 to drain of XM7
+
+a   = t['children']['XM10']['self'][0].source_drains[1]
+b   = t['children']['XM7']['self'][0].source_drains[1] # take the drain for alignment
+
+r.begin(a[0], a[1] - 100, "metal1")
+r.route('s', 50, mw1)
+r.via('metal2', 55, 55)
+r.routeTo('s', b[1] - 92, 80)
+r.routeTo('w', b[0], 80)
+
+# XM8 to XM6
+
+a   = t['children']['XM8']['self'][0].source_drains[1]
+b   = t['children']['XM6']['self'][0].source_drains[0] # take the drain for alignment
+
+r.begin(a[0], a[1] - 100, "metal1")
+r.route('s', 50, mw1)
+r.via('metal2', 55, 55)
+r.routeTo('s', b[1] - 92, 80)
+r.routeTo('e', b[0], 80)
+
+# Route two drains of XM3 together
+
+a   = t['children']['XM3']['self'][0].source_drains[0]
+b   = t['children']['XM3']['self'][1].source_drains[1] 
+
+r.begin(a[0], a[1], "metal1")
+r.route('n', 0, 80)
+r.via('metal2', 60, 60)
+r.routeTo('e', b[0], 100)
+r.via('metal1', 60, 60)
+r.route('n', 0, 80)
 
 top.writeMagFile(db, "strong-arm/strong_arm_latch_routed.mag")
 

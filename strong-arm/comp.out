@@ -1,0 +1,99 @@
+
+Circuit 1 cell sky130_fd_pr__nfet_01v8_lvt and Circuit 2 cell sky130_fd_pr__nfet_01v8_lvt are black boxes.
+Warning: Equate pins:  cell sky130_fd_pr__nfet_01v8_lvt is a placeholder, treated as a black box.
+Warning: Equate pins:  cell sky130_fd_pr__nfet_01v8_lvt is a placeholder, treated as a black box.
+
+Subcircuit pins:
+Circuit 1: sky130_fd_pr__nfet_01v8_lvt     |Circuit 2: sky130_fd_pr__nfet_01v8_lvt     
+-------------------------------------------|-------------------------------------------
+1                                          |1                                          
+2                                          |2                                          
+3                                          |3                                          
+4                                          |4                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes sky130_fd_pr__nfet_01v8_lvt and sky130_fd_pr__nfet_01v8_lvt are equivalent.
+
+Circuit 1 cell sky130_fd_pr__nfet_01v8 and Circuit 2 cell sky130_fd_pr__nfet_01v8 are black boxes.
+Warning: Equate pins:  cell sky130_fd_pr__nfet_01v8 is a placeholder, treated as a black box.
+Warning: Equate pins:  cell sky130_fd_pr__nfet_01v8 is a placeholder, treated as a black box.
+
+Subcircuit pins:
+Circuit 1: sky130_fd_pr__nfet_01v8         |Circuit 2: sky130_fd_pr__nfet_01v8         
+-------------------------------------------|-------------------------------------------
+1                                          |1                                          
+2                                          |2                                          
+3                                          |3                                          
+4                                          |4                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes sky130_fd_pr__nfet_01v8 and sky130_fd_pr__nfet_01v8 are equivalent.
+
+Circuit 1 cell sky130_fd_pr__pfet_01v8 and Circuit 2 cell sky130_fd_pr__pfet_01v8 are black boxes.
+Warning: Equate pins:  cell sky130_fd_pr__pfet_01v8 is a placeholder, treated as a black box.
+Warning: Equate pins:  cell sky130_fd_pr__pfet_01v8 is a placeholder, treated as a black box.
+
+Subcircuit pins:
+Circuit 1: sky130_fd_pr__pfet_01v8         |Circuit 2: sky130_fd_pr__pfet_01v8         
+-------------------------------------------|-------------------------------------------
+1                                          |1                                          
+2                                          |2                                          
+3                                          |3                                          
+4                                          |4                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes sky130_fd_pr__pfet_01v8 and sky130_fd_pr__pfet_01v8 are equivalent.
+Flattening unmatched subcell sky130_fd_pr__nfet_01v8_lvt_GVGYYV in circuit strong_arm_latch_routed (0)(2 instances)
+Flattening unmatched subcell sky130_fd_pr__nfet_01v8_lvt_URSRNG in circuit strong_arm_latch_routed (0)(1 instance)
+Flattening unmatched subcell sky130_fd_pr__nfet_01v8_CQH6Q5 in circuit strong_arm_latch_routed (0)(1 instance)
+Flattening unmatched subcell sky130_fd_pr__nfet_01v8_WXMB3T in circuit strong_arm_latch_routed (0)(1 instance)
+Flattening unmatched subcell sky130_fd_pr__pfet_01v8_CZ2BPM in circuit strong_arm_latch_routed (0)(1 instance)
+Flattening unmatched subcell sky130_fd_pr__pfet_01v8_NRXS53 in circuit strong_arm_latch_routed (0)(1 instance)
+Flattening unmatched subcell sky130_fd_pr__pfet_01v8_7PVLUA in circuit strong_arm_latch_routed (0)(1 instance)
+Flattening unmatched subcell sky130_fd_pr__pfet_01v8_MV5BJT in circuit strong_arm_latch_routed (0)(3 instances)
+
+Class strong_arm_latch_routed (0):  Merged 7 parallel devices.
+Subcircuit summary:
+Circuit 1: strong_arm_latch_routed         |Circuit 2: strong_arm_latch_routed         
+-------------------------------------------|-------------------------------------------
+sky130_fd_pr__nfet_01v8_lvt (6->3)         |sky130_fd_pr__nfet_01v8_lvt (3)            
+sky130_fd_pr__nfet_01v8 (2)                |sky130_fd_pr__nfet_01v8 (2)                
+sky130_fd_pr__pfet_01v8 (10->6)            |sky130_fd_pr__pfet_01v8 (6)                
+Number of devices: 11                      |Number of devices: 11                      
+Number of nets: 10                         |Number of nets: 10                         
+---------------------------------------------------------------------------------------
+Resolving symmetries by property value.
+Resolving symmetries by pin name.
+Netlists match uniquely with property errors.
+sky130_fd_pr__pfet_01v8_MV5BJT:XM10/sky130_fd_pr__pfet_01v8:0 vs. sky130_fd_pr__pfet_01v8:M10:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+sky130_fd_pr__pfet_01v8_7PVLUA:XM8/sky130_fd_pr__pfet_01v8:0 vs. sky130_fd_pr__pfet_01v8:M8:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+sky130_fd_pr__pfet_01v8_MV5BJT:XM9/sky130_fd_pr__pfet_01v8:0 vs. sky130_fd_pr__pfet_01v8:M9:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+sky130_fd_pr__pfet_01v8_MV5BJT:XM11/sky130_fd_pr__pfet_01v8:0 vs. sky130_fd_pr__pfet_01v8:M11:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM2/sky130_fd_pr__nfet_01v8_lvt:0 vs. sky130_fd_pr__nfet_01v8_lvt:M2:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM1/sky130_fd_pr__nfet_01v8_lvt:0 vs. sky130_fd_pr__nfet_01v8_lvt:M1:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+
+Subcircuit pins:
+Circuit 1: strong_arm_latch_routed         |Circuit 2: strong_arm_latch_routed         
+-------------------------------------------|-------------------------------------------
+VDD                                        |VDD                                        
+CLK                                        |CLK                                        
+VOUT_PLUS                                  |VOUT_PLUS                                  
+VOUT_MINUS                                 |VOUT_MINUS                                 
+VSS                                        |VSS                                        
+VINP                                       |VINP                                       
+VINN                                       |VINN                                       
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes strong_arm_latch_routed and strong_arm_latch_routed are equivalent.
+
+Final result: Circuits match uniquely.
+Property errors were found.
+
+The following cells had property errors:
+ strong_arm_latch_routed

@@ -1,0 +1,16 @@
+** sch_path: /home/jrsharp/old_home_mnt/asic/high_speed_comparator/xschem/strong_arm_latch.sch
+.subckt strong_arm_latch_routed VSS VDD CLK VINP VINN VOUT_MINUS VOUT_PLUS
+*.PININFO VSS:I VDD:I CLK:I VINP:I VINN:I VOUT_MINUS:O VOUT_PLUS:O
+XM1 net2 VINP net1 VSS sky130_fd_pr__nfet_01v8_lvt L=1 W=5 nf=2 m=1
+XM2 net3 VINN net1 VSS sky130_fd_pr__nfet_01v8_lvt L=1 W=5 nf=2 m=1
+XM3 net1 CLK VSS VSS sky130_fd_pr__nfet_01v8_lvt L=1 W=10 nf=1 m=1
+XM4 VOUT_PLUS VOUT_MINUS net2 VSS sky130_fd_pr__nfet_01v8 L=0.15 W=1 nf=1 m=1
+XM5 VOUT_MINUS VOUT_PLUS net3 VSS sky130_fd_pr__nfet_01v8 L=0.15 W=1 nf=1 m=1
+XM6 VOUT_PLUS VOUT_MINUS VDD VDD sky130_fd_pr__pfet_01v8 L=0.15 W=1 nf=1 m=1
+XM7 VOUT_MINUS VOUT_PLUS VDD VDD sky130_fd_pr__pfet_01v8 L=0.15 W=1 nf=1 m=1
+XM8 VOUT_PLUS CLK VDD VDD sky130_fd_pr__pfet_01v8 L=0.15 W=5 nf=2 m=1
+XM9 net2 CLK VDD VDD sky130_fd_pr__pfet_01v8 L=0.15 W=5 nf=2 m=1
+XM10 VOUT_MINUS CLK VDD VDD sky130_fd_pr__pfet_01v8 L=0.15 W=5 nf=2 m=1
+XM11 net3 CLK VDD VDD sky130_fd_pr__pfet_01v8 L=0.15 W=5 nf=2 m=1
+.ends
+.end
