@@ -413,10 +413,10 @@ cdef class Cell:
 
     def getBbox(self, db):
 
-        xbot = 1e10
-        ybot = 1e10
-        xtop = -1e10
-        ytop = -1e10
+        xbot = 1e9
+        ybot = 1e9
+        xtop = -1e9
+        ytop = -1e9
 
         for k, v in self.layers.items():
             for r in v:

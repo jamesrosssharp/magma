@@ -51,7 +51,10 @@ cdef class MagParser:
 
                     newfile = os.path.dirname(filename) + "/" + new_cell + ".mag"
 
-                    self.parse(newfile, db)
+                    try:
+                        self.parse(newfile, db)
+                    except:
+                        pass
 
                     cell_inst = db.setCellUse(cell_name_str, new_cell, s.split()[2])
 

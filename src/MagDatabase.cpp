@@ -3213,8 +3213,8 @@ static __pyx_mstatetype * const __pyx_mstate_global = &__pyx_mstate_global_stati
 #define __pyx_kp_b_iso88591_q_0_kQR_XQa_7_A_1 __pyx_string_tab[322]
 #define __pyx_kp_b_iso88591_q_0_kQR_haq_7_QnN_1 __pyx_string_tab[323]
 #define __pyx_kp_b_iso88591_q_a __pyx_string_tab[324]
-#define __pyx_float_neg_1e10 __pyx_number_tab[0]
-#define __pyx_float_1e10 __pyx_number_tab[1]
+#define __pyx_float_neg_1e9 __pyx_number_tab[0]
+#define __pyx_float_1e9 __pyx_number_tab[1]
 #define __pyx_int_0 __pyx_number_tab[2]
 #define __pyx_int_1 __pyx_number_tab[3]
 #define __pyx_int_100 __pyx_number_tab[4]
@@ -14359,7 +14359,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
  * 
  *     def getBbox(self, db):             # <<<<<<<<<<<<<<
  * 
- *         xbot = 1e10
+ *         xbot = 1e9
 */
 
 /* Python wrapper */
@@ -14480,45 +14480,45 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_24getBbox(struct __pyx_obj_11MagDa
   /* "MagDatabase.pyx":416
  *     def getBbox(self, db):
  * 
- *         xbot = 1e10             # <<<<<<<<<<<<<<
- *         ybot = 1e10
- *         xtop = -1e10
+ *         xbot = 1e9             # <<<<<<<<<<<<<<
+ *         ybot = 1e9
+ *         xtop = -1e9
 */
-  __Pyx_INCREF(__pyx_mstate_global->__pyx_float_1e10);
-  __pyx_v_xbot = __pyx_mstate_global->__pyx_float_1e10;
+  __Pyx_INCREF(__pyx_mstate_global->__pyx_float_1e9);
+  __pyx_v_xbot = __pyx_mstate_global->__pyx_float_1e9;
 
   /* "MagDatabase.pyx":417
  * 
- *         xbot = 1e10
- *         ybot = 1e10             # <<<<<<<<<<<<<<
- *         xtop = -1e10
- *         ytop = -1e10
+ *         xbot = 1e9
+ *         ybot = 1e9             # <<<<<<<<<<<<<<
+ *         xtop = -1e9
+ *         ytop = -1e9
 */
-  __Pyx_INCREF(__pyx_mstate_global->__pyx_float_1e10);
-  __pyx_v_ybot = __pyx_mstate_global->__pyx_float_1e10;
+  __Pyx_INCREF(__pyx_mstate_global->__pyx_float_1e9);
+  __pyx_v_ybot = __pyx_mstate_global->__pyx_float_1e9;
 
   /* "MagDatabase.pyx":418
- *         xbot = 1e10
- *         ybot = 1e10
- *         xtop = -1e10             # <<<<<<<<<<<<<<
- *         ytop = -1e10
+ *         xbot = 1e9
+ *         ybot = 1e9
+ *         xtop = -1e9             # <<<<<<<<<<<<<<
+ *         ytop = -1e9
  * 
 */
-  __Pyx_INCREF(__pyx_mstate_global->__pyx_float_neg_1e10);
-  __pyx_v_xtop = __pyx_mstate_global->__pyx_float_neg_1e10;
+  __Pyx_INCREF(__pyx_mstate_global->__pyx_float_neg_1e9);
+  __pyx_v_xtop = __pyx_mstate_global->__pyx_float_neg_1e9;
 
   /* "MagDatabase.pyx":419
- *         ybot = 1e10
- *         xtop = -1e10
- *         ytop = -1e10             # <<<<<<<<<<<<<<
+ *         ybot = 1e9
+ *         xtop = -1e9
+ *         ytop = -1e9             # <<<<<<<<<<<<<<
  * 
  *         for k, v in self.layers.items():
 */
-  __Pyx_INCREF(__pyx_mstate_global->__pyx_float_neg_1e10);
-  __pyx_v_ytop = __pyx_mstate_global->__pyx_float_neg_1e10;
+  __Pyx_INCREF(__pyx_mstate_global->__pyx_float_neg_1e9);
+  __pyx_v_ytop = __pyx_mstate_global->__pyx_float_neg_1e9;
 
   /* "MagDatabase.pyx":421
- *         ytop = -1e10
+ *         ytop = -1e9
  * 
  *         for k, v in self.layers.items():             # <<<<<<<<<<<<<<
  *             for r in v:
@@ -15002,7 +15002,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_24getBbox(struct __pyx_obj_11MagDa
  * 
  *     def getBbox(self, db):             # <<<<<<<<<<<<<<
  * 
- *         xbot = 1e10
+ *         xbot = 1e9
 */
 
   /* function exit code */
@@ -24588,7 +24588,7 @@ __Pyx_RefNannySetupContext("PyInit_MagDatabase", 0);
  * 
  *     def getBbox(self, db):             # <<<<<<<<<<<<<<
  * 
- *         xbot = 1e10
+ *         xbot = 1e9
 */
   __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_25getBbox, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_getBbox, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[30])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 414, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -25187,7 +25187,7 @@ const char* const bytes = "    Dumping transistor Dumping transistors in cell No
   }
   {
     PyObject **numbertab = __pyx_mstate->__pyx_number_tab;
-    double const c_constants[] = {-1e10,1e10};
+    double const c_constants[] = {-1e9,1e9};
     for (int i = 0; i < 2; i++) {
       numbertab[i] = PyFloat_FromDouble(c_constants[i]);
       if (unlikely(!numbertab[i])) __PYX_ERR(0, 1, __pyx_L1_error)
