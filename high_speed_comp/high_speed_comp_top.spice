@@ -1,0 +1,13 @@
+** sch_path: /home/jrsharp/old_home_mnt/asic/high_speed_comparator/xschem/high_speed_comp_top.sch
+.subckt high_speed_comp_top VINP VINN VDD VSS CLK COMP_OUT
+*.PININFO VINP:I VINN:I VDD:I VSS:I CLK:I COMP_OUT:O
+x1 VDD CLK_PRIME net1 net2 VSS VINP VINN strong_arm_latch_routed
+x2 VDD net1 net2 VOUT VSS post_amplifier_routed
+x3 CLK VOUT GND GND VDD VDD COMP_OUT sky130_fd_sc_hd__dfxtp_2
+x4 CLK GND GND VDD VDD CLK_PRIME sky130_fd_sc_hd__clkinv_4
+x5 VSS VSS VDD VDD sky130_fd_sc_hd__decap_3
+x7 VSS VSS VDD VDD sky130_fd_sc_hd__decap_3
+x9 VGND VPWR sky130_fd_sc_hd__tapvpwrvgnd_1
+.ends
+
+.end
