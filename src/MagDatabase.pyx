@@ -169,6 +169,12 @@ class Label:
     def centroid(self):
         return self.r.centroid()
 
+    def transform(self, t):
+
+        self.r.xbot, self.r.ybot = t.transform_point((self.r.xbot, self.r.ybot))
+        self.r.xtop, self.r.ytop = t.transform_point((self.r.xtop, self.r.ytop))
+
+
 
 cdef class Cell:
     cdef public dict layers
@@ -177,12 +183,14 @@ cdef class Cell:
     cdef public list transistors
     cdef public list uses
     cdef public dict labels
-    
+    cdef public Rect bbox
+
     def __init__(self):
         self.layers = {}
         self.transistors = []
         self.uses = []
         self.labels = {}
+        self.bbox = Rect(1e9, 1e9, -1e9, -1e9)
 
     def setTech(self, str tech):
         self.tech = tech
@@ -250,17 +258,33 @@ cdef class Cell:
     def get_transistors(self, db):
         return self.get_transistors_with_transform(db, Transform(1, 0, 0, 0, 1, 0))
 
-    def getPins(self, db):
-        """
-        Get pins hierarchy
-        """
+
+    def get_pins_with_transform(self, db, transform):
+
+        import copy
 
         p = {}
 
         for u in self.uses:
-            p[u['inst_name']] = db.cells[u['name']].getPins(db)
+            p[u['inst_name']] = db.cells[u['name']].get_pins_with_transform(db, u['transform'].Transform(transform))
 
-        return {'self': self.labels, 'children': p}
+        lab = {}
+
+        for k, v in self.labels.items():
+            lab[k] = copy.deepcopy(v)
+            lab[k].transform(transform)
+
+        return {'self': lab, 'children': p}
+
+
+        
+
+    def getPins(self, db):
+        """
+        Get pins hierarchy
+        """
+        return self.get_pins_with_transform(db, Transform(1, 0, 0, 0, 1, 0))
+
 
     def find_transistors(self):
         """
@@ -408,15 +432,16 @@ cdef class Cell:
                 self.transistors.append(t)
 
 
-
+    def setBBox(self, xbot, ybot, xtop, ytop):
+        self.bbox = Rect(xbot, ybot, xtop, ytop)
 
 
     def getBbox(self, db):
 
-        xbot = 1e9
-        ybot = 1e9
-        xtop = -1e9
-        ytop = -1e9
+        xbot = self.bbox.xbot
+        ybot = self.bbox.ybot
+        xtop = self.bbox.xtop
+        ytop = self.bbox.ytop
 
         for k, v in self.layers.items():
             for r in v:
@@ -529,6 +554,10 @@ cdef class MagDatabase:
     def setCellUseTransform(self, name, cell_inst, a, b, c, d, e, f):
     
         self.cells[name].setUseTransform(cell_inst, a, b, c, d, e, f)
+
+    def setCellBBox(self, name, xbot, ybot, xtop, ytop):
+
+        self.cells[name].setBBox(xbot, ybot, xtop, ytop)
 
     def dump(self):
 

@@ -1602,7 +1602,7 @@ struct __pyx_obj_11MagDatabase_Transform {
 };
 
 
-/* "MagDatabase.pyx":173
+/* "MagDatabase.pyx":179
  * 
  * 
  * cdef class Cell:             # <<<<<<<<<<<<<<
@@ -1617,10 +1617,11 @@ struct __pyx_obj_11MagDatabase_Cell {
   PyObject *transistors;
   PyObject *uses;
   PyObject *labels;
+  struct __pyx_obj_11MagDatabase_Rect *bbox;
 };
 
 
-/* "MagDatabase.pyx":502
+/* "MagDatabase.pyx":527
  * 
  * 
  * cdef class MagDatabase:             # <<<<<<<<<<<<<<
@@ -2151,6 +2152,18 @@ static CYTHON_INLINE int __Pyx_PyObject_SetAttrStr(PyObject* obj, PyObject* attr
 #define __Pyx_PyObject_SetAttrStr(o,n,v) PyObject_SetAttr(o,n,v)
 #endif
 
+/* RaiseTooManyValuesToUnpack.proto */
+static CYTHON_INLINE void __Pyx_RaiseTooManyValuesError(Py_ssize_t expected);
+
+/* RaiseNeedMoreValuesToUnpack.proto */
+static CYTHON_INLINE void __Pyx_RaiseNeedMoreValuesError(Py_ssize_t index);
+
+/* IterFinish.proto */
+static CYTHON_INLINE int __Pyx_IterFinish(void);
+
+/* UnpackItemEndCheck.proto */
+static int __Pyx_IternextUnpackEndCheck(PyObject *retval, Py_ssize_t expected);
+
 /* PyDictContains.proto */
 static CYTHON_INLINE int __Pyx_PyDict_ContainsTF(PyObject* item, PyObject* dict, int eq) {
     int result = PyDict_Contains(dict, item);
@@ -2182,23 +2195,11 @@ static PyObject *__Pyx_PyDict_GetItem(PyObject *d, PyObject* key);
 #define __Pyx_PyObject_Dict_GetItem(obj, name)  PyObject_GetItem(obj, name)
 #endif
 
-/* IterFinish.proto (used by dict_iter) */
-static CYTHON_INLINE int __Pyx_IterFinish(void);
-
 /* PyObjectCallNoArg.proto (used by PyObjectCallMethod0) */
 static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func);
 
 /* PyObjectCallMethod0.proto (used by dict_iter) */
 static PyObject* __Pyx_PyObject_CallMethod0(PyObject* obj, PyObject* method_name);
-
-/* RaiseNeedMoreValuesToUnpack.proto (used by UnpackTuple2) */
-static CYTHON_INLINE void __Pyx_RaiseNeedMoreValuesError(Py_ssize_t index);
-
-/* RaiseTooManyValuesToUnpack.proto (used by UnpackItemEndCheck) */
-static CYTHON_INLINE void __Pyx_RaiseTooManyValuesError(Py_ssize_t expected);
-
-/* UnpackItemEndCheck.proto (used by UnpackTuple2) */
-static int __Pyx_IternextUnpackEndCheck(PyObject *retval, Py_ssize_t expected);
 
 /* RaiseNoneIterError.proto (used by UnpackTupleError) */
 static CYTHON_INLINE void __Pyx_RaiseNoneNotIterableError(void);
@@ -2256,6 +2257,19 @@ static CYTHON_INLINE int __Pyx_ListComp_Append(PyObject* list, PyObject* x) {
 #define __Pyx_ListComp_Append(L,x) PyList_Append(L,x)
 #endif
 
+/* HasAttr.proto (used by ImportImpl) */
+#if __PYX_LIMITED_VERSION_HEX >= 0x030d0000
+#define __Pyx_HasAttr(o, n)  PyObject_HasAttrWithError(o, n)
+#else
+static CYTHON_INLINE int __Pyx_HasAttr(PyObject *, PyObject *);
+#endif
+
+/* ImportImpl.export */
+static PyObject *__Pyx__Import(PyObject *name, PyObject *const *imported_names, Py_ssize_t len_imported_names, PyObject *qualname, PyObject *moddict, int level);
+
+/* Import.proto */
+static CYTHON_INLINE PyObject *__Pyx_Import(PyObject *name, PyObject *const *imported_names, Py_ssize_t len_imported_names, PyObject *qualname, int level);
+
 /* PyObjectLookupSpecial.proto */
 #if CYTHON_USE_PYTYPE_LOOKUP && CYTHON_USE_TYPE_SLOTS
 #define __Pyx_PyObject_LookupSpecialNoError(obj, attr_name)  __Pyx__PyObject_LookupSpecial(obj, attr_name, 0)
@@ -2298,6 +2312,9 @@ static int __Pyx__GetException(PyThreadState *tstate, PyObject **type, PyObject 
 static int __Pyx_GetException(PyObject **type, PyObject **value, PyObject **tb);
 #endif
 
+/* ExtTypeTest.proto */
+static CYTHON_INLINE int __Pyx_TypeTest(PyObject *obj, PyTypeObject *type);
+
 /* AllocateExtensionType.proto */
 static PyObject *__Pyx_AllocateExtensionType(PyTypeObject *t, int is_final);
 
@@ -2334,19 +2351,6 @@ static int __Pyx__DelItemOnTypeDict(PyTypeObject *tp, PyObject *k);
 
 /* SetupReduce.proto */
 static int __Pyx_setup_reduce(PyObject* type_obj);
-
-/* HasAttr.proto (used by ImportImpl) */
-#if __PYX_LIMITED_VERSION_HEX >= 0x030d0000
-#define __Pyx_HasAttr(o, n)  PyObject_HasAttrWithError(o, n)
-#else
-static CYTHON_INLINE int __Pyx_HasAttr(PyObject *, PyObject *);
-#endif
-
-/* ImportImpl.export */
-static PyObject *__Pyx__Import(PyObject *name, PyObject *const *imported_names, Py_ssize_t len_imported_names, PyObject *qualname, PyObject *moddict, int level);
-
-/* Import.proto */
-static CYTHON_INLINE PyObject *__Pyx_Import(PyObject *name, PyObject *const *imported_names, Py_ssize_t len_imported_names, PyObject *qualname, int level);
 
 /* dict_setdefault.proto (used by FetchCommonType) */
 static CYTHON_INLINE PyObject *__Pyx_PyDict_SetDefault(PyObject *d, PyObject *key, PyObject *default_value);
@@ -2689,7 +2693,7 @@ static const char __pyx_k_cells[] = "cells";
 static const char __pyx_k_a_b_c_d_e_f[] = "a, b, c, d, e, f";
 static const char __pyx_k_xbot_xtop_ybot_ytop[] = "xbot, xtop, ybot, ytop";
 static const char __pyx_k_gates_source_drains_ttype[] = "gates, source_drains, ttype";
-static const char __pyx_k_labels_layers_name_tech_transist[] = "labels, layers, name, tech, transistors, uses";
+static const char __pyx_k_bbox_labels_layers_name_tech_tra[] = "bbox, labels, layers, name, tech, transistors, uses";
 /* #### Code section: decls ### */
 static int __pyx_pf_11MagDatabase_4Rect___init__(struct __pyx_obj_11MagDatabase_Rect *__pyx_v_self, PyObject *__pyx_v__xbot, PyObject *__pyx_v__ybot, PyObject *__pyx_v__xtop, PyObject *__pyx_v__ytop); /* proto */
 static PyObject *__pyx_pf_11MagDatabase_4Rect_2dump(struct __pyx_obj_11MagDatabase_Rect *__pyx_v_self); /* proto */
@@ -2745,6 +2749,7 @@ static PyObject *__pyx_pf_11MagDatabase_5Label___init__(CYTHON_UNUSED PyObject *
 static PyObject *__pyx_pf_11MagDatabase_5Label_2setPort(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_port, PyObject *__pyx_v_directions); /* proto */
 static PyObject *__pyx_pf_11MagDatabase_5Label_4__repr__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_11MagDatabase_5Label_6centroid(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_11MagDatabase_5Label_8transform(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_t); /* proto */
 static int __pyx_pf_11MagDatabase_4Cell___init__(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_11MagDatabase_4Cell_2setTech(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_tech); /* proto */
 static PyObject *__pyx_pf_11MagDatabase_4Cell_4addRect(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_layer, int __pyx_v_xbot, int __pyx_v_ybot, int __pyx_v_xtop, int __pyx_v_ytop); /* proto */
@@ -2755,12 +2760,14 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_12dump_transistors_with_transform(
 static PyObject *__pyx_pf_11MagDatabase_4Cell_14dump_transistors(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_db); /* proto */
 static PyObject *__pyx_pf_11MagDatabase_4Cell_16get_transistors_with_transform(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_db, PyObject *__pyx_v_transform); /* proto */
 static PyObject *__pyx_pf_11MagDatabase_4Cell_18get_transistors(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_db); /* proto */
-static PyObject *__pyx_pf_11MagDatabase_4Cell_20getPins(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_db); /* proto */
-static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_11MagDatabase_4Cell_24getBbox(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_db); /* proto */
-static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_db, PyObject *__pyx_v_fname); /* proto */
-static PyObject *__pyx_pf_11MagDatabase_4Cell_28addLabel(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_layer, PyObject *__pyx_v_xbot, PyObject *__pyx_v_ybot, PyObject *__pyx_v_xtop, PyObject *__pyx_v_ytop, PyObject *__pyx_v_pos, PyObject *__pyx_v_font, PyObject *__pyx_v_a, PyObject *__pyx_v_b, PyObject *__pyx_v_c, PyObject *__pyx_v_d, PyObject *__pyx_v_labname); /* proto */
-static PyObject *__pyx_pf_11MagDatabase_4Cell_30setLabelPort(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_labname, PyObject *__pyx_v_port, PyObject *__pyx_v_directions); /* proto */
+static PyObject *__pyx_pf_11MagDatabase_4Cell_20get_pins_with_transform(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_db, PyObject *__pyx_v_transform); /* proto */
+static PyObject *__pyx_pf_11MagDatabase_4Cell_22getPins(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_db); /* proto */
+static PyObject *__pyx_pf_11MagDatabase_4Cell_24find_transistors(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_11MagDatabase_4Cell_26setBBox(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_xbot, PyObject *__pyx_v_ybot, PyObject *__pyx_v_xtop, PyObject *__pyx_v_ytop); /* proto */
+static PyObject *__pyx_pf_11MagDatabase_4Cell_28getBbox(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_db); /* proto */
+static PyObject *__pyx_pf_11MagDatabase_4Cell_30writeMagFile(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_db, PyObject *__pyx_v_fname); /* proto */
+static PyObject *__pyx_pf_11MagDatabase_4Cell_32addLabel(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_layer, PyObject *__pyx_v_xbot, PyObject *__pyx_v_ybot, PyObject *__pyx_v_xtop, PyObject *__pyx_v_ytop, PyObject *__pyx_v_pos, PyObject *__pyx_v_font, PyObject *__pyx_v_a, PyObject *__pyx_v_b, PyObject *__pyx_v_c, PyObject *__pyx_v_d, PyObject *__pyx_v_labname); /* proto */
+static PyObject *__pyx_pf_11MagDatabase_4Cell_34setLabelPort(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_labname, PyObject *__pyx_v_port, PyObject *__pyx_v_directions); /* proto */
 static PyObject *__pyx_pf_11MagDatabase_4Cell_6layers___get__(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self); /* proto */
 static int __pyx_pf_11MagDatabase_4Cell_6layers_2__set__(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
 static int __pyx_pf_11MagDatabase_4Cell_6layers_4__del__(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self); /* proto */
@@ -2779,28 +2786,32 @@ static int __pyx_pf_11MagDatabase_4Cell_4uses_4__del__(struct __pyx_obj_11MagDat
 static PyObject *__pyx_pf_11MagDatabase_4Cell_6labels___get__(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self); /* proto */
 static int __pyx_pf_11MagDatabase_4Cell_6labels_2__set__(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
 static int __pyx_pf_11MagDatabase_4Cell_6labels_4__del__(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_11MagDatabase_4Cell_32__reduce_cython__(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_11MagDatabase_4Cell_34__setstate_cython__(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_11MagDatabase_4Cell_4bbox___get__(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self); /* proto */
+static int __pyx_pf_11MagDatabase_4Cell_4bbox_2__set__(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
+static int __pyx_pf_11MagDatabase_4Cell_4bbox_4__del__(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_11MagDatabase_4Cell_36__reduce_cython__(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_11MagDatabase_4Cell_38__setstate_cython__(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v___pyx_state); /* proto */
 static int __pyx_pf_11MagDatabase_11MagDatabase___init__(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_2createCell(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_name); /* proto */
 static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_4addRectToCell(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_name, PyObject *__pyx_v_layer, int __pyx_v_xbot, int __pyx_v_ybot, int __pyx_v_xtop, int __pyx_v_ytop); /* proto */
 static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_6setCellTech(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_name, PyObject *__pyx_v_tech); /* proto */
 static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_8setCellUse(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_name, PyObject *__pyx_v_new_cell, PyObject *__pyx_v_inst_name); /* proto */
 static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_10setCellUseTransform(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_name, PyObject *__pyx_v_cell_inst, PyObject *__pyx_v_a, PyObject *__pyx_v_b, PyObject *__pyx_v_c, PyObject *__pyx_v_d, PyObject *__pyx_v_e, PyObject *__pyx_v_f); /* proto */
-static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_12dump(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_14findCellTransistors(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_name); /* proto */
-static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_16findAllTransistors(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_18dumpCellTransistors(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_name); /* proto */
-static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_20getCellTransistors(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_name); /* proto */
-static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_22getCell(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_name); /* proto */
-static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_24addLabelToCell(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_cell_name_str, PyObject *__pyx_v_layer, PyObject *__pyx_v_xbot, PyObject *__pyx_v_ybot, PyObject *__pyx_v_xtop, PyObject *__pyx_v_ytop, PyObject *__pyx_v_pos, PyObject *__pyx_v_font, PyObject *__pyx_v_a, PyObject *__pyx_v_b, PyObject *__pyx_v_c, PyObject *__pyx_v_d, PyObject *__pyx_v_labname); /* proto */
-static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_26setLabelPort(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_cell_name_str, PyObject *__pyx_v_labname, PyObject *__pyx_v_port, PyObject *__pyx_v_directions); /* proto */
-static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_28getCellPins(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_cell_name_str); /* proto */
+static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_12setCellBBox(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_name, PyObject *__pyx_v_xbot, PyObject *__pyx_v_ybot, PyObject *__pyx_v_xtop, PyObject *__pyx_v_ytop); /* proto */
+static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_14dump(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_16findCellTransistors(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_name); /* proto */
+static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_18findAllTransistors(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_20dumpCellTransistors(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_name); /* proto */
+static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_22getCellTransistors(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_name); /* proto */
+static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_24getCell(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_name); /* proto */
+static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_26addLabelToCell(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_cell_name_str, PyObject *__pyx_v_layer, PyObject *__pyx_v_xbot, PyObject *__pyx_v_ybot, PyObject *__pyx_v_xtop, PyObject *__pyx_v_ytop, PyObject *__pyx_v_pos, PyObject *__pyx_v_font, PyObject *__pyx_v_a, PyObject *__pyx_v_b, PyObject *__pyx_v_c, PyObject *__pyx_v_d, PyObject *__pyx_v_labname); /* proto */
+static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_28setLabelPort(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_cell_name_str, PyObject *__pyx_v_labname, PyObject *__pyx_v_port, PyObject *__pyx_v_directions); /* proto */
+static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_30getCellPins(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_cell_name_str); /* proto */
 static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_5cells___get__(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self); /* proto */
 static int __pyx_pf_11MagDatabase_11MagDatabase_5cells_2__set__(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
 static int __pyx_pf_11MagDatabase_11MagDatabase_5cells_4__del__(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_30__reduce_cython__(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_32__setstate_cython__(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_32__reduce_cython__(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_34__setstate_cython__(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_pf_11MagDatabase___pyx_unpickle_Rect(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_pf_11MagDatabase_2__pyx_unpickle_Transistor(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_pf_11MagDatabase_4__pyx_unpickle_Transform(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
@@ -2844,9 +2855,9 @@ typedef struct {
   __Pyx_CachedCFunction __pyx_umethod_PyDict_Type_items;
   __Pyx_CachedCFunction __pyx_umethod_PyDict_Type_pop;
   __Pyx_CachedCFunction __pyx_umethod_PyDict_Type_values;
-  PyObject *__pyx_tuple[2];
-  PyObject *__pyx_codeobj_tab[57];
-  PyObject *__pyx_string_tab[325];
+  PyObject *__pyx_tuple[3];
+  PyObject *__pyx_codeobj_tab[61];
+  PyObject *__pyx_string_tab[339];
   PyObject *__pyx_number_tab[10];
 /* #### Code section: module_state_contents ### */
 /* CommonTypesMetaclass.module_state_decls */
@@ -2940,288 +2951,302 @@ static __pyx_mstatetype * const __pyx_mstate_global = &__pyx_mstate_global_stati
 #define __pyx_n_u_Cell_find_transistors __pyx_string_tab[49]
 #define __pyx_n_u_Cell_getBbox __pyx_string_tab[50]
 #define __pyx_n_u_Cell_getPins __pyx_string_tab[51]
-#define __pyx_n_u_Cell_get_transistors __pyx_string_tab[52]
-#define __pyx_n_u_Cell_get_transistors_with_transf __pyx_string_tab[53]
-#define __pyx_n_u_Cell_setLabelPort __pyx_string_tab[54]
-#define __pyx_n_u_Cell_setTech __pyx_string_tab[55]
-#define __pyx_n_u_Cell_setUseTransform __pyx_string_tab[56]
-#define __pyx_n_u_Cell_writeMagFile __pyx_string_tab[57]
-#define __pyx_n_u_Label __pyx_string_tab[58]
-#define __pyx_n_u_Label___init __pyx_string_tab[59]
-#define __pyx_n_u_Label___repr __pyx_string_tab[60]
-#define __pyx_n_u_Label_centroid __pyx_string_tab[61]
-#define __pyx_n_u_Label_setPort __pyx_string_tab[62]
-#define __pyx_n_u_MagDatabase __pyx_string_tab[63]
-#define __pyx_n_u_MagDatabase___reduce_cython __pyx_string_tab[64]
-#define __pyx_n_u_MagDatabase___setstate_cython __pyx_string_tab[65]
-#define __pyx_n_u_MagDatabase_addLabelToCell __pyx_string_tab[66]
-#define __pyx_n_u_MagDatabase_addRectToCell __pyx_string_tab[67]
-#define __pyx_n_u_MagDatabase_createCell __pyx_string_tab[68]
-#define __pyx_n_u_MagDatabase_dump __pyx_string_tab[69]
-#define __pyx_n_u_MagDatabase_dumpCellTransistors __pyx_string_tab[70]
-#define __pyx_n_u_MagDatabase_findAllTransistors __pyx_string_tab[71]
-#define __pyx_n_u_MagDatabase_findCellTransistors __pyx_string_tab[72]
-#define __pyx_n_u_MagDatabase_getCell __pyx_string_tab[73]
-#define __pyx_n_u_MagDatabase_getCellPins __pyx_string_tab[74]
-#define __pyx_n_u_MagDatabase_getCellTransistors __pyx_string_tab[75]
-#define __pyx_n_u_MagDatabase_setCellTech __pyx_string_tab[76]
-#define __pyx_n_u_MagDatabase_setCellUse __pyx_string_tab[77]
-#define __pyx_n_u_MagDatabase_setCellUseTransform __pyx_string_tab[78]
-#define __pyx_n_u_MagDatabase_setLabelPort __pyx_string_tab[79]
-#define __pyx_n_u_Pyx_PyDict_NextRef __pyx_string_tab[80]
-#define __pyx_n_u_Rect __pyx_string_tab[81]
-#define __pyx_n_u_Rect___reduce_cython __pyx_string_tab[82]
-#define __pyx_n_u_Rect___setstate_cython __pyx_string_tab[83]
-#define __pyx_n_u_Rect_abuts __pyx_string_tab[84]
-#define __pyx_n_u_Rect_centroid __pyx_string_tab[85]
-#define __pyx_n_u_Rect_dump __pyx_string_tab[86]
-#define __pyx_n_u_Rect_overlaps __pyx_string_tab[87]
-#define __pyx_n_u_Transform __pyx_string_tab[88]
-#define __pyx_n_u_Transform_Transform __pyx_string_tab[89]
-#define __pyx_n_u_Transform___reduce_cython __pyx_string_tab[90]
-#define __pyx_n_u_Transform___setstate_cython __pyx_string_tab[91]
-#define __pyx_n_u_Transform_toMatrix __pyx_string_tab[92]
-#define __pyx_n_u_Transform_transform_point __pyx_string_tab[93]
-#define __pyx_n_u_Transistor __pyx_string_tab[94]
-#define __pyx_n_u_Transistor___reduce_cython __pyx_string_tab[95]
-#define __pyx_n_u_Transistor___setstate_cython __pyx_string_tab[96]
-#define __pyx_n_u_Transistor_dump_with_transform __pyx_string_tab[97]
-#define __pyx_n_u_Transistor_transform __pyx_string_tab[98]
-#define __pyx_n_u_a __pyx_string_tab[99]
-#define __pyx_n_u_a_2 __pyx_string_tab[100]
-#define __pyx_n_u_abuts __pyx_string_tab[101]
-#define __pyx_n_u_addLabel __pyx_string_tab[102]
-#define __pyx_n_u_addLabelToCell __pyx_string_tab[103]
-#define __pyx_n_u_addRect __pyx_string_tab[104]
-#define __pyx_n_u_addRectToCell __pyx_string_tab[105]
-#define __pyx_n_u_addUse __pyx_string_tab[106]
-#define __pyx_n_u_annotate __pyx_string_tab[107]
-#define __pyx_n_u_append __pyx_string_tab[108]
-#define __pyx_n_u_array __pyx_string_tab[109]
-#define __pyx_n_u_asyncio_coroutines __pyx_string_tab[110]
-#define __pyx_n_u_b __pyx_string_tab[111]
-#define __pyx_n_u_b_2 __pyx_string_tab[112]
-#define __pyx_n_u_c __pyx_string_tab[113]
-#define __pyx_n_u_c_2 __pyx_string_tab[114]
-#define __pyx_n_u_cell_2 __pyx_string_tab[115]
-#define __pyx_n_u_cell_inst __pyx_string_tab[116]
-#define __pyx_n_u_cell_name_str __pyx_string_tab[117]
-#define __pyx_n_u_cells __pyx_string_tab[118]
-#define __pyx_n_u_centroid __pyx_string_tab[119]
-#define __pyx_n_u_children __pyx_string_tab[120]
-#define __pyx_n_u_class_getitem __pyx_string_tab[121]
-#define __pyx_n_u_cline_in_traceback __pyx_string_tab[122]
-#define __pyx_n_u_createCell __pyx_string_tab[123]
-#define __pyx_n_u_d __pyx_string_tab[124]
-#define __pyx_n_u_d_2 __pyx_string_tab[125]
-#define __pyx_n_u_db __pyx_string_tab[126]
-#define __pyx_n_u_dict __pyx_string_tab[127]
-#define __pyx_n_u_dict_2 __pyx_string_tab[128]
-#define __pyx_n_u_directions __pyx_string_tab[129]
-#define __pyx_n_u_doc __pyx_string_tab[130]
-#define __pyx_n_u_dump __pyx_string_tab[131]
-#define __pyx_n_u_dumpCellTransistors __pyx_string_tab[132]
-#define __pyx_n_u_dump_transistors __pyx_string_tab[133]
-#define __pyx_n_u_dump_transistors_with_transform __pyx_string_tab[134]
-#define __pyx_n_u_dump_with_transform __pyx_string_tab[135]
-#define __pyx_n_u_e __pyx_string_tab[136]
-#define __pyx_n_u_e_2 __pyx_string_tab[137]
-#define __pyx_n_u_enter __pyx_string_tab[138]
-#define __pyx_n_u_enumerate __pyx_string_tab[139]
-#define __pyx_n_u_exit __pyx_string_tab[140]
-#define __pyx_n_u_f __pyx_string_tab[141]
-#define __pyx_n_u_f_2 __pyx_string_tab[142]
-#define __pyx_n_u_findAllTransistors __pyx_string_tab[143]
-#define __pyx_n_u_findCellTransistors __pyx_string_tab[144]
-#define __pyx_n_u_find_transistors __pyx_string_tab[145]
-#define __pyx_n_u_fname __pyx_string_tab[146]
-#define __pyx_n_u_font __pyx_string_tab[147]
-#define __pyx_n_u_func __pyx_string_tab[148]
-#define __pyx_n_u_g __pyx_string_tab[149]
-#define __pyx_n_u_getBbox __pyx_string_tab[150]
-#define __pyx_n_u_getCell __pyx_string_tab[151]
-#define __pyx_n_u_getCellPins __pyx_string_tab[152]
-#define __pyx_n_u_getCellTransistors __pyx_string_tab[153]
-#define __pyx_n_u_getPins __pyx_string_tab[154]
-#define __pyx_n_u_get_transistors __pyx_string_tab[155]
-#define __pyx_n_u_get_transistors_with_transform __pyx_string_tab[156]
-#define __pyx_n_u_getstate __pyx_string_tab[157]
-#define __pyx_n_u_handle __pyx_string_tab[158]
-#define __pyx_n_u_i __pyx_string_tab[159]
-#define __pyx_n_u_init __pyx_string_tab[160]
-#define __pyx_n_u_inst __pyx_string_tab[161]
-#define __pyx_n_u_inst_name __pyx_string_tab[162]
-#define __pyx_n_u_is_coroutine __pyx_string_tab[163]
-#define __pyx_n_u_items __pyx_string_tab[164]
-#define __pyx_n_u_k __pyx_string_tab[165]
-#define __pyx_n_u_l __pyx_string_tab[166]
-#define __pyx_n_u_labname __pyx_string_tab[167]
-#define __pyx_n_u_layer __pyx_string_tab[168]
-#define __pyx_n_u_magic __pyx_string_tab[169]
-#define __pyx_n_u_main __pyx_string_tab[170]
-#define __pyx_n_u_matmul __pyx_string_tab[171]
-#define __pyx_n_u_metaclass __pyx_string_tab[172]
-#define __pyx_n_u_module __pyx_string_tab[173]
-#define __pyx_n_u_name __pyx_string_tab[174]
-#define __pyx_n_u_name_2 __pyx_string_tab[175]
-#define __pyx_n_u_nc __pyx_string_tab[176]
-#define __pyx_n_u_ndiff __pyx_string_tab[177]
-#define __pyx_n_u_ndiff_c __pyx_string_tab[178]
-#define __pyx_n_u_ndiff_r __pyx_string_tab[179]
-#define __pyx_n_u_ndiffc __pyx_string_tab[180]
-#define __pyx_n_u_new __pyx_string_tab[181]
-#define __pyx_n_u_new_cell __pyx_string_tab[182]
-#define __pyx_n_u_nmos __pyx_string_tab[183]
-#define __pyx_n_u_nmoslvt __pyx_string_tab[184]
-#define __pyx_n_u_np __pyx_string_tab[185]
-#define __pyx_n_u_nr __pyx_string_tab[186]
-#define __pyx_n_u_nsew __pyx_string_tab[187]
-#define __pyx_n_u_numpy __pyx_string_tab[188]
-#define __pyx_n_u_open __pyx_string_tab[189]
-#define __pyx_n_u_overlap_x __pyx_string_tab[190]
-#define __pyx_n_u_overlap_y __pyx_string_tab[191]
-#define __pyx_n_u_overlaps __pyx_string_tab[192]
-#define __pyx_n_u_p __pyx_string_tab[193]
-#define __pyx_n_u_pc __pyx_string_tab[194]
-#define __pyx_n_u_pdiff __pyx_string_tab[195]
-#define __pyx_n_u_pdiff_c __pyx_string_tab[196]
-#define __pyx_n_u_pdiff_r __pyx_string_tab[197]
-#define __pyx_n_u_pdiffc __pyx_string_tab[198]
-#define __pyx_n_u_pmos __pyx_string_tab[199]
-#define __pyx_n_u_poly __pyx_string_tab[200]
-#define __pyx_n_u_poly_c __pyx_string_tab[201]
-#define __pyx_n_u_poly_r __pyx_string_tab[202]
-#define __pyx_n_u_polycont __pyx_string_tab[203]
-#define __pyx_n_u_pop __pyx_string_tab[204]
-#define __pyx_n_u_port __pyx_string_tab[205]
-#define __pyx_n_u_pos __pyx_string_tab[206]
-#define __pyx_n_u_pp __pyx_string_tab[207]
-#define __pyx_n_u_pr __pyx_string_tab[208]
-#define __pyx_n_u_prepare __pyx_string_tab[209]
-#define __pyx_n_u_print __pyx_string_tab[210]
-#define __pyx_n_u_pyx_checksum __pyx_string_tab[211]
-#define __pyx_n_u_pyx_result __pyx_string_tab[212]
-#define __pyx_n_u_pyx_state __pyx_string_tab[213]
-#define __pyx_n_u_pyx_type __pyx_string_tab[214]
-#define __pyx_n_u_pyx_unpickle_Cell __pyx_string_tab[215]
-#define __pyx_n_u_pyx_unpickle_MagDatabase __pyx_string_tab[216]
-#define __pyx_n_u_pyx_unpickle_Rect __pyx_string_tab[217]
-#define __pyx_n_u_pyx_unpickle_Transform __pyx_string_tab[218]
-#define __pyx_n_u_pyx_unpickle_Transistor __pyx_string_tab[219]
-#define __pyx_n_u_qualname __pyx_string_tab[220]
-#define __pyx_n_u_r __pyx_string_tab[221]
-#define __pyx_n_u_r2 __pyx_string_tab[222]
-#define __pyx_n_u_reduce __pyx_string_tab[223]
-#define __pyx_n_u_reduce_cython __pyx_string_tab[224]
-#define __pyx_n_u_reduce_ex __pyx_string_tab[225]
-#define __pyx_n_u_repr __pyx_string_tab[226]
-#define __pyx_n_u_rp __pyx_string_tab[227]
-#define __pyx_n_u_sd __pyx_string_tab[228]
-#define __pyx_n_u_self __pyx_string_tab[229]
-#define __pyx_n_u_setCellTech __pyx_string_tab[230]
-#define __pyx_n_u_setCellUse __pyx_string_tab[231]
-#define __pyx_n_u_setCellUseTransform __pyx_string_tab[232]
-#define __pyx_n_u_setLabelPort __pyx_string_tab[233]
-#define __pyx_n_u_setPort __pyx_string_tab[234]
-#define __pyx_n_u_setTech __pyx_string_tab[235]
-#define __pyx_n_u_setUseTransform __pyx_string_tab[236]
-#define __pyx_n_u_set_name __pyx_string_tab[237]
-#define __pyx_n_u_setdefault __pyx_string_tab[238]
-#define __pyx_n_u_setstate __pyx_string_tab[239]
-#define __pyx_n_u_setstate_cython __pyx_string_tab[240]
-#define __pyx_n_u_state __pyx_string_tab[241]
-#define __pyx_n_u_str __pyx_string_tab[242]
-#define __pyx_n_u_t __pyx_string_tab[243]
-#define __pyx_n_u_tech __pyx_string_tab[244]
-#define __pyx_n_u_test __pyx_string_tab[245]
-#define __pyx_n_u_time __pyx_string_tab[246]
-#define __pyx_n_u_toMatrix __pyx_string_tab[247]
-#define __pyx_n_u_touch_horizontal __pyx_string_tab[248]
-#define __pyx_n_u_touch_vertical __pyx_string_tab[249]
-#define __pyx_n_u_transform __pyx_string_tab[250]
-#define __pyx_n_u_transform_point __pyx_string_tab[251]
-#define __pyx_n_u_tt __pyx_string_tab[252]
-#define __pyx_n_u_u __pyx_string_tab[253]
-#define __pyx_n_u_update __pyx_string_tab[254]
-#define __pyx_n_u_use __pyx_string_tab[255]
-#define __pyx_n_u_use_setstate __pyx_string_tab[256]
-#define __pyx_n_u_v __pyx_string_tab[257]
-#define __pyx_n_u_values __pyx_string_tab[258]
-#define __pyx_n_u_w __pyx_string_tab[259]
-#define __pyx_n_u_write __pyx_string_tab[260]
-#define __pyx_n_u_writeMagFile __pyx_string_tab[261]
-#define __pyx_n_u_xbot __pyx_string_tab[262]
-#define __pyx_n_u_xbot_2 __pyx_string_tab[263]
-#define __pyx_n_u_xtop __pyx_string_tab[264]
-#define __pyx_n_u_xtop_2 __pyx_string_tab[265]
-#define __pyx_n_u_ybot __pyx_string_tab[266]
-#define __pyx_n_u_ybot_2 __pyx_string_tab[267]
-#define __pyx_n_u_ytop __pyx_string_tab[268]
-#define __pyx_n_u_ytop_2 __pyx_string_tab[269]
-#define __pyx_kp_b_iso88591_6 __pyx_string_tab[270]
-#define __pyx_kp_b_iso88591_A_1F_D_c_a_1_1F_D_c_a_1_q __pyx_string_tab[271]
-#define __pyx_kp_b_iso88591_A_4vS_s_fCq_G1G6_WAQ_V3avS_F_Qa __pyx_string_tab[272]
-#define __pyx_kp_b_iso88591_A_ARz_T_t1_Q_E_Q_aq_6_1H4SSTTXXY __pyx_string_tab[273]
-#define __pyx_kp_b_iso88591_A_AT_3c_Cs __pyx_string_tab[274]
-#define __pyx_kp_b_iso88591_A_AT_E_Q_q __pyx_string_tab[275]
-#define __pyx_kp_b_iso88591_A_A_7_T_WAQ_S_A_WAQ_2S_Q_F_gQa_r __pyx_string_tab[276]
-#define __pyx_kp_b_iso88591_A_A_E_Q_Qaq_881A_I __pyx_string_tab[277]
-#define __pyx_kp_b_iso88591_A_D_F_81 __pyx_string_tab[278]
-#define __pyx_kp_b_iso88591_A_D_au_Q __pyx_string_tab[279]
-#define __pyx_kp_b_iso88591_A_D_vV1_6_A_q_G1F __pyx_string_tab[280]
-#define __pyx_kp_b_iso88591_A_E_Q_AQ __pyx_string_tab[281]
-#define __pyx_kp_b_iso88591_A_E_Q_AQ_F_a_AQ __pyx_string_tab[282]
-#define __pyx_kp_b_iso88591_A_E_Q_ar_a __pyx_string_tab[283]
-#define __pyx_kp_b_iso88591_A_E_a_iq_3c_Cq __pyx_string_tab[284]
-#define __pyx_kp_b_iso88591_A_E_vV6_fCs_S_G1Kq __pyx_string_tab[285]
-#define __pyx_kp_b_iso88591_A_F_5 __pyx_string_tab[286]
-#define __pyx_kp_b_iso88591_A_F_5_Cs_S_1 __pyx_string_tab[287]
-#define __pyx_kp_b_iso88591_A_F_5_fF __pyx_string_tab[288]
-#define __pyx_kp_b_iso88591_A_F_7_fF_vUXX_aab __pyx_string_tab[289]
-#define __pyx_kp_b_iso88591_A_F_ay_a __pyx_string_tab[290]
-#define __pyx_kp_b_iso88591_A_G1HHAV1 __pyx_string_tab[291]
-#define __pyx_kp_b_iso88591_A_HA __pyx_string_tab[292]
-#define __pyx_kp_b_iso88591_A_HA_N __pyx_string_tab[293]
-#define __pyx_kp_b_iso88591_A_Ja_Jd_6_vQ_Ja_Ja_Jd_3c_A_Ja_Ja __pyx_string_tab[294]
-#define __pyx_kp_b_iso88591_A_Ja_a_E_Q_V7_1_F_a_7_1_q __pyx_string_tab[295]
-#define __pyx_kp_b_iso88591_A_Q_AT_CuIQd_q_E_Q_fAQax_q_AQlR __pyx_string_tab[296]
-#define __pyx_kp_b_iso88591_A_Qc __pyx_string_tab[297]
-#define __pyx_kp_b_iso88591_A_QgQd_E_Q_1A_T_a_E_Q_1_CuD_vQ_1 __pyx_string_tab[298]
-#define __pyx_kp_b_iso88591_A_Rwat9D_1D_a_4r __pyx_string_tab[299]
-#define __pyx_kp_b_iso88591_A_Rwat9D_y_1Bat2Qb_Rq_4r_AT_1Bat __pyx_string_tab[300]
-#define __pyx_kp_b_iso88591_A_V1A_V1G1D_V1A_V1L_AT_a_V1A_HAQ __pyx_string_tab[301]
-#define __pyx_kp_b_iso88591_A_V2T_4t6_4wc __pyx_string_tab[302]
-#define __pyx_kp_b_iso88591_A_d_gQj __pyx_string_tab[303]
-#define __pyx_kp_b_iso88591_A_q_q_q_q_CuD_vQ_Q_1F_A_1A_1F_A __pyx_string_tab[304]
-#define __pyx_kp_b_iso88591_A_r_hat4q_F_4wat5_WTUUYY_aaeef __pyx_string_tab[305]
-#define __pyx_kp_b_iso88591_A_r_q_d_d_e1D_D_D_QcQTTU __pyx_string_tab[306]
-#define __pyx_kp_b_iso88591_A_t2Ya __pyx_string_tab[307]
-#define __pyx_kp_b_iso88591_A_t6 __pyx_string_tab[308]
-#define __pyx_kp_b_iso88591_A_t6_2 __pyx_string_tab[309]
-#define __pyx_kp_b_iso88591_A_t6_Qa __pyx_string_tab[310]
-#define __pyx_kp_b_iso88591_A_t6_t_1A __pyx_string_tab[311]
-#define __pyx_kp_b_iso88591_A_t_2_4y_Cs_SPQ __pyx_string_tab[312]
-#define __pyx_kp_b_iso88591_T_G1F_a_vWE_Q_q_t7_q_D_7_D_1 __pyx_string_tab[313]
-#define __pyx_kp_b_iso88591_T_G4wd_G1F_a_vWE_Q_q_q_q_T_G1_T __pyx_string_tab[314]
-#define __pyx_kp_b_iso88591_T_T_G1F_a_vWE_Q_q_t7_c__G5PSSWW __pyx_string_tab[315]
-#define __pyx_kp_b_iso88591_T_T_T_T_T_T_G1F_a_vWE_Q_q_q_q_a __pyx_string_tab[316]
-#define __pyx_kp_b_iso88591_T_it7_gT_tST_G1F_a_vWE_Q_q_t87 __pyx_string_tab[317]
-#define __pyx_kp_b_iso88591__9 __pyx_string_tab[318]
-#define __pyx_kp_b_iso88591_q __pyx_string_tab[319]
-#define __pyx_kp_b_iso88591_q_0_kQR_4xq_7_awnA_1 __pyx_string_tab[320]
-#define __pyx_kp_b_iso88591_q_0_kQR_9HAQ_7_1L_a_1 __pyx_string_tab[321]
-#define __pyx_kp_b_iso88591_q_0_kQR_XQa_7_A_1 __pyx_string_tab[322]
-#define __pyx_kp_b_iso88591_q_0_kQR_haq_7_QnN_1 __pyx_string_tab[323]
-#define __pyx_kp_b_iso88591_q_a __pyx_string_tab[324]
+#define __pyx_n_u_Cell_get_pins_with_transform __pyx_string_tab[52]
+#define __pyx_n_u_Cell_get_transistors __pyx_string_tab[53]
+#define __pyx_n_u_Cell_get_transistors_with_transf __pyx_string_tab[54]
+#define __pyx_n_u_Cell_setBBox __pyx_string_tab[55]
+#define __pyx_n_u_Cell_setLabelPort __pyx_string_tab[56]
+#define __pyx_n_u_Cell_setTech __pyx_string_tab[57]
+#define __pyx_n_u_Cell_setUseTransform __pyx_string_tab[58]
+#define __pyx_n_u_Cell_writeMagFile __pyx_string_tab[59]
+#define __pyx_n_u_Label __pyx_string_tab[60]
+#define __pyx_n_u_Label___init __pyx_string_tab[61]
+#define __pyx_n_u_Label___repr __pyx_string_tab[62]
+#define __pyx_n_u_Label_centroid __pyx_string_tab[63]
+#define __pyx_n_u_Label_setPort __pyx_string_tab[64]
+#define __pyx_n_u_Label_transform __pyx_string_tab[65]
+#define __pyx_n_u_MagDatabase __pyx_string_tab[66]
+#define __pyx_n_u_MagDatabase___reduce_cython __pyx_string_tab[67]
+#define __pyx_n_u_MagDatabase___setstate_cython __pyx_string_tab[68]
+#define __pyx_n_u_MagDatabase_addLabelToCell __pyx_string_tab[69]
+#define __pyx_n_u_MagDatabase_addRectToCell __pyx_string_tab[70]
+#define __pyx_n_u_MagDatabase_createCell __pyx_string_tab[71]
+#define __pyx_n_u_MagDatabase_dump __pyx_string_tab[72]
+#define __pyx_n_u_MagDatabase_dumpCellTransistors __pyx_string_tab[73]
+#define __pyx_n_u_MagDatabase_findAllTransistors __pyx_string_tab[74]
+#define __pyx_n_u_MagDatabase_findCellTransistors __pyx_string_tab[75]
+#define __pyx_n_u_MagDatabase_getCell __pyx_string_tab[76]
+#define __pyx_n_u_MagDatabase_getCellPins __pyx_string_tab[77]
+#define __pyx_n_u_MagDatabase_getCellTransistors __pyx_string_tab[78]
+#define __pyx_n_u_MagDatabase_setCellBBox __pyx_string_tab[79]
+#define __pyx_n_u_MagDatabase_setCellTech __pyx_string_tab[80]
+#define __pyx_n_u_MagDatabase_setCellUse __pyx_string_tab[81]
+#define __pyx_n_u_MagDatabase_setCellUseTransform __pyx_string_tab[82]
+#define __pyx_n_u_MagDatabase_setLabelPort __pyx_string_tab[83]
+#define __pyx_n_u_Pyx_PyDict_NextRef __pyx_string_tab[84]
+#define __pyx_n_u_Rect __pyx_string_tab[85]
+#define __pyx_n_u_Rect___reduce_cython __pyx_string_tab[86]
+#define __pyx_n_u_Rect___setstate_cython __pyx_string_tab[87]
+#define __pyx_n_u_Rect_abuts __pyx_string_tab[88]
+#define __pyx_n_u_Rect_centroid __pyx_string_tab[89]
+#define __pyx_n_u_Rect_dump __pyx_string_tab[90]
+#define __pyx_n_u_Rect_overlaps __pyx_string_tab[91]
+#define __pyx_n_u_Transform __pyx_string_tab[92]
+#define __pyx_n_u_Transform_Transform __pyx_string_tab[93]
+#define __pyx_n_u_Transform___reduce_cython __pyx_string_tab[94]
+#define __pyx_n_u_Transform___setstate_cython __pyx_string_tab[95]
+#define __pyx_n_u_Transform_toMatrix __pyx_string_tab[96]
+#define __pyx_n_u_Transform_transform_point __pyx_string_tab[97]
+#define __pyx_n_u_Transistor __pyx_string_tab[98]
+#define __pyx_n_u_Transistor___reduce_cython __pyx_string_tab[99]
+#define __pyx_n_u_Transistor___setstate_cython __pyx_string_tab[100]
+#define __pyx_n_u_Transistor_dump_with_transform __pyx_string_tab[101]
+#define __pyx_n_u_Transistor_transform __pyx_string_tab[102]
+#define __pyx_n_u_a __pyx_string_tab[103]
+#define __pyx_n_u_a_2 __pyx_string_tab[104]
+#define __pyx_n_u_abuts __pyx_string_tab[105]
+#define __pyx_n_u_addLabel __pyx_string_tab[106]
+#define __pyx_n_u_addLabelToCell __pyx_string_tab[107]
+#define __pyx_n_u_addRect __pyx_string_tab[108]
+#define __pyx_n_u_addRectToCell __pyx_string_tab[109]
+#define __pyx_n_u_addUse __pyx_string_tab[110]
+#define __pyx_n_u_annotate __pyx_string_tab[111]
+#define __pyx_n_u_append __pyx_string_tab[112]
+#define __pyx_n_u_array __pyx_string_tab[113]
+#define __pyx_n_u_asyncio_coroutines __pyx_string_tab[114]
+#define __pyx_n_u_b __pyx_string_tab[115]
+#define __pyx_n_u_b_2 __pyx_string_tab[116]
+#define __pyx_n_u_c __pyx_string_tab[117]
+#define __pyx_n_u_c_2 __pyx_string_tab[118]
+#define __pyx_n_u_cell_2 __pyx_string_tab[119]
+#define __pyx_n_u_cell_inst __pyx_string_tab[120]
+#define __pyx_n_u_cell_name_str __pyx_string_tab[121]
+#define __pyx_n_u_cells __pyx_string_tab[122]
+#define __pyx_n_u_centroid __pyx_string_tab[123]
+#define __pyx_n_u_children __pyx_string_tab[124]
+#define __pyx_n_u_class_getitem __pyx_string_tab[125]
+#define __pyx_n_u_cline_in_traceback __pyx_string_tab[126]
+#define __pyx_n_u_copy __pyx_string_tab[127]
+#define __pyx_n_u_createCell __pyx_string_tab[128]
+#define __pyx_n_u_d __pyx_string_tab[129]
+#define __pyx_n_u_d_2 __pyx_string_tab[130]
+#define __pyx_n_u_db __pyx_string_tab[131]
+#define __pyx_n_u_deepcopy __pyx_string_tab[132]
+#define __pyx_n_u_dict __pyx_string_tab[133]
+#define __pyx_n_u_dict_2 __pyx_string_tab[134]
+#define __pyx_n_u_directions __pyx_string_tab[135]
+#define __pyx_n_u_doc __pyx_string_tab[136]
+#define __pyx_n_u_dump __pyx_string_tab[137]
+#define __pyx_n_u_dumpCellTransistors __pyx_string_tab[138]
+#define __pyx_n_u_dump_transistors __pyx_string_tab[139]
+#define __pyx_n_u_dump_transistors_with_transform __pyx_string_tab[140]
+#define __pyx_n_u_dump_with_transform __pyx_string_tab[141]
+#define __pyx_n_u_e __pyx_string_tab[142]
+#define __pyx_n_u_e_2 __pyx_string_tab[143]
+#define __pyx_n_u_enter __pyx_string_tab[144]
+#define __pyx_n_u_enumerate __pyx_string_tab[145]
+#define __pyx_n_u_exit __pyx_string_tab[146]
+#define __pyx_n_u_f __pyx_string_tab[147]
+#define __pyx_n_u_f_2 __pyx_string_tab[148]
+#define __pyx_n_u_findAllTransistors __pyx_string_tab[149]
+#define __pyx_n_u_findCellTransistors __pyx_string_tab[150]
+#define __pyx_n_u_find_transistors __pyx_string_tab[151]
+#define __pyx_n_u_fname __pyx_string_tab[152]
+#define __pyx_n_u_font __pyx_string_tab[153]
+#define __pyx_n_u_func __pyx_string_tab[154]
+#define __pyx_n_u_g __pyx_string_tab[155]
+#define __pyx_n_u_getBbox __pyx_string_tab[156]
+#define __pyx_n_u_getCell __pyx_string_tab[157]
+#define __pyx_n_u_getCellPins __pyx_string_tab[158]
+#define __pyx_n_u_getCellTransistors __pyx_string_tab[159]
+#define __pyx_n_u_getPins __pyx_string_tab[160]
+#define __pyx_n_u_get_pins_with_transform __pyx_string_tab[161]
+#define __pyx_n_u_get_transistors __pyx_string_tab[162]
+#define __pyx_n_u_get_transistors_with_transform __pyx_string_tab[163]
+#define __pyx_n_u_getstate __pyx_string_tab[164]
+#define __pyx_n_u_handle __pyx_string_tab[165]
+#define __pyx_n_u_i __pyx_string_tab[166]
+#define __pyx_n_u_init __pyx_string_tab[167]
+#define __pyx_n_u_inst __pyx_string_tab[168]
+#define __pyx_n_u_inst_name __pyx_string_tab[169]
+#define __pyx_n_u_is_coroutine __pyx_string_tab[170]
+#define __pyx_n_u_items __pyx_string_tab[171]
+#define __pyx_n_u_k __pyx_string_tab[172]
+#define __pyx_n_u_l __pyx_string_tab[173]
+#define __pyx_n_u_lab __pyx_string_tab[174]
+#define __pyx_n_u_labname __pyx_string_tab[175]
+#define __pyx_n_u_layer __pyx_string_tab[176]
+#define __pyx_n_u_magic __pyx_string_tab[177]
+#define __pyx_n_u_main __pyx_string_tab[178]
+#define __pyx_n_u_matmul __pyx_string_tab[179]
+#define __pyx_n_u_metaclass __pyx_string_tab[180]
+#define __pyx_n_u_module __pyx_string_tab[181]
+#define __pyx_n_u_name __pyx_string_tab[182]
+#define __pyx_n_u_name_2 __pyx_string_tab[183]
+#define __pyx_n_u_nc __pyx_string_tab[184]
+#define __pyx_n_u_ndiff __pyx_string_tab[185]
+#define __pyx_n_u_ndiff_c __pyx_string_tab[186]
+#define __pyx_n_u_ndiff_r __pyx_string_tab[187]
+#define __pyx_n_u_ndiffc __pyx_string_tab[188]
+#define __pyx_n_u_new __pyx_string_tab[189]
+#define __pyx_n_u_new_cell __pyx_string_tab[190]
+#define __pyx_n_u_nmos __pyx_string_tab[191]
+#define __pyx_n_u_nmoslvt __pyx_string_tab[192]
+#define __pyx_n_u_np __pyx_string_tab[193]
+#define __pyx_n_u_nr __pyx_string_tab[194]
+#define __pyx_n_u_nsew __pyx_string_tab[195]
+#define __pyx_n_u_numpy __pyx_string_tab[196]
+#define __pyx_n_u_open __pyx_string_tab[197]
+#define __pyx_n_u_overlap_x __pyx_string_tab[198]
+#define __pyx_n_u_overlap_y __pyx_string_tab[199]
+#define __pyx_n_u_overlaps __pyx_string_tab[200]
+#define __pyx_n_u_p __pyx_string_tab[201]
+#define __pyx_n_u_pc __pyx_string_tab[202]
+#define __pyx_n_u_pdiff __pyx_string_tab[203]
+#define __pyx_n_u_pdiff_c __pyx_string_tab[204]
+#define __pyx_n_u_pdiff_r __pyx_string_tab[205]
+#define __pyx_n_u_pdiffc __pyx_string_tab[206]
+#define __pyx_n_u_pmos __pyx_string_tab[207]
+#define __pyx_n_u_poly __pyx_string_tab[208]
+#define __pyx_n_u_poly_c __pyx_string_tab[209]
+#define __pyx_n_u_poly_r __pyx_string_tab[210]
+#define __pyx_n_u_polycont __pyx_string_tab[211]
+#define __pyx_n_u_pop __pyx_string_tab[212]
+#define __pyx_n_u_port __pyx_string_tab[213]
+#define __pyx_n_u_pos __pyx_string_tab[214]
+#define __pyx_n_u_pp __pyx_string_tab[215]
+#define __pyx_n_u_pr __pyx_string_tab[216]
+#define __pyx_n_u_prepare __pyx_string_tab[217]
+#define __pyx_n_u_print __pyx_string_tab[218]
+#define __pyx_n_u_pyx_checksum __pyx_string_tab[219]
+#define __pyx_n_u_pyx_result __pyx_string_tab[220]
+#define __pyx_n_u_pyx_state __pyx_string_tab[221]
+#define __pyx_n_u_pyx_type __pyx_string_tab[222]
+#define __pyx_n_u_pyx_unpickle_Cell __pyx_string_tab[223]
+#define __pyx_n_u_pyx_unpickle_MagDatabase __pyx_string_tab[224]
+#define __pyx_n_u_pyx_unpickle_Rect __pyx_string_tab[225]
+#define __pyx_n_u_pyx_unpickle_Transform __pyx_string_tab[226]
+#define __pyx_n_u_pyx_unpickle_Transistor __pyx_string_tab[227]
+#define __pyx_n_u_qualname __pyx_string_tab[228]
+#define __pyx_n_u_r __pyx_string_tab[229]
+#define __pyx_n_u_r2 __pyx_string_tab[230]
+#define __pyx_n_u_reduce __pyx_string_tab[231]
+#define __pyx_n_u_reduce_cython __pyx_string_tab[232]
+#define __pyx_n_u_reduce_ex __pyx_string_tab[233]
+#define __pyx_n_u_repr __pyx_string_tab[234]
+#define __pyx_n_u_rp __pyx_string_tab[235]
+#define __pyx_n_u_sd __pyx_string_tab[236]
+#define __pyx_n_u_self __pyx_string_tab[237]
+#define __pyx_n_u_setBBox __pyx_string_tab[238]
+#define __pyx_n_u_setCellBBox __pyx_string_tab[239]
+#define __pyx_n_u_setCellTech __pyx_string_tab[240]
+#define __pyx_n_u_setCellUse __pyx_string_tab[241]
+#define __pyx_n_u_setCellUseTransform __pyx_string_tab[242]
+#define __pyx_n_u_setLabelPort __pyx_string_tab[243]
+#define __pyx_n_u_setPort __pyx_string_tab[244]
+#define __pyx_n_u_setTech __pyx_string_tab[245]
+#define __pyx_n_u_setUseTransform __pyx_string_tab[246]
+#define __pyx_n_u_set_name __pyx_string_tab[247]
+#define __pyx_n_u_setdefault __pyx_string_tab[248]
+#define __pyx_n_u_setstate __pyx_string_tab[249]
+#define __pyx_n_u_setstate_cython __pyx_string_tab[250]
+#define __pyx_n_u_state __pyx_string_tab[251]
+#define __pyx_n_u_str __pyx_string_tab[252]
+#define __pyx_n_u_t __pyx_string_tab[253]
+#define __pyx_n_u_tech __pyx_string_tab[254]
+#define __pyx_n_u_test __pyx_string_tab[255]
+#define __pyx_n_u_time __pyx_string_tab[256]
+#define __pyx_n_u_toMatrix __pyx_string_tab[257]
+#define __pyx_n_u_touch_horizontal __pyx_string_tab[258]
+#define __pyx_n_u_touch_vertical __pyx_string_tab[259]
+#define __pyx_n_u_transform __pyx_string_tab[260]
+#define __pyx_n_u_transform_point __pyx_string_tab[261]
+#define __pyx_n_u_tt __pyx_string_tab[262]
+#define __pyx_n_u_u __pyx_string_tab[263]
+#define __pyx_n_u_update __pyx_string_tab[264]
+#define __pyx_n_u_use __pyx_string_tab[265]
+#define __pyx_n_u_use_setstate __pyx_string_tab[266]
+#define __pyx_n_u_v __pyx_string_tab[267]
+#define __pyx_n_u_values __pyx_string_tab[268]
+#define __pyx_n_u_w __pyx_string_tab[269]
+#define __pyx_n_u_write __pyx_string_tab[270]
+#define __pyx_n_u_writeMagFile __pyx_string_tab[271]
+#define __pyx_n_u_xbot __pyx_string_tab[272]
+#define __pyx_n_u_xbot_2 __pyx_string_tab[273]
+#define __pyx_n_u_xtop __pyx_string_tab[274]
+#define __pyx_n_u_xtop_2 __pyx_string_tab[275]
+#define __pyx_n_u_ybot __pyx_string_tab[276]
+#define __pyx_n_u_ybot_2 __pyx_string_tab[277]
+#define __pyx_n_u_ytop __pyx_string_tab[278]
+#define __pyx_n_u_ytop_2 __pyx_string_tab[279]
+#define __pyx_kp_b_iso88591_6 __pyx_string_tab[280]
+#define __pyx_kp_b_iso88591_A_1F_D_c_a_1_1F_D_c_a_1_q __pyx_string_tab[281]
+#define __pyx_kp_b_iso88591_A_4vS_s_fCq_G1G6_WAQ_V3avS_F_Qa __pyx_string_tab[282]
+#define __pyx_kp_b_iso88591_A_ARz_T_t1_Q_E_Q_aq_6_1H4SSTTXXY __pyx_string_tab[283]
+#define __pyx_kp_b_iso88591_A_AT_3c_Cs __pyx_string_tab[284]
+#define __pyx_kp_b_iso88591_A_AT_E_Q_q __pyx_string_tab[285]
+#define __pyx_kp_b_iso88591_A_A_7_T_WAQ_S_A_WAQ_2S_Q_F_gQa_r __pyx_string_tab[286]
+#define __pyx_kp_b_iso88591_A_A_E_Q_Qaq_83K1DPQQRR_hhiij_a_C __pyx_string_tab[287]
+#define __pyx_kp_b_iso88591_A_BgT_81_4Bd_G4r_BgT_81_4Bd_G4r __pyx_string_tab[288]
+#define __pyx_kp_b_iso88591_A_D_F_81 __pyx_string_tab[289]
+#define __pyx_kp_b_iso88591_A_D_au_Q __pyx_string_tab[290]
+#define __pyx_kp_b_iso88591_A_D_vV1_6_A_q_G1F __pyx_string_tab[291]
+#define __pyx_kp_b_iso88591_A_E_Q_AQ __pyx_string_tab[292]
+#define __pyx_kp_b_iso88591_A_E_Q_AQ_F_a_AQ __pyx_string_tab[293]
+#define __pyx_kp_b_iso88591_A_E_Q_ar_a __pyx_string_tab[294]
+#define __pyx_kp_b_iso88591_A_E_a_iq_3c_Cq __pyx_string_tab[295]
+#define __pyx_kp_b_iso88591_A_E_vV6_fCs_S_G1Kq __pyx_string_tab[296]
+#define __pyx_kp_b_iso88591_A_F_5 __pyx_string_tab[297]
+#define __pyx_kp_b_iso88591_A_F_5_Cs_S_1 __pyx_string_tab[298]
+#define __pyx_kp_b_iso88591_A_F_5_fF __pyx_string_tab[299]
+#define __pyx_kp_b_iso88591_A_F_5_vV1 __pyx_string_tab[300]
+#define __pyx_kp_b_iso88591_A_F_7_fF_vUXX_aab __pyx_string_tab[301]
+#define __pyx_kp_b_iso88591_A_F_ay_a __pyx_string_tab[302]
+#define __pyx_kp_b_iso88591_A_G1HHAV1 __pyx_string_tab[303]
+#define __pyx_kp_b_iso88591_A_HA __pyx_string_tab[304]
+#define __pyx_kp_b_iso88591_A_HA_N __pyx_string_tab[305]
+#define __pyx_kp_b_iso88591_A_HD_vV1 __pyx_string_tab[306]
+#define __pyx_kp_b_iso88591_A_Ja_Jd_6_vQ_Ja_Ja_Jd_3c_A_Ja_Ja __pyx_string_tab[307]
+#define __pyx_kp_b_iso88591_A_Ja_a_E_Q_V7_1_F_a_7_1_q __pyx_string_tab[308]
+#define __pyx_kp_b_iso88591_A_Q_AT_CuIQd_q_E_Q_fAQax_q_AQlR __pyx_string_tab[309]
+#define __pyx_kp_b_iso88591_A_Qc __pyx_string_tab[310]
+#define __pyx_kp_b_iso88591_A_QgQd_E_Q_1A_T_a_E_Q_1_CuD_vQ_1 __pyx_string_tab[311]
+#define __pyx_kp_b_iso88591_A_Rwat9D_1D_a_4r __pyx_string_tab[312]
+#define __pyx_kp_b_iso88591_A_Rwat9D_y_1Bat2Qb_Rq_4r_AT_1Bat __pyx_string_tab[313]
+#define __pyx_kp_b_iso88591_A_V1A_V1G1D_V1A_V1L_AT_a_V1A_HAQ __pyx_string_tab[314]
+#define __pyx_kp_b_iso88591_A_V2T_4t6_4wc __pyx_string_tab[315]
+#define __pyx_kp_b_iso88591_A_d_gQj __pyx_string_tab[316]
+#define __pyx_kp_b_iso88591_A_r_hat4q_F_4wat5_WTUUYY_aaeef __pyx_string_tab[317]
+#define __pyx_kp_b_iso88591_A_r_q_d_d_e1D_D_D_QcQTTU __pyx_string_tab[318]
+#define __pyx_kp_b_iso88591_A_t2Ya __pyx_string_tab[319]
+#define __pyx_kp_b_iso88591_A_t5_t5_t5_t5_CuD_vQ_Q_1F_A_1A_1 __pyx_string_tab[320]
+#define __pyx_kp_b_iso88591_A_t6 __pyx_string_tab[321]
+#define __pyx_kp_b_iso88591_A_t6_2 __pyx_string_tab[322]
+#define __pyx_kp_b_iso88591_A_t6_Qa __pyx_string_tab[323]
+#define __pyx_kp_b_iso88591_A_t6_t_1A __pyx_string_tab[324]
+#define __pyx_kp_b_iso88591_A_t_1D_S_3c __pyx_string_tab[325]
+#define __pyx_kp_b_iso88591_A_t_2_4y_Cs_SPQ __pyx_string_tab[326]
+#define __pyx_kp_b_iso88591_T_G1F_a_vWE_Q_q_t7_q_D_7_D_1 __pyx_string_tab[327]
+#define __pyx_kp_b_iso88591_T_G4wd_G1F_a_vWE_Q_q_q_q_T_G1_T __pyx_string_tab[328]
+#define __pyx_kp_b_iso88591_T_IT_gT_NZ___G1F_a_vWE_Q_q_t6_S __pyx_string_tab[329]
+#define __pyx_kp_b_iso88591_T_T_G1F_a_vWE_Q_q_t7_c__G5PSSWW __pyx_string_tab[330]
+#define __pyx_kp_b_iso88591_T_T_T_T_T_T_G1F_a_vWE_Q_q_q_q_a __pyx_string_tab[331]
+#define __pyx_kp_b_iso88591__9 __pyx_string_tab[332]
+#define __pyx_kp_b_iso88591_q __pyx_string_tab[333]
+#define __pyx_kp_b_iso88591_q_0_kQR_4xq_7_awnA_1 __pyx_string_tab[334]
+#define __pyx_kp_b_iso88591_q_0_kQR_9HAQ_7_1L_a_1 __pyx_string_tab[335]
+#define __pyx_kp_b_iso88591_q_0_kQR_XQa_7_A_1 __pyx_string_tab[336]
+#define __pyx_kp_b_iso88591_q_0_kQR_haq_7_QnN_1 __pyx_string_tab[337]
+#define __pyx_kp_b_iso88591_q_a __pyx_string_tab[338]
 #define __pyx_float_neg_1e9 __pyx_number_tab[0]
 #define __pyx_float_1e9 __pyx_number_tab[1]
 #define __pyx_int_0 __pyx_number_tab[2]
 #define __pyx_int_1 __pyx_number_tab[3]
 #define __pyx_int_100 __pyx_number_tab[4]
-#define __pyx_int_36147052 __pyx_number_tab[5]
-#define __pyx_int_38472947 __pyx_number_tab[6]
-#define __pyx_int_91292869 __pyx_number_tab[7]
-#define __pyx_int_147591333 __pyx_number_tab[8]
+#define __pyx_int_24508157 __pyx_number_tab[5]
+#define __pyx_int_36147052 __pyx_number_tab[6]
+#define __pyx_int_38472947 __pyx_number_tab[7]
+#define __pyx_int_91292869 __pyx_number_tab[8]
 #define __pyx_int_195123576 __pyx_number_tab[9]
 /* #### Code section: module_state_clear ### */
 #if CYTHON_USE_MODULE_STATE
@@ -3247,9 +3272,9 @@ static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_type_11MagDatabase_Cell);
   Py_CLEAR(clear_module_state->__pyx_ptype_11MagDatabase_MagDatabase);
   Py_CLEAR(clear_module_state->__pyx_type_11MagDatabase_MagDatabase);
-  for (int i=0; i<2; ++i) { Py_CLEAR(clear_module_state->__pyx_tuple[i]); }
-  for (int i=0; i<57; ++i) { Py_CLEAR(clear_module_state->__pyx_codeobj_tab[i]); }
-  for (int i=0; i<325; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<3; ++i) { Py_CLEAR(clear_module_state->__pyx_tuple[i]); }
+  for (int i=0; i<61; ++i) { Py_CLEAR(clear_module_state->__pyx_codeobj_tab[i]); }
+  for (int i=0; i<339; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
   for (int i=0; i<10; ++i) { Py_CLEAR(clear_module_state->__pyx_number_tab[i]); }
 /* #### Code section: module_state_clear_contents ### */
 /* CommonTypesMetaclass.module_state_clear */
@@ -3283,9 +3308,9 @@ static CYTHON_SMALL_CODE int __pyx_m_traverse(PyObject *m, visitproc visit, void
   Py_VISIT(traverse_module_state->__pyx_type_11MagDatabase_Cell);
   Py_VISIT(traverse_module_state->__pyx_ptype_11MagDatabase_MagDatabase);
   Py_VISIT(traverse_module_state->__pyx_type_11MagDatabase_MagDatabase);
-  for (int i=0; i<2; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_tuple[i]); }
-  for (int i=0; i<57; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_codeobj_tab[i]); }
-  for (int i=0; i<325; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<3; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_tuple[i]); }
+  for (int i=0; i<61; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_codeobj_tab[i]); }
+  for (int i=0; i<339; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
   for (int i=0; i<10; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_number_tab[i]); }
 /* #### Code section: module_state_traverse_contents ### */
 /* CommonTypesMetaclass.module_state_traverse */
@@ -9348,7 +9373,7 @@ static PyObject *__pyx_pf_11MagDatabase_5Label_6centroid(CYTHON_UNUSED PyObject 
  *     def centroid(self):
  *         return self.r.centroid()             # <<<<<<<<<<<<<<
  * 
- * 
+ *     def transform(self, t):
 */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_r); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 170, __pyx_L1_error)
@@ -9389,8 +9414,343 @@ static PyObject *__pyx_pf_11MagDatabase_5Label_6centroid(CYTHON_UNUSED PyObject 
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":181
- *     cdef public dict labels
+/* "MagDatabase.pyx":172
+ *         return self.r.centroid()
+ * 
+ *     def transform(self, t):             # <<<<<<<<<<<<<<
+ * 
+ *         self.r.xbot, self.r.ybot = t.transform_point((self.r.xbot, self.r.ybot))
+*/
+
+/* Python wrapper */
+static PyObject *__pyx_pw_11MagDatabase_5Label_9transform(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+static PyMethodDef __pyx_mdef_11MagDatabase_5Label_9transform = {"transform", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_5Label_9transform, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_11MagDatabase_5Label_9transform(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  PyObject *__pyx_v_self = 0;
+  PyObject *__pyx_v_t = 0;
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject* values[2] = {0,0};
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("transform (wrapper)", 0);
+  #if !CYTHON_METH_FASTCALL
+  #if CYTHON_ASSUME_SAFE_SIZE
+  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #else
+  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
+  #endif
+  #endif
+  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  {
+    PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_self,&__pyx_mstate_global->__pyx_n_u_t,0};
+    const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 172, __pyx_L3_error)
+    if (__pyx_kwds_len > 0) {
+      switch (__pyx_nargs) {
+        case  2:
+        values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 172, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  1:
+        values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 172, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      const Py_ssize_t kwd_pos_args = __pyx_nargs;
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "transform", 0) < (0)) __PYX_ERR(0, 172, __pyx_L3_error)
+      for (Py_ssize_t i = __pyx_nargs; i < 2; i++) {
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("transform", 1, 2, 2, i); __PYX_ERR(0, 172, __pyx_L3_error) }
+      }
+    } else if (unlikely(__pyx_nargs != 2)) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 172, __pyx_L3_error)
+      values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 172, __pyx_L3_error)
+    }
+    __pyx_v_self = values[0];
+    __pyx_v_t = values[1];
+  }
+  goto __pyx_L6_skip;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("transform", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 172, __pyx_L3_error)
+  __pyx_L6_skip:;
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __Pyx_AddTraceback("MagDatabase.Label.transform", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_11MagDatabase_5Label_8transform(__pyx_self, __pyx_v_self, __pyx_v_t);
+
+  /* function exit code */
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_11MagDatabase_5Label_8transform(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_t) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  size_t __pyx_t_6;
+  PyObject *(*__pyx_t_7)(PyObject *);
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("transform", 0);
+
+  /* "MagDatabase.pyx":174
+ *     def transform(self, t):
+ * 
+ *         self.r.xbot, self.r.ybot = t.transform_point((self.r.xbot, self.r.ybot))             # <<<<<<<<<<<<<<
+ *         self.r.xtop, self.r.ytop = t.transform_point((self.r.xtop, self.r.ytop))
+ * 
+*/
+  __pyx_t_2 = __pyx_v_t;
+  __Pyx_INCREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_r); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 174, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_xbot_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 174, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_r); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 174, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_ybot_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 174, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 174, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_GIVEREF(__pyx_t_4);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4) != (0)) __PYX_ERR(0, 174, __pyx_L1_error);
+  __Pyx_GIVEREF(__pyx_t_5);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_5) != (0)) __PYX_ERR(0, 174, __pyx_L1_error);
+  __pyx_t_4 = 0;
+  __pyx_t_5 = 0;
+  __pyx_t_6 = 0;
+  {
+    PyObject *__pyx_callargs[2] = {__pyx_t_2, __pyx_t_3};
+    __pyx_t_1 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_transform_point, __pyx_callargs+__pyx_t_6, (2-__pyx_t_6) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 174, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+  }
+  if ((likely(PyTuple_CheckExact(__pyx_t_1))) || (PyList_CheckExact(__pyx_t_1))) {
+    PyObject* sequence = __pyx_t_1;
+    Py_ssize_t size = __Pyx_PySequence_SIZE(sequence);
+    if (unlikely(size != 2)) {
+      if (size > 2) __Pyx_RaiseTooManyValuesError(2);
+      else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
+      __PYX_ERR(0, 174, __pyx_L1_error)
+    }
+    #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+    if (likely(PyTuple_CheckExact(sequence))) {
+      __pyx_t_3 = PyTuple_GET_ITEM(sequence, 0);
+      __Pyx_INCREF(__pyx_t_3);
+      __pyx_t_2 = PyTuple_GET_ITEM(sequence, 1);
+      __Pyx_INCREF(__pyx_t_2);
+    } else {
+      __pyx_t_3 = __Pyx_PyList_GET_ITEM_REF(sequence, 0, __Pyx_ReferenceSharing_SharedReference);
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 174, __pyx_L1_error)
+      __Pyx_XGOTREF(__pyx_t_3);
+      __pyx_t_2 = __Pyx_PyList_GET_ITEM_REF(sequence, 1, __Pyx_ReferenceSharing_SharedReference);
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 174, __pyx_L1_error)
+      __Pyx_XGOTREF(__pyx_t_2);
+    }
+    #else
+    __pyx_t_3 = __Pyx_PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 174, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_2 = __Pyx_PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 174, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    #endif
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  } else {
+    Py_ssize_t index = -1;
+    __pyx_t_5 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 174, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_7 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_5);
+    index = 0; __pyx_t_3 = __pyx_t_7(__pyx_t_5); if (unlikely(!__pyx_t_3)) goto __pyx_L3_unpacking_failed;
+    __Pyx_GOTREF(__pyx_t_3);
+    index = 1; __pyx_t_2 = __pyx_t_7(__pyx_t_5); if (unlikely(!__pyx_t_2)) goto __pyx_L3_unpacking_failed;
+    __Pyx_GOTREF(__pyx_t_2);
+    if (__Pyx_IternextUnpackEndCheck(__pyx_t_7(__pyx_t_5), 2) < (0)) __PYX_ERR(0, 174, __pyx_L1_error)
+    __pyx_t_7 = NULL;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    goto __pyx_L4_unpacking_done;
+    __pyx_L3_unpacking_failed:;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __pyx_t_7 = NULL;
+    if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
+    __PYX_ERR(0, 174, __pyx_L1_error)
+    __pyx_L4_unpacking_done:;
+  }
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_r); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 174, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  if (__Pyx_PyObject_SetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_xbot_2, __pyx_t_3) < (0)) __PYX_ERR(0, 174, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_r); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 174, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  if (__Pyx_PyObject_SetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_ybot_2, __pyx_t_2) < (0)) __PYX_ERR(0, 174, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+
+  /* "MagDatabase.pyx":175
+ * 
+ *         self.r.xbot, self.r.ybot = t.transform_point((self.r.xbot, self.r.ybot))
+ *         self.r.xtop, self.r.ytop = t.transform_point((self.r.xtop, self.r.ytop))             # <<<<<<<<<<<<<<
+ * 
+ * 
+*/
+  __pyx_t_2 = __pyx_v_t;
+  __Pyx_INCREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_r); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 175, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_xtop_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 175, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_r); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 175, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_ytop_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 175, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 175, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_GIVEREF(__pyx_t_5);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_5) != (0)) __PYX_ERR(0, 175, __pyx_L1_error);
+  __Pyx_GIVEREF(__pyx_t_4);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_4) != (0)) __PYX_ERR(0, 175, __pyx_L1_error);
+  __pyx_t_5 = 0;
+  __pyx_t_4 = 0;
+  __pyx_t_6 = 0;
+  {
+    PyObject *__pyx_callargs[2] = {__pyx_t_2, __pyx_t_3};
+    __pyx_t_1 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_transform_point, __pyx_callargs+__pyx_t_6, (2-__pyx_t_6) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 175, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+  }
+  if ((likely(PyTuple_CheckExact(__pyx_t_1))) || (PyList_CheckExact(__pyx_t_1))) {
+    PyObject* sequence = __pyx_t_1;
+    Py_ssize_t size = __Pyx_PySequence_SIZE(sequence);
+    if (unlikely(size != 2)) {
+      if (size > 2) __Pyx_RaiseTooManyValuesError(2);
+      else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
+      __PYX_ERR(0, 175, __pyx_L1_error)
+    }
+    #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+    if (likely(PyTuple_CheckExact(sequence))) {
+      __pyx_t_3 = PyTuple_GET_ITEM(sequence, 0);
+      __Pyx_INCREF(__pyx_t_3);
+      __pyx_t_2 = PyTuple_GET_ITEM(sequence, 1);
+      __Pyx_INCREF(__pyx_t_2);
+    } else {
+      __pyx_t_3 = __Pyx_PyList_GET_ITEM_REF(sequence, 0, __Pyx_ReferenceSharing_SharedReference);
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 175, __pyx_L1_error)
+      __Pyx_XGOTREF(__pyx_t_3);
+      __pyx_t_2 = __Pyx_PyList_GET_ITEM_REF(sequence, 1, __Pyx_ReferenceSharing_SharedReference);
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 175, __pyx_L1_error)
+      __Pyx_XGOTREF(__pyx_t_2);
+    }
+    #else
+    __pyx_t_3 = __Pyx_PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 175, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_2 = __Pyx_PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 175, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    #endif
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  } else {
+    Py_ssize_t index = -1;
+    __pyx_t_4 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 175, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_7 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_4);
+    index = 0; __pyx_t_3 = __pyx_t_7(__pyx_t_4); if (unlikely(!__pyx_t_3)) goto __pyx_L5_unpacking_failed;
+    __Pyx_GOTREF(__pyx_t_3);
+    index = 1; __pyx_t_2 = __pyx_t_7(__pyx_t_4); if (unlikely(!__pyx_t_2)) goto __pyx_L5_unpacking_failed;
+    __Pyx_GOTREF(__pyx_t_2);
+    if (__Pyx_IternextUnpackEndCheck(__pyx_t_7(__pyx_t_4), 2) < (0)) __PYX_ERR(0, 175, __pyx_L1_error)
+    __pyx_t_7 = NULL;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    goto __pyx_L6_unpacking_done;
+    __pyx_L5_unpacking_failed:;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __pyx_t_7 = NULL;
+    if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
+    __PYX_ERR(0, 175, __pyx_L1_error)
+    __pyx_L6_unpacking_done:;
+  }
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_r); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 175, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  if (__Pyx_PyObject_SetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_xtop_2, __pyx_t_3) < (0)) __PYX_ERR(0, 175, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_r); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 175, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  if (__Pyx_PyObject_SetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_ytop_2, __pyx_t_2) < (0)) __PYX_ERR(0, 175, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+  /* "MagDatabase.pyx":172
+ *         return self.r.centroid()
+ * 
+ *     def transform(self, t):             # <<<<<<<<<<<<<<
+ * 
+ *         self.r.xbot, self.r.ybot = t.transform_point((self.r.xbot, self.r.ybot))
+*/
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_AddTraceback("MagDatabase.Label.transform", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "MagDatabase.pyx":188
+ *     cdef public Rect bbox
  * 
  *     def __init__(self):             # <<<<<<<<<<<<<<
  *         self.layers = {}
@@ -9431,14 +9791,14 @@ static int __pyx_pf_11MagDatabase_4Cell___init__(struct __pyx_obj_11MagDatabase_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "MagDatabase.pyx":182
+  /* "MagDatabase.pyx":189
  * 
  *     def __init__(self):
  *         self.layers = {}             # <<<<<<<<<<<<<<
  *         self.transistors = []
  *         self.uses = []
 */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 182, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 189, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v_self->layers);
@@ -9446,14 +9806,14 @@ static int __pyx_pf_11MagDatabase_4Cell___init__(struct __pyx_obj_11MagDatabase_
   __pyx_v_self->layers = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":183
+  /* "MagDatabase.pyx":190
  *     def __init__(self):
  *         self.layers = {}
  *         self.transistors = []             # <<<<<<<<<<<<<<
  *         self.uses = []
  *         self.labels = {}
 */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 183, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 190, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v_self->transistors);
@@ -9461,14 +9821,14 @@ static int __pyx_pf_11MagDatabase_4Cell___init__(struct __pyx_obj_11MagDatabase_
   __pyx_v_self->transistors = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":184
+  /* "MagDatabase.pyx":191
  *         self.layers = {}
  *         self.transistors = []
  *         self.uses = []             # <<<<<<<<<<<<<<
  *         self.labels = {}
- * 
+ *         self.bbox = Rect(1e9, 1e9, -1e9, -1e9)
 */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 184, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 191, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v_self->uses);
@@ -9476,14 +9836,14 @@ static int __pyx_pf_11MagDatabase_4Cell___init__(struct __pyx_obj_11MagDatabase_
   __pyx_v_self->uses = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":185
+  /* "MagDatabase.pyx":192
  *         self.transistors = []
  *         self.uses = []
  *         self.labels = {}             # <<<<<<<<<<<<<<
+ *         self.bbox = Rect(1e9, 1e9, -1e9, -1e9)
  * 
- *     def setTech(self, str tech):
 */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 185, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 192, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v_self->labels);
@@ -9491,8 +9851,23 @@ static int __pyx_pf_11MagDatabase_4Cell___init__(struct __pyx_obj_11MagDatabase_
   __pyx_v_self->labels = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":181
- *     cdef public dict labels
+  /* "MagDatabase.pyx":193
+ *         self.uses = []
+ *         self.labels = {}
+ *         self.bbox = Rect(1e9, 1e9, -1e9, -1e9)             # <<<<<<<<<<<<<<
+ * 
+ *     def setTech(self, str tech):
+*/
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_mstate_global->__pyx_ptype_11MagDatabase_Rect), __pyx_mstate_global->__pyx_tuple[0], NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 193, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_GIVEREF(__pyx_t_1);
+  __Pyx_GOTREF((PyObject *)__pyx_v_self->bbox);
+  __Pyx_DECREF((PyObject *)__pyx_v_self->bbox);
+  __pyx_v_self->bbox = ((struct __pyx_obj_11MagDatabase_Rect *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "MagDatabase.pyx":188
+ *     cdef public Rect bbox
  * 
  *     def __init__(self):             # <<<<<<<<<<<<<<
  *         self.layers = {}
@@ -9511,8 +9886,8 @@ static int __pyx_pf_11MagDatabase_4Cell___init__(struct __pyx_obj_11MagDatabase_
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":187
- *         self.labels = {}
+/* "MagDatabase.pyx":195
+ *         self.bbox = Rect(1e9, 1e9, -1e9, -1e9)
  * 
  *     def setTech(self, str tech):             # <<<<<<<<<<<<<<
  *         self.tech = tech
@@ -9558,32 +9933,32 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_tech,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 187, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 195, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 187, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 195, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "setTech", 0) < (0)) __PYX_ERR(0, 187, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "setTech", 0) < (0)) __PYX_ERR(0, 195, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 1; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("setTech", 1, 1, 1, i); __PYX_ERR(0, 187, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("setTech", 1, 1, 1, i); __PYX_ERR(0, 195, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 187, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 195, __pyx_L3_error)
     }
     __pyx_v_tech = ((PyObject*)values[0]);
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("setTech", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 187, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("setTech", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 195, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -9594,7 +9969,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_tech), (&PyUnicode_Type), 1, "tech", 1))) __PYX_ERR(0, 187, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_tech), (&PyUnicode_Type), 1, "tech", 1))) __PYX_ERR(0, 195, __pyx_L1_error)
   __pyx_r = __pyx_pf_11MagDatabase_4Cell_2setTech(((struct __pyx_obj_11MagDatabase_Cell *)__pyx_v_self), __pyx_v_tech);
 
   /* function exit code */
@@ -9619,7 +9994,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_2setTech(struct __pyx_obj_11MagDat
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("setTech", 0);
 
-  /* "MagDatabase.pyx":188
+  /* "MagDatabase.pyx":196
  * 
  *     def setTech(self, str tech):
  *         self.tech = tech             # <<<<<<<<<<<<<<
@@ -9632,8 +10007,8 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_2setTech(struct __pyx_obj_11MagDat
   __Pyx_DECREF(__pyx_v_self->tech);
   __pyx_v_self->tech = __pyx_v_tech;
 
-  /* "MagDatabase.pyx":187
- *         self.labels = {}
+  /* "MagDatabase.pyx":195
+ *         self.bbox = Rect(1e9, 1e9, -1e9, -1e9)
  * 
  *     def setTech(self, str tech):             # <<<<<<<<<<<<<<
  *         self.tech = tech
@@ -9647,7 +10022,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_2setTech(struct __pyx_obj_11MagDat
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":190
+/* "MagDatabase.pyx":198
  *         self.tech = tech
  * 
  *     def addRect(self, str layer, int xbot, int ybot, int xtop, int ytop):             # <<<<<<<<<<<<<<
@@ -9698,60 +10073,60 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_layer,&__pyx_mstate_global->__pyx_n_u_xbot_2,&__pyx_mstate_global->__pyx_n_u_ybot_2,&__pyx_mstate_global->__pyx_n_u_xtop_2,&__pyx_mstate_global->__pyx_n_u_ytop_2,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 190, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 198, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  5:
         values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 190, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 198, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  4:
         values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 190, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 198, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  3:
         values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 190, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 198, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 190, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 198, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 190, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 198, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "addRect", 0) < (0)) __PYX_ERR(0, 190, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "addRect", 0) < (0)) __PYX_ERR(0, 198, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 5; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("addRect", 1, 5, 5, i); __PYX_ERR(0, 190, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("addRect", 1, 5, 5, i); __PYX_ERR(0, 198, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 5)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 190, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 198, __pyx_L3_error)
       values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 190, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 198, __pyx_L3_error)
       values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 190, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 198, __pyx_L3_error)
       values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 190, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 198, __pyx_L3_error)
       values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 190, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 198, __pyx_L3_error)
     }
     __pyx_v_layer = ((PyObject*)values[0]);
-    __pyx_v_xbot = __Pyx_PyLong_As_int(values[1]); if (unlikely((__pyx_v_xbot == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 190, __pyx_L3_error)
-    __pyx_v_ybot = __Pyx_PyLong_As_int(values[2]); if (unlikely((__pyx_v_ybot == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 190, __pyx_L3_error)
-    __pyx_v_xtop = __Pyx_PyLong_As_int(values[3]); if (unlikely((__pyx_v_xtop == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 190, __pyx_L3_error)
-    __pyx_v_ytop = __Pyx_PyLong_As_int(values[4]); if (unlikely((__pyx_v_ytop == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 190, __pyx_L3_error)
+    __pyx_v_xbot = __Pyx_PyLong_As_int(values[1]); if (unlikely((__pyx_v_xbot == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 198, __pyx_L3_error)
+    __pyx_v_ybot = __Pyx_PyLong_As_int(values[2]); if (unlikely((__pyx_v_ybot == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 198, __pyx_L3_error)
+    __pyx_v_xtop = __Pyx_PyLong_As_int(values[3]); if (unlikely((__pyx_v_xtop == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 198, __pyx_L3_error)
+    __pyx_v_ytop = __Pyx_PyLong_As_int(values[4]); if (unlikely((__pyx_v_ytop == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 198, __pyx_L3_error)
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("addRect", 1, 5, 5, __pyx_nargs); __PYX_ERR(0, 190, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("addRect", 1, 5, 5, __pyx_nargs); __PYX_ERR(0, 198, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -9762,7 +10137,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_layer), (&PyUnicode_Type), 1, "layer", 1))) __PYX_ERR(0, 190, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_layer), (&PyUnicode_Type), 1, "layer", 1))) __PYX_ERR(0, 198, __pyx_L1_error)
   __pyx_r = __pyx_pf_11MagDatabase_4Cell_4addRect(((struct __pyx_obj_11MagDatabase_Cell *)__pyx_v_self), __pyx_v_layer, __pyx_v_xbot, __pyx_v_ybot, __pyx_v_xtop, __pyx_v_ytop);
 
   /* function exit code */
@@ -9800,7 +10175,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_4addRect(struct __pyx_obj_11MagDat
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("addRect", 0);
 
-  /* "MagDatabase.pyx":192
+  /* "MagDatabase.pyx":200
  *     def addRect(self, str layer, int xbot, int ybot, int xtop, int ytop):
  * 
  *         r = Rect(xbot, ybot, xtop, ytop)             # <<<<<<<<<<<<<<
@@ -9808,13 +10183,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_4addRect(struct __pyx_obj_11MagDat
  *         if layer not in self.layers:
 */
   __pyx_t_2 = NULL;
-  __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_xbot); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 192, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_xbot); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 200, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyLong_From_int(__pyx_v_ybot); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 192, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyLong_From_int(__pyx_v_ybot); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 200, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyLong_From_int(__pyx_v_xtop); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 192, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyLong_From_int(__pyx_v_xtop); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 200, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = __Pyx_PyLong_From_int(__pyx_v_ytop); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 192, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyLong_From_int(__pyx_v_ytop); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 200, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_t_7 = 1;
   {
@@ -9825,13 +10200,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_4addRect(struct __pyx_obj_11MagDat
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 192, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 200, __pyx_L1_error)
     __Pyx_GOTREF((PyObject *)__pyx_t_1);
   }
   __pyx_v_r = ((struct __pyx_obj_11MagDatabase_Rect *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":194
+  /* "MagDatabase.pyx":202
  *         r = Rect(xbot, ybot, xtop, ytop)
  * 
  *         if layer not in self.layers:             # <<<<<<<<<<<<<<
@@ -9840,28 +10215,28 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_4addRect(struct __pyx_obj_11MagDat
 */
   if (unlikely(__pyx_v_self->layers == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-    __PYX_ERR(0, 194, __pyx_L1_error)
+    __PYX_ERR(0, 202, __pyx_L1_error)
   }
-  __pyx_t_8 = (__Pyx_PyDict_ContainsTF(__pyx_v_layer, __pyx_v_self->layers, Py_NE)); if (unlikely((__pyx_t_8 < 0))) __PYX_ERR(0, 194, __pyx_L1_error)
+  __pyx_t_8 = (__Pyx_PyDict_ContainsTF(__pyx_v_layer, __pyx_v_self->layers, Py_NE)); if (unlikely((__pyx_t_8 < 0))) __PYX_ERR(0, 202, __pyx_L1_error)
   if (__pyx_t_8) {
 
-    /* "MagDatabase.pyx":195
+    /* "MagDatabase.pyx":203
  * 
  *         if layer not in self.layers:
  *             self.layers[layer] = []             # <<<<<<<<<<<<<<
  * 
  *         self.layers[layer].append(r)
 */
-    __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 195, __pyx_L1_error)
+    __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 203, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     if (unlikely(__pyx_v_self->layers == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 195, __pyx_L1_error)
+      __PYX_ERR(0, 203, __pyx_L1_error)
     }
-    if (unlikely((PyDict_SetItem(__pyx_v_self->layers, __pyx_v_layer, __pyx_t_1) < 0))) __PYX_ERR(0, 195, __pyx_L1_error)
+    if (unlikely((PyDict_SetItem(__pyx_v_self->layers, __pyx_v_layer, __pyx_t_1) < 0))) __PYX_ERR(0, 203, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "MagDatabase.pyx":194
+    /* "MagDatabase.pyx":202
  *         r = Rect(xbot, ybot, xtop, ytop)
  * 
  *         if layer not in self.layers:             # <<<<<<<<<<<<<<
@@ -9870,7 +10245,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_4addRect(struct __pyx_obj_11MagDat
 */
   }
 
-  /* "MagDatabase.pyx":197
+  /* "MagDatabase.pyx":205
  *             self.layers[layer] = []
  * 
  *         self.layers[layer].append(r)             # <<<<<<<<<<<<<<
@@ -9879,14 +10254,14 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_4addRect(struct __pyx_obj_11MagDat
 */
   if (unlikely(__pyx_v_self->layers == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 197, __pyx_L1_error)
+    __PYX_ERR(0, 205, __pyx_L1_error)
   }
-  __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_v_layer); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 197, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_v_layer); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 205, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_9 = __Pyx_PyObject_Append(__pyx_t_1, ((PyObject *)__pyx_v_r)); if (unlikely(__pyx_t_9 == ((int)-1))) __PYX_ERR(0, 197, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_Append(__pyx_t_1, ((PyObject *)__pyx_v_r)); if (unlikely(__pyx_t_9 == ((int)-1))) __PYX_ERR(0, 205, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":190
+  /* "MagDatabase.pyx":198
  *         self.tech = tech
  * 
  *     def addRect(self, str layer, int xbot, int ybot, int xtop, int ytop):             # <<<<<<<<<<<<<<
@@ -9913,7 +10288,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_4addRect(struct __pyx_obj_11MagDat
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":199
+/* "MagDatabase.pyx":207
  *         self.layers[layer].append(r)
  * 
  *     def dump(self):             # <<<<<<<<<<<<<<
@@ -9988,7 +10363,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_6dump(struct __pyx_obj_11MagDataba
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("dump", 0);
 
-  /* "MagDatabase.pyx":200
+  /* "MagDatabase.pyx":208
  * 
  *     def dump(self):
  *         print(f"cell {self.name}")             # <<<<<<<<<<<<<<
@@ -9996,9 +10371,9 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_6dump(struct __pyx_obj_11MagDataba
  *             print(f" layer {l}")
 */
   __pyx_t_2 = NULL;
-  __pyx_t_3 = __Pyx_PyUnicode_Unicode(__pyx_v_self->name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 200, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyUnicode_Unicode(__pyx_v_self->name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 208, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyUnicode_Concat(__pyx_mstate_global->__pyx_kp_u_cell, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 200, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyUnicode_Concat(__pyx_mstate_global->__pyx_kp_u_cell, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 208, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_5 = 1;
@@ -10007,12 +10382,12 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_6dump(struct __pyx_obj_11MagDataba
     __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_builtin_print, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 200, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 208, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":201
+  /* "MagDatabase.pyx":209
  *     def dump(self):
  *         print(f"cell {self.name}")
  *         for l in self.layers:             # <<<<<<<<<<<<<<
@@ -10022,9 +10397,9 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_6dump(struct __pyx_obj_11MagDataba
   __pyx_t_6 = 0;
   if (unlikely(__pyx_v_self->layers == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-    __PYX_ERR(0, 201, __pyx_L1_error)
+    __PYX_ERR(0, 209, __pyx_L1_error)
   }
-  __pyx_t_4 = __Pyx_dict_iterator(__pyx_v_self->layers, 1, ((PyObject *)NULL), (&__pyx_t_7), (&__pyx_t_8)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 201, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_dict_iterator(__pyx_v_self->layers, 1, ((PyObject *)NULL), (&__pyx_t_7), (&__pyx_t_8)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 209, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_1);
   __pyx_t_1 = __pyx_t_4;
@@ -10032,12 +10407,12 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_6dump(struct __pyx_obj_11MagDataba
   while (1) {
     __pyx_t_9 = __Pyx_dict_iter_next(__pyx_t_1, __pyx_t_7, &__pyx_t_6, &__pyx_t_4, NULL, NULL, __pyx_t_8);
     if (unlikely(__pyx_t_9 == 0)) break;
-    if (unlikely(__pyx_t_9 == -1)) __PYX_ERR(0, 201, __pyx_L1_error)
+    if (unlikely(__pyx_t_9 == -1)) __PYX_ERR(0, 209, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_XDECREF_SET(__pyx_v_l, __pyx_t_4);
     __pyx_t_4 = 0;
 
-    /* "MagDatabase.pyx":202
+    /* "MagDatabase.pyx":210
  *         print(f"cell {self.name}")
  *         for l in self.layers:
  *             print(f" layer {l}")             # <<<<<<<<<<<<<<
@@ -10045,9 +10420,9 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_6dump(struct __pyx_obj_11MagDataba
  *                 r.dump()
 */
     __pyx_t_2 = NULL;
-    __pyx_t_3 = __Pyx_PyObject_FormatSimple(__pyx_v_l, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 202, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_FormatSimple(__pyx_v_l, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 210, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_10 = __Pyx_PyUnicode_Concat(__pyx_mstate_global->__pyx_kp_u_layer_2, __pyx_t_3); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 202, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyUnicode_Concat(__pyx_mstate_global->__pyx_kp_u_layer_2, __pyx_t_3); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 210, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_5 = 1;
@@ -10056,12 +10431,12 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_6dump(struct __pyx_obj_11MagDataba
       __pyx_t_4 = __Pyx_PyObject_FastCall((PyObject*)__pyx_builtin_print, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 202, __pyx_L1_error)
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 210, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
     }
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "MagDatabase.pyx":203
+    /* "MagDatabase.pyx":211
  *         for l in self.layers:
  *             print(f" layer {l}")
  *             for r in self.layers[l]:             # <<<<<<<<<<<<<<
@@ -10070,18 +10445,18 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_6dump(struct __pyx_obj_11MagDataba
 */
     if (unlikely(__pyx_v_self->layers == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 203, __pyx_L1_error)
+      __PYX_ERR(0, 211, __pyx_L1_error)
     }
-    __pyx_t_4 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_v_l); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 203, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_v_l); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 211, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     if (likely(PyList_CheckExact(__pyx_t_4)) || PyTuple_CheckExact(__pyx_t_4)) {
       __pyx_t_10 = __pyx_t_4; __Pyx_INCREF(__pyx_t_10);
       __pyx_t_11 = 0;
       __pyx_t_12 = NULL;
     } else {
-      __pyx_t_11 = -1; __pyx_t_10 = PyObject_GetIter(__pyx_t_4); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 203, __pyx_L1_error)
+      __pyx_t_11 = -1; __pyx_t_10 = PyObject_GetIter(__pyx_t_4); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 211, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_10);
-      __pyx_t_12 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_10); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 203, __pyx_L1_error)
+      __pyx_t_12 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_10); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 211, __pyx_L1_error)
     }
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     for (;;) {
@@ -10090,7 +10465,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_6dump(struct __pyx_obj_11MagDataba
           {
             Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_10);
             #if !CYTHON_ASSUME_SAFE_SIZE
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 203, __pyx_L1_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 211, __pyx_L1_error)
             #endif
             if (__pyx_t_11 >= __pyx_temp) break;
           }
@@ -10100,7 +10475,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_6dump(struct __pyx_obj_11MagDataba
           {
             Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_10);
             #if !CYTHON_ASSUME_SAFE_SIZE
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 203, __pyx_L1_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 211, __pyx_L1_error)
             #endif
             if (__pyx_t_11 >= __pyx_temp) break;
           }
@@ -10111,13 +10486,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_6dump(struct __pyx_obj_11MagDataba
           #endif
           ++__pyx_t_11;
         }
-        if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 203, __pyx_L1_error)
+        if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 211, __pyx_L1_error)
       } else {
         __pyx_t_4 = __pyx_t_12(__pyx_t_10);
         if (unlikely(!__pyx_t_4)) {
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
-            if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 203, __pyx_L1_error)
+            if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 211, __pyx_L1_error)
             PyErr_Clear();
           }
           break;
@@ -10127,7 +10502,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_6dump(struct __pyx_obj_11MagDataba
       __Pyx_XDECREF_SET(__pyx_v_r, __pyx_t_4);
       __pyx_t_4 = 0;
 
-      /* "MagDatabase.pyx":204
+      /* "MagDatabase.pyx":212
  *             print(f" layer {l}")
  *             for r in self.layers[l]:
  *                 r.dump()             # <<<<<<<<<<<<<<
@@ -10141,12 +10516,12 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_6dump(struct __pyx_obj_11MagDataba
         PyObject *__pyx_callargs[2] = {__pyx_t_2, NULL};
         __pyx_t_4 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_dump, __pyx_callargs+__pyx_t_5, (1-__pyx_t_5) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
         __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-        if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 204, __pyx_L1_error)
+        if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 212, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
       }
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-      /* "MagDatabase.pyx":203
+      /* "MagDatabase.pyx":211
  *         for l in self.layers:
  *             print(f" layer {l}")
  *             for r in self.layers[l]:             # <<<<<<<<<<<<<<
@@ -10158,7 +10533,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_6dump(struct __pyx_obj_11MagDataba
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":206
+  /* "MagDatabase.pyx":214
  *                 r.dump()
  * 
  *         for u in self.uses:             # <<<<<<<<<<<<<<
@@ -10167,7 +10542,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_6dump(struct __pyx_obj_11MagDataba
 */
   if (unlikely(__pyx_v_self->uses == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-    __PYX_ERR(0, 206, __pyx_L1_error)
+    __PYX_ERR(0, 214, __pyx_L1_error)
   }
   __pyx_t_1 = __pyx_v_self->uses; __Pyx_INCREF(__pyx_t_1);
   __pyx_t_7 = 0;
@@ -10175,18 +10550,18 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_6dump(struct __pyx_obj_11MagDataba
     {
       Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_1);
       #if !CYTHON_ASSUME_SAFE_SIZE
-      if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 206, __pyx_L1_error)
+      if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 214, __pyx_L1_error)
       #endif
       if (__pyx_t_7 >= __pyx_temp) break;
     }
     __pyx_t_10 = __Pyx_PyList_GET_ITEM_REF(__pyx_t_1, __pyx_t_7, __Pyx_ReferenceSharing_OwnStrongReference);
     ++__pyx_t_7;
-    if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 206, __pyx_L1_error)
+    if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 214, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_XDECREF_SET(__pyx_v_u, __pyx_t_10);
     __pyx_t_10 = 0;
 
-    /* "MagDatabase.pyx":207
+    /* "MagDatabase.pyx":215
  * 
  *         for u in self.uses:
  *             print(f" uses {u}")             # <<<<<<<<<<<<<<
@@ -10194,9 +10569,9 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_6dump(struct __pyx_obj_11MagDataba
  *         for k, v in self.labels.items():
 */
     __pyx_t_4 = NULL;
-    __pyx_t_2 = __Pyx_PyObject_FormatSimple(__pyx_v_u, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 207, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_FormatSimple(__pyx_v_u, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 215, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __Pyx_PyUnicode_Concat(__pyx_mstate_global->__pyx_kp_u_uses, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 207, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyUnicode_Concat(__pyx_mstate_global->__pyx_kp_u_uses, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 215, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_5 = 1;
@@ -10205,12 +10580,12 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_6dump(struct __pyx_obj_11MagDataba
       __pyx_t_10 = __Pyx_PyObject_FastCall((PyObject*)__pyx_builtin_print, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 207, __pyx_L1_error)
+      if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 215, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_10);
     }
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-    /* "MagDatabase.pyx":206
+    /* "MagDatabase.pyx":214
  *                 r.dump()
  * 
  *         for u in self.uses:             # <<<<<<<<<<<<<<
@@ -10220,7 +10595,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_6dump(struct __pyx_obj_11MagDataba
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":209
+  /* "MagDatabase.pyx":217
  *             print(f" uses {u}")
  * 
  *         for k, v in self.labels.items():             # <<<<<<<<<<<<<<
@@ -10230,9 +10605,9 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_6dump(struct __pyx_obj_11MagDataba
   __pyx_t_7 = 0;
   if (unlikely(__pyx_v_self->labels == Py_None)) {
     PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "items");
-    __PYX_ERR(0, 209, __pyx_L1_error)
+    __PYX_ERR(0, 217, __pyx_L1_error)
   }
-  __pyx_t_10 = __Pyx_dict_iterator(__pyx_v_self->labels, 1, __pyx_mstate_global->__pyx_n_u_items, (&__pyx_t_6), (&__pyx_t_8)); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 209, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_dict_iterator(__pyx_v_self->labels, 1, __pyx_mstate_global->__pyx_n_u_items, (&__pyx_t_6), (&__pyx_t_8)); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 217, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_XDECREF(__pyx_t_1);
   __pyx_t_1 = __pyx_t_10;
@@ -10240,7 +10615,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_6dump(struct __pyx_obj_11MagDataba
   while (1) {
     __pyx_t_9 = __Pyx_dict_iter_next(__pyx_t_1, __pyx_t_6, &__pyx_t_7, &__pyx_t_10, &__pyx_t_3, NULL, __pyx_t_8);
     if (unlikely(__pyx_t_9 == 0)) break;
-    if (unlikely(__pyx_t_9 == -1)) __PYX_ERR(0, 209, __pyx_L1_error)
+    if (unlikely(__pyx_t_9 == -1)) __PYX_ERR(0, 217, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_XDECREF_SET(__pyx_v_k, __pyx_t_10);
@@ -10248,7 +10623,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_6dump(struct __pyx_obj_11MagDataba
     __Pyx_XDECREF_SET(__pyx_v_v, __pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "MagDatabase.pyx":210
+    /* "MagDatabase.pyx":218
  * 
  *         for k, v in self.labels.items():
  *             print(f" label {v}")             # <<<<<<<<<<<<<<
@@ -10256,9 +10631,9 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_6dump(struct __pyx_obj_11MagDataba
  *     def addUse(self, name, inst_name):
 */
     __pyx_t_10 = NULL;
-    __pyx_t_4 = __Pyx_PyObject_FormatSimple(__pyx_v_v, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 210, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_FormatSimple(__pyx_v_v, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 218, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_2 = __Pyx_PyUnicode_Concat(__pyx_mstate_global->__pyx_kp_u_label, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 210, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyUnicode_Concat(__pyx_mstate_global->__pyx_kp_u_label, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 218, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_5 = 1;
@@ -10267,14 +10642,14 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_6dump(struct __pyx_obj_11MagDataba
       __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)__pyx_builtin_print, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 210, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 218, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
     }
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":199
+  /* "MagDatabase.pyx":207
  *         self.layers[layer].append(r)
  * 
  *     def dump(self):             # <<<<<<<<<<<<<<
@@ -10304,7 +10679,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_6dump(struct __pyx_obj_11MagDataba
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":212
+/* "MagDatabase.pyx":220
  *             print(f" label {v}")
  * 
  *     def addUse(self, name, inst_name):             # <<<<<<<<<<<<<<
@@ -10352,39 +10727,39 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_name,&__pyx_mstate_global->__pyx_n_u_inst_name,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 212, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 220, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 212, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 220, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 212, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 220, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "addUse", 0) < (0)) __PYX_ERR(0, 212, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "addUse", 0) < (0)) __PYX_ERR(0, 220, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 2; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("addUse", 1, 2, 2, i); __PYX_ERR(0, 212, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("addUse", 1, 2, 2, i); __PYX_ERR(0, 220, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 212, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 220, __pyx_L3_error)
       values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 212, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 220, __pyx_L3_error)
     }
     __pyx_v_name = values[0];
     __pyx_v_inst_name = values[1];
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("addUse", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 212, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("addUse", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 220, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -10417,7 +10792,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_8addUse(struct __pyx_obj_11MagData
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("addUse", 0);
 
-  /* "MagDatabase.pyx":214
+  /* "MagDatabase.pyx":222
  *     def addUse(self, name, inst_name):
  * 
  *         handle = len(self.uses)             # <<<<<<<<<<<<<<
@@ -10428,13 +10803,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_8addUse(struct __pyx_obj_11MagData
   __Pyx_INCREF(__pyx_t_1);
   if (unlikely(__pyx_t_1 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 214, __pyx_L1_error)
+    __PYX_ERR(0, 222, __pyx_L1_error)
   }
-  __pyx_t_2 = __Pyx_PyList_GET_SIZE(__pyx_t_1); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 214, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyList_GET_SIZE(__pyx_t_1); if (unlikely(__pyx_t_2 == ((Py_ssize_t)-1))) __PYX_ERR(0, 222, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_handle = __pyx_t_2;
 
-  /* "MagDatabase.pyx":215
+  /* "MagDatabase.pyx":223
  * 
  *         handle = len(self.uses)
  *         self.uses.append({'name': name, 'inst_name': inst_name, 'transform': None})             # <<<<<<<<<<<<<<
@@ -10443,17 +10818,17 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_8addUse(struct __pyx_obj_11MagData
 */
   if (unlikely(__pyx_v_self->uses == Py_None)) {
     PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "append");
-    __PYX_ERR(0, 215, __pyx_L1_error)
+    __PYX_ERR(0, 223, __pyx_L1_error)
   }
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 215, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 223, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_name, __pyx_v_name) < (0)) __PYX_ERR(0, 215, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_inst_name, __pyx_v_inst_name) < (0)) __PYX_ERR(0, 215, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_transform, Py_None) < (0)) __PYX_ERR(0, 215, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_PyList_Append(__pyx_v_self->uses, __pyx_t_1); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 215, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_name, __pyx_v_name) < (0)) __PYX_ERR(0, 223, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_inst_name, __pyx_v_inst_name) < (0)) __PYX_ERR(0, 223, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_transform, Py_None) < (0)) __PYX_ERR(0, 223, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyList_Append(__pyx_v_self->uses, __pyx_t_1); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 223, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":217
+  /* "MagDatabase.pyx":225
  *         self.uses.append({'name': name, 'inst_name': inst_name, 'transform': None})
  * 
  *         return handle             # <<<<<<<<<<<<<<
@@ -10461,13 +10836,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_8addUse(struct __pyx_obj_11MagData
  *     def setUseTransform(self, use, a, b, c, d, e, f):
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyLong_FromSsize_t(__pyx_v_handle); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 217, __pyx_L1_error)
+  __pyx_t_1 = PyLong_FromSsize_t(__pyx_v_handle); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 225, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "MagDatabase.pyx":212
+  /* "MagDatabase.pyx":220
  *             print(f" label {v}")
  * 
  *     def addUse(self, name, inst_name):             # <<<<<<<<<<<<<<
@@ -10486,7 +10861,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_8addUse(struct __pyx_obj_11MagData
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":219
+/* "MagDatabase.pyx":227
  *         return handle
  * 
  *     def setUseTransform(self, use, a, b, c, d, e, f):             # <<<<<<<<<<<<<<
@@ -10539,62 +10914,62 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_use,&__pyx_mstate_global->__pyx_n_u_a_2,&__pyx_mstate_global->__pyx_n_u_b_2,&__pyx_mstate_global->__pyx_n_u_c_2,&__pyx_mstate_global->__pyx_n_u_d_2,&__pyx_mstate_global->__pyx_n_u_e_2,&__pyx_mstate_global->__pyx_n_u_f_2,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 219, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 227, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  7:
         values[6] = __Pyx_ArgRef_FASTCALL(__pyx_args, 6);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 219, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 227, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  6:
         values[5] = __Pyx_ArgRef_FASTCALL(__pyx_args, 5);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 219, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 227, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  5:
         values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 219, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 227, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  4:
         values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 219, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 227, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  3:
         values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 219, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 227, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 219, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 227, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 219, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 227, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "setUseTransform", 0) < (0)) __PYX_ERR(0, 219, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "setUseTransform", 0) < (0)) __PYX_ERR(0, 227, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 7; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("setUseTransform", 1, 7, 7, i); __PYX_ERR(0, 219, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("setUseTransform", 1, 7, 7, i); __PYX_ERR(0, 227, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 7)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 219, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 227, __pyx_L3_error)
       values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 219, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 227, __pyx_L3_error)
       values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 219, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 227, __pyx_L3_error)
       values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 219, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 227, __pyx_L3_error)
       values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 219, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 227, __pyx_L3_error)
       values[5] = __Pyx_ArgRef_FASTCALL(__pyx_args, 5);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 219, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 227, __pyx_L3_error)
       values[6] = __Pyx_ArgRef_FASTCALL(__pyx_args, 6);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 219, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 227, __pyx_L3_error)
     }
     __pyx_v_use = values[0];
     __pyx_v_a = values[1];
@@ -10606,7 +10981,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("setUseTransform", 1, 7, 7, __pyx_nargs); __PYX_ERR(0, 219, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("setUseTransform", 1, 7, 7, __pyx_nargs); __PYX_ERR(0, 227, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -10638,7 +11013,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_10setUseTransform(struct __pyx_obj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("setUseTransform", 0);
 
-  /* "MagDatabase.pyx":220
+  /* "MagDatabase.pyx":228
  * 
  *     def setUseTransform(self, use, a, b, c, d, e, f):
  *         self.uses[use]['transform'] = Transform(a, b, c, d, e, f)             # <<<<<<<<<<<<<<
@@ -10651,20 +11026,20 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_10setUseTransform(struct __pyx_obj
     PyObject *__pyx_callargs[7] = {__pyx_t_2, __pyx_v_a, __pyx_v_b, __pyx_v_c, __pyx_v_d, __pyx_v_e, __pyx_v_f};
     __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_mstate_global->__pyx_ptype_11MagDatabase_Transform, __pyx_callargs+__pyx_t_3, (7-__pyx_t_3) | (__pyx_t_3*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 220, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 228, __pyx_L1_error)
     __Pyx_GOTREF((PyObject *)__pyx_t_1);
   }
   if (unlikely(__pyx_v_self->uses == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 220, __pyx_L1_error)
+    __PYX_ERR(0, 228, __pyx_L1_error)
   }
-  __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_v_self->uses, __pyx_v_use); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 220, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_v_self->uses, __pyx_v_use); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 228, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (unlikely((PyObject_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_transform, ((PyObject *)__pyx_t_1)) < 0))) __PYX_ERR(0, 220, __pyx_L1_error)
+  if (unlikely((PyObject_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_transform, ((PyObject *)__pyx_t_1)) < 0))) __PYX_ERR(0, 228, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF((PyObject *)__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":219
+  /* "MagDatabase.pyx":227
  *         return handle
  * 
  *     def setUseTransform(self, use, a, b, c, d, e, f):             # <<<<<<<<<<<<<<
@@ -10686,7 +11061,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_10setUseTransform(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":222
+/* "MagDatabase.pyx":230
  *         self.uses[use]['transform'] = Transform(a, b, c, d, e, f)
  * 
  *     def dump_transistors_with_transform(self, db, transform):             # <<<<<<<<<<<<<<
@@ -10735,39 +11110,39 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_db,&__pyx_mstate_global->__pyx_n_u_transform,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 222, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 230, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 222, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 230, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 222, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 230, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "dump_transistors_with_transform", 0) < (0)) __PYX_ERR(0, 222, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "dump_transistors_with_transform", 0) < (0)) __PYX_ERR(0, 230, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 2; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("dump_transistors_with_transform", 1, 2, 2, i); __PYX_ERR(0, 222, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("dump_transistors_with_transform", 1, 2, 2, i); __PYX_ERR(0, 230, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 222, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 230, __pyx_L3_error)
       values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 222, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 230, __pyx_L3_error)
     }
     __pyx_v_db = values[0];
     __pyx_v_transform = values[1];
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("dump_transistors_with_transform", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 222, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("dump_transistors_with_transform", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 230, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -10808,7 +11183,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_12dump_transistors_with_transform(
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("dump_transistors_with_transform", 0);
 
-  /* "MagDatabase.pyx":226
+  /* "MagDatabase.pyx":234
  *         Dump transistors in this cell and in child cells
  *         """
  *         print(f"Dumping transistors in cell {self.name}")             # <<<<<<<<<<<<<<
@@ -10816,9 +11191,9 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_12dump_transistors_with_transform(
  *         for i, t in enumerate(self.transistors):
 */
   __pyx_t_2 = NULL;
-  __pyx_t_3 = __Pyx_PyUnicode_Unicode(__pyx_v_self->name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 226, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyUnicode_Unicode(__pyx_v_self->name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 234, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyUnicode_Concat(__pyx_mstate_global->__pyx_kp_u_Dumping_transistors_in_cell, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 226, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyUnicode_Concat(__pyx_mstate_global->__pyx_kp_u_Dumping_transistors_in_cell, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 234, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_5 = 1;
@@ -10827,12 +11202,12 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_12dump_transistors_with_transform(
     __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_builtin_print, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 226, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 234, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":228
+  /* "MagDatabase.pyx":236
  *         print(f"Dumping transistors in cell {self.name}")
  * 
  *         for i, t in enumerate(self.transistors):             # <<<<<<<<<<<<<<
@@ -10847,25 +11222,25 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_12dump_transistors_with_transform(
     {
       Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_4);
       #if !CYTHON_ASSUME_SAFE_SIZE
-      if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 228, __pyx_L1_error)
+      if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 236, __pyx_L1_error)
       #endif
       if (__pyx_t_6 >= __pyx_temp) break;
     }
     __pyx_t_2 = __Pyx_PyList_GET_ITEM_REF(__pyx_t_4, __pyx_t_6, __Pyx_ReferenceSharing_OwnStrongReference);
     ++__pyx_t_6;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 228, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 236, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_XDECREF_SET(__pyx_v_t, __pyx_t_2);
     __pyx_t_2 = 0;
     __Pyx_INCREF(__pyx_t_1);
     __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_1);
-    __pyx_t_2 = __Pyx_PyLong_AddObjC(__pyx_t_1, __pyx_mstate_global->__pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 228, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyLong_AddObjC(__pyx_t_1, __pyx_mstate_global->__pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 236, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1);
     __pyx_t_1 = __pyx_t_2;
     __pyx_t_2 = 0;
 
-    /* "MagDatabase.pyx":229
+    /* "MagDatabase.pyx":237
  * 
  *         for i, t in enumerate(self.transistors):
  *             print(f"Dumping transistor {i}")             # <<<<<<<<<<<<<<
@@ -10873,9 +11248,9 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_12dump_transistors_with_transform(
  * 
 */
     __pyx_t_3 = NULL;
-    __pyx_t_7 = __Pyx_PyObject_FormatSimple(__pyx_v_i, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 229, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_FormatSimple(__pyx_v_i, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 237, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_8 = __Pyx_PyUnicode_Concat(__pyx_mstate_global->__pyx_kp_u_Dumping_transistor, __pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 229, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyUnicode_Concat(__pyx_mstate_global->__pyx_kp_u_Dumping_transistor, __pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 237, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_t_5 = 1;
@@ -10884,12 +11259,12 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_12dump_transistors_with_transform(
       __pyx_t_2 = __Pyx_PyObject_FastCall((PyObject*)__pyx_builtin_print, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 229, __pyx_L1_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 237, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
     }
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "MagDatabase.pyx":230
+    /* "MagDatabase.pyx":238
  *         for i, t in enumerate(self.transistors):
  *             print(f"Dumping transistor {i}")
  *             t.dump_with_transform(transform)             # <<<<<<<<<<<<<<
@@ -10903,12 +11278,12 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_12dump_transistors_with_transform(
       PyObject *__pyx_callargs[2] = {__pyx_t_8, __pyx_v_transform};
       __pyx_t_2 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_dump_with_transform, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 230, __pyx_L1_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 238, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
     }
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "MagDatabase.pyx":228
+    /* "MagDatabase.pyx":236
  *         print(f"Dumping transistors in cell {self.name}")
  * 
  *         for i, t in enumerate(self.transistors):             # <<<<<<<<<<<<<<
@@ -10919,7 +11294,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_12dump_transistors_with_transform(
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":232
+  /* "MagDatabase.pyx":240
  *             t.dump_with_transform(transform)
  * 
  *         for u in self.uses:             # <<<<<<<<<<<<<<
@@ -10928,7 +11303,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_12dump_transistors_with_transform(
 */
   if (unlikely(__pyx_v_self->uses == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-    __PYX_ERR(0, 232, __pyx_L1_error)
+    __PYX_ERR(0, 240, __pyx_L1_error)
   }
   __pyx_t_1 = __pyx_v_self->uses; __Pyx_INCREF(__pyx_t_1);
   __pyx_t_6 = 0;
@@ -10936,35 +11311,35 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_12dump_transistors_with_transform(
     {
       Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_1);
       #if !CYTHON_ASSUME_SAFE_SIZE
-      if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 232, __pyx_L1_error)
+      if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 240, __pyx_L1_error)
       #endif
       if (__pyx_t_6 >= __pyx_temp) break;
     }
     __pyx_t_4 = __Pyx_PyList_GET_ITEM_REF(__pyx_t_1, __pyx_t_6, __Pyx_ReferenceSharing_OwnStrongReference);
     ++__pyx_t_6;
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 232, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 240, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_XDECREF_SET(__pyx_v_u, __pyx_t_4);
     __pyx_t_4 = 0;
 
-    /* "MagDatabase.pyx":233
+    /* "MagDatabase.pyx":241
  * 
  *         for u in self.uses:
  *             db.cells[u['name']].dump_transistors_with_transform(db, u['transform'].Transform(transform))             # <<<<<<<<<<<<<<
  * 
  *     def dump_transistors(self, db):
 */
-    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_db, __pyx_mstate_global->__pyx_n_u_cells); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 233, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_db, __pyx_mstate_global->__pyx_n_u_cells); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 241, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
-    __pyx_t_3 = __Pyx_PyObject_Dict_GetItem(__pyx_v_u, __pyx_mstate_global->__pyx_n_u_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 233, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Dict_GetItem(__pyx_v_u, __pyx_mstate_global->__pyx_n_u_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 241, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_7 = __Pyx_PyObject_GetItem(__pyx_t_8, __pyx_t_3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 233, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_GetItem(__pyx_t_8, __pyx_t_3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 241, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_2 = __pyx_t_7;
     __Pyx_INCREF(__pyx_t_2);
-    __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_v_u, __pyx_mstate_global->__pyx_n_u_transform); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 233, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_v_u, __pyx_mstate_global->__pyx_n_u_transform); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 241, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __pyx_t_8 = __pyx_t_9;
     __Pyx_INCREF(__pyx_t_8);
@@ -10974,7 +11349,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_12dump_transistors_with_transform(
       __pyx_t_3 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_Transform, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 233, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 241, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
     }
     __pyx_t_5 = 0;
@@ -10984,12 +11359,12 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_12dump_transistors_with_transform(
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 233, __pyx_L1_error)
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 241, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
     }
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "MagDatabase.pyx":232
+    /* "MagDatabase.pyx":240
  *             t.dump_with_transform(transform)
  * 
  *         for u in self.uses:             # <<<<<<<<<<<<<<
@@ -10999,7 +11374,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_12dump_transistors_with_transform(
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":222
+  /* "MagDatabase.pyx":230
  *         self.uses[use]['transform'] = Transform(a, b, c, d, e, f)
  * 
  *     def dump_transistors_with_transform(self, db, transform):             # <<<<<<<<<<<<<<
@@ -11029,7 +11404,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_12dump_transistors_with_transform(
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":235
+/* "MagDatabase.pyx":243
  *             db.cells[u['name']].dump_transistors_with_transform(db, u['transform'].Transform(transform))
  * 
  *     def dump_transistors(self, db):             # <<<<<<<<<<<<<<
@@ -11076,32 +11451,32 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_db,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 235, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 243, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 235, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 243, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "dump_transistors", 0) < (0)) __PYX_ERR(0, 235, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "dump_transistors", 0) < (0)) __PYX_ERR(0, 243, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 1; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("dump_transistors", 1, 1, 1, i); __PYX_ERR(0, 235, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("dump_transistors", 1, 1, 1, i); __PYX_ERR(0, 243, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 235, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 243, __pyx_L3_error)
     }
     __pyx_v_db = values[0];
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("dump_transistors", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 235, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("dump_transistors", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 243, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -11134,7 +11509,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_14dump_transistors(struct __pyx_ob
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("dump_transistors", 0);
 
-  /* "MagDatabase.pyx":236
+  /* "MagDatabase.pyx":244
  * 
  *     def dump_transistors(self, db):
  *         self.dump_transistors_with_transform(db, Transform(1, 0, 0, 0, 1, 0))             # <<<<<<<<<<<<<<
@@ -11143,7 +11518,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_14dump_transistors(struct __pyx_ob
 */
   __pyx_t_2 = ((PyObject *)__pyx_v_self);
   __Pyx_INCREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_mstate_global->__pyx_ptype_11MagDatabase_Transform), __pyx_mstate_global->__pyx_tuple[0], NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 236, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_mstate_global->__pyx_ptype_11MagDatabase_Transform), __pyx_mstate_global->__pyx_tuple[1], NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 244, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = 0;
   {
@@ -11151,12 +11526,12 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_14dump_transistors(struct __pyx_ob
     __pyx_t_1 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_dump_transistors_with_transform, __pyx_callargs+__pyx_t_4, (3-__pyx_t_4) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 236, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 244, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":235
+  /* "MagDatabase.pyx":243
  *             db.cells[u['name']].dump_transistors_with_transform(db, u['transform'].Transform(transform))
  * 
  *     def dump_transistors(self, db):             # <<<<<<<<<<<<<<
@@ -11179,7 +11554,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_14dump_transistors(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":238
+/* "MagDatabase.pyx":246
  *         self.dump_transistors_with_transform(db, Transform(1, 0, 0, 0, 1, 0))
  * 
  *     def get_transistors_with_transform(self, db, transform):             # <<<<<<<<<<<<<<
@@ -11228,39 +11603,39 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_db,&__pyx_mstate_global->__pyx_n_u_transform,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 238, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 246, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 238, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 246, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 238, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 246, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "get_transistors_with_transform", 0) < (0)) __PYX_ERR(0, 238, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "get_transistors_with_transform", 0) < (0)) __PYX_ERR(0, 246, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 2; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("get_transistors_with_transform", 1, 2, 2, i); __PYX_ERR(0, 238, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("get_transistors_with_transform", 1, 2, 2, i); __PYX_ERR(0, 246, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 238, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 246, __pyx_L3_error)
       values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 238, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 246, __pyx_L3_error)
     }
     __pyx_v_db = values[0];
     __pyx_v_transform = values[1];
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("get_transistors_with_transform", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 238, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("get_transistors_with_transform", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 246, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -11302,7 +11677,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_16get_transistors_with_transform(s
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_transistors_with_transform", 0);
 
-  /* "MagDatabase.pyx":242
+  /* "MagDatabase.pyx":250
  *         Get transistors in this cell and in child cells
  *         """
  *         t = [tt.transform(transform) for tt in self.transistors]             # <<<<<<<<<<<<<<
@@ -11310,11 +11685,11 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_16get_transistors_with_transform(s
  *         tt = {}
 */
   { /* enter inner scope */
-    __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 242, __pyx_L5_error)
+    __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 250, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_1);
     if (unlikely(__pyx_v_self->transistors == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-      __PYX_ERR(0, 242, __pyx_L5_error)
+      __PYX_ERR(0, 250, __pyx_L5_error)
     }
     __pyx_t_2 = __pyx_v_self->transistors; __Pyx_INCREF(__pyx_t_2);
     __pyx_t_3 = 0;
@@ -11322,13 +11697,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_16get_transistors_with_transform(s
       {
         Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_2);
         #if !CYTHON_ASSUME_SAFE_SIZE
-        if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 242, __pyx_L5_error)
+        if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 250, __pyx_L5_error)
         #endif
         if (__pyx_t_3 >= __pyx_temp) break;
       }
       __pyx_t_4 = __Pyx_PyList_GET_ITEM_REF(__pyx_t_2, __pyx_t_3, __Pyx_ReferenceSharing_OwnStrongReference);
       ++__pyx_t_3;
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 242, __pyx_L5_error)
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 250, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_XDECREF_SET(__pyx_7genexpr__pyx_v_tt, __pyx_t_4);
       __pyx_t_4 = 0;
@@ -11339,10 +11714,10 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_16get_transistors_with_transform(s
         PyObject *__pyx_callargs[2] = {__pyx_t_5, __pyx_v_transform};
         __pyx_t_4 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_transform, __pyx_callargs+__pyx_t_6, (2-__pyx_t_6) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
         __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-        if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 242, __pyx_L5_error)
+        if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 250, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_4);
       }
-      if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_4))) __PYX_ERR(0, 242, __pyx_L5_error)
+      if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_4))) __PYX_ERR(0, 250, __pyx_L5_error)
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -11356,19 +11731,19 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_16get_transistors_with_transform(s
   __pyx_v_t = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":244
+  /* "MagDatabase.pyx":252
  *         t = [tt.transform(transform) for tt in self.transistors]
  * 
  *         tt = {}             # <<<<<<<<<<<<<<
  *         for u in self.uses:
  *             tt[u['inst_name']] = db.cells[u['name']].get_transistors_with_transform(db, u['transform'].Transform(transform))
 */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 244, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 252, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_tt = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":245
+  /* "MagDatabase.pyx":253
  * 
  *         tt = {}
  *         for u in self.uses:             # <<<<<<<<<<<<<<
@@ -11377,7 +11752,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_16get_transistors_with_transform(s
 */
   if (unlikely(__pyx_v_self->uses == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-    __PYX_ERR(0, 245, __pyx_L1_error)
+    __PYX_ERR(0, 253, __pyx_L1_error)
   }
   __pyx_t_1 = __pyx_v_self->uses; __Pyx_INCREF(__pyx_t_1);
   __pyx_t_3 = 0;
@@ -11385,35 +11760,35 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_16get_transistors_with_transform(s
     {
       Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_1);
       #if !CYTHON_ASSUME_SAFE_SIZE
-      if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 245, __pyx_L1_error)
+      if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 253, __pyx_L1_error)
       #endif
       if (__pyx_t_3 >= __pyx_temp) break;
     }
     __pyx_t_2 = __Pyx_PyList_GET_ITEM_REF(__pyx_t_1, __pyx_t_3, __Pyx_ReferenceSharing_OwnStrongReference);
     ++__pyx_t_3;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 245, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 253, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_XDECREF_SET(__pyx_v_u, __pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "MagDatabase.pyx":246
+    /* "MagDatabase.pyx":254
  *         tt = {}
  *         for u in self.uses:
  *             tt[u['inst_name']] = db.cells[u['name']].get_transistors_with_transform(db, u['transform'].Transform(transform))             # <<<<<<<<<<<<<<
  * 
  *         return {'self': t, 'children': tt}
 */
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_db, __pyx_mstate_global->__pyx_n_u_cells); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 246, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_db, __pyx_mstate_global->__pyx_n_u_cells); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 254, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_u, __pyx_mstate_global->__pyx_n_u_name); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 246, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_u, __pyx_mstate_global->__pyx_n_u_name); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 254, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_8 = __Pyx_PyObject_GetItem(__pyx_t_5, __pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 246, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_GetItem(__pyx_t_5, __pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 254, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_t_4 = __pyx_t_8;
     __Pyx_INCREF(__pyx_t_4);
-    __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_v_u, __pyx_mstate_global->__pyx_n_u_transform); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 246, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_v_u, __pyx_mstate_global->__pyx_n_u_transform); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 254, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __pyx_t_5 = __pyx_t_9;
     __Pyx_INCREF(__pyx_t_5);
@@ -11423,7 +11798,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_16get_transistors_with_transform(s
       __pyx_t_7 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_Transform, __pyx_callargs+__pyx_t_6, (2-__pyx_t_6) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-      if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 246, __pyx_L1_error)
+      if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 254, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
     }
     __pyx_t_6 = 0;
@@ -11433,16 +11808,16 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_16get_transistors_with_transform(s
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 246, __pyx_L1_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 254, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
     }
-    __pyx_t_8 = __Pyx_PyObject_Dict_GetItem(__pyx_v_u, __pyx_mstate_global->__pyx_n_u_inst_name); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 246, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_Dict_GetItem(__pyx_v_u, __pyx_mstate_global->__pyx_n_u_inst_name); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 254, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
-    if (unlikely((PyDict_SetItem(__pyx_v_tt, __pyx_t_8, __pyx_t_2) < 0))) __PYX_ERR(0, 246, __pyx_L1_error)
+    if (unlikely((PyDict_SetItem(__pyx_v_tt, __pyx_t_8, __pyx_t_2) < 0))) __PYX_ERR(0, 254, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "MagDatabase.pyx":245
+    /* "MagDatabase.pyx":253
  * 
  *         tt = {}
  *         for u in self.uses:             # <<<<<<<<<<<<<<
@@ -11452,7 +11827,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_16get_transistors_with_transform(s
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":248
+  /* "MagDatabase.pyx":256
  *             tt[u['inst_name']] = db.cells[u['name']].get_transistors_with_transform(db, u['transform'].Transform(transform))
  * 
  *         return {'self': t, 'children': tt}             # <<<<<<<<<<<<<<
@@ -11460,15 +11835,15 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_16get_transistors_with_transform(s
  *     def get_transistors(self, db):
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 248, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 256, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_self, __pyx_v_t) < (0)) __PYX_ERR(0, 248, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_children, __pyx_v_tt) < (0)) __PYX_ERR(0, 248, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_self, __pyx_v_t) < (0)) __PYX_ERR(0, 256, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_children, __pyx_v_tt) < (0)) __PYX_ERR(0, 256, __pyx_L1_error)
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "MagDatabase.pyx":238
+  /* "MagDatabase.pyx":246
  *         self.dump_transistors_with_transform(db, Transform(1, 0, 0, 0, 1, 0))
  * 
  *     def get_transistors_with_transform(self, db, transform):             # <<<<<<<<<<<<<<
@@ -11497,7 +11872,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_16get_transistors_with_transform(s
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":250
+/* "MagDatabase.pyx":258
  *         return {'self': t, 'children': tt}
  * 
  *     def get_transistors(self, db):             # <<<<<<<<<<<<<<
@@ -11544,32 +11919,32 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_db,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 250, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 258, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 250, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 258, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "get_transistors", 0) < (0)) __PYX_ERR(0, 250, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "get_transistors", 0) < (0)) __PYX_ERR(0, 258, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 1; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("get_transistors", 1, 1, 1, i); __PYX_ERR(0, 250, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("get_transistors", 1, 1, 1, i); __PYX_ERR(0, 258, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 250, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 258, __pyx_L3_error)
     }
     __pyx_v_db = values[0];
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("get_transistors", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 250, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("get_transistors", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 258, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -11602,17 +11977,17 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_18get_transistors(struct __pyx_obj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_transistors", 0);
 
-  /* "MagDatabase.pyx":251
+  /* "MagDatabase.pyx":259
  * 
  *     def get_transistors(self, db):
  *         return self.get_transistors_with_transform(db, Transform(1, 0, 0, 0, 1, 0))             # <<<<<<<<<<<<<<
  * 
- *     def getPins(self, db):
+ * 
 */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2 = ((PyObject *)__pyx_v_self);
   __Pyx_INCREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_mstate_global->__pyx_ptype_11MagDatabase_Transform), __pyx_mstate_global->__pyx_tuple[0], NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 251, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_mstate_global->__pyx_ptype_11MagDatabase_Transform), __pyx_mstate_global->__pyx_tuple[1], NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 259, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = 0;
   {
@@ -11620,14 +11995,14 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_18get_transistors(struct __pyx_obj
     __pyx_t_1 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_get_transistors_with_transform, __pyx_callargs+__pyx_t_4, (3-__pyx_t_4) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 251, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 259, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "MagDatabase.pyx":250
+  /* "MagDatabase.pyx":258
  *         return {'self': t, 'children': tt}
  * 
  *     def get_transistors(self, db):             # <<<<<<<<<<<<<<
@@ -11648,8 +12023,376 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_18get_transistors(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":253
- *         return self.get_transistors_with_transform(db, Transform(1, 0, 0, 0, 1, 0))
+/* "MagDatabase.pyx":262
+ * 
+ * 
+ *     def get_pins_with_transform(self, db, transform):             # <<<<<<<<<<<<<<
+ * 
+ *         import copy
+*/
+
+/* Python wrapper */
+static PyObject *__pyx_pw_11MagDatabase_4Cell_21get_pins_with_transform(PyObject *__pyx_v_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+static PyMethodDef __pyx_mdef_11MagDatabase_4Cell_21get_pins_with_transform = {"get_pins_with_transform", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_21get_pins_with_transform, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_11MagDatabase_4Cell_21get_pins_with_transform(PyObject *__pyx_v_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  PyObject *__pyx_v_db = 0;
+  PyObject *__pyx_v_transform = 0;
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject* values[2] = {0,0};
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("get_pins_with_transform (wrapper)", 0);
+  #if !CYTHON_METH_FASTCALL
+  #if CYTHON_ASSUME_SAFE_SIZE
+  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #else
+  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
+  #endif
+  #endif
+  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  {
+    PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_db,&__pyx_mstate_global->__pyx_n_u_transform,0};
+    const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 262, __pyx_L3_error)
+    if (__pyx_kwds_len > 0) {
+      switch (__pyx_nargs) {
+        case  2:
+        values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 262, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  1:
+        values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 262, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      const Py_ssize_t kwd_pos_args = __pyx_nargs;
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "get_pins_with_transform", 0) < (0)) __PYX_ERR(0, 262, __pyx_L3_error)
+      for (Py_ssize_t i = __pyx_nargs; i < 2; i++) {
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("get_pins_with_transform", 1, 2, 2, i); __PYX_ERR(0, 262, __pyx_L3_error) }
+      }
+    } else if (unlikely(__pyx_nargs != 2)) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 262, __pyx_L3_error)
+      values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 262, __pyx_L3_error)
+    }
+    __pyx_v_db = values[0];
+    __pyx_v_transform = values[1];
+  }
+  goto __pyx_L6_skip;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("get_pins_with_transform", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 262, __pyx_L3_error)
+  __pyx_L6_skip:;
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __Pyx_AddTraceback("MagDatabase.Cell.get_pins_with_transform", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_11MagDatabase_4Cell_20get_pins_with_transform(((struct __pyx_obj_11MagDatabase_Cell *)__pyx_v_self), __pyx_v_db, __pyx_v_transform);
+
+  /* function exit code */
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_11MagDatabase_4Cell_20get_pins_with_transform(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_db, PyObject *__pyx_v_transform) {
+  PyObject *__pyx_v_copy = NULL;
+  PyObject *__pyx_v_p = NULL;
+  PyObject *__pyx_v_u = NULL;
+  PyObject *__pyx_v_lab = NULL;
+  PyObject *__pyx_v_k = NULL;
+  PyObject *__pyx_v_v = NULL;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  Py_ssize_t __pyx_t_3;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  PyObject *__pyx_t_7 = NULL;
+  PyObject *__pyx_t_8 = NULL;
+  PyObject *__pyx_t_9 = NULL;
+  size_t __pyx_t_10;
+  Py_ssize_t __pyx_t_11;
+  int __pyx_t_12;
+  int __pyx_t_13;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("get_pins_with_transform", 0);
+
+  /* "MagDatabase.pyx":264
+ *     def get_pins_with_transform(self, db, transform):
+ * 
+ *         import copy             # <<<<<<<<<<<<<<
+ * 
+ *         p = {}
+*/
+  __pyx_t_2 = __Pyx_Import(__pyx_mstate_global->__pyx_n_u_copy, 0, 0, NULL, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 264, __pyx_L1_error)
+  __pyx_t_1 = __pyx_t_2;
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_copy = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "MagDatabase.pyx":266
+ *         import copy
+ * 
+ *         p = {}             # <<<<<<<<<<<<<<
+ * 
+ *         for u in self.uses:
+*/
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 266, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_p = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "MagDatabase.pyx":268
+ *         p = {}
+ * 
+ *         for u in self.uses:             # <<<<<<<<<<<<<<
+ *             p[u['inst_name']] = db.cells[u['name']].get_pins_with_transform(db, u['transform'].Transform(transform))
+ * 
+*/
+  if (unlikely(__pyx_v_self->uses == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
+    __PYX_ERR(0, 268, __pyx_L1_error)
+  }
+  __pyx_t_1 = __pyx_v_self->uses; __Pyx_INCREF(__pyx_t_1);
+  __pyx_t_3 = 0;
+  for (;;) {
+    {
+      Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_1);
+      #if !CYTHON_ASSUME_SAFE_SIZE
+      if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 268, __pyx_L1_error)
+      #endif
+      if (__pyx_t_3 >= __pyx_temp) break;
+    }
+    __pyx_t_4 = __Pyx_PyList_GET_ITEM_REF(__pyx_t_1, __pyx_t_3, __Pyx_ReferenceSharing_OwnStrongReference);
+    ++__pyx_t_3;
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 268, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_XDECREF_SET(__pyx_v_u, __pyx_t_4);
+    __pyx_t_4 = 0;
+
+    /* "MagDatabase.pyx":269
+ * 
+ *         for u in self.uses:
+ *             p[u['inst_name']] = db.cells[u['name']].get_pins_with_transform(db, u['transform'].Transform(transform))             # <<<<<<<<<<<<<<
+ * 
+ *         lab = {}
+*/
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_db, __pyx_mstate_global->__pyx_n_u_cells); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 269, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_u, __pyx_mstate_global->__pyx_n_u_name); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 269, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_7);
+    __pyx_t_8 = __Pyx_PyObject_GetItem(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 269, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_8);
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    __pyx_t_5 = __pyx_t_8;
+    __Pyx_INCREF(__pyx_t_5);
+    __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_v_u, __pyx_mstate_global->__pyx_n_u_transform); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 269, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_9);
+    __pyx_t_6 = __pyx_t_9;
+    __Pyx_INCREF(__pyx_t_6);
+    __pyx_t_10 = 0;
+    {
+      PyObject *__pyx_callargs[2] = {__pyx_t_6, __pyx_v_transform};
+      __pyx_t_7 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_Transform, __pyx_callargs+__pyx_t_10, (2-__pyx_t_10) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+      __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+      __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+      if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 269, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_7);
+    }
+    __pyx_t_10 = 0;
+    {
+      PyObject *__pyx_callargs[3] = {__pyx_t_5, __pyx_v_db, __pyx_t_7};
+      __pyx_t_4 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_get_pins_with_transform, __pyx_callargs+__pyx_t_10, (3-__pyx_t_10) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+      __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+      __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+      __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 269, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_4);
+    }
+    __pyx_t_8 = __Pyx_PyObject_Dict_GetItem(__pyx_v_u, __pyx_mstate_global->__pyx_n_u_inst_name); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 269, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_8);
+    if (unlikely((PyDict_SetItem(__pyx_v_p, __pyx_t_8, __pyx_t_4) < 0))) __PYX_ERR(0, 269, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+    /* "MagDatabase.pyx":268
+ *         p = {}
+ * 
+ *         for u in self.uses:             # <<<<<<<<<<<<<<
+ *             p[u['inst_name']] = db.cells[u['name']].get_pins_with_transform(db, u['transform'].Transform(transform))
+ * 
+*/
+  }
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "MagDatabase.pyx":271
+ *             p[u['inst_name']] = db.cells[u['name']].get_pins_with_transform(db, u['transform'].Transform(transform))
+ * 
+ *         lab = {}             # <<<<<<<<<<<<<<
+ * 
+ *         for k, v in self.labels.items():
+*/
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 271, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_lab = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "MagDatabase.pyx":273
+ *         lab = {}
+ * 
+ *         for k, v in self.labels.items():             # <<<<<<<<<<<<<<
+ *             lab[k] = copy.deepcopy(v)
+ *             lab[k].transform(transform)
+*/
+  __pyx_t_3 = 0;
+  if (unlikely(__pyx_v_self->labels == Py_None)) {
+    PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "items");
+    __PYX_ERR(0, 273, __pyx_L1_error)
+  }
+  __pyx_t_4 = __Pyx_dict_iterator(__pyx_v_self->labels, 1, __pyx_mstate_global->__pyx_n_u_items, (&__pyx_t_11), (&__pyx_t_12)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 273, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_1);
+  __pyx_t_1 = __pyx_t_4;
+  __pyx_t_4 = 0;
+  while (1) {
+    __pyx_t_13 = __Pyx_dict_iter_next(__pyx_t_1, __pyx_t_11, &__pyx_t_3, &__pyx_t_4, &__pyx_t_8, NULL, __pyx_t_12);
+    if (unlikely(__pyx_t_13 == 0)) break;
+    if (unlikely(__pyx_t_13 == -1)) __PYX_ERR(0, 273, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_GOTREF(__pyx_t_8);
+    __Pyx_XDECREF_SET(__pyx_v_k, __pyx_t_4);
+    __pyx_t_4 = 0;
+    __Pyx_XDECREF_SET(__pyx_v_v, __pyx_t_8);
+    __pyx_t_8 = 0;
+
+    /* "MagDatabase.pyx":274
+ * 
+ *         for k, v in self.labels.items():
+ *             lab[k] = copy.deepcopy(v)             # <<<<<<<<<<<<<<
+ *             lab[k].transform(transform)
+ * 
+*/
+    __pyx_t_4 = __pyx_v_copy;
+    __Pyx_INCREF(__pyx_t_4);
+    __pyx_t_10 = 0;
+    {
+      PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_v_v};
+      __pyx_t_8 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_deepcopy, __pyx_callargs+__pyx_t_10, (2-__pyx_t_10) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+      __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+      if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 274, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_8);
+    }
+    if (unlikely((PyDict_SetItem(__pyx_v_lab, __pyx_v_k, __pyx_t_8) < 0))) __PYX_ERR(0, 274, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+
+    /* "MagDatabase.pyx":275
+ *         for k, v in self.labels.items():
+ *             lab[k] = copy.deepcopy(v)
+ *             lab[k].transform(transform)             # <<<<<<<<<<<<<<
+ * 
+ *         return {'self': lab, 'children': p}
+*/
+    __pyx_t_7 = __Pyx_PyDict_GetItem(__pyx_v_lab, __pyx_v_k); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 275, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_7);
+    __pyx_t_4 = __pyx_t_7;
+    __Pyx_INCREF(__pyx_t_4);
+    __pyx_t_10 = 0;
+    {
+      PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_v_transform};
+      __pyx_t_8 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_transform, __pyx_callargs+__pyx_t_10, (2-__pyx_t_10) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+      __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+      __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+      if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 275, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_8);
+    }
+    __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+  }
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "MagDatabase.pyx":277
+ *             lab[k].transform(transform)
+ * 
+ *         return {'self': lab, 'children': p}             # <<<<<<<<<<<<<<
+ * 
+ * 
+*/
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 277, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_self, __pyx_v_lab) < (0)) __PYX_ERR(0, 277, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_children, __pyx_v_p) < (0)) __PYX_ERR(0, 277, __pyx_L1_error)
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "MagDatabase.pyx":262
+ * 
+ * 
+ *     def get_pins_with_transform(self, db, transform):             # <<<<<<<<<<<<<<
+ * 
+ *         import copy
+*/
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_XDECREF(__pyx_t_7);
+  __Pyx_XDECREF(__pyx_t_8);
+  __Pyx_XDECREF(__pyx_t_9);
+  __Pyx_AddTraceback("MagDatabase.Cell.get_pins_with_transform", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_copy);
+  __Pyx_XDECREF(__pyx_v_p);
+  __Pyx_XDECREF(__pyx_v_u);
+  __Pyx_XDECREF(__pyx_v_lab);
+  __Pyx_XDECREF(__pyx_v_k);
+  __Pyx_XDECREF(__pyx_v_v);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "MagDatabase.pyx":282
+ * 
  * 
  *     def getPins(self, db):             # <<<<<<<<<<<<<<
  *         """
@@ -11657,16 +12400,16 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_18get_transistors(struct __pyx_obj
 */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11MagDatabase_4Cell_21getPins(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_11MagDatabase_4Cell_23getPins(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_11MagDatabase_4Cell_20getPins, "\n        Get pins hierarchy\n        ");
-static PyMethodDef __pyx_mdef_11MagDatabase_4Cell_21getPins = {"getPins", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_21getPins, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_11MagDatabase_4Cell_20getPins};
-static PyObject *__pyx_pw_11MagDatabase_4Cell_21getPins(PyObject *__pyx_v_self, 
+PyDoc_STRVAR(__pyx_doc_11MagDatabase_4Cell_22getPins, "\n        Get pins hierarchy\n        ");
+static PyMethodDef __pyx_mdef_11MagDatabase_4Cell_23getPins = {"getPins", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_23getPins, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_11MagDatabase_4Cell_22getPins};
+static PyObject *__pyx_pw_11MagDatabase_4Cell_23getPins(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -11696,32 +12439,32 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_db,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 253, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 282, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 253, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 282, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "getPins", 0) < (0)) __PYX_ERR(0, 253, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "getPins", 0) < (0)) __PYX_ERR(0, 282, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 1; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("getPins", 1, 1, 1, i); __PYX_ERR(0, 253, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("getPins", 1, 1, 1, i); __PYX_ERR(0, 282, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 253, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 282, __pyx_L3_error)
     }
     __pyx_v_db = values[0];
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("getPins", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 253, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("getPins", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 282, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -11732,7 +12475,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11MagDatabase_4Cell_20getPins(((struct __pyx_obj_11MagDatabase_Cell *)__pyx_v_self), __pyx_v_db);
+  __pyx_r = __pyx_pf_11MagDatabase_4Cell_22getPins(((struct __pyx_obj_11MagDatabase_Cell *)__pyx_v_self), __pyx_v_db);
 
   /* function exit code */
   for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
@@ -11742,124 +12485,45 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11MagDatabase_4Cell_20getPins(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_db) {
-  PyObject *__pyx_v_p = NULL;
-  PyObject *__pyx_v_u = NULL;
+static PyObject *__pyx_pf_11MagDatabase_4Cell_22getPins(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_db) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
-  Py_ssize_t __pyx_t_2;
+  PyObject *__pyx_t_2 = NULL;
   PyObject *__pyx_t_3 = NULL;
-  PyObject *__pyx_t_4 = NULL;
-  PyObject *__pyx_t_5 = NULL;
-  PyObject *__pyx_t_6 = NULL;
-  PyObject *__pyx_t_7 = NULL;
-  size_t __pyx_t_8;
+  size_t __pyx_t_4;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("getPins", 0);
 
-  /* "MagDatabase.pyx":258
+  /* "MagDatabase.pyx":286
+ *         Get pins hierarchy
  *         """
+ *         return self.get_pins_with_transform(db, Transform(1, 0, 0, 0, 1, 0))             # <<<<<<<<<<<<<<
  * 
- *         p = {}             # <<<<<<<<<<<<<<
  * 
- *         for u in self.uses:
-*/
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 258, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_v_p = ((PyObject*)__pyx_t_1);
-  __pyx_t_1 = 0;
-
-  /* "MagDatabase.pyx":260
- *         p = {}
- * 
- *         for u in self.uses:             # <<<<<<<<<<<<<<
- *             p[u['inst_name']] = db.cells[u['name']].getPins(db)
- * 
-*/
-  if (unlikely(__pyx_v_self->uses == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-    __PYX_ERR(0, 260, __pyx_L1_error)
-  }
-  __pyx_t_1 = __pyx_v_self->uses; __Pyx_INCREF(__pyx_t_1);
-  __pyx_t_2 = 0;
-  for (;;) {
-    {
-      Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_1);
-      #if !CYTHON_ASSUME_SAFE_SIZE
-      if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 260, __pyx_L1_error)
-      #endif
-      if (__pyx_t_2 >= __pyx_temp) break;
-    }
-    __pyx_t_3 = __Pyx_PyList_GET_ITEM_REF(__pyx_t_1, __pyx_t_2, __Pyx_ReferenceSharing_OwnStrongReference);
-    ++__pyx_t_2;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 260, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_XDECREF_SET(__pyx_v_u, __pyx_t_3);
-    __pyx_t_3 = 0;
-
-    /* "MagDatabase.pyx":261
- * 
- *         for u in self.uses:
- *             p[u['inst_name']] = db.cells[u['name']].getPins(db)             # <<<<<<<<<<<<<<
- * 
- *         return {'self': self.labels, 'children': p}
-*/
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_db, __pyx_mstate_global->__pyx_n_u_cells); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 261, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = __Pyx_PyObject_Dict_GetItem(__pyx_v_u, __pyx_mstate_global->__pyx_n_u_name); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 261, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_7 = __Pyx_PyObject_GetItem(__pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 261, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_7);
-    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_4 = __pyx_t_7;
-    __Pyx_INCREF(__pyx_t_4);
-    __pyx_t_8 = 0;
-    {
-      PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_v_db};
-      __pyx_t_3 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_getPins, __pyx_callargs+__pyx_t_8, (2-__pyx_t_8) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
-      __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 261, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-    }
-    __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_u, __pyx_mstate_global->__pyx_n_u_inst_name); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 261, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_7);
-    if (unlikely((PyDict_SetItem(__pyx_v_p, __pyx_t_7, __pyx_t_3) < 0))) __PYX_ERR(0, 261, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-
-    /* "MagDatabase.pyx":260
- *         p = {}
- * 
- *         for u in self.uses:             # <<<<<<<<<<<<<<
- *             p[u['inst_name']] = db.cells[u['name']].getPins(db)
- * 
-*/
-  }
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-  /* "MagDatabase.pyx":263
- *             p[u['inst_name']] = db.cells[u['name']].getPins(db)
- * 
- *         return {'self': self.labels, 'children': p}             # <<<<<<<<<<<<<<
- * 
- *     def find_transistors(self):
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 263, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_self, __pyx_v_self->labels) < (0)) __PYX_ERR(0, 263, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_children, __pyx_v_p) < (0)) __PYX_ERR(0, 263, __pyx_L1_error)
+  __pyx_t_2 = ((PyObject *)__pyx_v_self);
+  __Pyx_INCREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_mstate_global->__pyx_ptype_11MagDatabase_Transform), __pyx_mstate_global->__pyx_tuple[1], NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 286, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = 0;
+  {
+    PyObject *__pyx_callargs[3] = {__pyx_t_2, __pyx_v_db, __pyx_t_3};
+    __pyx_t_1 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_get_pins_with_transform, __pyx_callargs+__pyx_t_4, (3-__pyx_t_4) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 286, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+  }
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "MagDatabase.pyx":253
- *         return self.get_transistors_with_transform(db, Transform(1, 0, 0, 0, 1, 0))
+  /* "MagDatabase.pyx":282
+ * 
  * 
  *     def getPins(self, db):             # <<<<<<<<<<<<<<
  *         """
@@ -11869,23 +12533,18 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_20getPins(struct __pyx_obj_11MagDa
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_XDECREF(__pyx_t_5);
-  __Pyx_XDECREF(__pyx_t_6);
-  __Pyx_XDECREF(__pyx_t_7);
   __Pyx_AddTraceback("MagDatabase.Cell.getPins", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
-  __Pyx_XDECREF(__pyx_v_p);
-  __Pyx_XDECREF(__pyx_v_u);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":265
- *         return {'self': self.labels, 'children': p}
+/* "MagDatabase.pyx":289
+ * 
  * 
  *     def find_transistors(self):             # <<<<<<<<<<<<<<
  *         """
@@ -11893,16 +12552,16 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_20getPins(struct __pyx_obj_11MagDa
 */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11MagDatabase_4Cell_23find_transistors(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_11MagDatabase_4Cell_25find_transistors(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_11MagDatabase_4Cell_22find_transistors, "\n        Returns a list of Transistor objects for all transistors in the cell\n        ");
-static PyMethodDef __pyx_mdef_11MagDatabase_4Cell_23find_transistors = {"find_transistors", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_23find_transistors, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_11MagDatabase_4Cell_22find_transistors};
-static PyObject *__pyx_pw_11MagDatabase_4Cell_23find_transistors(PyObject *__pyx_v_self, 
+PyDoc_STRVAR(__pyx_doc_11MagDatabase_4Cell_24find_transistors, "\n        Returns a list of Transistor objects for all transistors in the cell\n        ");
+static PyMethodDef __pyx_mdef_11MagDatabase_4Cell_25find_transistors = {"find_transistors", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_25find_transistors, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_11MagDatabase_4Cell_24find_transistors};
+static PyObject *__pyx_pw_11MagDatabase_4Cell_25find_transistors(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -11928,14 +12587,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   const Py_ssize_t __pyx_kwds_len = unlikely(__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
   if (unlikely(__pyx_kwds_len < 0)) return NULL;
   if (unlikely(__pyx_kwds_len > 0)) {__Pyx_RejectKeywords("find_transistors", __pyx_kwds); return NULL;}
-  __pyx_r = __pyx_pf_11MagDatabase_4Cell_22find_transistors(((struct __pyx_obj_11MagDatabase_Cell *)__pyx_v_self));
+  __pyx_r = __pyx_pf_11MagDatabase_4Cell_24find_transistors(((struct __pyx_obj_11MagDatabase_Cell *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self) {
+static PyObject *__pyx_pf_11MagDatabase_4Cell_24find_transistors(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self) {
   PyObject *__pyx_v_l = NULL;
   PyObject *__pyx_v_r = NULL;
   PyObject *__pyx_v_poly_r = NULL;
@@ -11973,19 +12632,19 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("find_transistors", 0);
 
-  /* "MagDatabase.pyx":272
+  /* "MagDatabase.pyx":296
  *         # 1. First, find all nmos rects. This is the active region of an nmos transistor.
  * 
  *         l = []             # <<<<<<<<<<<<<<
  * 
  *         if 'nmos' in self.layers:
 */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 272, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 296, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_l = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":274
+  /* "MagDatabase.pyx":298
  *         l = []
  * 
  *         if 'nmos' in self.layers:             # <<<<<<<<<<<<<<
@@ -11994,12 +12653,12 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
   if (unlikely(__pyx_v_self->layers == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-    __PYX_ERR(0, 274, __pyx_L1_error)
+    __PYX_ERR(0, 298, __pyx_L1_error)
   }
-  __pyx_t_2 = (__Pyx_PyDict_ContainsTF(__pyx_mstate_global->__pyx_n_u_nmos, __pyx_v_self->layers, Py_EQ)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 274, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PyDict_ContainsTF(__pyx_mstate_global->__pyx_n_u_nmos, __pyx_v_self->layers, Py_EQ)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 298, __pyx_L1_error)
   if (__pyx_t_2) {
 
-    /* "MagDatabase.pyx":275
+    /* "MagDatabase.pyx":299
  * 
  *         if 'nmos' in self.layers:
  *             l += self.layers['nmos']             # <<<<<<<<<<<<<<
@@ -12008,17 +12667,17 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
     if (unlikely(__pyx_v_self->layers == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 275, __pyx_L1_error)
+      __PYX_ERR(0, 299, __pyx_L1_error)
     }
-    __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_mstate_global->__pyx_n_u_nmos); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 275, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_mstate_global->__pyx_n_u_nmos); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 299, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = PyNumber_InPlaceAdd(__pyx_v_l, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 275, __pyx_L1_error)
+    __pyx_t_3 = PyNumber_InPlaceAdd(__pyx_v_l, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 299, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF_SET(__pyx_v_l, __pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "MagDatabase.pyx":274
+    /* "MagDatabase.pyx":298
  *         l = []
  * 
  *         if 'nmos' in self.layers:             # <<<<<<<<<<<<<<
@@ -12027,7 +12686,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
   }
 
-  /* "MagDatabase.pyx":276
+  /* "MagDatabase.pyx":300
  *         if 'nmos' in self.layers:
  *             l += self.layers['nmos']
  *         if 'nmoslvt' in self.layers:             # <<<<<<<<<<<<<<
@@ -12036,12 +12695,12 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
   if (unlikely(__pyx_v_self->layers == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-    __PYX_ERR(0, 276, __pyx_L1_error)
+    __PYX_ERR(0, 300, __pyx_L1_error)
   }
-  __pyx_t_2 = (__Pyx_PyDict_ContainsTF(__pyx_mstate_global->__pyx_n_u_nmoslvt, __pyx_v_self->layers, Py_EQ)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 276, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PyDict_ContainsTF(__pyx_mstate_global->__pyx_n_u_nmoslvt, __pyx_v_self->layers, Py_EQ)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 300, __pyx_L1_error)
   if (__pyx_t_2) {
 
-    /* "MagDatabase.pyx":277
+    /* "MagDatabase.pyx":301
  *             l += self.layers['nmos']
  *         if 'nmoslvt' in self.layers:
  *             l += self.layers['nmoslvt']             # <<<<<<<<<<<<<<
@@ -12050,17 +12709,17 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
     if (unlikely(__pyx_v_self->layers == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 277, __pyx_L1_error)
+      __PYX_ERR(0, 301, __pyx_L1_error)
     }
-    __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_mstate_global->__pyx_n_u_nmoslvt); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 277, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_mstate_global->__pyx_n_u_nmoslvt); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 301, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_1 = PyNumber_InPlaceAdd(__pyx_v_l, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 277, __pyx_L1_error)
+    __pyx_t_1 = PyNumber_InPlaceAdd(__pyx_v_l, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 301, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF_SET(__pyx_v_l, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "MagDatabase.pyx":276
+    /* "MagDatabase.pyx":300
  *         if 'nmos' in self.layers:
  *             l += self.layers['nmos']
  *         if 'nmoslvt' in self.layers:             # <<<<<<<<<<<<<<
@@ -12069,22 +12728,22 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
   }
 
-  /* "MagDatabase.pyx":279
+  /* "MagDatabase.pyx":303
  *             l += self.layers['nmoslvt']
  * 
  *         if l != []:             # <<<<<<<<<<<<<<
  *             for r in l:
  * 
 */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 279, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 303, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyObject_RichCompare(__pyx_v_l, __pyx_t_1, Py_NE); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 279, __pyx_L1_error)
+  __pyx_t_3 = PyObject_RichCompare(__pyx_v_l, __pyx_t_1, Py_NE); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 303, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 279, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 303, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   if (__pyx_t_2) {
 
-    /* "MagDatabase.pyx":280
+    /* "MagDatabase.pyx":304
  * 
  *         if l != []:
  *             for r in l:             # <<<<<<<<<<<<<<
@@ -12096,9 +12755,9 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
       __pyx_t_4 = 0;
       __pyx_t_5 = NULL;
     } else {
-      __pyx_t_4 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_v_l); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 280, __pyx_L1_error)
+      __pyx_t_4 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_v_l); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 304, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_5 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 280, __pyx_L1_error)
+      __pyx_t_5 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 304, __pyx_L1_error)
     }
     for (;;) {
       if (likely(!__pyx_t_5)) {
@@ -12106,7 +12765,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
           {
             Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_3);
             #if !CYTHON_ASSUME_SAFE_SIZE
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 280, __pyx_L1_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 304, __pyx_L1_error)
             #endif
             if (__pyx_t_4 >= __pyx_temp) break;
           }
@@ -12116,7 +12775,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
           {
             Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_3);
             #if !CYTHON_ASSUME_SAFE_SIZE
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 280, __pyx_L1_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 304, __pyx_L1_error)
             #endif
             if (__pyx_t_4 >= __pyx_temp) break;
           }
@@ -12127,13 +12786,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
           #endif
           ++__pyx_t_4;
         }
-        if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 280, __pyx_L1_error)
+        if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 304, __pyx_L1_error)
       } else {
         __pyx_t_1 = __pyx_t_5(__pyx_t_3);
         if (unlikely(!__pyx_t_1)) {
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
-            if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 280, __pyx_L1_error)
+            if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 304, __pyx_L1_error)
             PyErr_Clear();
           }
           break;
@@ -12143,19 +12802,19 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
       __Pyx_XDECREF_SET(__pyx_v_r, __pyx_t_1);
       __pyx_t_1 = 0;
 
-      /* "MagDatabase.pyx":284
+      /* "MagDatabase.pyx":308
  *                 # Find all polysilicon rects which abut the nmos rects
  * 
  *                 poly_r = []             # <<<<<<<<<<<<<<
  * 
  *                 for rp in self.layers['poly']:
 */
-      __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 284, __pyx_L1_error)
+      __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 308, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_XDECREF_SET(__pyx_v_poly_r, ((PyObject*)__pyx_t_1));
       __pyx_t_1 = 0;
 
-      /* "MagDatabase.pyx":286
+      /* "MagDatabase.pyx":310
  *                 poly_r = []
  * 
  *                 for rp in self.layers['poly']:             # <<<<<<<<<<<<<<
@@ -12164,18 +12823,18 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
       if (unlikely(__pyx_v_self->layers == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        __PYX_ERR(0, 286, __pyx_L1_error)
+        __PYX_ERR(0, 310, __pyx_L1_error)
       }
-      __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_mstate_global->__pyx_n_u_poly); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 286, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_mstate_global->__pyx_n_u_poly); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 310, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
         __pyx_t_6 = __pyx_t_1; __Pyx_INCREF(__pyx_t_6);
         __pyx_t_7 = 0;
         __pyx_t_8 = NULL;
       } else {
-        __pyx_t_7 = -1; __pyx_t_6 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 286, __pyx_L1_error)
+        __pyx_t_7 = -1; __pyx_t_6 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 310, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_8 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_6); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 286, __pyx_L1_error)
+        __pyx_t_8 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_6); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 310, __pyx_L1_error)
       }
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       for (;;) {
@@ -12184,7 +12843,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             {
               Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_6);
               #if !CYTHON_ASSUME_SAFE_SIZE
-              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 286, __pyx_L1_error)
+              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 310, __pyx_L1_error)
               #endif
               if (__pyx_t_7 >= __pyx_temp) break;
             }
@@ -12194,7 +12853,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             {
               Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_6);
               #if !CYTHON_ASSUME_SAFE_SIZE
-              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 286, __pyx_L1_error)
+              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 310, __pyx_L1_error)
               #endif
               if (__pyx_t_7 >= __pyx_temp) break;
             }
@@ -12205,13 +12864,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             #endif
             ++__pyx_t_7;
           }
-          if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 286, __pyx_L1_error)
+          if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 310, __pyx_L1_error)
         } else {
           __pyx_t_1 = __pyx_t_8(__pyx_t_6);
           if (unlikely(!__pyx_t_1)) {
             PyObject* exc_type = PyErr_Occurred();
             if (exc_type) {
-              if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 286, __pyx_L1_error)
+              if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 310, __pyx_L1_error)
               PyErr_Clear();
             }
             break;
@@ -12221,7 +12880,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
         __Pyx_XDECREF_SET(__pyx_v_rp, __pyx_t_1);
         __pyx_t_1 = 0;
 
-        /* "MagDatabase.pyx":287
+        /* "MagDatabase.pyx":311
  * 
  *                 for rp in self.layers['poly']:
  *                     if rp.abuts(r):             # <<<<<<<<<<<<<<
@@ -12235,23 +12894,23 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
           PyObject *__pyx_callargs[2] = {__pyx_t_9, __pyx_v_r};
           __pyx_t_1 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_abuts, __pyx_callargs+__pyx_t_10, (2-__pyx_t_10) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
           __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
-          if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 287, __pyx_L1_error)
+          if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 311, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_1);
         }
-        __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 287, __pyx_L1_error)
+        __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 311, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         if (__pyx_t_2) {
 
-          /* "MagDatabase.pyx":288
+          /* "MagDatabase.pyx":312
  *                 for rp in self.layers['poly']:
  *                     if rp.abuts(r):
  *                         poly_r.append(rp)             # <<<<<<<<<<<<<<
  * 
  * 
 */
-          __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_poly_r, __pyx_v_rp); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 288, __pyx_L1_error)
+          __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_poly_r, __pyx_v_rp); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 312, __pyx_L1_error)
 
-          /* "MagDatabase.pyx":287
+          /* "MagDatabase.pyx":311
  * 
  *                 for rp in self.layers['poly']:
  *                     if rp.abuts(r):             # <<<<<<<<<<<<<<
@@ -12260,7 +12919,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
         }
 
-        /* "MagDatabase.pyx":286
+        /* "MagDatabase.pyx":310
  *                 poly_r = []
  * 
  *                 for rp in self.layers['poly']:             # <<<<<<<<<<<<<<
@@ -12270,7 +12929,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
       }
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-      /* "MagDatabase.pyx":293
+      /* "MagDatabase.pyx":317
  * 
  * 
  *                 for rp in self.layers['poly']:             # <<<<<<<<<<<<<<
@@ -12279,18 +12938,18 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
       if (unlikely(__pyx_v_self->layers == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        __PYX_ERR(0, 293, __pyx_L1_error)
+        __PYX_ERR(0, 317, __pyx_L1_error)
       }
-      __pyx_t_6 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_mstate_global->__pyx_n_u_poly); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 293, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_mstate_global->__pyx_n_u_poly); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 317, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       if (likely(PyList_CheckExact(__pyx_t_6)) || PyTuple_CheckExact(__pyx_t_6)) {
         __pyx_t_1 = __pyx_t_6; __Pyx_INCREF(__pyx_t_1);
         __pyx_t_7 = 0;
         __pyx_t_8 = NULL;
       } else {
-        __pyx_t_7 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 293, __pyx_L1_error)
+        __pyx_t_7 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 317, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_8 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 293, __pyx_L1_error)
+        __pyx_t_8 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 317, __pyx_L1_error)
       }
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       for (;;) {
@@ -12299,7 +12958,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             {
               Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_1);
               #if !CYTHON_ASSUME_SAFE_SIZE
-              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 293, __pyx_L1_error)
+              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 317, __pyx_L1_error)
               #endif
               if (__pyx_t_7 >= __pyx_temp) break;
             }
@@ -12309,7 +12968,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             {
               Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_1);
               #if !CYTHON_ASSUME_SAFE_SIZE
-              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 293, __pyx_L1_error)
+              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 317, __pyx_L1_error)
               #endif
               if (__pyx_t_7 >= __pyx_temp) break;
             }
@@ -12320,13 +12979,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             #endif
             ++__pyx_t_7;
           }
-          if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 293, __pyx_L1_error)
+          if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 317, __pyx_L1_error)
         } else {
           __pyx_t_6 = __pyx_t_8(__pyx_t_1);
           if (unlikely(!__pyx_t_6)) {
             PyObject* exc_type = PyErr_Occurred();
             if (exc_type) {
-              if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 293, __pyx_L1_error)
+              if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 317, __pyx_L1_error)
               PyErr_Clear();
             }
             break;
@@ -12336,26 +12995,26 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
         __Pyx_XDECREF_SET(__pyx_v_rp, __pyx_t_6);
         __pyx_t_6 = 0;
 
-        /* "MagDatabase.pyx":294
+        /* "MagDatabase.pyx":318
  * 
  *                 for rp in self.layers['poly']:
  *                     for i in range(0, len(poly_r)):             # <<<<<<<<<<<<<<
  *                         if poly_r[i].abuts(rp):
  *                             poly_r.append(rp)
 */
-        __pyx_t_12 = __Pyx_PyList_GET_SIZE(__pyx_v_poly_r); if (unlikely(__pyx_t_12 == ((Py_ssize_t)-1))) __PYX_ERR(0, 294, __pyx_L1_error)
+        __pyx_t_12 = __Pyx_PyList_GET_SIZE(__pyx_v_poly_r); if (unlikely(__pyx_t_12 == ((Py_ssize_t)-1))) __PYX_ERR(0, 318, __pyx_L1_error)
         __pyx_t_13 = __pyx_t_12;
         for (__pyx_t_14 = 0; __pyx_t_14 < __pyx_t_13; __pyx_t_14+=1) {
           __pyx_v_i = __pyx_t_14;
 
-          /* "MagDatabase.pyx":295
+          /* "MagDatabase.pyx":319
  *                 for rp in self.layers['poly']:
  *                     for i in range(0, len(poly_r)):
  *                         if poly_r[i].abuts(rp):             # <<<<<<<<<<<<<<
  *                             poly_r.append(rp)
  * 
 */
-          __pyx_t_15 = __Pyx_GetItemInt_List(__pyx_v_poly_r, __pyx_v_i, Py_ssize_t, 1, PyLong_FromSsize_t, 1, 1, 1, 1, __Pyx_ReferenceSharing_OwnStrongReference); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 295, __pyx_L1_error)
+          __pyx_t_15 = __Pyx_GetItemInt_List(__pyx_v_poly_r, __pyx_v_i, Py_ssize_t, 1, PyLong_FromSsize_t, 1, 1, 1, 1, __Pyx_ReferenceSharing_OwnStrongReference); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 319, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_15);
           __pyx_t_9 = __pyx_t_15;
           __Pyx_INCREF(__pyx_t_9);
@@ -12365,23 +13024,23 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             __pyx_t_6 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_abuts, __pyx_callargs+__pyx_t_10, (2-__pyx_t_10) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
             __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
             __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-            if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 295, __pyx_L1_error)
+            if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 319, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_6);
           }
-          __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 295, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 319, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           if (__pyx_t_2) {
 
-            /* "MagDatabase.pyx":296
+            /* "MagDatabase.pyx":320
  *                     for i in range(0, len(poly_r)):
  *                         if poly_r[i].abuts(rp):
  *                             poly_r.append(rp)             # <<<<<<<<<<<<<<
  * 
  * 
 */
-            __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_poly_r, __pyx_v_rp); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 296, __pyx_L1_error)
+            __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_poly_r, __pyx_v_rp); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 320, __pyx_L1_error)
 
-            /* "MagDatabase.pyx":295
+            /* "MagDatabase.pyx":319
  *                 for rp in self.layers['poly']:
  *                     for i in range(0, len(poly_r)):
  *                         if poly_r[i].abuts(rp):             # <<<<<<<<<<<<<<
@@ -12391,7 +13050,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
           }
         }
 
-        /* "MagDatabase.pyx":293
+        /* "MagDatabase.pyx":317
  * 
  * 
  *                 for rp in self.layers['poly']:             # <<<<<<<<<<<<<<
@@ -12401,19 +13060,19 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
       }
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "MagDatabase.pyx":301
+      /* "MagDatabase.pyx":325
  *                 # Find all polycont rects which overlap poly_r
  * 
  *                 poly_c = []             # <<<<<<<<<<<<<<
  * 
  *                 for pc in self.layers['polycont']:
 */
-      __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 301, __pyx_L1_error)
+      __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 325, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_XDECREF_SET(__pyx_v_poly_c, ((PyObject*)__pyx_t_1));
       __pyx_t_1 = 0;
 
-      /* "MagDatabase.pyx":303
+      /* "MagDatabase.pyx":327
  *                 poly_c = []
  * 
  *                 for pc in self.layers['polycont']:             # <<<<<<<<<<<<<<
@@ -12422,18 +13081,18 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
       if (unlikely(__pyx_v_self->layers == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        __PYX_ERR(0, 303, __pyx_L1_error)
+        __PYX_ERR(0, 327, __pyx_L1_error)
       }
-      __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_mstate_global->__pyx_n_u_polycont); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 303, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_mstate_global->__pyx_n_u_polycont); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 327, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
         __pyx_t_6 = __pyx_t_1; __Pyx_INCREF(__pyx_t_6);
         __pyx_t_7 = 0;
         __pyx_t_8 = NULL;
       } else {
-        __pyx_t_7 = -1; __pyx_t_6 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 303, __pyx_L1_error)
+        __pyx_t_7 = -1; __pyx_t_6 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 327, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_8 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_6); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 303, __pyx_L1_error)
+        __pyx_t_8 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_6); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 327, __pyx_L1_error)
       }
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       for (;;) {
@@ -12442,7 +13101,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             {
               Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_6);
               #if !CYTHON_ASSUME_SAFE_SIZE
-              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 303, __pyx_L1_error)
+              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 327, __pyx_L1_error)
               #endif
               if (__pyx_t_7 >= __pyx_temp) break;
             }
@@ -12452,7 +13111,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             {
               Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_6);
               #if !CYTHON_ASSUME_SAFE_SIZE
-              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 303, __pyx_L1_error)
+              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 327, __pyx_L1_error)
               #endif
               if (__pyx_t_7 >= __pyx_temp) break;
             }
@@ -12463,13 +13122,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             #endif
             ++__pyx_t_7;
           }
-          if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 303, __pyx_L1_error)
+          if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 327, __pyx_L1_error)
         } else {
           __pyx_t_1 = __pyx_t_8(__pyx_t_6);
           if (unlikely(!__pyx_t_1)) {
             PyObject* exc_type = PyErr_Occurred();
             if (exc_type) {
-              if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 303, __pyx_L1_error)
+              if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 327, __pyx_L1_error)
               PyErr_Clear();
             }
             break;
@@ -12479,7 +13138,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
         __Pyx_XDECREF_SET(__pyx_v_pc, __pyx_t_1);
         __pyx_t_1 = 0;
 
-        /* "MagDatabase.pyx":304
+        /* "MagDatabase.pyx":328
  * 
  *                 for pc in self.layers['polycont']:
  *                     for pr in poly_r:             # <<<<<<<<<<<<<<
@@ -12492,18 +13151,18 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
           {
             Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_1);
             #if !CYTHON_ASSUME_SAFE_SIZE
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 304, __pyx_L1_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 328, __pyx_L1_error)
             #endif
             if (__pyx_t_12 >= __pyx_temp) break;
           }
           __pyx_t_15 = __Pyx_PyList_GET_ITEM_REF(__pyx_t_1, __pyx_t_12, __Pyx_ReferenceSharing_OwnStrongReference);
           ++__pyx_t_12;
-          if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 304, __pyx_L1_error)
+          if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 328, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_15);
           __Pyx_XDECREF_SET(__pyx_v_pr, __pyx_t_15);
           __pyx_t_15 = 0;
 
-          /* "MagDatabase.pyx":305
+          /* "MagDatabase.pyx":329
  *                 for pc in self.layers['polycont']:
  *                     for pr in poly_r:
  *                         if pc.overlaps(pr):             # <<<<<<<<<<<<<<
@@ -12517,23 +13176,23 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             PyObject *__pyx_callargs[2] = {__pyx_t_9, __pyx_v_pr};
             __pyx_t_15 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_overlaps, __pyx_callargs+__pyx_t_10, (2-__pyx_t_10) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
             __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
-            if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 305, __pyx_L1_error)
+            if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 329, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_15);
           }
-          __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_15); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 305, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_15); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 329, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
           if (__pyx_t_2) {
 
-            /* "MagDatabase.pyx":306
+            /* "MagDatabase.pyx":330
  *                     for pr in poly_r:
  *                         if pc.overlaps(pr):
  *                             poly_c.append(pc)             # <<<<<<<<<<<<<<
  *                             break
  * 
 */
-            __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_poly_c, __pyx_v_pc); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 306, __pyx_L1_error)
+            __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_poly_c, __pyx_v_pc); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 330, __pyx_L1_error)
 
-            /* "MagDatabase.pyx":307
+            /* "MagDatabase.pyx":331
  *                         if pc.overlaps(pr):
  *                             poly_c.append(pc)
  *                             break             # <<<<<<<<<<<<<<
@@ -12542,7 +13201,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
             goto __pyx_L21_break;
 
-            /* "MagDatabase.pyx":305
+            /* "MagDatabase.pyx":329
  *                 for pc in self.layers['polycont']:
  *                     for pr in poly_r:
  *                         if pc.overlaps(pr):             # <<<<<<<<<<<<<<
@@ -12551,7 +13210,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
           }
 
-          /* "MagDatabase.pyx":304
+          /* "MagDatabase.pyx":328
  * 
  *                 for pc in self.layers['polycont']:
  *                     for pr in poly_r:             # <<<<<<<<<<<<<<
@@ -12566,7 +13225,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
         goto __pyx_L23_for_end;
         __pyx_L23_for_end:;
 
-        /* "MagDatabase.pyx":303
+        /* "MagDatabase.pyx":327
  *                 poly_c = []
  * 
  *                 for pc in self.layers['polycont']:             # <<<<<<<<<<<<<<
@@ -12576,19 +13235,19 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
       }
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-      /* "MagDatabase.pyx":311
+      /* "MagDatabase.pyx":335
  *                 # Find source and drain contacts
  * 
  *                 ndiff_r = []             # <<<<<<<<<<<<<<
  * 
  *                 for rp in self.layers['ndiff']:
 */
-      __pyx_t_6 = PyList_New(0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 311, __pyx_L1_error)
+      __pyx_t_6 = PyList_New(0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 335, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_XDECREF_SET(__pyx_v_ndiff_r, ((PyObject*)__pyx_t_6));
       __pyx_t_6 = 0;
 
-      /* "MagDatabase.pyx":313
+      /* "MagDatabase.pyx":337
  *                 ndiff_r = []
  * 
  *                 for rp in self.layers['ndiff']:             # <<<<<<<<<<<<<<
@@ -12597,18 +13256,18 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
       if (unlikely(__pyx_v_self->layers == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        __PYX_ERR(0, 313, __pyx_L1_error)
+        __PYX_ERR(0, 337, __pyx_L1_error)
       }
-      __pyx_t_6 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_mstate_global->__pyx_n_u_ndiff); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 313, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_mstate_global->__pyx_n_u_ndiff); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 337, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       if (likely(PyList_CheckExact(__pyx_t_6)) || PyTuple_CheckExact(__pyx_t_6)) {
         __pyx_t_1 = __pyx_t_6; __Pyx_INCREF(__pyx_t_1);
         __pyx_t_7 = 0;
         __pyx_t_8 = NULL;
       } else {
-        __pyx_t_7 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 313, __pyx_L1_error)
+        __pyx_t_7 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 337, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_8 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 313, __pyx_L1_error)
+        __pyx_t_8 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 337, __pyx_L1_error)
       }
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       for (;;) {
@@ -12617,7 +13276,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             {
               Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_1);
               #if !CYTHON_ASSUME_SAFE_SIZE
-              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 313, __pyx_L1_error)
+              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 337, __pyx_L1_error)
               #endif
               if (__pyx_t_7 >= __pyx_temp) break;
             }
@@ -12627,7 +13286,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             {
               Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_1);
               #if !CYTHON_ASSUME_SAFE_SIZE
-              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 313, __pyx_L1_error)
+              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 337, __pyx_L1_error)
               #endif
               if (__pyx_t_7 >= __pyx_temp) break;
             }
@@ -12638,13 +13297,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             #endif
             ++__pyx_t_7;
           }
-          if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 313, __pyx_L1_error)
+          if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 337, __pyx_L1_error)
         } else {
           __pyx_t_6 = __pyx_t_8(__pyx_t_1);
           if (unlikely(!__pyx_t_6)) {
             PyObject* exc_type = PyErr_Occurred();
             if (exc_type) {
-              if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 313, __pyx_L1_error)
+              if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 337, __pyx_L1_error)
               PyErr_Clear();
             }
             break;
@@ -12654,7 +13313,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
         __Pyx_XDECREF_SET(__pyx_v_rp, __pyx_t_6);
         __pyx_t_6 = 0;
 
-        /* "MagDatabase.pyx":314
+        /* "MagDatabase.pyx":338
  * 
  *                 for rp in self.layers['ndiff']:
  *                     if rp.abuts(r):             # <<<<<<<<<<<<<<
@@ -12668,23 +13327,23 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
           PyObject *__pyx_callargs[2] = {__pyx_t_15, __pyx_v_r};
           __pyx_t_6 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_abuts, __pyx_callargs+__pyx_t_10, (2-__pyx_t_10) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
           __Pyx_XDECREF(__pyx_t_15); __pyx_t_15 = 0;
-          if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 314, __pyx_L1_error)
+          if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 338, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_6);
         }
-        __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 314, __pyx_L1_error)
+        __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 338, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         if (__pyx_t_2) {
 
-          /* "MagDatabase.pyx":315
+          /* "MagDatabase.pyx":339
  *                 for rp in self.layers['ndiff']:
  *                     if rp.abuts(r):
  *                         ndiff_r.append(rp)             # <<<<<<<<<<<<<<
  * 
  * 
 */
-          __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_ndiff_r, __pyx_v_rp); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 315, __pyx_L1_error)
+          __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_ndiff_r, __pyx_v_rp); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 339, __pyx_L1_error)
 
-          /* "MagDatabase.pyx":314
+          /* "MagDatabase.pyx":338
  * 
  *                 for rp in self.layers['ndiff']:
  *                     if rp.abuts(r):             # <<<<<<<<<<<<<<
@@ -12693,7 +13352,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
         }
 
-        /* "MagDatabase.pyx":313
+        /* "MagDatabase.pyx":337
  *                 ndiff_r = []
  * 
  *                 for rp in self.layers['ndiff']:             # <<<<<<<<<<<<<<
@@ -12703,7 +13362,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
       }
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "MagDatabase.pyx":318
+      /* "MagDatabase.pyx":342
  * 
  * 
  *                 for rp in self.layers['ndiff']:             # <<<<<<<<<<<<<<
@@ -12712,18 +13371,18 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
       if (unlikely(__pyx_v_self->layers == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        __PYX_ERR(0, 318, __pyx_L1_error)
+        __PYX_ERR(0, 342, __pyx_L1_error)
       }
-      __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_mstate_global->__pyx_n_u_ndiff); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 318, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_mstate_global->__pyx_n_u_ndiff); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 342, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
         __pyx_t_6 = __pyx_t_1; __Pyx_INCREF(__pyx_t_6);
         __pyx_t_7 = 0;
         __pyx_t_8 = NULL;
       } else {
-        __pyx_t_7 = -1; __pyx_t_6 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 318, __pyx_L1_error)
+        __pyx_t_7 = -1; __pyx_t_6 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 342, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_8 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_6); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 318, __pyx_L1_error)
+        __pyx_t_8 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_6); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 342, __pyx_L1_error)
       }
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       for (;;) {
@@ -12732,7 +13391,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             {
               Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_6);
               #if !CYTHON_ASSUME_SAFE_SIZE
-              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 318, __pyx_L1_error)
+              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 342, __pyx_L1_error)
               #endif
               if (__pyx_t_7 >= __pyx_temp) break;
             }
@@ -12742,7 +13401,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             {
               Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_6);
               #if !CYTHON_ASSUME_SAFE_SIZE
-              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 318, __pyx_L1_error)
+              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 342, __pyx_L1_error)
               #endif
               if (__pyx_t_7 >= __pyx_temp) break;
             }
@@ -12753,13 +13412,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             #endif
             ++__pyx_t_7;
           }
-          if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 318, __pyx_L1_error)
+          if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 342, __pyx_L1_error)
         } else {
           __pyx_t_1 = __pyx_t_8(__pyx_t_6);
           if (unlikely(!__pyx_t_1)) {
             PyObject* exc_type = PyErr_Occurred();
             if (exc_type) {
-              if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 318, __pyx_L1_error)
+              if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 342, __pyx_L1_error)
               PyErr_Clear();
             }
             break;
@@ -12769,26 +13428,26 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
         __Pyx_XDECREF_SET(__pyx_v_rp, __pyx_t_1);
         __pyx_t_1 = 0;
 
-        /* "MagDatabase.pyx":319
+        /* "MagDatabase.pyx":343
  * 
  *                 for rp in self.layers['ndiff']:
  *                     for i in range(0, len(ndiff_r)):             # <<<<<<<<<<<<<<
  *                         if ndiff_r[i].abuts(rp):
  *                             ndiff_r.append(rp)
 */
-        __pyx_t_12 = __Pyx_PyList_GET_SIZE(__pyx_v_ndiff_r); if (unlikely(__pyx_t_12 == ((Py_ssize_t)-1))) __PYX_ERR(0, 319, __pyx_L1_error)
+        __pyx_t_12 = __Pyx_PyList_GET_SIZE(__pyx_v_ndiff_r); if (unlikely(__pyx_t_12 == ((Py_ssize_t)-1))) __PYX_ERR(0, 343, __pyx_L1_error)
         __pyx_t_13 = __pyx_t_12;
         for (__pyx_t_14 = 0; __pyx_t_14 < __pyx_t_13; __pyx_t_14+=1) {
           __pyx_v_i = __pyx_t_14;
 
-          /* "MagDatabase.pyx":320
+          /* "MagDatabase.pyx":344
  *                 for rp in self.layers['ndiff']:
  *                     for i in range(0, len(ndiff_r)):
  *                         if ndiff_r[i].abuts(rp):             # <<<<<<<<<<<<<<
  *                             ndiff_r.append(rp)
  * 
 */
-          __pyx_t_9 = __Pyx_GetItemInt_List(__pyx_v_ndiff_r, __pyx_v_i, Py_ssize_t, 1, PyLong_FromSsize_t, 1, 1, 1, 1, __Pyx_ReferenceSharing_OwnStrongReference); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 320, __pyx_L1_error)
+          __pyx_t_9 = __Pyx_GetItemInt_List(__pyx_v_ndiff_r, __pyx_v_i, Py_ssize_t, 1, PyLong_FromSsize_t, 1, 1, 1, 1, __Pyx_ReferenceSharing_OwnStrongReference); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 344, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_9);
           __pyx_t_15 = __pyx_t_9;
           __Pyx_INCREF(__pyx_t_15);
@@ -12798,23 +13457,23 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             __pyx_t_1 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_abuts, __pyx_callargs+__pyx_t_10, (2-__pyx_t_10) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
             __Pyx_XDECREF(__pyx_t_15); __pyx_t_15 = 0;
             __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-            if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 320, __pyx_L1_error)
+            if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 344, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_1);
           }
-          __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 320, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 344, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           if (__pyx_t_2) {
 
-            /* "MagDatabase.pyx":321
+            /* "MagDatabase.pyx":345
  *                     for i in range(0, len(ndiff_r)):
  *                         if ndiff_r[i].abuts(rp):
  *                             ndiff_r.append(rp)             # <<<<<<<<<<<<<<
  * 
  *                 # Find all ndiffc rects which overlap ndiff_r
 */
-            __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_ndiff_r, __pyx_v_rp); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 321, __pyx_L1_error)
+            __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_ndiff_r, __pyx_v_rp); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 345, __pyx_L1_error)
 
-            /* "MagDatabase.pyx":320
+            /* "MagDatabase.pyx":344
  *                 for rp in self.layers['ndiff']:
  *                     for i in range(0, len(ndiff_r)):
  *                         if ndiff_r[i].abuts(rp):             # <<<<<<<<<<<<<<
@@ -12824,7 +13483,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
           }
         }
 
-        /* "MagDatabase.pyx":318
+        /* "MagDatabase.pyx":342
  * 
  * 
  *                 for rp in self.layers['ndiff']:             # <<<<<<<<<<<<<<
@@ -12834,19 +13493,19 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
       }
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-      /* "MagDatabase.pyx":325
+      /* "MagDatabase.pyx":349
  *                 # Find all ndiffc rects which overlap ndiff_r
  * 
  *                 ndiff_c = []             # <<<<<<<<<<<<<<
  * 
  *                 for nc in self.layers['ndiffc']:
 */
-      __pyx_t_6 = PyList_New(0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 325, __pyx_L1_error)
+      __pyx_t_6 = PyList_New(0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 349, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_XDECREF_SET(__pyx_v_ndiff_c, ((PyObject*)__pyx_t_6));
       __pyx_t_6 = 0;
 
-      /* "MagDatabase.pyx":327
+      /* "MagDatabase.pyx":351
  *                 ndiff_c = []
  * 
  *                 for nc in self.layers['ndiffc']:             # <<<<<<<<<<<<<<
@@ -12855,18 +13514,18 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
       if (unlikely(__pyx_v_self->layers == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        __PYX_ERR(0, 327, __pyx_L1_error)
+        __PYX_ERR(0, 351, __pyx_L1_error)
       }
-      __pyx_t_6 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_mstate_global->__pyx_n_u_ndiffc); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 327, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_mstate_global->__pyx_n_u_ndiffc); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 351, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       if (likely(PyList_CheckExact(__pyx_t_6)) || PyTuple_CheckExact(__pyx_t_6)) {
         __pyx_t_1 = __pyx_t_6; __Pyx_INCREF(__pyx_t_1);
         __pyx_t_7 = 0;
         __pyx_t_8 = NULL;
       } else {
-        __pyx_t_7 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 327, __pyx_L1_error)
+        __pyx_t_7 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 351, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_8 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 327, __pyx_L1_error)
+        __pyx_t_8 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 351, __pyx_L1_error)
       }
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       for (;;) {
@@ -12875,7 +13534,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             {
               Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_1);
               #if !CYTHON_ASSUME_SAFE_SIZE
-              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 327, __pyx_L1_error)
+              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 351, __pyx_L1_error)
               #endif
               if (__pyx_t_7 >= __pyx_temp) break;
             }
@@ -12885,7 +13544,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             {
               Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_1);
               #if !CYTHON_ASSUME_SAFE_SIZE
-              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 327, __pyx_L1_error)
+              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 351, __pyx_L1_error)
               #endif
               if (__pyx_t_7 >= __pyx_temp) break;
             }
@@ -12896,13 +13555,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             #endif
             ++__pyx_t_7;
           }
-          if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 327, __pyx_L1_error)
+          if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 351, __pyx_L1_error)
         } else {
           __pyx_t_6 = __pyx_t_8(__pyx_t_1);
           if (unlikely(!__pyx_t_6)) {
             PyObject* exc_type = PyErr_Occurred();
             if (exc_type) {
-              if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 327, __pyx_L1_error)
+              if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 351, __pyx_L1_error)
               PyErr_Clear();
             }
             break;
@@ -12912,7 +13571,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
         __Pyx_XDECREF_SET(__pyx_v_nc, __pyx_t_6);
         __pyx_t_6 = 0;
 
-        /* "MagDatabase.pyx":328
+        /* "MagDatabase.pyx":352
  * 
  *                 for nc in self.layers['ndiffc']:
  *                     for nr in ndiff_r:             # <<<<<<<<<<<<<<
@@ -12925,18 +13584,18 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
           {
             Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_6);
             #if !CYTHON_ASSUME_SAFE_SIZE
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 328, __pyx_L1_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 352, __pyx_L1_error)
             #endif
             if (__pyx_t_12 >= __pyx_temp) break;
           }
           __pyx_t_9 = __Pyx_PyList_GET_ITEM_REF(__pyx_t_6, __pyx_t_12, __Pyx_ReferenceSharing_OwnStrongReference);
           ++__pyx_t_12;
-          if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 328, __pyx_L1_error)
+          if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 352, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_9);
           __Pyx_XDECREF_SET(__pyx_v_nr, __pyx_t_9);
           __pyx_t_9 = 0;
 
-          /* "MagDatabase.pyx":329
+          /* "MagDatabase.pyx":353
  *                 for nc in self.layers['ndiffc']:
  *                     for nr in ndiff_r:
  *                         if nc.overlaps(nr):             # <<<<<<<<<<<<<<
@@ -12950,23 +13609,23 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             PyObject *__pyx_callargs[2] = {__pyx_t_15, __pyx_v_nr};
             __pyx_t_9 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_overlaps, __pyx_callargs+__pyx_t_10, (2-__pyx_t_10) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
             __Pyx_XDECREF(__pyx_t_15); __pyx_t_15 = 0;
-            if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 329, __pyx_L1_error)
+            if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 353, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_9);
           }
-          __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_9); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 329, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_9); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 353, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
           if (__pyx_t_2) {
 
-            /* "MagDatabase.pyx":330
+            /* "MagDatabase.pyx":354
  *                     for nr in ndiff_r:
  *                         if nc.overlaps(nr):
  *                             ndiff_c.append(nc)             # <<<<<<<<<<<<<<
  *                             break
  * 
 */
-            __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_ndiff_c, __pyx_v_nc); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 330, __pyx_L1_error)
+            __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_ndiff_c, __pyx_v_nc); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 354, __pyx_L1_error)
 
-            /* "MagDatabase.pyx":331
+            /* "MagDatabase.pyx":355
  *                         if nc.overlaps(nr):
  *                             ndiff_c.append(nc)
  *                             break             # <<<<<<<<<<<<<<
@@ -12975,7 +13634,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
             goto __pyx_L38_break;
 
-            /* "MagDatabase.pyx":329
+            /* "MagDatabase.pyx":353
  *                 for nc in self.layers['ndiffc']:
  *                     for nr in ndiff_r:
  *                         if nc.overlaps(nr):             # <<<<<<<<<<<<<<
@@ -12984,7 +13643,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
           }
 
-          /* "MagDatabase.pyx":328
+          /* "MagDatabase.pyx":352
  * 
  *                 for nc in self.layers['ndiffc']:
  *                     for nr in ndiff_r:             # <<<<<<<<<<<<<<
@@ -12999,7 +13658,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
         goto __pyx_L40_for_end;
         __pyx_L40_for_end:;
 
-        /* "MagDatabase.pyx":327
+        /* "MagDatabase.pyx":351
  *                 ndiff_c = []
  * 
  *                 for nc in self.layers['ndiffc']:             # <<<<<<<<<<<<<<
@@ -13009,7 +13668,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
       }
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "MagDatabase.pyx":333
+      /* "MagDatabase.pyx":357
  *                             break
  * 
  *                 t = Transistor()             # <<<<<<<<<<<<<<
@@ -13022,13 +13681,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
         PyObject *__pyx_callargs[2] = {__pyx_t_6, NULL};
         __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_mstate_global->__pyx_ptype_11MagDatabase_Transistor, __pyx_callargs+__pyx_t_10, (1-__pyx_t_10) | (__pyx_t_10*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
         __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-        if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 333, __pyx_L1_error)
+        if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 357, __pyx_L1_error)
         __Pyx_GOTREF((PyObject *)__pyx_t_1);
       }
       __Pyx_XDECREF_SET(__pyx_v_t, ((struct __pyx_obj_11MagDatabase_Transistor *)__pyx_t_1));
       __pyx_t_1 = 0;
 
-      /* "MagDatabase.pyx":335
+      /* "MagDatabase.pyx":359
  *                 t = Transistor()
  * 
  *                 t.ttype = "nmos"             # <<<<<<<<<<<<<<
@@ -13041,7 +13700,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
       __Pyx_DECREF(__pyx_v_t->ttype);
       __pyx_v_t->ttype = __pyx_mstate_global->__pyx_n_u_nmos;
 
-      /* "MagDatabase.pyx":337
+      /* "MagDatabase.pyx":361
  *                 t.ttype = "nmos"
  * 
  *                 for r in poly_c:             # <<<<<<<<<<<<<<
@@ -13054,18 +13713,18 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
         {
           Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_1);
           #if !CYTHON_ASSUME_SAFE_SIZE
-          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 337, __pyx_L1_error)
+          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 361, __pyx_L1_error)
           #endif
           if (__pyx_t_7 >= __pyx_temp) break;
         }
         __pyx_t_6 = __Pyx_PyList_GET_ITEM_REF(__pyx_t_1, __pyx_t_7, __Pyx_ReferenceSharing_OwnStrongReference);
         ++__pyx_t_7;
-        if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 337, __pyx_L1_error)
+        if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 361, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF_SET(__pyx_v_r, __pyx_t_6);
         __pyx_t_6 = 0;
 
-        /* "MagDatabase.pyx":338
+        /* "MagDatabase.pyx":362
  * 
  *                 for r in poly_c:
  *                     t.gates.append(r.centroid())             # <<<<<<<<<<<<<<
@@ -13074,7 +13733,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
         if (unlikely(__pyx_v_t->gates == Py_None)) {
           PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "append");
-          __PYX_ERR(0, 338, __pyx_L1_error)
+          __PYX_ERR(0, 362, __pyx_L1_error)
         }
         __pyx_t_9 = __pyx_v_r;
         __Pyx_INCREF(__pyx_t_9);
@@ -13083,13 +13742,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
           PyObject *__pyx_callargs[2] = {__pyx_t_9, NULL};
           __pyx_t_6 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_centroid, __pyx_callargs+__pyx_t_10, (1-__pyx_t_10) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
           __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
-          if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 338, __pyx_L1_error)
+          if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 362, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_6);
         }
-        __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_t->gates, __pyx_t_6); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 338, __pyx_L1_error)
+        __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_t->gates, __pyx_t_6); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 362, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-        /* "MagDatabase.pyx":337
+        /* "MagDatabase.pyx":361
  *                 t.ttype = "nmos"
  * 
  *                 for r in poly_c:             # <<<<<<<<<<<<<<
@@ -13099,7 +13758,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
       }
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "MagDatabase.pyx":340
+      /* "MagDatabase.pyx":364
  *                     t.gates.append(r.centroid())
  * 
  *                 for r in ndiff_c:             # <<<<<<<<<<<<<<
@@ -13112,18 +13771,18 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
         {
           Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_1);
           #if !CYTHON_ASSUME_SAFE_SIZE
-          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 340, __pyx_L1_error)
+          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 364, __pyx_L1_error)
           #endif
           if (__pyx_t_7 >= __pyx_temp) break;
         }
         __pyx_t_6 = __Pyx_PyList_GET_ITEM_REF(__pyx_t_1, __pyx_t_7, __Pyx_ReferenceSharing_OwnStrongReference);
         ++__pyx_t_7;
-        if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 340, __pyx_L1_error)
+        if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 364, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF_SET(__pyx_v_r, __pyx_t_6);
         __pyx_t_6 = 0;
 
-        /* "MagDatabase.pyx":341
+        /* "MagDatabase.pyx":365
  * 
  *                 for r in ndiff_c:
  *                     t.source_drains.append(r.centroid())             # <<<<<<<<<<<<<<
@@ -13132,7 +13791,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
         if (unlikely(__pyx_v_t->source_drains == Py_None)) {
           PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "append");
-          __PYX_ERR(0, 341, __pyx_L1_error)
+          __PYX_ERR(0, 365, __pyx_L1_error)
         }
         __pyx_t_9 = __pyx_v_r;
         __Pyx_INCREF(__pyx_t_9);
@@ -13141,13 +13800,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
           PyObject *__pyx_callargs[2] = {__pyx_t_9, NULL};
           __pyx_t_6 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_centroid, __pyx_callargs+__pyx_t_10, (1-__pyx_t_10) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
           __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
-          if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 341, __pyx_L1_error)
+          if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 365, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_6);
         }
-        __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_t->source_drains, __pyx_t_6); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 341, __pyx_L1_error)
+        __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_t->source_drains, __pyx_t_6); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 365, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-        /* "MagDatabase.pyx":340
+        /* "MagDatabase.pyx":364
  *                     t.gates.append(r.centroid())
  * 
  *                 for r in ndiff_c:             # <<<<<<<<<<<<<<
@@ -13157,7 +13816,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
       }
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "MagDatabase.pyx":343
+      /* "MagDatabase.pyx":367
  *                     t.source_drains.append(r.centroid())
  * 
  *                 self.transistors.append(t)             # <<<<<<<<<<<<<<
@@ -13166,11 +13825,11 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
       if (unlikely(__pyx_v_self->transistors == Py_None)) {
         PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "append");
-        __PYX_ERR(0, 343, __pyx_L1_error)
+        __PYX_ERR(0, 367, __pyx_L1_error)
       }
-      __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_self->transistors, ((PyObject *)__pyx_v_t)); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 343, __pyx_L1_error)
+      __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_self->transistors, ((PyObject *)__pyx_v_t)); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 367, __pyx_L1_error)
 
-      /* "MagDatabase.pyx":280
+      /* "MagDatabase.pyx":304
  * 
  *         if l != []:
  *             for r in l:             # <<<<<<<<<<<<<<
@@ -13180,7 +13839,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
     }
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "MagDatabase.pyx":279
+    /* "MagDatabase.pyx":303
  *             l += self.layers['nmoslvt']
  * 
  *         if l != []:             # <<<<<<<<<<<<<<
@@ -13189,7 +13848,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
   }
 
-  /* "MagDatabase.pyx":345
+  /* "MagDatabase.pyx":369
  *                 self.transistors.append(t)
  * 
  *         if 'pmos' in self.layers:             # <<<<<<<<<<<<<<
@@ -13198,12 +13857,12 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
   if (unlikely(__pyx_v_self->layers == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-    __PYX_ERR(0, 345, __pyx_L1_error)
+    __PYX_ERR(0, 369, __pyx_L1_error)
   }
-  __pyx_t_2 = (__Pyx_PyDict_ContainsTF(__pyx_mstate_global->__pyx_n_u_pmos, __pyx_v_self->layers, Py_EQ)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 345, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PyDict_ContainsTF(__pyx_mstate_global->__pyx_n_u_pmos, __pyx_v_self->layers, Py_EQ)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 369, __pyx_L1_error)
   if (__pyx_t_2) {
 
-    /* "MagDatabase.pyx":346
+    /* "MagDatabase.pyx":370
  * 
  *         if 'pmos' in self.layers:
  *             for r in self.layers['pmos']:             # <<<<<<<<<<<<<<
@@ -13212,18 +13871,18 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
     if (unlikely(__pyx_v_self->layers == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 346, __pyx_L1_error)
+      __PYX_ERR(0, 370, __pyx_L1_error)
     }
-    __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_mstate_global->__pyx_n_u_pmos); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 346, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_mstate_global->__pyx_n_u_pmos); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 370, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     if (likely(PyList_CheckExact(__pyx_t_3)) || PyTuple_CheckExact(__pyx_t_3)) {
       __pyx_t_1 = __pyx_t_3; __Pyx_INCREF(__pyx_t_1);
       __pyx_t_4 = 0;
       __pyx_t_5 = NULL;
     } else {
-      __pyx_t_4 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 346, __pyx_L1_error)
+      __pyx_t_4 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 370, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_5 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 346, __pyx_L1_error)
+      __pyx_t_5 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 370, __pyx_L1_error)
     }
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     for (;;) {
@@ -13232,7 +13891,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
           {
             Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_1);
             #if !CYTHON_ASSUME_SAFE_SIZE
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 346, __pyx_L1_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 370, __pyx_L1_error)
             #endif
             if (__pyx_t_4 >= __pyx_temp) break;
           }
@@ -13242,7 +13901,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
           {
             Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_1);
             #if !CYTHON_ASSUME_SAFE_SIZE
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 346, __pyx_L1_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 370, __pyx_L1_error)
             #endif
             if (__pyx_t_4 >= __pyx_temp) break;
           }
@@ -13253,13 +13912,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
           #endif
           ++__pyx_t_4;
         }
-        if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 346, __pyx_L1_error)
+        if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 370, __pyx_L1_error)
       } else {
         __pyx_t_3 = __pyx_t_5(__pyx_t_1);
         if (unlikely(!__pyx_t_3)) {
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
-            if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 346, __pyx_L1_error)
+            if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 370, __pyx_L1_error)
             PyErr_Clear();
           }
           break;
@@ -13269,19 +13928,19 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
       __Pyx_XDECREF_SET(__pyx_v_r, __pyx_t_3);
       __pyx_t_3 = 0;
 
-      /* "MagDatabase.pyx":350
+      /* "MagDatabase.pyx":374
  *                 # Find all polysilicon rects which abut the pmos rects
  * 
  *                 poly_r = []             # <<<<<<<<<<<<<<
  * 
  *                 for rp in self.layers['poly']:
 */
-      __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 350, __pyx_L1_error)
+      __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 374, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_XDECREF_SET(__pyx_v_poly_r, ((PyObject*)__pyx_t_3));
       __pyx_t_3 = 0;
 
-      /* "MagDatabase.pyx":352
+      /* "MagDatabase.pyx":376
  *                 poly_r = []
  * 
  *                 for rp in self.layers['poly']:             # <<<<<<<<<<<<<<
@@ -13290,18 +13949,18 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
       if (unlikely(__pyx_v_self->layers == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        __PYX_ERR(0, 352, __pyx_L1_error)
+        __PYX_ERR(0, 376, __pyx_L1_error)
       }
-      __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_mstate_global->__pyx_n_u_poly); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 352, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_mstate_global->__pyx_n_u_poly); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 376, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       if (likely(PyList_CheckExact(__pyx_t_3)) || PyTuple_CheckExact(__pyx_t_3)) {
         __pyx_t_6 = __pyx_t_3; __Pyx_INCREF(__pyx_t_6);
         __pyx_t_7 = 0;
         __pyx_t_8 = NULL;
       } else {
-        __pyx_t_7 = -1; __pyx_t_6 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 352, __pyx_L1_error)
+        __pyx_t_7 = -1; __pyx_t_6 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 376, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_8 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_6); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 352, __pyx_L1_error)
+        __pyx_t_8 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_6); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 376, __pyx_L1_error)
       }
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       for (;;) {
@@ -13310,7 +13969,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             {
               Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_6);
               #if !CYTHON_ASSUME_SAFE_SIZE
-              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 352, __pyx_L1_error)
+              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 376, __pyx_L1_error)
               #endif
               if (__pyx_t_7 >= __pyx_temp) break;
             }
@@ -13320,7 +13979,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             {
               Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_6);
               #if !CYTHON_ASSUME_SAFE_SIZE
-              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 352, __pyx_L1_error)
+              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 376, __pyx_L1_error)
               #endif
               if (__pyx_t_7 >= __pyx_temp) break;
             }
@@ -13331,13 +13990,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             #endif
             ++__pyx_t_7;
           }
-          if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 352, __pyx_L1_error)
+          if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 376, __pyx_L1_error)
         } else {
           __pyx_t_3 = __pyx_t_8(__pyx_t_6);
           if (unlikely(!__pyx_t_3)) {
             PyObject* exc_type = PyErr_Occurred();
             if (exc_type) {
-              if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 352, __pyx_L1_error)
+              if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 376, __pyx_L1_error)
               PyErr_Clear();
             }
             break;
@@ -13347,7 +14006,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
         __Pyx_XDECREF_SET(__pyx_v_rp, __pyx_t_3);
         __pyx_t_3 = 0;
 
-        /* "MagDatabase.pyx":353
+        /* "MagDatabase.pyx":377
  * 
  *                 for rp in self.layers['poly']:
  *                     if rp.abuts(r):             # <<<<<<<<<<<<<<
@@ -13361,23 +14020,23 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
           PyObject *__pyx_callargs[2] = {__pyx_t_9, __pyx_v_r};
           __pyx_t_3 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_abuts, __pyx_callargs+__pyx_t_10, (2-__pyx_t_10) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
           __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
-          if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 353, __pyx_L1_error)
+          if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 377, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
         }
-        __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 353, __pyx_L1_error)
+        __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 377, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         if (__pyx_t_2) {
 
-          /* "MagDatabase.pyx":354
+          /* "MagDatabase.pyx":378
  *                 for rp in self.layers['poly']:
  *                     if rp.abuts(r):
  *                         poly_r.append(rp)             # <<<<<<<<<<<<<<
  * 
  * 
 */
-          __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_poly_r, __pyx_v_rp); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 354, __pyx_L1_error)
+          __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_poly_r, __pyx_v_rp); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 378, __pyx_L1_error)
 
-          /* "MagDatabase.pyx":353
+          /* "MagDatabase.pyx":377
  * 
  *                 for rp in self.layers['poly']:
  *                     if rp.abuts(r):             # <<<<<<<<<<<<<<
@@ -13386,7 +14045,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
         }
 
-        /* "MagDatabase.pyx":352
+        /* "MagDatabase.pyx":376
  *                 poly_r = []
  * 
  *                 for rp in self.layers['poly']:             # <<<<<<<<<<<<<<
@@ -13396,7 +14055,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
       }
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-      /* "MagDatabase.pyx":357
+      /* "MagDatabase.pyx":381
  * 
  * 
  *                 for rp in self.layers['poly']:             # <<<<<<<<<<<<<<
@@ -13405,18 +14064,18 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
       if (unlikely(__pyx_v_self->layers == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        __PYX_ERR(0, 357, __pyx_L1_error)
+        __PYX_ERR(0, 381, __pyx_L1_error)
       }
-      __pyx_t_6 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_mstate_global->__pyx_n_u_poly); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 357, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_mstate_global->__pyx_n_u_poly); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 381, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       if (likely(PyList_CheckExact(__pyx_t_6)) || PyTuple_CheckExact(__pyx_t_6)) {
         __pyx_t_3 = __pyx_t_6; __Pyx_INCREF(__pyx_t_3);
         __pyx_t_7 = 0;
         __pyx_t_8 = NULL;
       } else {
-        __pyx_t_7 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 357, __pyx_L1_error)
+        __pyx_t_7 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 381, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_8 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 357, __pyx_L1_error)
+        __pyx_t_8 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 381, __pyx_L1_error)
       }
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       for (;;) {
@@ -13425,7 +14084,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             {
               Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_3);
               #if !CYTHON_ASSUME_SAFE_SIZE
-              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 357, __pyx_L1_error)
+              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 381, __pyx_L1_error)
               #endif
               if (__pyx_t_7 >= __pyx_temp) break;
             }
@@ -13435,7 +14094,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             {
               Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_3);
               #if !CYTHON_ASSUME_SAFE_SIZE
-              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 357, __pyx_L1_error)
+              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 381, __pyx_L1_error)
               #endif
               if (__pyx_t_7 >= __pyx_temp) break;
             }
@@ -13446,13 +14105,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             #endif
             ++__pyx_t_7;
           }
-          if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 357, __pyx_L1_error)
+          if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 381, __pyx_L1_error)
         } else {
           __pyx_t_6 = __pyx_t_8(__pyx_t_3);
           if (unlikely(!__pyx_t_6)) {
             PyObject* exc_type = PyErr_Occurred();
             if (exc_type) {
-              if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 357, __pyx_L1_error)
+              if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 381, __pyx_L1_error)
               PyErr_Clear();
             }
             break;
@@ -13462,26 +14121,26 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
         __Pyx_XDECREF_SET(__pyx_v_rp, __pyx_t_6);
         __pyx_t_6 = 0;
 
-        /* "MagDatabase.pyx":358
+        /* "MagDatabase.pyx":382
  * 
  *                 for rp in self.layers['poly']:
  *                     for i in range(0, len(poly_r)):             # <<<<<<<<<<<<<<
  *                         if poly_r[i].abuts(rp):
  *                             poly_r.append(rp)
 */
-        __pyx_t_12 = __Pyx_PyList_GET_SIZE(__pyx_v_poly_r); if (unlikely(__pyx_t_12 == ((Py_ssize_t)-1))) __PYX_ERR(0, 358, __pyx_L1_error)
+        __pyx_t_12 = __Pyx_PyList_GET_SIZE(__pyx_v_poly_r); if (unlikely(__pyx_t_12 == ((Py_ssize_t)-1))) __PYX_ERR(0, 382, __pyx_L1_error)
         __pyx_t_13 = __pyx_t_12;
         for (__pyx_t_14 = 0; __pyx_t_14 < __pyx_t_13; __pyx_t_14+=1) {
           __pyx_v_i = __pyx_t_14;
 
-          /* "MagDatabase.pyx":359
+          /* "MagDatabase.pyx":383
  *                 for rp in self.layers['poly']:
  *                     for i in range(0, len(poly_r)):
  *                         if poly_r[i].abuts(rp):             # <<<<<<<<<<<<<<
  *                             poly_r.append(rp)
  * 
 */
-          __pyx_t_15 = __Pyx_GetItemInt_List(__pyx_v_poly_r, __pyx_v_i, Py_ssize_t, 1, PyLong_FromSsize_t, 1, 1, 1, 1, __Pyx_ReferenceSharing_OwnStrongReference); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 359, __pyx_L1_error)
+          __pyx_t_15 = __Pyx_GetItemInt_List(__pyx_v_poly_r, __pyx_v_i, Py_ssize_t, 1, PyLong_FromSsize_t, 1, 1, 1, 1, __Pyx_ReferenceSharing_OwnStrongReference); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 383, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_15);
           __pyx_t_9 = __pyx_t_15;
           __Pyx_INCREF(__pyx_t_9);
@@ -13491,23 +14150,23 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             __pyx_t_6 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_abuts, __pyx_callargs+__pyx_t_10, (2-__pyx_t_10) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
             __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
             __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-            if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 359, __pyx_L1_error)
+            if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 383, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_6);
           }
-          __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 359, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 383, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           if (__pyx_t_2) {
 
-            /* "MagDatabase.pyx":360
+            /* "MagDatabase.pyx":384
  *                     for i in range(0, len(poly_r)):
  *                         if poly_r[i].abuts(rp):
  *                             poly_r.append(rp)             # <<<<<<<<<<<<<<
  * 
  * 
 */
-            __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_poly_r, __pyx_v_rp); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 360, __pyx_L1_error)
+            __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_poly_r, __pyx_v_rp); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 384, __pyx_L1_error)
 
-            /* "MagDatabase.pyx":359
+            /* "MagDatabase.pyx":383
  *                 for rp in self.layers['poly']:
  *                     for i in range(0, len(poly_r)):
  *                         if poly_r[i].abuts(rp):             # <<<<<<<<<<<<<<
@@ -13517,7 +14176,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
           }
         }
 
-        /* "MagDatabase.pyx":357
+        /* "MagDatabase.pyx":381
  * 
  * 
  *                 for rp in self.layers['poly']:             # <<<<<<<<<<<<<<
@@ -13527,19 +14186,19 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
       }
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-      /* "MagDatabase.pyx":365
+      /* "MagDatabase.pyx":389
  *                 # Find all polycont rects which overlap poly_r
  * 
  *                 poly_c = []             # <<<<<<<<<<<<<<
  * 
  *                 for pc in self.layers['polycont']:
 */
-      __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 365, __pyx_L1_error)
+      __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 389, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_XDECREF_SET(__pyx_v_poly_c, ((PyObject*)__pyx_t_3));
       __pyx_t_3 = 0;
 
-      /* "MagDatabase.pyx":367
+      /* "MagDatabase.pyx":391
  *                 poly_c = []
  * 
  *                 for pc in self.layers['polycont']:             # <<<<<<<<<<<<<<
@@ -13548,18 +14207,18 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
       if (unlikely(__pyx_v_self->layers == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        __PYX_ERR(0, 367, __pyx_L1_error)
+        __PYX_ERR(0, 391, __pyx_L1_error)
       }
-      __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_mstate_global->__pyx_n_u_polycont); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 367, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_mstate_global->__pyx_n_u_polycont); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 391, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       if (likely(PyList_CheckExact(__pyx_t_3)) || PyTuple_CheckExact(__pyx_t_3)) {
         __pyx_t_6 = __pyx_t_3; __Pyx_INCREF(__pyx_t_6);
         __pyx_t_7 = 0;
         __pyx_t_8 = NULL;
       } else {
-        __pyx_t_7 = -1; __pyx_t_6 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 367, __pyx_L1_error)
+        __pyx_t_7 = -1; __pyx_t_6 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 391, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_8 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_6); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 367, __pyx_L1_error)
+        __pyx_t_8 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_6); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 391, __pyx_L1_error)
       }
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       for (;;) {
@@ -13568,7 +14227,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             {
               Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_6);
               #if !CYTHON_ASSUME_SAFE_SIZE
-              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 367, __pyx_L1_error)
+              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 391, __pyx_L1_error)
               #endif
               if (__pyx_t_7 >= __pyx_temp) break;
             }
@@ -13578,7 +14237,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             {
               Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_6);
               #if !CYTHON_ASSUME_SAFE_SIZE
-              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 367, __pyx_L1_error)
+              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 391, __pyx_L1_error)
               #endif
               if (__pyx_t_7 >= __pyx_temp) break;
             }
@@ -13589,13 +14248,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             #endif
             ++__pyx_t_7;
           }
-          if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 367, __pyx_L1_error)
+          if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 391, __pyx_L1_error)
         } else {
           __pyx_t_3 = __pyx_t_8(__pyx_t_6);
           if (unlikely(!__pyx_t_3)) {
             PyObject* exc_type = PyErr_Occurred();
             if (exc_type) {
-              if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 367, __pyx_L1_error)
+              if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 391, __pyx_L1_error)
               PyErr_Clear();
             }
             break;
@@ -13605,7 +14264,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
         __Pyx_XDECREF_SET(__pyx_v_pc, __pyx_t_3);
         __pyx_t_3 = 0;
 
-        /* "MagDatabase.pyx":368
+        /* "MagDatabase.pyx":392
  * 
  *                 for pc in self.layers['polycont']:
  *                     for pr in poly_r:             # <<<<<<<<<<<<<<
@@ -13618,18 +14277,18 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
           {
             Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_3);
             #if !CYTHON_ASSUME_SAFE_SIZE
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 368, __pyx_L1_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 392, __pyx_L1_error)
             #endif
             if (__pyx_t_12 >= __pyx_temp) break;
           }
           __pyx_t_15 = __Pyx_PyList_GET_ITEM_REF(__pyx_t_3, __pyx_t_12, __Pyx_ReferenceSharing_OwnStrongReference);
           ++__pyx_t_12;
-          if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 368, __pyx_L1_error)
+          if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 392, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_15);
           __Pyx_XDECREF_SET(__pyx_v_pr, __pyx_t_15);
           __pyx_t_15 = 0;
 
-          /* "MagDatabase.pyx":369
+          /* "MagDatabase.pyx":393
  *                 for pc in self.layers['polycont']:
  *                     for pr in poly_r:
  *                         if pc.overlaps(pr):             # <<<<<<<<<<<<<<
@@ -13643,23 +14302,23 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             PyObject *__pyx_callargs[2] = {__pyx_t_9, __pyx_v_pr};
             __pyx_t_15 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_overlaps, __pyx_callargs+__pyx_t_10, (2-__pyx_t_10) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
             __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
-            if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 369, __pyx_L1_error)
+            if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 393, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_15);
           }
-          __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_15); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 369, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_15); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 393, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
           if (__pyx_t_2) {
 
-            /* "MagDatabase.pyx":370
+            /* "MagDatabase.pyx":394
  *                     for pr in poly_r:
  *                         if pc.overlaps(pr):
  *                             poly_c.append(pc)             # <<<<<<<<<<<<<<
  *                             break
  * 
 */
-            __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_poly_c, __pyx_v_pc); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 370, __pyx_L1_error)
+            __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_poly_c, __pyx_v_pc); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 394, __pyx_L1_error)
 
-            /* "MagDatabase.pyx":371
+            /* "MagDatabase.pyx":395
  *                         if pc.overlaps(pr):
  *                             poly_c.append(pc)
  *                             break             # <<<<<<<<<<<<<<
@@ -13668,7 +14327,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
             goto __pyx_L65_break;
 
-            /* "MagDatabase.pyx":369
+            /* "MagDatabase.pyx":393
  *                 for pc in self.layers['polycont']:
  *                     for pr in poly_r:
  *                         if pc.overlaps(pr):             # <<<<<<<<<<<<<<
@@ -13677,7 +14336,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
           }
 
-          /* "MagDatabase.pyx":368
+          /* "MagDatabase.pyx":392
  * 
  *                 for pc in self.layers['polycont']:
  *                     for pr in poly_r:             # <<<<<<<<<<<<<<
@@ -13692,7 +14351,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
         goto __pyx_L67_for_end;
         __pyx_L67_for_end:;
 
-        /* "MagDatabase.pyx":367
+        /* "MagDatabase.pyx":391
  *                 poly_c = []
  * 
  *                 for pc in self.layers['polycont']:             # <<<<<<<<<<<<<<
@@ -13702,19 +14361,19 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
       }
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-      /* "MagDatabase.pyx":376
+      /* "MagDatabase.pyx":400
  *                 # Find source and drain contacts
  * 
  *                 pdiff_r = []             # <<<<<<<<<<<<<<
  * 
  *                 for rp in self.layers['pdiff']:
 */
-      __pyx_t_6 = PyList_New(0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 376, __pyx_L1_error)
+      __pyx_t_6 = PyList_New(0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 400, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_XDECREF_SET(__pyx_v_pdiff_r, ((PyObject*)__pyx_t_6));
       __pyx_t_6 = 0;
 
-      /* "MagDatabase.pyx":378
+      /* "MagDatabase.pyx":402
  *                 pdiff_r = []
  * 
  *                 for rp in self.layers['pdiff']:             # <<<<<<<<<<<<<<
@@ -13723,18 +14382,18 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
       if (unlikely(__pyx_v_self->layers == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        __PYX_ERR(0, 378, __pyx_L1_error)
+        __PYX_ERR(0, 402, __pyx_L1_error)
       }
-      __pyx_t_6 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_mstate_global->__pyx_n_u_pdiff); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 378, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_mstate_global->__pyx_n_u_pdiff); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 402, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       if (likely(PyList_CheckExact(__pyx_t_6)) || PyTuple_CheckExact(__pyx_t_6)) {
         __pyx_t_3 = __pyx_t_6; __Pyx_INCREF(__pyx_t_3);
         __pyx_t_7 = 0;
         __pyx_t_8 = NULL;
       } else {
-        __pyx_t_7 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 378, __pyx_L1_error)
+        __pyx_t_7 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 402, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_8 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 378, __pyx_L1_error)
+        __pyx_t_8 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 402, __pyx_L1_error)
       }
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       for (;;) {
@@ -13743,7 +14402,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             {
               Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_3);
               #if !CYTHON_ASSUME_SAFE_SIZE
-              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 378, __pyx_L1_error)
+              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 402, __pyx_L1_error)
               #endif
               if (__pyx_t_7 >= __pyx_temp) break;
             }
@@ -13753,7 +14412,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             {
               Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_3);
               #if !CYTHON_ASSUME_SAFE_SIZE
-              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 378, __pyx_L1_error)
+              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 402, __pyx_L1_error)
               #endif
               if (__pyx_t_7 >= __pyx_temp) break;
             }
@@ -13764,13 +14423,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             #endif
             ++__pyx_t_7;
           }
-          if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 378, __pyx_L1_error)
+          if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 402, __pyx_L1_error)
         } else {
           __pyx_t_6 = __pyx_t_8(__pyx_t_3);
           if (unlikely(!__pyx_t_6)) {
             PyObject* exc_type = PyErr_Occurred();
             if (exc_type) {
-              if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 378, __pyx_L1_error)
+              if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 402, __pyx_L1_error)
               PyErr_Clear();
             }
             break;
@@ -13780,7 +14439,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
         __Pyx_XDECREF_SET(__pyx_v_rp, __pyx_t_6);
         __pyx_t_6 = 0;
 
-        /* "MagDatabase.pyx":379
+        /* "MagDatabase.pyx":403
  * 
  *                 for rp in self.layers['pdiff']:
  *                     if rp.abuts(r):             # <<<<<<<<<<<<<<
@@ -13794,23 +14453,23 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
           PyObject *__pyx_callargs[2] = {__pyx_t_15, __pyx_v_r};
           __pyx_t_6 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_abuts, __pyx_callargs+__pyx_t_10, (2-__pyx_t_10) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
           __Pyx_XDECREF(__pyx_t_15); __pyx_t_15 = 0;
-          if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 379, __pyx_L1_error)
+          if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 403, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_6);
         }
-        __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 379, __pyx_L1_error)
+        __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 403, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         if (__pyx_t_2) {
 
-          /* "MagDatabase.pyx":380
+          /* "MagDatabase.pyx":404
  *                 for rp in self.layers['pdiff']:
  *                     if rp.abuts(r):
  *                         pdiff_r.append(rp)             # <<<<<<<<<<<<<<
  * 
  * 
 */
-          __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_pdiff_r, __pyx_v_rp); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 380, __pyx_L1_error)
+          __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_pdiff_r, __pyx_v_rp); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 404, __pyx_L1_error)
 
-          /* "MagDatabase.pyx":379
+          /* "MagDatabase.pyx":403
  * 
  *                 for rp in self.layers['pdiff']:
  *                     if rp.abuts(r):             # <<<<<<<<<<<<<<
@@ -13819,7 +14478,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
         }
 
-        /* "MagDatabase.pyx":378
+        /* "MagDatabase.pyx":402
  *                 pdiff_r = []
  * 
  *                 for rp in self.layers['pdiff']:             # <<<<<<<<<<<<<<
@@ -13829,7 +14488,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
       }
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-      /* "MagDatabase.pyx":383
+      /* "MagDatabase.pyx":407
  * 
  * 
  *                 for rp in self.layers['pdiff']:             # <<<<<<<<<<<<<<
@@ -13838,18 +14497,18 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
       if (unlikely(__pyx_v_self->layers == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        __PYX_ERR(0, 383, __pyx_L1_error)
+        __PYX_ERR(0, 407, __pyx_L1_error)
       }
-      __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_mstate_global->__pyx_n_u_pdiff); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 383, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_mstate_global->__pyx_n_u_pdiff); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 407, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       if (likely(PyList_CheckExact(__pyx_t_3)) || PyTuple_CheckExact(__pyx_t_3)) {
         __pyx_t_6 = __pyx_t_3; __Pyx_INCREF(__pyx_t_6);
         __pyx_t_7 = 0;
         __pyx_t_8 = NULL;
       } else {
-        __pyx_t_7 = -1; __pyx_t_6 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 383, __pyx_L1_error)
+        __pyx_t_7 = -1; __pyx_t_6 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 407, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_8 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_6); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 383, __pyx_L1_error)
+        __pyx_t_8 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_6); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 407, __pyx_L1_error)
       }
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       for (;;) {
@@ -13858,7 +14517,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             {
               Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_6);
               #if !CYTHON_ASSUME_SAFE_SIZE
-              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 383, __pyx_L1_error)
+              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 407, __pyx_L1_error)
               #endif
               if (__pyx_t_7 >= __pyx_temp) break;
             }
@@ -13868,7 +14527,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             {
               Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_6);
               #if !CYTHON_ASSUME_SAFE_SIZE
-              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 383, __pyx_L1_error)
+              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 407, __pyx_L1_error)
               #endif
               if (__pyx_t_7 >= __pyx_temp) break;
             }
@@ -13879,13 +14538,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             #endif
             ++__pyx_t_7;
           }
-          if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 383, __pyx_L1_error)
+          if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 407, __pyx_L1_error)
         } else {
           __pyx_t_3 = __pyx_t_8(__pyx_t_6);
           if (unlikely(!__pyx_t_3)) {
             PyObject* exc_type = PyErr_Occurred();
             if (exc_type) {
-              if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 383, __pyx_L1_error)
+              if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 407, __pyx_L1_error)
               PyErr_Clear();
             }
             break;
@@ -13895,26 +14554,26 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
         __Pyx_XDECREF_SET(__pyx_v_rp, __pyx_t_3);
         __pyx_t_3 = 0;
 
-        /* "MagDatabase.pyx":384
+        /* "MagDatabase.pyx":408
  * 
  *                 for rp in self.layers['pdiff']:
  *                     for i in range(0, len(pdiff_r)):             # <<<<<<<<<<<<<<
  *                         if pdiff_r[i].abuts(rp):
  *                             pdiff_r.append(rp)
 */
-        __pyx_t_12 = __Pyx_PyList_GET_SIZE(__pyx_v_pdiff_r); if (unlikely(__pyx_t_12 == ((Py_ssize_t)-1))) __PYX_ERR(0, 384, __pyx_L1_error)
+        __pyx_t_12 = __Pyx_PyList_GET_SIZE(__pyx_v_pdiff_r); if (unlikely(__pyx_t_12 == ((Py_ssize_t)-1))) __PYX_ERR(0, 408, __pyx_L1_error)
         __pyx_t_13 = __pyx_t_12;
         for (__pyx_t_14 = 0; __pyx_t_14 < __pyx_t_13; __pyx_t_14+=1) {
           __pyx_v_i = __pyx_t_14;
 
-          /* "MagDatabase.pyx":385
+          /* "MagDatabase.pyx":409
  *                 for rp in self.layers['pdiff']:
  *                     for i in range(0, len(pdiff_r)):
  *                         if pdiff_r[i].abuts(rp):             # <<<<<<<<<<<<<<
  *                             pdiff_r.append(rp)
  * 
 */
-          __pyx_t_9 = __Pyx_GetItemInt_List(__pyx_v_pdiff_r, __pyx_v_i, Py_ssize_t, 1, PyLong_FromSsize_t, 1, 1, 1, 1, __Pyx_ReferenceSharing_OwnStrongReference); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 385, __pyx_L1_error)
+          __pyx_t_9 = __Pyx_GetItemInt_List(__pyx_v_pdiff_r, __pyx_v_i, Py_ssize_t, 1, PyLong_FromSsize_t, 1, 1, 1, 1, __Pyx_ReferenceSharing_OwnStrongReference); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 409, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_9);
           __pyx_t_15 = __pyx_t_9;
           __Pyx_INCREF(__pyx_t_15);
@@ -13924,23 +14583,23 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             __pyx_t_3 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_abuts, __pyx_callargs+__pyx_t_10, (2-__pyx_t_10) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
             __Pyx_XDECREF(__pyx_t_15); __pyx_t_15 = 0;
             __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-            if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 385, __pyx_L1_error)
+            if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 409, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_3);
           }
-          __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 385, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 409, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           if (__pyx_t_2) {
 
-            /* "MagDatabase.pyx":386
+            /* "MagDatabase.pyx":410
  *                     for i in range(0, len(pdiff_r)):
  *                         if pdiff_r[i].abuts(rp):
  *                             pdiff_r.append(rp)             # <<<<<<<<<<<<<<
  * 
  *                 # Find all ndiffc rects which overlap ndiff_r
 */
-            __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_pdiff_r, __pyx_v_rp); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 386, __pyx_L1_error)
+            __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_pdiff_r, __pyx_v_rp); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 410, __pyx_L1_error)
 
-            /* "MagDatabase.pyx":385
+            /* "MagDatabase.pyx":409
  *                 for rp in self.layers['pdiff']:
  *                     for i in range(0, len(pdiff_r)):
  *                         if pdiff_r[i].abuts(rp):             # <<<<<<<<<<<<<<
@@ -13950,7 +14609,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
           }
         }
 
-        /* "MagDatabase.pyx":383
+        /* "MagDatabase.pyx":407
  * 
  * 
  *                 for rp in self.layers['pdiff']:             # <<<<<<<<<<<<<<
@@ -13960,19 +14619,19 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
       }
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-      /* "MagDatabase.pyx":390
+      /* "MagDatabase.pyx":414
  *                 # Find all ndiffc rects which overlap ndiff_r
  * 
  *                 pdiff_c = []             # <<<<<<<<<<<<<<
  * 
  *                 for nc in self.layers['pdiffc']:
 */
-      __pyx_t_6 = PyList_New(0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 390, __pyx_L1_error)
+      __pyx_t_6 = PyList_New(0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 414, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_XDECREF_SET(__pyx_v_pdiff_c, ((PyObject*)__pyx_t_6));
       __pyx_t_6 = 0;
 
-      /* "MagDatabase.pyx":392
+      /* "MagDatabase.pyx":416
  *                 pdiff_c = []
  * 
  *                 for nc in self.layers['pdiffc']:             # <<<<<<<<<<<<<<
@@ -13981,18 +14640,18 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
       if (unlikely(__pyx_v_self->layers == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        __PYX_ERR(0, 392, __pyx_L1_error)
+        __PYX_ERR(0, 416, __pyx_L1_error)
       }
-      __pyx_t_6 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_mstate_global->__pyx_n_u_pdiffc); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 392, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyDict_GetItem(__pyx_v_self->layers, __pyx_mstate_global->__pyx_n_u_pdiffc); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 416, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       if (likely(PyList_CheckExact(__pyx_t_6)) || PyTuple_CheckExact(__pyx_t_6)) {
         __pyx_t_3 = __pyx_t_6; __Pyx_INCREF(__pyx_t_3);
         __pyx_t_7 = 0;
         __pyx_t_8 = NULL;
       } else {
-        __pyx_t_7 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 392, __pyx_L1_error)
+        __pyx_t_7 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 416, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_8 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 392, __pyx_L1_error)
+        __pyx_t_8 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 416, __pyx_L1_error)
       }
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       for (;;) {
@@ -14001,7 +14660,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             {
               Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_3);
               #if !CYTHON_ASSUME_SAFE_SIZE
-              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 392, __pyx_L1_error)
+              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 416, __pyx_L1_error)
               #endif
               if (__pyx_t_7 >= __pyx_temp) break;
             }
@@ -14011,7 +14670,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             {
               Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_3);
               #if !CYTHON_ASSUME_SAFE_SIZE
-              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 392, __pyx_L1_error)
+              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 416, __pyx_L1_error)
               #endif
               if (__pyx_t_7 >= __pyx_temp) break;
             }
@@ -14022,13 +14681,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             #endif
             ++__pyx_t_7;
           }
-          if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 392, __pyx_L1_error)
+          if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 416, __pyx_L1_error)
         } else {
           __pyx_t_6 = __pyx_t_8(__pyx_t_3);
           if (unlikely(!__pyx_t_6)) {
             PyObject* exc_type = PyErr_Occurred();
             if (exc_type) {
-              if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 392, __pyx_L1_error)
+              if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 416, __pyx_L1_error)
               PyErr_Clear();
             }
             break;
@@ -14038,7 +14697,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
         __Pyx_XDECREF_SET(__pyx_v_nc, __pyx_t_6);
         __pyx_t_6 = 0;
 
-        /* "MagDatabase.pyx":393
+        /* "MagDatabase.pyx":417
  * 
  *                 for nc in self.layers['pdiffc']:
  *                     for nr in pdiff_r:             # <<<<<<<<<<<<<<
@@ -14051,18 +14710,18 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
           {
             Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_6);
             #if !CYTHON_ASSUME_SAFE_SIZE
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 393, __pyx_L1_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 417, __pyx_L1_error)
             #endif
             if (__pyx_t_12 >= __pyx_temp) break;
           }
           __pyx_t_9 = __Pyx_PyList_GET_ITEM_REF(__pyx_t_6, __pyx_t_12, __Pyx_ReferenceSharing_OwnStrongReference);
           ++__pyx_t_12;
-          if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 393, __pyx_L1_error)
+          if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 417, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_9);
           __Pyx_XDECREF_SET(__pyx_v_nr, __pyx_t_9);
           __pyx_t_9 = 0;
 
-          /* "MagDatabase.pyx":394
+          /* "MagDatabase.pyx":418
  *                 for nc in self.layers['pdiffc']:
  *                     for nr in pdiff_r:
  *                         if nc.overlaps(nr):             # <<<<<<<<<<<<<<
@@ -14076,23 +14735,23 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
             PyObject *__pyx_callargs[2] = {__pyx_t_15, __pyx_v_nr};
             __pyx_t_9 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_overlaps, __pyx_callargs+__pyx_t_10, (2-__pyx_t_10) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
             __Pyx_XDECREF(__pyx_t_15); __pyx_t_15 = 0;
-            if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 394, __pyx_L1_error)
+            if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 418, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_9);
           }
-          __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_9); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 394, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_9); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 418, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
           if (__pyx_t_2) {
 
-            /* "MagDatabase.pyx":395
+            /* "MagDatabase.pyx":419
  *                     for nr in pdiff_r:
  *                         if nc.overlaps(nr):
  *                             pdiff_c.append(nc)             # <<<<<<<<<<<<<<
  *                             break
  * 
 */
-            __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_pdiff_c, __pyx_v_nc); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 395, __pyx_L1_error)
+            __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_pdiff_c, __pyx_v_nc); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 419, __pyx_L1_error)
 
-            /* "MagDatabase.pyx":396
+            /* "MagDatabase.pyx":420
  *                         if nc.overlaps(nr):
  *                             pdiff_c.append(nc)
  *                             break             # <<<<<<<<<<<<<<
@@ -14101,7 +14760,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
             goto __pyx_L82_break;
 
-            /* "MagDatabase.pyx":394
+            /* "MagDatabase.pyx":418
  *                 for nc in self.layers['pdiffc']:
  *                     for nr in pdiff_r:
  *                         if nc.overlaps(nr):             # <<<<<<<<<<<<<<
@@ -14110,7 +14769,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
           }
 
-          /* "MagDatabase.pyx":393
+          /* "MagDatabase.pyx":417
  * 
  *                 for nc in self.layers['pdiffc']:
  *                     for nr in pdiff_r:             # <<<<<<<<<<<<<<
@@ -14125,7 +14784,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
         goto __pyx_L84_for_end;
         __pyx_L84_for_end:;
 
-        /* "MagDatabase.pyx":392
+        /* "MagDatabase.pyx":416
  *                 pdiff_c = []
  * 
  *                 for nc in self.layers['pdiffc']:             # <<<<<<<<<<<<<<
@@ -14135,7 +14794,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
       }
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-      /* "MagDatabase.pyx":398
+      /* "MagDatabase.pyx":422
  *                             break
  * 
  *                 t = Transistor()             # <<<<<<<<<<<<<<
@@ -14148,13 +14807,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
         PyObject *__pyx_callargs[2] = {__pyx_t_6, NULL};
         __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)__pyx_mstate_global->__pyx_ptype_11MagDatabase_Transistor, __pyx_callargs+__pyx_t_10, (1-__pyx_t_10) | (__pyx_t_10*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
         __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-        if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 398, __pyx_L1_error)
+        if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 422, __pyx_L1_error)
         __Pyx_GOTREF((PyObject *)__pyx_t_3);
       }
       __Pyx_XDECREF_SET(__pyx_v_t, ((struct __pyx_obj_11MagDatabase_Transistor *)__pyx_t_3));
       __pyx_t_3 = 0;
 
-      /* "MagDatabase.pyx":400
+      /* "MagDatabase.pyx":424
  *                 t = Transistor()
  * 
  *                 t.ttype = "pmos"             # <<<<<<<<<<<<<<
@@ -14167,7 +14826,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
       __Pyx_DECREF(__pyx_v_t->ttype);
       __pyx_v_t->ttype = __pyx_mstate_global->__pyx_n_u_pmos;
 
-      /* "MagDatabase.pyx":402
+      /* "MagDatabase.pyx":426
  *                 t.ttype = "pmos"
  * 
  *                 for r in poly_c:             # <<<<<<<<<<<<<<
@@ -14180,18 +14839,18 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
         {
           Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_3);
           #if !CYTHON_ASSUME_SAFE_SIZE
-          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 402, __pyx_L1_error)
+          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 426, __pyx_L1_error)
           #endif
           if (__pyx_t_7 >= __pyx_temp) break;
         }
         __pyx_t_6 = __Pyx_PyList_GET_ITEM_REF(__pyx_t_3, __pyx_t_7, __Pyx_ReferenceSharing_OwnStrongReference);
         ++__pyx_t_7;
-        if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 402, __pyx_L1_error)
+        if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 426, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF_SET(__pyx_v_r, __pyx_t_6);
         __pyx_t_6 = 0;
 
-        /* "MagDatabase.pyx":403
+        /* "MagDatabase.pyx":427
  * 
  *                 for r in poly_c:
  *                     t.gates.append(r.centroid())             # <<<<<<<<<<<<<<
@@ -14200,7 +14859,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
         if (unlikely(__pyx_v_t->gates == Py_None)) {
           PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "append");
-          __PYX_ERR(0, 403, __pyx_L1_error)
+          __PYX_ERR(0, 427, __pyx_L1_error)
         }
         __pyx_t_9 = __pyx_v_r;
         __Pyx_INCREF(__pyx_t_9);
@@ -14209,13 +14868,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
           PyObject *__pyx_callargs[2] = {__pyx_t_9, NULL};
           __pyx_t_6 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_centroid, __pyx_callargs+__pyx_t_10, (1-__pyx_t_10) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
           __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
-          if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 403, __pyx_L1_error)
+          if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 427, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_6);
         }
-        __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_t->gates, __pyx_t_6); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 403, __pyx_L1_error)
+        __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_t->gates, __pyx_t_6); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 427, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-        /* "MagDatabase.pyx":402
+        /* "MagDatabase.pyx":426
  *                 t.ttype = "pmos"
  * 
  *                 for r in poly_c:             # <<<<<<<<<<<<<<
@@ -14225,7 +14884,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
       }
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-      /* "MagDatabase.pyx":405
+      /* "MagDatabase.pyx":429
  *                     t.gates.append(r.centroid())
  * 
  *                 for r in pdiff_c:             # <<<<<<<<<<<<<<
@@ -14238,18 +14897,18 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
         {
           Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_3);
           #if !CYTHON_ASSUME_SAFE_SIZE
-          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 405, __pyx_L1_error)
+          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 429, __pyx_L1_error)
           #endif
           if (__pyx_t_7 >= __pyx_temp) break;
         }
         __pyx_t_6 = __Pyx_PyList_GET_ITEM_REF(__pyx_t_3, __pyx_t_7, __Pyx_ReferenceSharing_OwnStrongReference);
         ++__pyx_t_7;
-        if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 405, __pyx_L1_error)
+        if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 429, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF_SET(__pyx_v_r, __pyx_t_6);
         __pyx_t_6 = 0;
 
-        /* "MagDatabase.pyx":406
+        /* "MagDatabase.pyx":430
  * 
  *                 for r in pdiff_c:
  *                     t.source_drains.append(r.centroid())             # <<<<<<<<<<<<<<
@@ -14258,7 +14917,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
         if (unlikely(__pyx_v_t->source_drains == Py_None)) {
           PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "append");
-          __PYX_ERR(0, 406, __pyx_L1_error)
+          __PYX_ERR(0, 430, __pyx_L1_error)
         }
         __pyx_t_9 = __pyx_v_r;
         __Pyx_INCREF(__pyx_t_9);
@@ -14267,13 +14926,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
           PyObject *__pyx_callargs[2] = {__pyx_t_9, NULL};
           __pyx_t_6 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_centroid, __pyx_callargs+__pyx_t_10, (1-__pyx_t_10) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
           __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
-          if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 406, __pyx_L1_error)
+          if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 430, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_6);
         }
-        __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_t->source_drains, __pyx_t_6); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 406, __pyx_L1_error)
+        __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_t->source_drains, __pyx_t_6); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 430, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-        /* "MagDatabase.pyx":405
+        /* "MagDatabase.pyx":429
  *                     t.gates.append(r.centroid())
  * 
  *                 for r in pdiff_c:             # <<<<<<<<<<<<<<
@@ -14283,7 +14942,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
       }
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-      /* "MagDatabase.pyx":408
+      /* "MagDatabase.pyx":432
  *                     t.source_drains.append(r.centroid())
  * 
  *                 self.transistors.append(t)             # <<<<<<<<<<<<<<
@@ -14292,11 +14951,11 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
       if (unlikely(__pyx_v_self->transistors == Py_None)) {
         PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "append");
-        __PYX_ERR(0, 408, __pyx_L1_error)
+        __PYX_ERR(0, 432, __pyx_L1_error)
       }
-      __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_self->transistors, ((PyObject *)__pyx_v_t)); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 408, __pyx_L1_error)
+      __pyx_t_11 = __Pyx_PyList_Append(__pyx_v_self->transistors, ((PyObject *)__pyx_v_t)); if (unlikely(__pyx_t_11 == ((int)-1))) __PYX_ERR(0, 432, __pyx_L1_error)
 
-      /* "MagDatabase.pyx":346
+      /* "MagDatabase.pyx":370
  * 
  *         if 'pmos' in self.layers:
  *             for r in self.layers['pmos']:             # <<<<<<<<<<<<<<
@@ -14306,7 +14965,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "MagDatabase.pyx":345
+    /* "MagDatabase.pyx":369
  *                 self.transistors.append(t)
  * 
  *         if 'pmos' in self.layers:             # <<<<<<<<<<<<<<
@@ -14315,8 +14974,8 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
 */
   }
 
-  /* "MagDatabase.pyx":265
- *         return {'self': self.labels, 'children': p}
+  /* "MagDatabase.pyx":289
+ * 
  * 
  *     def find_transistors(self):             # <<<<<<<<<<<<<<
  *         """
@@ -14354,24 +15013,196 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_22find_transistors(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":414
+/* "MagDatabase.pyx":435
  * 
  * 
- *     def getBbox(self, db):             # <<<<<<<<<<<<<<
+ *     def setBBox(self, xbot, ybot, xtop, ytop):             # <<<<<<<<<<<<<<
+ *         self.bbox = Rect(xbot, ybot, xtop, ytop)
  * 
- *         xbot = 1e9
 */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11MagDatabase_4Cell_25getBbox(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_11MagDatabase_4Cell_27setBBox(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_11MagDatabase_4Cell_25getBbox = {"getBbox", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_25getBbox, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_11MagDatabase_4Cell_25getBbox(PyObject *__pyx_v_self, 
+static PyMethodDef __pyx_mdef_11MagDatabase_4Cell_27setBBox = {"setBBox", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_27setBBox, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_11MagDatabase_4Cell_27setBBox(PyObject *__pyx_v_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  PyObject *__pyx_v_xbot = 0;
+  PyObject *__pyx_v_ybot = 0;
+  PyObject *__pyx_v_xtop = 0;
+  PyObject *__pyx_v_ytop = 0;
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject* values[4] = {0,0,0,0};
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("setBBox (wrapper)", 0);
+  #if !CYTHON_METH_FASTCALL
+  #if CYTHON_ASSUME_SAFE_SIZE
+  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #else
+  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
+  #endif
+  #endif
+  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  {
+    PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_xbot_2,&__pyx_mstate_global->__pyx_n_u_ybot_2,&__pyx_mstate_global->__pyx_n_u_xtop_2,&__pyx_mstate_global->__pyx_n_u_ytop_2,0};
+    const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 435, __pyx_L3_error)
+    if (__pyx_kwds_len > 0) {
+      switch (__pyx_nargs) {
+        case  4:
+        values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 435, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  3:
+        values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 435, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  2:
+        values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 435, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  1:
+        values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 435, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      const Py_ssize_t kwd_pos_args = __pyx_nargs;
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "setBBox", 0) < (0)) __PYX_ERR(0, 435, __pyx_L3_error)
+      for (Py_ssize_t i = __pyx_nargs; i < 4; i++) {
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("setBBox", 1, 4, 4, i); __PYX_ERR(0, 435, __pyx_L3_error) }
+      }
+    } else if (unlikely(__pyx_nargs != 4)) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 435, __pyx_L3_error)
+      values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 435, __pyx_L3_error)
+      values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 435, __pyx_L3_error)
+      values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 435, __pyx_L3_error)
+    }
+    __pyx_v_xbot = values[0];
+    __pyx_v_ybot = values[1];
+    __pyx_v_xtop = values[2];
+    __pyx_v_ytop = values[3];
+  }
+  goto __pyx_L6_skip;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("setBBox", 1, 4, 4, __pyx_nargs); __PYX_ERR(0, 435, __pyx_L3_error)
+  __pyx_L6_skip:;
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __Pyx_AddTraceback("MagDatabase.Cell.setBBox", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_11MagDatabase_4Cell_26setBBox(((struct __pyx_obj_11MagDatabase_Cell *)__pyx_v_self), __pyx_v_xbot, __pyx_v_ybot, __pyx_v_xtop, __pyx_v_ytop);
+
+  /* function exit code */
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_11MagDatabase_4Cell_26setBBox(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_xbot, PyObject *__pyx_v_ybot, PyObject *__pyx_v_xtop, PyObject *__pyx_v_ytop) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  size_t __pyx_t_3;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("setBBox", 0);
+
+  /* "MagDatabase.pyx":436
+ * 
+ *     def setBBox(self, xbot, ybot, xtop, ytop):
+ *         self.bbox = Rect(xbot, ybot, xtop, ytop)             # <<<<<<<<<<<<<<
+ * 
+ * 
+*/
+  __pyx_t_2 = NULL;
+  __pyx_t_3 = 1;
+  {
+    PyObject *__pyx_callargs[5] = {__pyx_t_2, __pyx_v_xbot, __pyx_v_ybot, __pyx_v_xtop, __pyx_v_ytop};
+    __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_mstate_global->__pyx_ptype_11MagDatabase_Rect, __pyx_callargs+__pyx_t_3, (5-__pyx_t_3) | (__pyx_t_3*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 436, __pyx_L1_error)
+    __Pyx_GOTREF((PyObject *)__pyx_t_1);
+  }
+  __Pyx_GIVEREF((PyObject *)__pyx_t_1);
+  __Pyx_GOTREF((PyObject *)__pyx_v_self->bbox);
+  __Pyx_DECREF((PyObject *)__pyx_v_self->bbox);
+  __pyx_v_self->bbox = ((struct __pyx_obj_11MagDatabase_Rect *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "MagDatabase.pyx":435
+ * 
+ * 
+ *     def setBBox(self, xbot, ybot, xtop, ytop):             # <<<<<<<<<<<<<<
+ *         self.bbox = Rect(xbot, ybot, xtop, ytop)
+ * 
+*/
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_AddTraceback("MagDatabase.Cell.setBBox", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "MagDatabase.pyx":439
+ * 
+ * 
+ *     def getBbox(self, db):             # <<<<<<<<<<<<<<
+ * 
+ *         xbot = self.bbox.xbot
+*/
+
+/* Python wrapper */
+static PyObject *__pyx_pw_11MagDatabase_4Cell_29getBbox(PyObject *__pyx_v_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+static PyMethodDef __pyx_mdef_11MagDatabase_4Cell_29getBbox = {"getBbox", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_29getBbox, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_11MagDatabase_4Cell_29getBbox(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -14401,32 +15232,32 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_db,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 414, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 439, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 414, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 439, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "getBbox", 0) < (0)) __PYX_ERR(0, 414, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "getBbox", 0) < (0)) __PYX_ERR(0, 439, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 1; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("getBbox", 1, 1, 1, i); __PYX_ERR(0, 414, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("getBbox", 1, 1, 1, i); __PYX_ERR(0, 439, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 414, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 439, __pyx_L3_error)
     }
     __pyx_v_db = values[0];
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("getBbox", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 414, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("getBbox", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 439, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -14437,7 +15268,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11MagDatabase_4Cell_24getBbox(((struct __pyx_obj_11MagDatabase_Cell *)__pyx_v_self), __pyx_v_db);
+  __pyx_r = __pyx_pf_11MagDatabase_4Cell_28getBbox(((struct __pyx_obj_11MagDatabase_Cell *)__pyx_v_self), __pyx_v_db);
 
   /* function exit code */
   for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
@@ -14447,7 +15278,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11MagDatabase_4Cell_24getBbox(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_db) {
+static PyObject *__pyx_pf_11MagDatabase_4Cell_28getBbox(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_db) {
   PyObject *__pyx_v_xbot = NULL;
   PyObject *__pyx_v_ybot = NULL;
   PyObject *__pyx_v_xtop = NULL;
@@ -14477,48 +15308,56 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_24getBbox(struct __pyx_obj_11MagDa
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("getBbox", 0);
 
-  /* "MagDatabase.pyx":416
+  /* "MagDatabase.pyx":441
  *     def getBbox(self, db):
  * 
- *         xbot = 1e9             # <<<<<<<<<<<<<<
- *         ybot = 1e9
- *         xtop = -1e9
+ *         xbot = self.bbox.xbot             # <<<<<<<<<<<<<<
+ *         ybot = self.bbox.ybot
+ *         xtop = self.bbox.xtop
 */
-  __Pyx_INCREF(__pyx_mstate_global->__pyx_float_1e9);
-  __pyx_v_xbot = __pyx_mstate_global->__pyx_float_1e9;
+  __pyx_t_1 = __Pyx_PyLong_From_int(__pyx_v_self->bbox->xbot); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 441, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_xbot = __pyx_t_1;
+  __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":417
+  /* "MagDatabase.pyx":442
  * 
- *         xbot = 1e9
- *         ybot = 1e9             # <<<<<<<<<<<<<<
- *         xtop = -1e9
- *         ytop = -1e9
+ *         xbot = self.bbox.xbot
+ *         ybot = self.bbox.ybot             # <<<<<<<<<<<<<<
+ *         xtop = self.bbox.xtop
+ *         ytop = self.bbox.ytop
 */
-  __Pyx_INCREF(__pyx_mstate_global->__pyx_float_1e9);
-  __pyx_v_ybot = __pyx_mstate_global->__pyx_float_1e9;
+  __pyx_t_1 = __Pyx_PyLong_From_int(__pyx_v_self->bbox->ybot); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 442, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_ybot = __pyx_t_1;
+  __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":418
- *         xbot = 1e9
- *         ybot = 1e9
- *         xtop = -1e9             # <<<<<<<<<<<<<<
- *         ytop = -1e9
+  /* "MagDatabase.pyx":443
+ *         xbot = self.bbox.xbot
+ *         ybot = self.bbox.ybot
+ *         xtop = self.bbox.xtop             # <<<<<<<<<<<<<<
+ *         ytop = self.bbox.ytop
  * 
 */
-  __Pyx_INCREF(__pyx_mstate_global->__pyx_float_neg_1e9);
-  __pyx_v_xtop = __pyx_mstate_global->__pyx_float_neg_1e9;
+  __pyx_t_1 = __Pyx_PyLong_From_int(__pyx_v_self->bbox->xtop); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 443, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_xtop = __pyx_t_1;
+  __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":419
- *         ybot = 1e9
- *         xtop = -1e9
- *         ytop = -1e9             # <<<<<<<<<<<<<<
+  /* "MagDatabase.pyx":444
+ *         ybot = self.bbox.ybot
+ *         xtop = self.bbox.xtop
+ *         ytop = self.bbox.ytop             # <<<<<<<<<<<<<<
  * 
  *         for k, v in self.layers.items():
 */
-  __Pyx_INCREF(__pyx_mstate_global->__pyx_float_neg_1e9);
-  __pyx_v_ytop = __pyx_mstate_global->__pyx_float_neg_1e9;
+  __pyx_t_1 = __Pyx_PyLong_From_int(__pyx_v_self->bbox->ytop); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 444, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_ytop = __pyx_t_1;
+  __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":421
- *         ytop = -1e9
+  /* "MagDatabase.pyx":446
+ *         ytop = self.bbox.ytop
  * 
  *         for k, v in self.layers.items():             # <<<<<<<<<<<<<<
  *             for r in v:
@@ -14527,9 +15366,9 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_24getBbox(struct __pyx_obj_11MagDa
   __pyx_t_2 = 0;
   if (unlikely(__pyx_v_self->layers == Py_None)) {
     PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "items");
-    __PYX_ERR(0, 421, __pyx_L1_error)
+    __PYX_ERR(0, 446, __pyx_L1_error)
   }
-  __pyx_t_5 = __Pyx_dict_iterator(__pyx_v_self->layers, 1, __pyx_mstate_global->__pyx_n_u_items, (&__pyx_t_3), (&__pyx_t_4)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 421, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_dict_iterator(__pyx_v_self->layers, 1, __pyx_mstate_global->__pyx_n_u_items, (&__pyx_t_3), (&__pyx_t_4)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 446, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_1);
   __pyx_t_1 = __pyx_t_5;
@@ -14537,7 +15376,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_24getBbox(struct __pyx_obj_11MagDa
   while (1) {
     __pyx_t_7 = __Pyx_dict_iter_next(__pyx_t_1, __pyx_t_3, &__pyx_t_2, &__pyx_t_5, &__pyx_t_6, NULL, __pyx_t_4);
     if (unlikely(__pyx_t_7 == 0)) break;
-    if (unlikely(__pyx_t_7 == -1)) __PYX_ERR(0, 421, __pyx_L1_error)
+    if (unlikely(__pyx_t_7 == -1)) __PYX_ERR(0, 446, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_XDECREF_SET(__pyx_v_k, __pyx_t_5);
@@ -14545,7 +15384,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_24getBbox(struct __pyx_obj_11MagDa
     __Pyx_XDECREF_SET(__pyx_v_v, __pyx_t_6);
     __pyx_t_6 = 0;
 
-    /* "MagDatabase.pyx":422
+    /* "MagDatabase.pyx":447
  * 
  *         for k, v in self.layers.items():
  *             for r in v:             # <<<<<<<<<<<<<<
@@ -14557,9 +15396,9 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_24getBbox(struct __pyx_obj_11MagDa
       __pyx_t_8 = 0;
       __pyx_t_9 = NULL;
     } else {
-      __pyx_t_8 = -1; __pyx_t_6 = PyObject_GetIter(__pyx_v_v); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 422, __pyx_L1_error)
+      __pyx_t_8 = -1; __pyx_t_6 = PyObject_GetIter(__pyx_v_v); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 447, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_9 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_6); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 422, __pyx_L1_error)
+      __pyx_t_9 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_6); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 447, __pyx_L1_error)
     }
     for (;;) {
       if (likely(!__pyx_t_9)) {
@@ -14567,7 +15406,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_24getBbox(struct __pyx_obj_11MagDa
           {
             Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_6);
             #if !CYTHON_ASSUME_SAFE_SIZE
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 422, __pyx_L1_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 447, __pyx_L1_error)
             #endif
             if (__pyx_t_8 >= __pyx_temp) break;
           }
@@ -14577,7 +15416,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_24getBbox(struct __pyx_obj_11MagDa
           {
             Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_6);
             #if !CYTHON_ASSUME_SAFE_SIZE
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 422, __pyx_L1_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 447, __pyx_L1_error)
             #endif
             if (__pyx_t_8 >= __pyx_temp) break;
           }
@@ -14588,13 +15427,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_24getBbox(struct __pyx_obj_11MagDa
           #endif
           ++__pyx_t_8;
         }
-        if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 422, __pyx_L1_error)
+        if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 447, __pyx_L1_error)
       } else {
         __pyx_t_5 = __pyx_t_9(__pyx_t_6);
         if (unlikely(!__pyx_t_5)) {
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
-            if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 422, __pyx_L1_error)
+            if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 447, __pyx_L1_error)
             PyErr_Clear();
           }
           break;
@@ -14604,34 +15443,34 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_24getBbox(struct __pyx_obj_11MagDa
       __Pyx_XDECREF_SET(__pyx_v_r, __pyx_t_5);
       __pyx_t_5 = 0;
 
-      /* "MagDatabase.pyx":423
+      /* "MagDatabase.pyx":448
  *         for k, v in self.layers.items():
  *             for r in v:
  *                 if r.xbot < xbot:             # <<<<<<<<<<<<<<
  *                     xbot = r.xbot
  *                 if r.ybot < ybot:
 */
-      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_xbot_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 423, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_xbot_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 448, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_10 = PyObject_RichCompare(__pyx_t_5, __pyx_v_xbot, Py_LT); __Pyx_XGOTREF(__pyx_t_10); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 423, __pyx_L1_error)
+      __pyx_t_10 = PyObject_RichCompare(__pyx_t_5, __pyx_v_xbot, Py_LT); __Pyx_XGOTREF(__pyx_t_10); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 448, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_11 = __Pyx_PyObject_IsTrue(__pyx_t_10); if (unlikely((__pyx_t_11 < 0))) __PYX_ERR(0, 423, __pyx_L1_error)
+      __pyx_t_11 = __Pyx_PyObject_IsTrue(__pyx_t_10); if (unlikely((__pyx_t_11 < 0))) __PYX_ERR(0, 448, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
       if (__pyx_t_11) {
 
-        /* "MagDatabase.pyx":424
+        /* "MagDatabase.pyx":449
  *             for r in v:
  *                 if r.xbot < xbot:
  *                     xbot = r.xbot             # <<<<<<<<<<<<<<
  *                 if r.ybot < ybot:
  *                     ybot = r.ybot
 */
-        __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_xbot_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 424, __pyx_L1_error)
+        __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_xbot_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 449, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_10);
         __Pyx_DECREF_SET(__pyx_v_xbot, __pyx_t_10);
         __pyx_t_10 = 0;
 
-        /* "MagDatabase.pyx":423
+        /* "MagDatabase.pyx":448
  *         for k, v in self.layers.items():
  *             for r in v:
  *                 if r.xbot < xbot:             # <<<<<<<<<<<<<<
@@ -14640,34 +15479,34 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_24getBbox(struct __pyx_obj_11MagDa
 */
       }
 
-      /* "MagDatabase.pyx":425
+      /* "MagDatabase.pyx":450
  *                 if r.xbot < xbot:
  *                     xbot = r.xbot
  *                 if r.ybot < ybot:             # <<<<<<<<<<<<<<
  *                     ybot = r.ybot
  *                 if r.xtop > xtop:
 */
-      __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_ybot_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 425, __pyx_L1_error)
+      __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_ybot_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 450, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_10);
-      __pyx_t_5 = PyObject_RichCompare(__pyx_t_10, __pyx_v_ybot, Py_LT); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 425, __pyx_L1_error)
+      __pyx_t_5 = PyObject_RichCompare(__pyx_t_10, __pyx_v_ybot, Py_LT); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 450, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-      __pyx_t_11 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely((__pyx_t_11 < 0))) __PYX_ERR(0, 425, __pyx_L1_error)
+      __pyx_t_11 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely((__pyx_t_11 < 0))) __PYX_ERR(0, 450, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       if (__pyx_t_11) {
 
-        /* "MagDatabase.pyx":426
+        /* "MagDatabase.pyx":451
  *                     xbot = r.xbot
  *                 if r.ybot < ybot:
  *                     ybot = r.ybot             # <<<<<<<<<<<<<<
  *                 if r.xtop > xtop:
  *                     xtop = r.xtop
 */
-        __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_ybot_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 426, __pyx_L1_error)
+        __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_ybot_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 451, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF_SET(__pyx_v_ybot, __pyx_t_5);
         __pyx_t_5 = 0;
 
-        /* "MagDatabase.pyx":425
+        /* "MagDatabase.pyx":450
  *                 if r.xbot < xbot:
  *                     xbot = r.xbot
  *                 if r.ybot < ybot:             # <<<<<<<<<<<<<<
@@ -14676,34 +15515,34 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_24getBbox(struct __pyx_obj_11MagDa
 */
       }
 
-      /* "MagDatabase.pyx":427
+      /* "MagDatabase.pyx":452
  *                 if r.ybot < ybot:
  *                     ybot = r.ybot
  *                 if r.xtop > xtop:             # <<<<<<<<<<<<<<
  *                     xtop = r.xtop
  *                 if r.ytop > ytop:
 */
-      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_xtop_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 427, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_xtop_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 452, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_10 = PyObject_RichCompare(__pyx_t_5, __pyx_v_xtop, Py_GT); __Pyx_XGOTREF(__pyx_t_10); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 427, __pyx_L1_error)
+      __pyx_t_10 = PyObject_RichCompare(__pyx_t_5, __pyx_v_xtop, Py_GT); __Pyx_XGOTREF(__pyx_t_10); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 452, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_11 = __Pyx_PyObject_IsTrue(__pyx_t_10); if (unlikely((__pyx_t_11 < 0))) __PYX_ERR(0, 427, __pyx_L1_error)
+      __pyx_t_11 = __Pyx_PyObject_IsTrue(__pyx_t_10); if (unlikely((__pyx_t_11 < 0))) __PYX_ERR(0, 452, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
       if (__pyx_t_11) {
 
-        /* "MagDatabase.pyx":428
+        /* "MagDatabase.pyx":453
  *                     ybot = r.ybot
  *                 if r.xtop > xtop:
  *                     xtop = r.xtop             # <<<<<<<<<<<<<<
  *                 if r.ytop > ytop:
  *                     ytop = r.ytop
 */
-        __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_xtop_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 428, __pyx_L1_error)
+        __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_xtop_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 453, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_10);
         __Pyx_DECREF_SET(__pyx_v_xtop, __pyx_t_10);
         __pyx_t_10 = 0;
 
-        /* "MagDatabase.pyx":427
+        /* "MagDatabase.pyx":452
  *                 if r.ybot < ybot:
  *                     ybot = r.ybot
  *                 if r.xtop > xtop:             # <<<<<<<<<<<<<<
@@ -14712,34 +15551,34 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_24getBbox(struct __pyx_obj_11MagDa
 */
       }
 
-      /* "MagDatabase.pyx":429
+      /* "MagDatabase.pyx":454
  *                 if r.xtop > xtop:
  *                     xtop = r.xtop
  *                 if r.ytop > ytop:             # <<<<<<<<<<<<<<
  *                     ytop = r.ytop
  * 
 */
-      __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_ytop_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 429, __pyx_L1_error)
+      __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_ytop_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 454, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_10);
-      __pyx_t_5 = PyObject_RichCompare(__pyx_t_10, __pyx_v_ytop, Py_GT); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 429, __pyx_L1_error)
+      __pyx_t_5 = PyObject_RichCompare(__pyx_t_10, __pyx_v_ytop, Py_GT); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 454, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-      __pyx_t_11 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely((__pyx_t_11 < 0))) __PYX_ERR(0, 429, __pyx_L1_error)
+      __pyx_t_11 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely((__pyx_t_11 < 0))) __PYX_ERR(0, 454, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       if (__pyx_t_11) {
 
-        /* "MagDatabase.pyx":430
+        /* "MagDatabase.pyx":455
  *                     xtop = r.xtop
  *                 if r.ytop > ytop:
  *                     ytop = r.ytop             # <<<<<<<<<<<<<<
  * 
  *         for u in self.uses:
 */
-        __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_ytop_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 430, __pyx_L1_error)
+        __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_ytop_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 455, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF_SET(__pyx_v_ytop, __pyx_t_5);
         __pyx_t_5 = 0;
 
-        /* "MagDatabase.pyx":429
+        /* "MagDatabase.pyx":454
  *                 if r.xtop > xtop:
  *                     xtop = r.xtop
  *                 if r.ytop > ytop:             # <<<<<<<<<<<<<<
@@ -14748,7 +15587,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_24getBbox(struct __pyx_obj_11MagDa
 */
       }
 
-      /* "MagDatabase.pyx":422
+      /* "MagDatabase.pyx":447
  * 
  *         for k, v in self.layers.items():
  *             for r in v:             # <<<<<<<<<<<<<<
@@ -14760,7 +15599,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_24getBbox(struct __pyx_obj_11MagDa
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":432
+  /* "MagDatabase.pyx":457
  *                     ytop = r.ytop
  * 
  *         for u in self.uses:             # <<<<<<<<<<<<<<
@@ -14769,7 +15608,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_24getBbox(struct __pyx_obj_11MagDa
 */
   if (unlikely(__pyx_v_self->uses == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-    __PYX_ERR(0, 432, __pyx_L1_error)
+    __PYX_ERR(0, 457, __pyx_L1_error)
   }
   __pyx_t_1 = __pyx_v_self->uses; __Pyx_INCREF(__pyx_t_1);
   __pyx_t_3 = 0;
@@ -14777,18 +15616,18 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_24getBbox(struct __pyx_obj_11MagDa
     {
       Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_1);
       #if !CYTHON_ASSUME_SAFE_SIZE
-      if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 432, __pyx_L1_error)
+      if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 457, __pyx_L1_error)
       #endif
       if (__pyx_t_3 >= __pyx_temp) break;
     }
     __pyx_t_6 = __Pyx_PyList_GET_ITEM_REF(__pyx_t_1, __pyx_t_3, __Pyx_ReferenceSharing_OwnStrongReference);
     ++__pyx_t_3;
-    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 432, __pyx_L1_error)
+    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 457, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_XDECREF_SET(__pyx_v_u, __pyx_t_6);
     __pyx_t_6 = 0;
 
-    /* "MagDatabase.pyx":433
+    /* "MagDatabase.pyx":458
  * 
  *         for u in self.uses:
  *             r = db.getCell(u['name']).getBbox(db)             # <<<<<<<<<<<<<<
@@ -14797,7 +15636,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_24getBbox(struct __pyx_obj_11MagDa
 */
     __pyx_t_12 = __pyx_v_db;
     __Pyx_INCREF(__pyx_t_12);
-    __pyx_t_13 = __Pyx_PyObject_Dict_GetItem(__pyx_v_u, __pyx_mstate_global->__pyx_n_u_name); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 433, __pyx_L1_error)
+    __pyx_t_13 = __Pyx_PyObject_Dict_GetItem(__pyx_v_u, __pyx_mstate_global->__pyx_n_u_name); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 458, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_13);
     __pyx_t_14 = 0;
     {
@@ -14805,7 +15644,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_24getBbox(struct __pyx_obj_11MagDa
       __pyx_t_10 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_getCell, __pyx_callargs+__pyx_t_14, (2-__pyx_t_14) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
       __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-      if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 433, __pyx_L1_error)
+      if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 458, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_10);
     }
     __pyx_t_5 = __pyx_t_10;
@@ -14816,40 +15655,40 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_24getBbox(struct __pyx_obj_11MagDa
       __pyx_t_6 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_getBbox, __pyx_callargs+__pyx_t_14, (2-__pyx_t_14) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-      if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 433, __pyx_L1_error)
+      if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 458, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
     }
     __Pyx_XDECREF_SET(__pyx_v_r, __pyx_t_6);
     __pyx_t_6 = 0;
 
-    /* "MagDatabase.pyx":434
+    /* "MagDatabase.pyx":459
  *         for u in self.uses:
  *             r = db.getCell(u['name']).getBbox(db)
  *             if r.xbot < xbot:             # <<<<<<<<<<<<<<
  *                 xbot = r.xbot
  *             if r.ybot < ybot:
 */
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_xbot_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 434, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_xbot_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 459, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_10 = PyObject_RichCompare(__pyx_t_6, __pyx_v_xbot, Py_LT); __Pyx_XGOTREF(__pyx_t_10); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 434, __pyx_L1_error)
+    __pyx_t_10 = PyObject_RichCompare(__pyx_t_6, __pyx_v_xbot, Py_LT); __Pyx_XGOTREF(__pyx_t_10); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 459, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_11 = __Pyx_PyObject_IsTrue(__pyx_t_10); if (unlikely((__pyx_t_11 < 0))) __PYX_ERR(0, 434, __pyx_L1_error)
+    __pyx_t_11 = __Pyx_PyObject_IsTrue(__pyx_t_10); if (unlikely((__pyx_t_11 < 0))) __PYX_ERR(0, 459, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     if (__pyx_t_11) {
 
-      /* "MagDatabase.pyx":435
+      /* "MagDatabase.pyx":460
  *             r = db.getCell(u['name']).getBbox(db)
  *             if r.xbot < xbot:
  *                 xbot = r.xbot             # <<<<<<<<<<<<<<
  *             if r.ybot < ybot:
  *                 ybot = r.ybot
 */
-      __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_xbot_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 435, __pyx_L1_error)
+      __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_xbot_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 460, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_10);
       __Pyx_DECREF_SET(__pyx_v_xbot, __pyx_t_10);
       __pyx_t_10 = 0;
 
-      /* "MagDatabase.pyx":434
+      /* "MagDatabase.pyx":459
  *         for u in self.uses:
  *             r = db.getCell(u['name']).getBbox(db)
  *             if r.xbot < xbot:             # <<<<<<<<<<<<<<
@@ -14858,34 +15697,34 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_24getBbox(struct __pyx_obj_11MagDa
 */
     }
 
-    /* "MagDatabase.pyx":436
+    /* "MagDatabase.pyx":461
  *             if r.xbot < xbot:
  *                 xbot = r.xbot
  *             if r.ybot < ybot:             # <<<<<<<<<<<<<<
  *                 ybot = r.ybot
  *             if r.xtop > xtop:
 */
-    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_ybot_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 436, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_ybot_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 461, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
-    __pyx_t_6 = PyObject_RichCompare(__pyx_t_10, __pyx_v_ybot, Py_LT); __Pyx_XGOTREF(__pyx_t_6); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 436, __pyx_L1_error)
+    __pyx_t_6 = PyObject_RichCompare(__pyx_t_10, __pyx_v_ybot, Py_LT); __Pyx_XGOTREF(__pyx_t_6); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 461, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    __pyx_t_11 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely((__pyx_t_11 < 0))) __PYX_ERR(0, 436, __pyx_L1_error)
+    __pyx_t_11 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely((__pyx_t_11 < 0))) __PYX_ERR(0, 461, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     if (__pyx_t_11) {
 
-      /* "MagDatabase.pyx":437
+      /* "MagDatabase.pyx":462
  *                 xbot = r.xbot
  *             if r.ybot < ybot:
  *                 ybot = r.ybot             # <<<<<<<<<<<<<<
  *             if r.xtop > xtop:
  *                 xtop = r.xtop
 */
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_ybot_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 437, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_ybot_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 462, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF_SET(__pyx_v_ybot, __pyx_t_6);
       __pyx_t_6 = 0;
 
-      /* "MagDatabase.pyx":436
+      /* "MagDatabase.pyx":461
  *             if r.xbot < xbot:
  *                 xbot = r.xbot
  *             if r.ybot < ybot:             # <<<<<<<<<<<<<<
@@ -14894,34 +15733,34 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_24getBbox(struct __pyx_obj_11MagDa
 */
     }
 
-    /* "MagDatabase.pyx":438
+    /* "MagDatabase.pyx":463
  *             if r.ybot < ybot:
  *                 ybot = r.ybot
  *             if r.xtop > xtop:             # <<<<<<<<<<<<<<
  *                 xtop = r.xtop
  *             if r.ytop > ytop:
 */
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_xtop_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 438, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_xtop_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 463, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_10 = PyObject_RichCompare(__pyx_t_6, __pyx_v_xtop, Py_GT); __Pyx_XGOTREF(__pyx_t_10); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 438, __pyx_L1_error)
+    __pyx_t_10 = PyObject_RichCompare(__pyx_t_6, __pyx_v_xtop, Py_GT); __Pyx_XGOTREF(__pyx_t_10); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 463, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_11 = __Pyx_PyObject_IsTrue(__pyx_t_10); if (unlikely((__pyx_t_11 < 0))) __PYX_ERR(0, 438, __pyx_L1_error)
+    __pyx_t_11 = __Pyx_PyObject_IsTrue(__pyx_t_10); if (unlikely((__pyx_t_11 < 0))) __PYX_ERR(0, 463, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     if (__pyx_t_11) {
 
-      /* "MagDatabase.pyx":439
+      /* "MagDatabase.pyx":464
  *                 ybot = r.ybot
  *             if r.xtop > xtop:
  *                 xtop = r.xtop             # <<<<<<<<<<<<<<
  *             if r.ytop > ytop:
  *                 ytop = r.ytop
 */
-      __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_xtop_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 439, __pyx_L1_error)
+      __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_xtop_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 464, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_10);
       __Pyx_DECREF_SET(__pyx_v_xtop, __pyx_t_10);
       __pyx_t_10 = 0;
 
-      /* "MagDatabase.pyx":438
+      /* "MagDatabase.pyx":463
  *             if r.ybot < ybot:
  *                 ybot = r.ybot
  *             if r.xtop > xtop:             # <<<<<<<<<<<<<<
@@ -14930,34 +15769,34 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_24getBbox(struct __pyx_obj_11MagDa
 */
     }
 
-    /* "MagDatabase.pyx":440
+    /* "MagDatabase.pyx":465
  *             if r.xtop > xtop:
  *                 xtop = r.xtop
  *             if r.ytop > ytop:             # <<<<<<<<<<<<<<
  *                 ytop = r.ytop
  * 
 */
-    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_ytop_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 440, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_ytop_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 465, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
-    __pyx_t_6 = PyObject_RichCompare(__pyx_t_10, __pyx_v_ytop, Py_GT); __Pyx_XGOTREF(__pyx_t_6); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 440, __pyx_L1_error)
+    __pyx_t_6 = PyObject_RichCompare(__pyx_t_10, __pyx_v_ytop, Py_GT); __Pyx_XGOTREF(__pyx_t_6); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 465, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    __pyx_t_11 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely((__pyx_t_11 < 0))) __PYX_ERR(0, 440, __pyx_L1_error)
+    __pyx_t_11 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely((__pyx_t_11 < 0))) __PYX_ERR(0, 465, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     if (__pyx_t_11) {
 
-      /* "MagDatabase.pyx":441
+      /* "MagDatabase.pyx":466
  *                 xtop = r.xtop
  *             if r.ytop > ytop:
  *                 ytop = r.ytop             # <<<<<<<<<<<<<<
  * 
  *         return Rect(xbot, ybot, xtop, ytop)
 */
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_ytop_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 441, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_ytop_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 466, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF_SET(__pyx_v_ytop, __pyx_t_6);
       __pyx_t_6 = 0;
 
-      /* "MagDatabase.pyx":440
+      /* "MagDatabase.pyx":465
  *             if r.xtop > xtop:
  *                 xtop = r.xtop
  *             if r.ytop > ytop:             # <<<<<<<<<<<<<<
@@ -14966,7 +15805,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_24getBbox(struct __pyx_obj_11MagDa
 */
     }
 
-    /* "MagDatabase.pyx":432
+    /* "MagDatabase.pyx":457
  *                     ytop = r.ytop
  * 
  *         for u in self.uses:             # <<<<<<<<<<<<<<
@@ -14976,7 +15815,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_24getBbox(struct __pyx_obj_11MagDa
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":443
+  /* "MagDatabase.pyx":468
  *                 ytop = r.ytop
  * 
  *         return Rect(xbot, ybot, xtop, ytop)             # <<<<<<<<<<<<<<
@@ -14990,19 +15829,19 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_24getBbox(struct __pyx_obj_11MagDa
     PyObject *__pyx_callargs[5] = {__pyx_t_6, __pyx_v_xbot, __pyx_v_ybot, __pyx_v_xtop, __pyx_v_ytop};
     __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_mstate_global->__pyx_ptype_11MagDatabase_Rect, __pyx_callargs+__pyx_t_14, (5-__pyx_t_14) | (__pyx_t_14*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 443, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 468, __pyx_L1_error)
     __Pyx_GOTREF((PyObject *)__pyx_t_1);
   }
   __pyx_r = ((PyObject *)__pyx_t_1);
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "MagDatabase.pyx":414
+  /* "MagDatabase.pyx":439
  * 
  * 
  *     def getBbox(self, db):             # <<<<<<<<<<<<<<
  * 
- *         xbot = 1e9
+ *         xbot = self.bbox.xbot
 */
 
   /* function exit code */
@@ -15029,7 +15868,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_24getBbox(struct __pyx_obj_11MagDa
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":447
+/* "MagDatabase.pyx":472
  * 
  * 
  *     def writeMagFile(self, db, fname):             # <<<<<<<<<<<<<<
@@ -15038,15 +15877,15 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_24getBbox(struct __pyx_obj_11MagDa
 */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11MagDatabase_4Cell_27writeMagFile(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_11MagDatabase_4Cell_31writeMagFile(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_11MagDatabase_4Cell_27writeMagFile = {"writeMagFile", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_27writeMagFile, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_11MagDatabase_4Cell_27writeMagFile(PyObject *__pyx_v_self, 
+static PyMethodDef __pyx_mdef_11MagDatabase_4Cell_31writeMagFile = {"writeMagFile", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_31writeMagFile, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_11MagDatabase_4Cell_31writeMagFile(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -15077,39 +15916,39 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_db,&__pyx_mstate_global->__pyx_n_u_fname,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 447, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 472, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 447, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 472, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 447, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 472, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "writeMagFile", 0) < (0)) __PYX_ERR(0, 447, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "writeMagFile", 0) < (0)) __PYX_ERR(0, 472, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 2; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("writeMagFile", 1, 2, 2, i); __PYX_ERR(0, 447, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("writeMagFile", 1, 2, 2, i); __PYX_ERR(0, 472, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 447, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 472, __pyx_L3_error)
       values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 447, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 472, __pyx_L3_error)
     }
     __pyx_v_db = values[0];
     __pyx_v_fname = values[1];
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("writeMagFile", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 447, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("writeMagFile", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 472, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -15120,7 +15959,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11MagDatabase_4Cell_26writeMagFile(((struct __pyx_obj_11MagDatabase_Cell *)__pyx_v_self), __pyx_v_db, __pyx_v_fname);
+  __pyx_r = __pyx_pf_11MagDatabase_4Cell_30writeMagFile(((struct __pyx_obj_11MagDatabase_Cell *)__pyx_v_self), __pyx_v_db, __pyx_v_fname);
 
   /* function exit code */
   for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
@@ -15130,7 +15969,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_db, PyObject *__pyx_v_fname) {
+static PyObject *__pyx_pf_11MagDatabase_4Cell_30writeMagFile(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_db, PyObject *__pyx_v_fname) {
   PyObject *__pyx_v_f = NULL;
   PyObject *__pyx_v_r = NULL;
   PyObject *__pyx_v_k = NULL;
@@ -15178,7 +16017,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("writeMagFile", 0);
 
-  /* "MagDatabase.pyx":449
+  /* "MagDatabase.pyx":474
  *     def writeMagFile(self, db, fname):
  * 
  *         with open(fname, "w") as f:             # <<<<<<<<<<<<<<
@@ -15192,13 +16031,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
       PyObject *__pyx_callargs[3] = {__pyx_t_2, __pyx_v_fname, __pyx_mstate_global->__pyx_n_u_w};
       __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_builtin_open, __pyx_callargs+__pyx_t_3, (3-__pyx_t_3) | (__pyx_t_3*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 449, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 474, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
     }
-    __pyx_t_4 = __Pyx_PyObject_LookupSpecial(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_exit); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 449, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_LookupSpecial(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_exit); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 474, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_5 = NULL;
-    __pyx_t_6 = __Pyx_PyObject_LookupSpecial(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_enter); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 449, __pyx_L3_error)
+    __pyx_t_6 = __Pyx_PyObject_LookupSpecial(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_enter); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 474, __pyx_L3_error)
     __Pyx_GOTREF(__pyx_t_6);
     __pyx_t_3 = 1;
     #if CYTHON_UNPACK_METHODS
@@ -15217,7 +16056,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
       __pyx_t_2 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_6, __pyx_callargs+__pyx_t_3, (1-__pyx_t_3) | (__pyx_t_3*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 449, __pyx_L3_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 474, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_2);
     }
     __pyx_t_6 = __pyx_t_2;
@@ -15235,7 +16074,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
           __pyx_v_f = __pyx_t_6;
           __pyx_t_6 = 0;
 
-          /* "MagDatabase.pyx":451
+          /* "MagDatabase.pyx":476
  *         with open(fname, "w") as f:
  * 
  *             f.write("magic\n")             # <<<<<<<<<<<<<<
@@ -15249,12 +16088,12 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
             PyObject *__pyx_callargs[2] = {__pyx_t_1, __pyx_mstate_global->__pyx_n_u_magic};
             __pyx_t_6 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_write, __pyx_callargs+__pyx_t_3, (2-__pyx_t_3) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
             __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-            if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 451, __pyx_L7_error)
+            if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 476, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_6);
           }
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-          /* "MagDatabase.pyx":453
+          /* "MagDatabase.pyx":478
  *             f.write("magic\n")
  * 
  *             f.write(f"tech {self.tech}\n")             # <<<<<<<<<<<<<<
@@ -15263,13 +16102,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
 */
           __pyx_t_1 = __pyx_v_f;
           __Pyx_INCREF(__pyx_t_1);
-          __pyx_t_2 = __Pyx_PyUnicode_Unicode(__pyx_v_self->tech); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 453, __pyx_L7_error)
+          __pyx_t_2 = __Pyx_PyUnicode_Unicode(__pyx_v_self->tech); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 478, __pyx_L7_error)
           __Pyx_GOTREF(__pyx_t_2);
           __pyx_t_10[0] = __pyx_mstate_global->__pyx_kp_u_tech_2;
           __pyx_t_10[1] = __pyx_t_2;
           __pyx_t_10[2] = __pyx_mstate_global->__pyx_kp_u__4;
           __pyx_t_5 = __Pyx_PyUnicode_Join(__pyx_t_10, 3, 5 + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_2) + 1, 127 | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_2));
-          if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 453, __pyx_L7_error)
+          if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 478, __pyx_L7_error)
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
           __pyx_t_3 = 0;
@@ -15278,12 +16117,12 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
             __pyx_t_6 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_write, __pyx_callargs+__pyx_t_3, (2-__pyx_t_3) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
             __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-            if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 453, __pyx_L7_error)
+            if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 478, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_6);
           }
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-          /* "MagDatabase.pyx":456
+          /* "MagDatabase.pyx":481
  * 
  *             # FIXME: Load from file when parsing
  *             f.write(f"magscale 1 2\n")             # <<<<<<<<<<<<<<
@@ -15297,12 +16136,12 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
             PyObject *__pyx_callargs[2] = {__pyx_t_5, __pyx_mstate_global->__pyx_kp_u_magscale_1_2};
             __pyx_t_6 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_write, __pyx_callargs+__pyx_t_3, (2-__pyx_t_3) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
             __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-            if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 456, __pyx_L7_error)
+            if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 481, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_6);
           }
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-          /* "MagDatabase.pyx":458
+          /* "MagDatabase.pyx":483
  *             f.write(f"magscale 1 2\n")
  * 
  *             f.write(f"timestamp {int(time.time())}\n")             # <<<<<<<<<<<<<<
@@ -15311,25 +16150,25 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
 */
           __pyx_t_5 = __pyx_v_f;
           __Pyx_INCREF(__pyx_t_5);
-          __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_time); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 458, __pyx_L7_error)
+          __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_time); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 483, __pyx_L7_error)
           __Pyx_GOTREF(__pyx_t_1);
-          __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_time); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 458, __pyx_L7_error)
+          __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_time); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 483, __pyx_L7_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-          __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 458, __pyx_L7_error)
+          __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 483, __pyx_L7_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-          __pyx_t_2 = __Pyx_PyNumber_Int(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 458, __pyx_L7_error)
+          __pyx_t_2 = __Pyx_PyNumber_Int(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 483, __pyx_L7_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-          __pyx_t_1 = __Pyx_PyObject_FormatSimple(__pyx_t_2, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 458, __pyx_L7_error)
+          __pyx_t_1 = __Pyx_PyObject_FormatSimple(__pyx_t_2, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 483, __pyx_L7_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
           __pyx_t_10[0] = __pyx_mstate_global->__pyx_kp_u_timestamp;
           __pyx_t_10[1] = __pyx_t_1;
           __pyx_t_10[2] = __pyx_mstate_global->__pyx_kp_u__4;
           __pyx_t_2 = __Pyx_PyUnicode_Join(__pyx_t_10, 3, 10 + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_1) + 1, 127 | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_1));
-          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 458, __pyx_L7_error)
+          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 483, __pyx_L7_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           __pyx_t_3 = 0;
@@ -15338,12 +16177,12 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
             __pyx_t_6 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_write, __pyx_callargs+__pyx_t_3, (2-__pyx_t_3) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
             __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-            if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 458, __pyx_L7_error)
+            if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 483, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_6);
           }
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-          /* "MagDatabase.pyx":460
+          /* "MagDatabase.pyx":485
  *             f.write(f"timestamp {int(time.time())}\n")
  * 
  *             f.write(f"<< checkpaint >>\n")             # <<<<<<<<<<<<<<
@@ -15357,12 +16196,12 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
             PyObject *__pyx_callargs[2] = {__pyx_t_2, __pyx_mstate_global->__pyx_kp_u_checkpaint};
             __pyx_t_6 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_write, __pyx_callargs+__pyx_t_3, (2-__pyx_t_3) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
             __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-            if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 460, __pyx_L7_error)
+            if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 485, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_6);
           }
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-          /* "MagDatabase.pyx":462
+          /* "MagDatabase.pyx":487
  *             f.write(f"<< checkpaint >>\n")
  * 
  *             r = self.getBbox(db)             # <<<<<<<<<<<<<<
@@ -15376,13 +16215,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
             PyObject *__pyx_callargs[2] = {__pyx_t_2, __pyx_v_db};
             __pyx_t_6 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_getBbox, __pyx_callargs+__pyx_t_3, (2-__pyx_t_3) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
             __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-            if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 462, __pyx_L7_error)
+            if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 487, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_6);
           }
           __pyx_v_r = __pyx_t_6;
           __pyx_t_6 = 0;
 
-          /* "MagDatabase.pyx":464
+          /* "MagDatabase.pyx":489
  *             r = self.getBbox(db)
  * 
  *             f.write(f"rect {r.xbot} {r.ybot} {r.xtop} {r.ytop}\n")             # <<<<<<<<<<<<<<
@@ -15391,24 +16230,24 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
 */
           __pyx_t_2 = __pyx_v_f;
           __Pyx_INCREF(__pyx_t_2);
-          __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_xbot_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 464, __pyx_L7_error)
+          __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_xbot_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 489, __pyx_L7_error)
           __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_1 = __Pyx_PyObject_FormatSimple(__pyx_t_5, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 464, __pyx_L7_error)
+          __pyx_t_1 = __Pyx_PyObject_FormatSimple(__pyx_t_5, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 489, __pyx_L7_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-          __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_ybot_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 464, __pyx_L7_error)
+          __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_ybot_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 489, __pyx_L7_error)
           __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_11 = __Pyx_PyObject_FormatSimple(__pyx_t_5, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 464, __pyx_L7_error)
+          __pyx_t_11 = __Pyx_PyObject_FormatSimple(__pyx_t_5, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 489, __pyx_L7_error)
           __Pyx_GOTREF(__pyx_t_11);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-          __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_xtop_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 464, __pyx_L7_error)
+          __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_xtop_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 489, __pyx_L7_error)
           __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_12 = __Pyx_PyObject_FormatSimple(__pyx_t_5, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 464, __pyx_L7_error)
+          __pyx_t_12 = __Pyx_PyObject_FormatSimple(__pyx_t_5, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 489, __pyx_L7_error)
           __Pyx_GOTREF(__pyx_t_12);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-          __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_ytop_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 464, __pyx_L7_error)
+          __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_ytop_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 489, __pyx_L7_error)
           __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_13 = __Pyx_PyObject_FormatSimple(__pyx_t_5, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 464, __pyx_L7_error)
+          __pyx_t_13 = __Pyx_PyObject_FormatSimple(__pyx_t_5, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 489, __pyx_L7_error)
           __Pyx_GOTREF(__pyx_t_13);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __pyx_t_14[0] = __pyx_mstate_global->__pyx_kp_u_rect;
@@ -15421,7 +16260,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
           __pyx_t_14[7] = __pyx_t_13;
           __pyx_t_14[8] = __pyx_mstate_global->__pyx_kp_u__4;
           __pyx_t_5 = __Pyx_PyUnicode_Join(__pyx_t_14, 9, 5 + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_1) + 1 * 4 + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_11) + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_12) + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_13), 127 | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_1) | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_11) | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_12) | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_13));
-          if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 464, __pyx_L7_error)
+          if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 489, __pyx_L7_error)
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
@@ -15433,12 +16272,12 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
             __pyx_t_6 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_write, __pyx_callargs+__pyx_t_3, (2-__pyx_t_3) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
             __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-            if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 464, __pyx_L7_error)
+            if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 489, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_6);
           }
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-          /* "MagDatabase.pyx":466
+          /* "MagDatabase.pyx":491
  *             f.write(f"rect {r.xbot} {r.ybot} {r.xtop} {r.ytop}\n")
  * 
  *             for k, v in self.layers.items():             # <<<<<<<<<<<<<<
@@ -15448,9 +16287,9 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
           __pyx_t_15 = 0;
           if (unlikely(__pyx_v_self->layers == Py_None)) {
             PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "items");
-            __PYX_ERR(0, 466, __pyx_L7_error)
+            __PYX_ERR(0, 491, __pyx_L7_error)
           }
-          __pyx_t_5 = __Pyx_dict_iterator(__pyx_v_self->layers, 1, __pyx_mstate_global->__pyx_n_u_items, (&__pyx_t_16), (&__pyx_t_17)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 466, __pyx_L7_error)
+          __pyx_t_5 = __Pyx_dict_iterator(__pyx_v_self->layers, 1, __pyx_mstate_global->__pyx_n_u_items, (&__pyx_t_16), (&__pyx_t_17)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 491, __pyx_L7_error)
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_XDECREF(__pyx_t_6);
           __pyx_t_6 = __pyx_t_5;
@@ -15458,7 +16297,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
           while (1) {
             __pyx_t_18 = __Pyx_dict_iter_next(__pyx_t_6, __pyx_t_16, &__pyx_t_15, &__pyx_t_5, &__pyx_t_2, NULL, __pyx_t_17);
             if (unlikely(__pyx_t_18 == 0)) break;
-            if (unlikely(__pyx_t_18 == -1)) __PYX_ERR(0, 466, __pyx_L7_error)
+            if (unlikely(__pyx_t_18 == -1)) __PYX_ERR(0, 491, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_GOTREF(__pyx_t_2);
             __Pyx_XDECREF_SET(__pyx_v_k, __pyx_t_5);
@@ -15466,7 +16305,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
             __Pyx_XDECREF_SET(__pyx_v_v, __pyx_t_2);
             __pyx_t_2 = 0;
 
-            /* "MagDatabase.pyx":467
+            /* "MagDatabase.pyx":492
  * 
  *             for k, v in self.layers.items():
  *                 f.write(f"<< {k} >>\n")             # <<<<<<<<<<<<<<
@@ -15475,13 +16314,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
 */
             __pyx_t_5 = __pyx_v_f;
             __Pyx_INCREF(__pyx_t_5);
-            __pyx_t_13 = __Pyx_PyObject_FormatSimple(__pyx_v_k, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 467, __pyx_L7_error)
+            __pyx_t_13 = __Pyx_PyObject_FormatSimple(__pyx_v_k, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 492, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_13);
             __pyx_t_10[0] = __pyx_mstate_global->__pyx_kp_u__5;
             __pyx_t_10[1] = __pyx_t_13;
             __pyx_t_10[2] = __pyx_mstate_global->__pyx_kp_u__6;
             __pyx_t_12 = __Pyx_PyUnicode_Join(__pyx_t_10, 3, 3 + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_13) + 4, 127 | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_13));
-            if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 467, __pyx_L7_error)
+            if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 492, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_12);
             __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
             __pyx_t_3 = 0;
@@ -15490,12 +16329,12 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
               __pyx_t_2 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_write, __pyx_callargs+__pyx_t_3, (2-__pyx_t_3) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
               __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
               __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-              if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 467, __pyx_L7_error)
+              if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 492, __pyx_L7_error)
               __Pyx_GOTREF(__pyx_t_2);
             }
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-            /* "MagDatabase.pyx":469
+            /* "MagDatabase.pyx":494
  *                 f.write(f"<< {k} >>\n")
  * 
  *                 for r in v:             # <<<<<<<<<<<<<<
@@ -15507,9 +16346,9 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
               __pyx_t_19 = 0;
               __pyx_t_20 = NULL;
             } else {
-              __pyx_t_19 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_v_v); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 469, __pyx_L7_error)
+              __pyx_t_19 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_v_v); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 494, __pyx_L7_error)
               __Pyx_GOTREF(__pyx_t_2);
-              __pyx_t_20 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_2); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 469, __pyx_L7_error)
+              __pyx_t_20 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_2); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 494, __pyx_L7_error)
             }
             for (;;) {
               if (likely(!__pyx_t_20)) {
@@ -15517,7 +16356,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
                   {
                     Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_2);
                     #if !CYTHON_ASSUME_SAFE_SIZE
-                    if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 469, __pyx_L7_error)
+                    if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 494, __pyx_L7_error)
                     #endif
                     if (__pyx_t_19 >= __pyx_temp) break;
                   }
@@ -15527,7 +16366,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
                   {
                     Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_2);
                     #if !CYTHON_ASSUME_SAFE_SIZE
-                    if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 469, __pyx_L7_error)
+                    if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 494, __pyx_L7_error)
                     #endif
                     if (__pyx_t_19 >= __pyx_temp) break;
                   }
@@ -15538,13 +16377,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
                   #endif
                   ++__pyx_t_19;
                 }
-                if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 469, __pyx_L7_error)
+                if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 494, __pyx_L7_error)
               } else {
                 __pyx_t_12 = __pyx_t_20(__pyx_t_2);
                 if (unlikely(!__pyx_t_12)) {
                   PyObject* exc_type = PyErr_Occurred();
                   if (exc_type) {
-                    if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 469, __pyx_L7_error)
+                    if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 494, __pyx_L7_error)
                     PyErr_Clear();
                   }
                   break;
@@ -15554,7 +16393,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
               __Pyx_DECREF_SET(__pyx_v_r, __pyx_t_12);
               __pyx_t_12 = 0;
 
-              /* "MagDatabase.pyx":470
+              /* "MagDatabase.pyx":495
  * 
  *                 for r in v:
  *                     f.write(f"rect {r.xbot} {r.ybot} {r.xtop} {r.ytop}\n")             # <<<<<<<<<<<<<<
@@ -15563,24 +16402,24 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
 */
               __pyx_t_5 = __pyx_v_f;
               __Pyx_INCREF(__pyx_t_5);
-              __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_xbot_2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 470, __pyx_L7_error)
+              __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_xbot_2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 495, __pyx_L7_error)
               __Pyx_GOTREF(__pyx_t_13);
-              __pyx_t_11 = __Pyx_PyObject_FormatSimple(__pyx_t_13, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 470, __pyx_L7_error)
+              __pyx_t_11 = __Pyx_PyObject_FormatSimple(__pyx_t_13, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 495, __pyx_L7_error)
               __Pyx_GOTREF(__pyx_t_11);
               __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-              __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_ybot_2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 470, __pyx_L7_error)
+              __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_ybot_2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 495, __pyx_L7_error)
               __Pyx_GOTREF(__pyx_t_13);
-              __pyx_t_1 = __Pyx_PyObject_FormatSimple(__pyx_t_13, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 470, __pyx_L7_error)
+              __pyx_t_1 = __Pyx_PyObject_FormatSimple(__pyx_t_13, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 495, __pyx_L7_error)
               __Pyx_GOTREF(__pyx_t_1);
               __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-              __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_xtop_2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 470, __pyx_L7_error)
+              __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_xtop_2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 495, __pyx_L7_error)
               __Pyx_GOTREF(__pyx_t_13);
-              __pyx_t_21 = __Pyx_PyObject_FormatSimple(__pyx_t_13, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 470, __pyx_L7_error)
+              __pyx_t_21 = __Pyx_PyObject_FormatSimple(__pyx_t_13, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 495, __pyx_L7_error)
               __Pyx_GOTREF(__pyx_t_21);
               __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-              __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_ytop_2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 470, __pyx_L7_error)
+              __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_ytop_2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 495, __pyx_L7_error)
               __Pyx_GOTREF(__pyx_t_13);
-              __pyx_t_22 = __Pyx_PyObject_FormatSimple(__pyx_t_13, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 470, __pyx_L7_error)
+              __pyx_t_22 = __Pyx_PyObject_FormatSimple(__pyx_t_13, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 495, __pyx_L7_error)
               __Pyx_GOTREF(__pyx_t_22);
               __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
               __pyx_t_14[0] = __pyx_mstate_global->__pyx_kp_u_rect;
@@ -15593,7 +16432,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
               __pyx_t_14[7] = __pyx_t_22;
               __pyx_t_14[8] = __pyx_mstate_global->__pyx_kp_u__4;
               __pyx_t_13 = __Pyx_PyUnicode_Join(__pyx_t_14, 9, 5 + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_11) + 1 * 4 + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_1) + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_21) + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_22), 127 | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_11) | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_1) | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_21) | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_22));
-              if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 470, __pyx_L7_error)
+              if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 495, __pyx_L7_error)
               __Pyx_GOTREF(__pyx_t_13);
               __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
               __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -15605,12 +16444,12 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
                 __pyx_t_12 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_write, __pyx_callargs+__pyx_t_3, (2-__pyx_t_3) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
                 __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
                 __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-                if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 470, __pyx_L7_error)
+                if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 495, __pyx_L7_error)
                 __Pyx_GOTREF(__pyx_t_12);
               }
               __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
 
-              /* "MagDatabase.pyx":469
+              /* "MagDatabase.pyx":494
  *                 f.write(f"<< {k} >>\n")
  * 
  *                 for r in v:             # <<<<<<<<<<<<<<
@@ -15622,7 +16461,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
           }
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-          /* "MagDatabase.pyx":472
+          /* "MagDatabase.pyx":497
  *                     f.write(f"rect {r.xbot} {r.ybot} {r.xtop} {r.ytop}\n")
  * 
  *             for inst in self.uses:             # <<<<<<<<<<<<<<
@@ -15631,7 +16470,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
 */
           if (unlikely(__pyx_v_self->uses == Py_None)) {
             PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-            __PYX_ERR(0, 472, __pyx_L7_error)
+            __PYX_ERR(0, 497, __pyx_L7_error)
           }
           __pyx_t_6 = __pyx_v_self->uses; __Pyx_INCREF(__pyx_t_6);
           __pyx_t_16 = 0;
@@ -15639,18 +16478,18 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
             {
               Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_6);
               #if !CYTHON_ASSUME_SAFE_SIZE
-              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 472, __pyx_L7_error)
+              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 497, __pyx_L7_error)
               #endif
               if (__pyx_t_16 >= __pyx_temp) break;
             }
             __pyx_t_2 = __Pyx_PyList_GET_ITEM_REF(__pyx_t_6, __pyx_t_16, __Pyx_ReferenceSharing_OwnStrongReference);
             ++__pyx_t_16;
-            if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 472, __pyx_L7_error)
+            if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 497, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_2);
             __Pyx_XDECREF_SET(__pyx_v_inst, __pyx_t_2);
             __pyx_t_2 = 0;
 
-            /* "MagDatabase.pyx":473
+            /* "MagDatabase.pyx":498
  * 
  *             for inst in self.uses:
  *                 f.write(f"use {inst['name']}  {inst['inst_name']}\n")             # <<<<<<<<<<<<<<
@@ -15659,14 +16498,14 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
 */
             __pyx_t_12 = __pyx_v_f;
             __Pyx_INCREF(__pyx_t_12);
-            __pyx_t_13 = __Pyx_PyObject_Dict_GetItem(__pyx_v_inst, __pyx_mstate_global->__pyx_n_u_name); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 473, __pyx_L7_error)
+            __pyx_t_13 = __Pyx_PyObject_Dict_GetItem(__pyx_v_inst, __pyx_mstate_global->__pyx_n_u_name); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 498, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_13);
-            __pyx_t_5 = __Pyx_PyObject_FormatSimple(__pyx_t_13, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 473, __pyx_L7_error)
+            __pyx_t_5 = __Pyx_PyObject_FormatSimple(__pyx_t_13, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 498, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-            __pyx_t_13 = __Pyx_PyObject_Dict_GetItem(__pyx_v_inst, __pyx_mstate_global->__pyx_n_u_inst_name); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 473, __pyx_L7_error)
+            __pyx_t_13 = __Pyx_PyObject_Dict_GetItem(__pyx_v_inst, __pyx_mstate_global->__pyx_n_u_inst_name); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 498, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_13);
-            __pyx_t_22 = __Pyx_PyObject_FormatSimple(__pyx_t_13, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 473, __pyx_L7_error)
+            __pyx_t_22 = __Pyx_PyObject_FormatSimple(__pyx_t_13, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 498, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_22);
             __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
             __pyx_t_23[0] = __pyx_mstate_global->__pyx_kp_u_use_2;
@@ -15675,7 +16514,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
             __pyx_t_23[3] = __pyx_t_22;
             __pyx_t_23[4] = __pyx_mstate_global->__pyx_kp_u__4;
             __pyx_t_13 = __Pyx_PyUnicode_Join(__pyx_t_23, 5, 4 + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_5) + 2 + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_22) + 1, 127 | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_5) | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_22));
-            if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 473, __pyx_L7_error)
+            if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 498, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_13);
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
             __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
@@ -15685,12 +16524,12 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
               __pyx_t_2 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_write, __pyx_callargs+__pyx_t_3, (2-__pyx_t_3) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
               __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
               __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-              if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 473, __pyx_L7_error)
+              if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 498, __pyx_L7_error)
               __Pyx_GOTREF(__pyx_t_2);
             }
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-            /* "MagDatabase.pyx":474
+            /* "MagDatabase.pyx":499
  *             for inst in self.uses:
  *                 f.write(f"use {inst['name']}  {inst['inst_name']}\n")
  *                 f.write(f"timestamp {int(time.time() - 100)}\n")             # <<<<<<<<<<<<<<
@@ -15699,28 +16538,28 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
 */
             __pyx_t_13 = __pyx_v_f;
             __Pyx_INCREF(__pyx_t_13);
-            __Pyx_GetModuleGlobalName(__pyx_t_12, __pyx_mstate_global->__pyx_n_u_time); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 474, __pyx_L7_error)
+            __Pyx_GetModuleGlobalName(__pyx_t_12, __pyx_mstate_global->__pyx_n_u_time); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 499, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_12);
-            __pyx_t_22 = __Pyx_PyObject_GetAttrStr(__pyx_t_12, __pyx_mstate_global->__pyx_n_u_time); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 474, __pyx_L7_error)
+            __pyx_t_22 = __Pyx_PyObject_GetAttrStr(__pyx_t_12, __pyx_mstate_global->__pyx_n_u_time); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 499, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_22);
             __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-            __pyx_t_12 = __Pyx_PyObject_CallNoArg(__pyx_t_22); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 474, __pyx_L7_error)
+            __pyx_t_12 = __Pyx_PyObject_CallNoArg(__pyx_t_22); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 499, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_12);
             __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
-            __pyx_t_22 = __Pyx_PyLong_SubtractObjC(__pyx_t_12, __pyx_mstate_global->__pyx_int_100, 0x64, 0, 0); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 474, __pyx_L7_error)
+            __pyx_t_22 = __Pyx_PyLong_SubtractObjC(__pyx_t_12, __pyx_mstate_global->__pyx_int_100, 0x64, 0, 0); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 499, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_22);
             __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-            __pyx_t_12 = __Pyx_PyNumber_Int(__pyx_t_22); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 474, __pyx_L7_error)
+            __pyx_t_12 = __Pyx_PyNumber_Int(__pyx_t_22); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 499, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_12);
             __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
-            __pyx_t_22 = __Pyx_PyObject_FormatSimple(__pyx_t_12, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 474, __pyx_L7_error)
+            __pyx_t_22 = __Pyx_PyObject_FormatSimple(__pyx_t_12, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 499, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_22);
             __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
             __pyx_t_10[0] = __pyx_mstate_global->__pyx_kp_u_timestamp;
             __pyx_t_10[1] = __pyx_t_22;
             __pyx_t_10[2] = __pyx_mstate_global->__pyx_kp_u__4;
             __pyx_t_12 = __Pyx_PyUnicode_Join(__pyx_t_10, 3, 10 + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_22) + 1, 127 | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_22));
-            if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 474, __pyx_L7_error)
+            if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 499, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_12);
             __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
             __pyx_t_3 = 0;
@@ -15729,12 +16568,12 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
               __pyx_t_2 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_write, __pyx_callargs+__pyx_t_3, (2-__pyx_t_3) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
               __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
               __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-              if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 474, __pyx_L7_error)
+              if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 499, __pyx_L7_error)
               __Pyx_GOTREF(__pyx_t_2);
             }
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-            /* "MagDatabase.pyx":475
+            /* "MagDatabase.pyx":500
  *                 f.write(f"use {inst['name']}  {inst['inst_name']}\n")
  *                 f.write(f"timestamp {int(time.time() - 100)}\n")
  *                 f.write(f"transform {inst['transform'].a} {inst['transform'].b} {inst['transform'].c} {inst['transform'].d} {inst['transform'].e} {inst['transform'].f}\n")             # <<<<<<<<<<<<<<
@@ -15743,52 +16582,52 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
 */
             __pyx_t_12 = __pyx_v_f;
             __Pyx_INCREF(__pyx_t_12);
-            __pyx_t_13 = __Pyx_PyObject_Dict_GetItem(__pyx_v_inst, __pyx_mstate_global->__pyx_n_u_transform); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 475, __pyx_L7_error)
+            __pyx_t_13 = __Pyx_PyObject_Dict_GetItem(__pyx_v_inst, __pyx_mstate_global->__pyx_n_u_transform); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 500, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_13);
-            __pyx_t_22 = __Pyx_PyObject_GetAttrStr(__pyx_t_13, __pyx_mstate_global->__pyx_n_u_a_2); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 475, __pyx_L7_error)
+            __pyx_t_22 = __Pyx_PyObject_GetAttrStr(__pyx_t_13, __pyx_mstate_global->__pyx_n_u_a_2); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 500, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_22);
             __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-            __pyx_t_13 = __Pyx_PyObject_FormatSimple(__pyx_t_22, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 475, __pyx_L7_error)
+            __pyx_t_13 = __Pyx_PyObject_FormatSimple(__pyx_t_22, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 500, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_13);
             __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
-            __pyx_t_22 = __Pyx_PyObject_Dict_GetItem(__pyx_v_inst, __pyx_mstate_global->__pyx_n_u_transform); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 475, __pyx_L7_error)
+            __pyx_t_22 = __Pyx_PyObject_Dict_GetItem(__pyx_v_inst, __pyx_mstate_global->__pyx_n_u_transform); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 500, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_22);
-            __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_22, __pyx_mstate_global->__pyx_n_u_b_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 475, __pyx_L7_error)
+            __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_22, __pyx_mstate_global->__pyx_n_u_b_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 500, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
-            __pyx_t_22 = __Pyx_PyObject_FormatSimple(__pyx_t_5, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 475, __pyx_L7_error)
+            __pyx_t_22 = __Pyx_PyObject_FormatSimple(__pyx_t_5, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 500, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_22);
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-            __pyx_t_5 = __Pyx_PyObject_Dict_GetItem(__pyx_v_inst, __pyx_mstate_global->__pyx_n_u_transform); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 475, __pyx_L7_error)
+            __pyx_t_5 = __Pyx_PyObject_Dict_GetItem(__pyx_v_inst, __pyx_mstate_global->__pyx_n_u_transform); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 500, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_5);
-            __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_c_2); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 475, __pyx_L7_error)
+            __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_c_2); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 500, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_21);
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-            __pyx_t_5 = __Pyx_PyObject_FormatSimple(__pyx_t_21, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 475, __pyx_L7_error)
+            __pyx_t_5 = __Pyx_PyObject_FormatSimple(__pyx_t_21, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 500, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-            __pyx_t_21 = __Pyx_PyObject_Dict_GetItem(__pyx_v_inst, __pyx_mstate_global->__pyx_n_u_transform); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 475, __pyx_L7_error)
+            __pyx_t_21 = __Pyx_PyObject_Dict_GetItem(__pyx_v_inst, __pyx_mstate_global->__pyx_n_u_transform); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 500, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_21);
-            __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_mstate_global->__pyx_n_u_d_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 475, __pyx_L7_error)
+            __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_mstate_global->__pyx_n_u_d_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 500, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-            __pyx_t_21 = __Pyx_PyObject_FormatSimple(__pyx_t_1, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 475, __pyx_L7_error)
+            __pyx_t_21 = __Pyx_PyObject_FormatSimple(__pyx_t_1, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 500, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_21);
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-            __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_inst, __pyx_mstate_global->__pyx_n_u_transform); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 475, __pyx_L7_error)
+            __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_inst, __pyx_mstate_global->__pyx_n_u_transform); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 500, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_1);
-            __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_e_2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 475, __pyx_L7_error)
+            __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_e_2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 500, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_11);
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-            __pyx_t_1 = __Pyx_PyObject_FormatSimple(__pyx_t_11, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 475, __pyx_L7_error)
+            __pyx_t_1 = __Pyx_PyObject_FormatSimple(__pyx_t_11, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 500, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-            __pyx_t_11 = __Pyx_PyObject_Dict_GetItem(__pyx_v_inst, __pyx_mstate_global->__pyx_n_u_transform); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 475, __pyx_L7_error)
+            __pyx_t_11 = __Pyx_PyObject_Dict_GetItem(__pyx_v_inst, __pyx_mstate_global->__pyx_n_u_transform); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 500, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_11);
-            __pyx_t_24 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_mstate_global->__pyx_n_u_f_2); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 475, __pyx_L7_error)
+            __pyx_t_24 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_mstate_global->__pyx_n_u_f_2); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 500, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_24);
             __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-            __pyx_t_11 = __Pyx_PyObject_FormatSimple(__pyx_t_24, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 475, __pyx_L7_error)
+            __pyx_t_11 = __Pyx_PyObject_FormatSimple(__pyx_t_24, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 500, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_11);
             __Pyx_DECREF(__pyx_t_24); __pyx_t_24 = 0;
             __pyx_t_25[0] = __pyx_mstate_global->__pyx_kp_u_transform_2;
@@ -15805,7 +16644,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
             __pyx_t_25[11] = __pyx_t_11;
             __pyx_t_25[12] = __pyx_mstate_global->__pyx_kp_u__4;
             __pyx_t_24 = __Pyx_PyUnicode_Join(__pyx_t_25, 13, 10 + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_13) + 1 * 6 + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_22) + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_5) + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_21) + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_1) + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_11), 127 | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_13) | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_22) | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_5) | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_21) | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_1) | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_11));
-            if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 475, __pyx_L7_error)
+            if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 500, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_24);
             __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
             __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
@@ -15819,12 +16658,12 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
               __pyx_t_2 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_write, __pyx_callargs+__pyx_t_3, (2-__pyx_t_3) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
               __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
               __Pyx_DECREF(__pyx_t_24); __pyx_t_24 = 0;
-              if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 475, __pyx_L7_error)
+              if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 500, __pyx_L7_error)
               __Pyx_GOTREF(__pyx_t_2);
             }
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-            /* "MagDatabase.pyx":476
+            /* "MagDatabase.pyx":501
  *                 f.write(f"timestamp {int(time.time() - 100)}\n")
  *                 f.write(f"transform {inst['transform'].a} {inst['transform'].b} {inst['transform'].c} {inst['transform'].d} {inst['transform'].e} {inst['transform'].f}\n")
  *                 r = db.getCell(inst['name']).getBbox(db)             # <<<<<<<<<<<<<<
@@ -15833,7 +16672,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
 */
             __pyx_t_11 = __pyx_v_db;
             __Pyx_INCREF(__pyx_t_11);
-            __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_inst, __pyx_mstate_global->__pyx_n_u_name); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 476, __pyx_L7_error)
+            __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_inst, __pyx_mstate_global->__pyx_n_u_name); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 501, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_1);
             __pyx_t_3 = 0;
             {
@@ -15841,7 +16680,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
               __pyx_t_12 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_getCell, __pyx_callargs+__pyx_t_3, (2-__pyx_t_3) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
               __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
               __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-              if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 476, __pyx_L7_error)
+              if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 501, __pyx_L7_error)
               __Pyx_GOTREF(__pyx_t_12);
             }
             __pyx_t_24 = __pyx_t_12;
@@ -15852,13 +16691,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
               __pyx_t_2 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_getBbox, __pyx_callargs+__pyx_t_3, (2-__pyx_t_3) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
               __Pyx_XDECREF(__pyx_t_24); __pyx_t_24 = 0;
               __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-              if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 476, __pyx_L7_error)
+              if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 501, __pyx_L7_error)
               __Pyx_GOTREF(__pyx_t_2);
             }
             __Pyx_DECREF_SET(__pyx_v_r, __pyx_t_2);
             __pyx_t_2 = 0;
 
-            /* "MagDatabase.pyx":477
+            /* "MagDatabase.pyx":502
  *                 f.write(f"transform {inst['transform'].a} {inst['transform'].b} {inst['transform'].c} {inst['transform'].d} {inst['transform'].e} {inst['transform'].f}\n")
  *                 r = db.getCell(inst['name']).getBbox(db)
  *                 f.write(f"box {r.xbot} {r.ybot} {r.xtop} {r.ytop}\n")             # <<<<<<<<<<<<<<
@@ -15867,24 +16706,24 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
 */
             __pyx_t_12 = __pyx_v_f;
             __Pyx_INCREF(__pyx_t_12);
-            __pyx_t_24 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_xbot_2); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 477, __pyx_L7_error)
+            __pyx_t_24 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_xbot_2); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 502, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_24);
-            __pyx_t_1 = __Pyx_PyObject_FormatSimple(__pyx_t_24, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 477, __pyx_L7_error)
+            __pyx_t_1 = __Pyx_PyObject_FormatSimple(__pyx_t_24, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 502, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_24); __pyx_t_24 = 0;
-            __pyx_t_24 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_ybot_2); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 477, __pyx_L7_error)
+            __pyx_t_24 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_ybot_2); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 502, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_24);
-            __pyx_t_11 = __Pyx_PyObject_FormatSimple(__pyx_t_24, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 477, __pyx_L7_error)
+            __pyx_t_11 = __Pyx_PyObject_FormatSimple(__pyx_t_24, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 502, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_11);
             __Pyx_DECREF(__pyx_t_24); __pyx_t_24 = 0;
-            __pyx_t_24 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_xtop_2); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 477, __pyx_L7_error)
+            __pyx_t_24 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_xtop_2); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 502, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_24);
-            __pyx_t_21 = __Pyx_PyObject_FormatSimple(__pyx_t_24, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 477, __pyx_L7_error)
+            __pyx_t_21 = __Pyx_PyObject_FormatSimple(__pyx_t_24, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 502, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_21);
             __Pyx_DECREF(__pyx_t_24); __pyx_t_24 = 0;
-            __pyx_t_24 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_ytop_2); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 477, __pyx_L7_error)
+            __pyx_t_24 = __Pyx_PyObject_GetAttrStr(__pyx_v_r, __pyx_mstate_global->__pyx_n_u_ytop_2); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 502, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_24);
-            __pyx_t_5 = __Pyx_PyObject_FormatSimple(__pyx_t_24, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 477, __pyx_L7_error)
+            __pyx_t_5 = __Pyx_PyObject_FormatSimple(__pyx_t_24, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 502, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_DECREF(__pyx_t_24); __pyx_t_24 = 0;
             __pyx_t_14[0] = __pyx_mstate_global->__pyx_kp_u_box;
@@ -15897,7 +16736,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
             __pyx_t_14[7] = __pyx_t_5;
             __pyx_t_14[8] = __pyx_mstate_global->__pyx_kp_u__4;
             __pyx_t_24 = __Pyx_PyUnicode_Join(__pyx_t_14, 9, 4 + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_1) + 1 * 4 + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_11) + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_21) + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_5), 127 | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_1) | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_11) | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_21) | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_5));
-            if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 477, __pyx_L7_error)
+            if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 502, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_24);
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
             __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
@@ -15909,12 +16748,12 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
               __pyx_t_2 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_write, __pyx_callargs+__pyx_t_3, (2-__pyx_t_3) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
               __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
               __Pyx_DECREF(__pyx_t_24); __pyx_t_24 = 0;
-              if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 477, __pyx_L7_error)
+              if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 502, __pyx_L7_error)
               __Pyx_GOTREF(__pyx_t_2);
             }
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-            /* "MagDatabase.pyx":472
+            /* "MagDatabase.pyx":497
  *                     f.write(f"rect {r.xbot} {r.ybot} {r.xtop} {r.ytop}\n")
  * 
  *             for inst in self.uses:             # <<<<<<<<<<<<<<
@@ -15924,7 +16763,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
           }
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-          /* "MagDatabase.pyx":479
+          /* "MagDatabase.pyx":504
  *                 f.write(f"box {r.xbot} {r.ybot} {r.xtop} {r.ytop}\n")
  * 
  *             f.write("<< labels >>\n")             # <<<<<<<<<<<<<<
@@ -15938,12 +16777,12 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
             PyObject *__pyx_callargs[2] = {__pyx_t_2, __pyx_mstate_global->__pyx_kp_u_labels};
             __pyx_t_6 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_write, __pyx_callargs+__pyx_t_3, (2-__pyx_t_3) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
             __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-            if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 479, __pyx_L7_error)
+            if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 504, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_6);
           }
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-          /* "MagDatabase.pyx":481
+          /* "MagDatabase.pyx":506
  *             f.write("<< labels >>\n")
  * 
  *             for k, v in self.labels.items():             # <<<<<<<<<<<<<<
@@ -15953,9 +16792,9 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
           __pyx_t_16 = 0;
           if (unlikely(__pyx_v_self->labels == Py_None)) {
             PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "items");
-            __PYX_ERR(0, 481, __pyx_L7_error)
+            __PYX_ERR(0, 506, __pyx_L7_error)
           }
-          __pyx_t_2 = __Pyx_dict_iterator(__pyx_v_self->labels, 1, __pyx_mstate_global->__pyx_n_u_items, (&__pyx_t_15), (&__pyx_t_17)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 481, __pyx_L7_error)
+          __pyx_t_2 = __Pyx_dict_iterator(__pyx_v_self->labels, 1, __pyx_mstate_global->__pyx_n_u_items, (&__pyx_t_15), (&__pyx_t_17)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 506, __pyx_L7_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_XDECREF(__pyx_t_6);
           __pyx_t_6 = __pyx_t_2;
@@ -15963,7 +16802,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
           while (1) {
             __pyx_t_18 = __Pyx_dict_iter_next(__pyx_t_6, __pyx_t_15, &__pyx_t_16, &__pyx_t_2, &__pyx_t_24, NULL, __pyx_t_17);
             if (unlikely(__pyx_t_18 == 0)) break;
-            if (unlikely(__pyx_t_18 == -1)) __PYX_ERR(0, 481, __pyx_L7_error)
+            if (unlikely(__pyx_t_18 == -1)) __PYX_ERR(0, 506, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_2);
             __Pyx_GOTREF(__pyx_t_24);
             __Pyx_XDECREF_SET(__pyx_v_k, __pyx_t_2);
@@ -15971,7 +16810,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
             __Pyx_XDECREF_SET(__pyx_v_v, __pyx_t_24);
             __pyx_t_24 = 0;
 
-            /* "MagDatabase.pyx":482
+            /* "MagDatabase.pyx":507
  * 
  *             for k, v in self.labels.items():
  *                 f.write(f"flabel {v.layer} {v.r.xbot} {v.r.ybot} {v.r.xtop} {v.r.ytop} {v.pos} {v.font} {v.r2.xbot} {v.r2.ybot} {v.r2.xtop} {v.r2.ytop} {v.name}\n")             # <<<<<<<<<<<<<<
@@ -15980,88 +16819,88 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
 */
             __pyx_t_2 = __pyx_v_f;
             __Pyx_INCREF(__pyx_t_2);
-            __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_v_v, __pyx_mstate_global->__pyx_n_u_layer); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 482, __pyx_L7_error)
+            __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_v_v, __pyx_mstate_global->__pyx_n_u_layer); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_12);
-            __pyx_t_5 = __Pyx_PyObject_FormatSimple(__pyx_t_12, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 482, __pyx_L7_error)
+            __pyx_t_5 = __Pyx_PyObject_FormatSimple(__pyx_t_12, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-            __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_v_v, __pyx_mstate_global->__pyx_n_u_r); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 482, __pyx_L7_error)
+            __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_v_v, __pyx_mstate_global->__pyx_n_u_r); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_12);
-            __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_12, __pyx_mstate_global->__pyx_n_u_xbot_2); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 482, __pyx_L7_error)
+            __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_12, __pyx_mstate_global->__pyx_n_u_xbot_2); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_21);
             __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-            __pyx_t_12 = __Pyx_PyObject_FormatSimple(__pyx_t_21, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 482, __pyx_L7_error)
+            __pyx_t_12 = __Pyx_PyObject_FormatSimple(__pyx_t_21, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_12);
             __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-            __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_v_v, __pyx_mstate_global->__pyx_n_u_r); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 482, __pyx_L7_error)
+            __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_v_v, __pyx_mstate_global->__pyx_n_u_r); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_21);
-            __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_mstate_global->__pyx_n_u_ybot_2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 482, __pyx_L7_error)
+            __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_mstate_global->__pyx_n_u_ybot_2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_11);
             __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-            __pyx_t_21 = __Pyx_PyObject_FormatSimple(__pyx_t_11, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 482, __pyx_L7_error)
+            __pyx_t_21 = __Pyx_PyObject_FormatSimple(__pyx_t_11, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_21);
             __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-            __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_v, __pyx_mstate_global->__pyx_n_u_r); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 482, __pyx_L7_error)
+            __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_v, __pyx_mstate_global->__pyx_n_u_r); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_11);
-            __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_mstate_global->__pyx_n_u_xtop_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 482, __pyx_L7_error)
+            __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_mstate_global->__pyx_n_u_xtop_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-            __pyx_t_11 = __Pyx_PyObject_FormatSimple(__pyx_t_1, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 482, __pyx_L7_error)
+            __pyx_t_11 = __Pyx_PyObject_FormatSimple(__pyx_t_1, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_11);
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-            __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_v, __pyx_mstate_global->__pyx_n_u_r); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 482, __pyx_L7_error)
+            __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_v, __pyx_mstate_global->__pyx_n_u_r); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_1);
-            __pyx_t_22 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_ytop_2); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 482, __pyx_L7_error)
+            __pyx_t_22 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_ytop_2); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_22);
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-            __pyx_t_1 = __Pyx_PyObject_FormatSimple(__pyx_t_22, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 482, __pyx_L7_error)
+            __pyx_t_1 = __Pyx_PyObject_FormatSimple(__pyx_t_22, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
-            __pyx_t_22 = __Pyx_PyObject_GetAttrStr(__pyx_v_v, __pyx_mstate_global->__pyx_n_u_pos); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 482, __pyx_L7_error)
+            __pyx_t_22 = __Pyx_PyObject_GetAttrStr(__pyx_v_v, __pyx_mstate_global->__pyx_n_u_pos); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_22);
-            __pyx_t_13 = __Pyx_PyObject_FormatSimple(__pyx_t_22, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 482, __pyx_L7_error)
+            __pyx_t_13 = __Pyx_PyObject_FormatSimple(__pyx_t_22, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_13);
             __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
-            __pyx_t_22 = __Pyx_PyObject_GetAttrStr(__pyx_v_v, __pyx_mstate_global->__pyx_n_u_font); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 482, __pyx_L7_error)
+            __pyx_t_22 = __Pyx_PyObject_GetAttrStr(__pyx_v_v, __pyx_mstate_global->__pyx_n_u_font); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_22);
-            __pyx_t_26 = __Pyx_PyObject_FormatSimple(__pyx_t_22, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_26)) __PYX_ERR(0, 482, __pyx_L7_error)
+            __pyx_t_26 = __Pyx_PyObject_FormatSimple(__pyx_t_22, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_26)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_26);
             __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
-            __pyx_t_22 = __Pyx_PyObject_GetAttrStr(__pyx_v_v, __pyx_mstate_global->__pyx_n_u_r2); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 482, __pyx_L7_error)
+            __pyx_t_22 = __Pyx_PyObject_GetAttrStr(__pyx_v_v, __pyx_mstate_global->__pyx_n_u_r2); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_22);
-            __pyx_t_27 = __Pyx_PyObject_GetAttrStr(__pyx_t_22, __pyx_mstate_global->__pyx_n_u_xbot_2); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 482, __pyx_L7_error)
+            __pyx_t_27 = __Pyx_PyObject_GetAttrStr(__pyx_t_22, __pyx_mstate_global->__pyx_n_u_xbot_2); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_27);
             __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
-            __pyx_t_22 = __Pyx_PyObject_FormatSimple(__pyx_t_27, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 482, __pyx_L7_error)
+            __pyx_t_22 = __Pyx_PyObject_FormatSimple(__pyx_t_27, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_22);
             __Pyx_DECREF(__pyx_t_27); __pyx_t_27 = 0;
-            __pyx_t_27 = __Pyx_PyObject_GetAttrStr(__pyx_v_v, __pyx_mstate_global->__pyx_n_u_r2); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 482, __pyx_L7_error)
+            __pyx_t_27 = __Pyx_PyObject_GetAttrStr(__pyx_v_v, __pyx_mstate_global->__pyx_n_u_r2); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_27);
-            __pyx_t_28 = __Pyx_PyObject_GetAttrStr(__pyx_t_27, __pyx_mstate_global->__pyx_n_u_ybot_2); if (unlikely(!__pyx_t_28)) __PYX_ERR(0, 482, __pyx_L7_error)
+            __pyx_t_28 = __Pyx_PyObject_GetAttrStr(__pyx_t_27, __pyx_mstate_global->__pyx_n_u_ybot_2); if (unlikely(!__pyx_t_28)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_28);
             __Pyx_DECREF(__pyx_t_27); __pyx_t_27 = 0;
-            __pyx_t_27 = __Pyx_PyObject_FormatSimple(__pyx_t_28, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 482, __pyx_L7_error)
+            __pyx_t_27 = __Pyx_PyObject_FormatSimple(__pyx_t_28, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_27);
             __Pyx_DECREF(__pyx_t_28); __pyx_t_28 = 0;
-            __pyx_t_28 = __Pyx_PyObject_GetAttrStr(__pyx_v_v, __pyx_mstate_global->__pyx_n_u_r2); if (unlikely(!__pyx_t_28)) __PYX_ERR(0, 482, __pyx_L7_error)
+            __pyx_t_28 = __Pyx_PyObject_GetAttrStr(__pyx_v_v, __pyx_mstate_global->__pyx_n_u_r2); if (unlikely(!__pyx_t_28)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_28);
-            __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_t_28, __pyx_mstate_global->__pyx_n_u_xtop_2); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 482, __pyx_L7_error)
+            __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_t_28, __pyx_mstate_global->__pyx_n_u_xtop_2); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_29);
             __Pyx_DECREF(__pyx_t_28); __pyx_t_28 = 0;
-            __pyx_t_28 = __Pyx_PyObject_FormatSimple(__pyx_t_29, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_28)) __PYX_ERR(0, 482, __pyx_L7_error)
+            __pyx_t_28 = __Pyx_PyObject_FormatSimple(__pyx_t_29, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_28)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_28);
             __Pyx_DECREF(__pyx_t_29); __pyx_t_29 = 0;
-            __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_v_v, __pyx_mstate_global->__pyx_n_u_r2); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 482, __pyx_L7_error)
+            __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_v_v, __pyx_mstate_global->__pyx_n_u_r2); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_29);
-            __pyx_t_30 = __Pyx_PyObject_GetAttrStr(__pyx_t_29, __pyx_mstate_global->__pyx_n_u_ytop_2); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 482, __pyx_L7_error)
+            __pyx_t_30 = __Pyx_PyObject_GetAttrStr(__pyx_t_29, __pyx_mstate_global->__pyx_n_u_ytop_2); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_30);
             __Pyx_DECREF(__pyx_t_29); __pyx_t_29 = 0;
-            __pyx_t_29 = __Pyx_PyObject_FormatSimple(__pyx_t_30, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 482, __pyx_L7_error)
+            __pyx_t_29 = __Pyx_PyObject_FormatSimple(__pyx_t_30, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_29);
             __Pyx_DECREF(__pyx_t_30); __pyx_t_30 = 0;
-            __pyx_t_30 = __Pyx_PyObject_GetAttrStr(__pyx_v_v, __pyx_mstate_global->__pyx_n_u_name); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 482, __pyx_L7_error)
+            __pyx_t_30 = __Pyx_PyObject_GetAttrStr(__pyx_v_v, __pyx_mstate_global->__pyx_n_u_name); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_30);
-            __pyx_t_31 = __Pyx_PyObject_FormatSimple(__pyx_t_30, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_31)) __PYX_ERR(0, 482, __pyx_L7_error)
+            __pyx_t_31 = __Pyx_PyObject_FormatSimple(__pyx_t_30, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_31)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_31);
             __Pyx_DECREF(__pyx_t_30); __pyx_t_30 = 0;
             __pyx_t_32[0] = __pyx_mstate_global->__pyx_kp_u_flabel;
@@ -16090,7 +16929,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
             __pyx_t_32[23] = __pyx_t_31;
             __pyx_t_32[24] = __pyx_mstate_global->__pyx_kp_u__4;
             __pyx_t_30 = __Pyx_PyUnicode_Join(__pyx_t_32, 25, 7 + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_5) + 1 * 12 + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_12) + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_21) + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_11) + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_1) + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_13) + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_26) + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_22) + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_27) + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_28) + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_29) + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_31), 127 | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_5) | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_12) | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_21) | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_11) | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_1) | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_13) | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_26) | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_22) | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_27) | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_28) | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_29) | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_31));
-            if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 482, __pyx_L7_error)
+            if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 507, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_30);
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
             __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
@@ -16110,12 +16949,12 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
               __pyx_t_24 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_write, __pyx_callargs+__pyx_t_3, (2-__pyx_t_3) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
               __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
               __Pyx_DECREF(__pyx_t_30); __pyx_t_30 = 0;
-              if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 482, __pyx_L7_error)
+              if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 507, __pyx_L7_error)
               __Pyx_GOTREF(__pyx_t_24);
             }
             __Pyx_DECREF(__pyx_t_24); __pyx_t_24 = 0;
 
-            /* "MagDatabase.pyx":483
+            /* "MagDatabase.pyx":508
  *             for k, v in self.labels.items():
  *                 f.write(f"flabel {v.layer} {v.r.xbot} {v.r.ybot} {v.r.xtop} {v.r.ytop} {v.pos} {v.font} {v.r2.xbot} {v.r2.ybot} {v.r2.xtop} {v.r2.ytop} {v.name}\n")
  *                 f.write(f"port {v.port} {v.directions}\n")             # <<<<<<<<<<<<<<
@@ -16124,14 +16963,14 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
 */
             __pyx_t_30 = __pyx_v_f;
             __Pyx_INCREF(__pyx_t_30);
-            __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_v, __pyx_mstate_global->__pyx_n_u_port); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 483, __pyx_L7_error)
+            __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_v, __pyx_mstate_global->__pyx_n_u_port); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 508, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_2);
-            __pyx_t_31 = __Pyx_PyObject_FormatSimple(__pyx_t_2, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_31)) __PYX_ERR(0, 483, __pyx_L7_error)
+            __pyx_t_31 = __Pyx_PyObject_FormatSimple(__pyx_t_2, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_31)) __PYX_ERR(0, 508, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_31);
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-            __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_v, __pyx_mstate_global->__pyx_n_u_directions); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 483, __pyx_L7_error)
+            __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_v, __pyx_mstate_global->__pyx_n_u_directions); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 508, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_2);
-            __pyx_t_29 = __Pyx_PyObject_FormatSimple(__pyx_t_2, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 483, __pyx_L7_error)
+            __pyx_t_29 = __Pyx_PyObject_FormatSimple(__pyx_t_2, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 508, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_29);
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             __pyx_t_23[0] = __pyx_mstate_global->__pyx_kp_u_port_2;
@@ -16140,7 +16979,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
             __pyx_t_23[3] = __pyx_t_29;
             __pyx_t_23[4] = __pyx_mstate_global->__pyx_kp_u__4;
             __pyx_t_2 = __Pyx_PyUnicode_Join(__pyx_t_23, 5, 5 + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_31) + 1 * 2 + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_29), 127 | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_31) | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_29));
-            if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 483, __pyx_L7_error)
+            if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 508, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_2);
             __Pyx_DECREF(__pyx_t_31); __pyx_t_31 = 0;
             __Pyx_DECREF(__pyx_t_29); __pyx_t_29 = 0;
@@ -16150,14 +16989,14 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
               __pyx_t_24 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_write, __pyx_callargs+__pyx_t_3, (2-__pyx_t_3) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
               __Pyx_XDECREF(__pyx_t_30); __pyx_t_30 = 0;
               __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-              if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 483, __pyx_L7_error)
+              if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 508, __pyx_L7_error)
               __Pyx_GOTREF(__pyx_t_24);
             }
             __Pyx_DECREF(__pyx_t_24); __pyx_t_24 = 0;
           }
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-          /* "MagDatabase.pyx":485
+          /* "MagDatabase.pyx":510
  *                 f.write(f"port {v.port} {v.directions}\n")
  * 
  *             f.write("<< end >>\n")             # <<<<<<<<<<<<<<
@@ -16171,12 +17010,12 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
             PyObject *__pyx_callargs[2] = {__pyx_t_24, __pyx_mstate_global->__pyx_kp_u_end};
             __pyx_t_6 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_write, __pyx_callargs+__pyx_t_3, (2-__pyx_t_3) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
             __Pyx_XDECREF(__pyx_t_24); __pyx_t_24 = 0;
-            if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 485, __pyx_L7_error)
+            if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 510, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_6);
           }
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-          /* "MagDatabase.pyx":449
+          /* "MagDatabase.pyx":474
  *     def writeMagFile(self, db, fname):
  * 
  *         with open(fname, "w") as f:             # <<<<<<<<<<<<<<
@@ -16207,20 +17046,20 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
         __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
         /*except:*/ {
           __Pyx_AddTraceback("MagDatabase.Cell.writeMagFile", __pyx_clineno, __pyx_lineno, __pyx_filename);
-          if (__Pyx_GetException(&__pyx_t_6, &__pyx_t_24, &__pyx_t_2) < 0) __PYX_ERR(0, 449, __pyx_L9_except_error)
+          if (__Pyx_GetException(&__pyx_t_6, &__pyx_t_24, &__pyx_t_2) < 0) __PYX_ERR(0, 474, __pyx_L9_except_error)
           __Pyx_XGOTREF(__pyx_t_6);
           __Pyx_XGOTREF(__pyx_t_24);
           __Pyx_XGOTREF(__pyx_t_2);
-          __pyx_t_30 = PyTuple_Pack(3, __pyx_t_6, __pyx_t_24, __pyx_t_2); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 449, __pyx_L9_except_error)
+          __pyx_t_30 = PyTuple_Pack(3, __pyx_t_6, __pyx_t_24, __pyx_t_2); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 474, __pyx_L9_except_error)
           __Pyx_GOTREF(__pyx_t_30);
           __pyx_t_33 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_30, NULL);
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
           __Pyx_DECREF(__pyx_t_30); __pyx_t_30 = 0;
-          if (unlikely(!__pyx_t_33)) __PYX_ERR(0, 449, __pyx_L9_except_error)
+          if (unlikely(!__pyx_t_33)) __PYX_ERR(0, 474, __pyx_L9_except_error)
           __Pyx_GOTREF(__pyx_t_33);
           __pyx_t_34 = __Pyx_PyObject_IsTrue(__pyx_t_33);
           __Pyx_DECREF(__pyx_t_33); __pyx_t_33 = 0;
-          if (__pyx_t_34 < (0)) __PYX_ERR(0, 449, __pyx_L9_except_error)
+          if (__pyx_t_34 < (0)) __PYX_ERR(0, 474, __pyx_L9_except_error)
           __pyx_t_35 = (!__pyx_t_34);
           if (unlikely(__pyx_t_35)) {
             __Pyx_GIVEREF(__pyx_t_6);
@@ -16228,7 +17067,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
             __Pyx_XGIVEREF(__pyx_t_2);
             __Pyx_ErrRestoreWithState(__pyx_t_6, __pyx_t_24, __pyx_t_2);
             __pyx_t_6 = 0;  __pyx_t_24 = 0;  __pyx_t_2 = 0; 
-            __PYX_ERR(0, 449, __pyx_L9_except_error)
+            __PYX_ERR(0, 474, __pyx_L9_except_error)
           }
           __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
           __Pyx_XDECREF(__pyx_t_24); __pyx_t_24 = 0;
@@ -16252,9 +17091,9 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
     /*finally:*/ {
       /*normal exit:*/{
         if (__pyx_t_4) {
-          __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_mstate_global->__pyx_tuple[1], NULL);
+          __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_mstate_global->__pyx_tuple[2], NULL);
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-          if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 449, __pyx_L1_error)
+          if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 474, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_9);
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         }
@@ -16269,7 +17108,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
     __pyx_L26:;
   }
 
-  /* "MagDatabase.pyx":447
+  /* "MagDatabase.pyx":472
  * 
  * 
  *     def writeMagFile(self, db, fname):             # <<<<<<<<<<<<<<
@@ -16310,7 +17149,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":488
+/* "MagDatabase.pyx":513
  * 
  * 
  *     def addLabel(self, layer, xbot, ybot, xtop, ytop, pos, font, a, b, c, d, labname):             # <<<<<<<<<<<<<<
@@ -16319,15 +17158,15 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_26writeMagFile(struct __pyx_obj_11
 */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11MagDatabase_4Cell_29addLabel(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_11MagDatabase_4Cell_33addLabel(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_11MagDatabase_4Cell_29addLabel = {"addLabel", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_29addLabel, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_11MagDatabase_4Cell_29addLabel(PyObject *__pyx_v_self, 
+static PyMethodDef __pyx_mdef_11MagDatabase_4Cell_33addLabel = {"addLabel", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_33addLabel, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_11MagDatabase_4Cell_33addLabel(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -16368,92 +17207,92 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_layer,&__pyx_mstate_global->__pyx_n_u_xbot_2,&__pyx_mstate_global->__pyx_n_u_ybot_2,&__pyx_mstate_global->__pyx_n_u_xtop_2,&__pyx_mstate_global->__pyx_n_u_ytop_2,&__pyx_mstate_global->__pyx_n_u_pos,&__pyx_mstate_global->__pyx_n_u_font,&__pyx_mstate_global->__pyx_n_u_a_2,&__pyx_mstate_global->__pyx_n_u_b_2,&__pyx_mstate_global->__pyx_n_u_c_2,&__pyx_mstate_global->__pyx_n_u_d_2,&__pyx_mstate_global->__pyx_n_u_labname,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 488, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 513, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case 12:
         values[11] = __Pyx_ArgRef_FASTCALL(__pyx_args, 11);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[11])) __PYX_ERR(0, 488, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[11])) __PYX_ERR(0, 513, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 11:
         values[10] = __Pyx_ArgRef_FASTCALL(__pyx_args, 10);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[10])) __PYX_ERR(0, 488, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[10])) __PYX_ERR(0, 513, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 10:
         values[9] = __Pyx_ArgRef_FASTCALL(__pyx_args, 9);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[9])) __PYX_ERR(0, 488, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[9])) __PYX_ERR(0, 513, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  9:
         values[8] = __Pyx_ArgRef_FASTCALL(__pyx_args, 8);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[8])) __PYX_ERR(0, 488, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[8])) __PYX_ERR(0, 513, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  8:
         values[7] = __Pyx_ArgRef_FASTCALL(__pyx_args, 7);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 488, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 513, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  7:
         values[6] = __Pyx_ArgRef_FASTCALL(__pyx_args, 6);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 488, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 513, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  6:
         values[5] = __Pyx_ArgRef_FASTCALL(__pyx_args, 5);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 488, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 513, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  5:
         values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 488, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 513, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  4:
         values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 488, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 513, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  3:
         values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 488, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 513, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 488, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 513, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 488, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 513, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "addLabel", 0) < (0)) __PYX_ERR(0, 488, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "addLabel", 0) < (0)) __PYX_ERR(0, 513, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 12; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("addLabel", 1, 12, 12, i); __PYX_ERR(0, 488, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("addLabel", 1, 12, 12, i); __PYX_ERR(0, 513, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 12)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 488, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 513, __pyx_L3_error)
       values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 488, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 513, __pyx_L3_error)
       values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 488, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 513, __pyx_L3_error)
       values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 488, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 513, __pyx_L3_error)
       values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 488, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 513, __pyx_L3_error)
       values[5] = __Pyx_ArgRef_FASTCALL(__pyx_args, 5);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 488, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 513, __pyx_L3_error)
       values[6] = __Pyx_ArgRef_FASTCALL(__pyx_args, 6);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 488, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 513, __pyx_L3_error)
       values[7] = __Pyx_ArgRef_FASTCALL(__pyx_args, 7);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 488, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 513, __pyx_L3_error)
       values[8] = __Pyx_ArgRef_FASTCALL(__pyx_args, 8);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[8])) __PYX_ERR(0, 488, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[8])) __PYX_ERR(0, 513, __pyx_L3_error)
       values[9] = __Pyx_ArgRef_FASTCALL(__pyx_args, 9);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[9])) __PYX_ERR(0, 488, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[9])) __PYX_ERR(0, 513, __pyx_L3_error)
       values[10] = __Pyx_ArgRef_FASTCALL(__pyx_args, 10);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[10])) __PYX_ERR(0, 488, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[10])) __PYX_ERR(0, 513, __pyx_L3_error)
       values[11] = __Pyx_ArgRef_FASTCALL(__pyx_args, 11);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[11])) __PYX_ERR(0, 488, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[11])) __PYX_ERR(0, 513, __pyx_L3_error)
     }
     __pyx_v_layer = values[0];
     __pyx_v_xbot = values[1];
@@ -16470,7 +17309,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("addLabel", 1, 12, 12, __pyx_nargs); __PYX_ERR(0, 488, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("addLabel", 1, 12, 12, __pyx_nargs); __PYX_ERR(0, 513, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -16481,7 +17320,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11MagDatabase_4Cell_28addLabel(((struct __pyx_obj_11MagDatabase_Cell *)__pyx_v_self), __pyx_v_layer, __pyx_v_xbot, __pyx_v_ybot, __pyx_v_xtop, __pyx_v_ytop, __pyx_v_pos, __pyx_v_font, __pyx_v_a, __pyx_v_b, __pyx_v_c, __pyx_v_d, __pyx_v_labname);
+  __pyx_r = __pyx_pf_11MagDatabase_4Cell_32addLabel(((struct __pyx_obj_11MagDatabase_Cell *)__pyx_v_self), __pyx_v_layer, __pyx_v_xbot, __pyx_v_ybot, __pyx_v_xtop, __pyx_v_ytop, __pyx_v_pos, __pyx_v_font, __pyx_v_a, __pyx_v_b, __pyx_v_c, __pyx_v_d, __pyx_v_labname);
 
   /* function exit code */
   for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
@@ -16491,7 +17330,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11MagDatabase_4Cell_28addLabel(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_layer, PyObject *__pyx_v_xbot, PyObject *__pyx_v_ybot, PyObject *__pyx_v_xtop, PyObject *__pyx_v_ytop, PyObject *__pyx_v_pos, PyObject *__pyx_v_font, PyObject *__pyx_v_a, PyObject *__pyx_v_b, PyObject *__pyx_v_c, PyObject *__pyx_v_d, PyObject *__pyx_v_labname) {
+static PyObject *__pyx_pf_11MagDatabase_4Cell_32addLabel(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_layer, PyObject *__pyx_v_xbot, PyObject *__pyx_v_ybot, PyObject *__pyx_v_xtop, PyObject *__pyx_v_ytop, PyObject *__pyx_v_pos, PyObject *__pyx_v_font, PyObject *__pyx_v_a, PyObject *__pyx_v_b, PyObject *__pyx_v_c, PyObject *__pyx_v_d, PyObject *__pyx_v_labname) {
   PyObject *__pyx_v_l = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -16504,7 +17343,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_28addLabel(struct __pyx_obj_11MagD
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("addLabel", 0);
 
-  /* "MagDatabase.pyx":490
+  /* "MagDatabase.pyx":515
  *     def addLabel(self, layer, xbot, ybot, xtop, ytop, pos, font, a, b, c, d, labname):
  * 
  *         l = Label(layer, xbot, ybot, xtop, ytop, pos, font, a, b, c, d, labname)             # <<<<<<<<<<<<<<
@@ -16512,7 +17351,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_28addLabel(struct __pyx_obj_11MagD
  *         self.labels[labname] = l
 */
   __pyx_t_2 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_Label); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 490, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_Label); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 515, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = 1;
   #if CYTHON_UNPACK_METHODS
@@ -16531,13 +17370,13 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_28addLabel(struct __pyx_obj_11MagD
     __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_3, __pyx_callargs+__pyx_t_4, (13-__pyx_t_4) | (__pyx_t_4*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 490, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 515, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_v_l = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":492
+  /* "MagDatabase.pyx":517
  *         l = Label(layer, xbot, ybot, xtop, ytop, pos, font, a, b, c, d, labname)
  * 
  *         self.labels[labname] = l             # <<<<<<<<<<<<<<
@@ -16546,11 +17385,11 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_28addLabel(struct __pyx_obj_11MagD
 */
   if (unlikely(__pyx_v_self->labels == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 492, __pyx_L1_error)
+    __PYX_ERR(0, 517, __pyx_L1_error)
   }
-  if (unlikely((PyDict_SetItem(__pyx_v_self->labels, __pyx_v_labname, __pyx_v_l) < 0))) __PYX_ERR(0, 492, __pyx_L1_error)
+  if (unlikely((PyDict_SetItem(__pyx_v_self->labels, __pyx_v_labname, __pyx_v_l) < 0))) __PYX_ERR(0, 517, __pyx_L1_error)
 
-  /* "MagDatabase.pyx":488
+  /* "MagDatabase.pyx":513
  * 
  * 
  *     def addLabel(self, layer, xbot, ybot, xtop, ytop, pos, font, a, b, c, d, labname):             # <<<<<<<<<<<<<<
@@ -16574,7 +17413,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_28addLabel(struct __pyx_obj_11MagD
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":495
+/* "MagDatabase.pyx":520
  * 
  * 
  *     def setLabelPort(self, labname, port, directions):             # <<<<<<<<<<<<<<
@@ -16583,15 +17422,15 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_28addLabel(struct __pyx_obj_11MagD
 */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11MagDatabase_4Cell_31setLabelPort(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_11MagDatabase_4Cell_35setLabelPort(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_11MagDatabase_4Cell_31setLabelPort = {"setLabelPort", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_31setLabelPort, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_11MagDatabase_4Cell_31setLabelPort(PyObject *__pyx_v_self, 
+static PyMethodDef __pyx_mdef_11MagDatabase_4Cell_35setLabelPort = {"setLabelPort", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_35setLabelPort, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_11MagDatabase_4Cell_35setLabelPort(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -16623,38 +17462,38 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_labname,&__pyx_mstate_global->__pyx_n_u_port,&__pyx_mstate_global->__pyx_n_u_directions,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 495, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 520, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  3:
         values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 495, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 520, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 495, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 520, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 495, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 520, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "setLabelPort", 0) < (0)) __PYX_ERR(0, 495, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "setLabelPort", 0) < (0)) __PYX_ERR(0, 520, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 3; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("setLabelPort", 1, 3, 3, i); __PYX_ERR(0, 495, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("setLabelPort", 1, 3, 3, i); __PYX_ERR(0, 520, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 3)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 495, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 520, __pyx_L3_error)
       values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 495, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 520, __pyx_L3_error)
       values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 495, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 520, __pyx_L3_error)
     }
     __pyx_v_labname = values[0];
     __pyx_v_port = values[1];
@@ -16662,7 +17501,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("setLabelPort", 1, 3, 3, __pyx_nargs); __PYX_ERR(0, 495, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("setLabelPort", 1, 3, 3, __pyx_nargs); __PYX_ERR(0, 520, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -16673,7 +17512,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11MagDatabase_4Cell_30setLabelPort(((struct __pyx_obj_11MagDatabase_Cell *)__pyx_v_self), __pyx_v_labname, __pyx_v_port, __pyx_v_directions);
+  __pyx_r = __pyx_pf_11MagDatabase_4Cell_34setLabelPort(((struct __pyx_obj_11MagDatabase_Cell *)__pyx_v_self), __pyx_v_labname, __pyx_v_port, __pyx_v_directions);
 
   /* function exit code */
   for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
@@ -16683,7 +17522,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11MagDatabase_4Cell_30setLabelPort(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_labname, PyObject *__pyx_v_port, PyObject *__pyx_v_directions) {
+static PyObject *__pyx_pf_11MagDatabase_4Cell_34setLabelPort(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_labname, PyObject *__pyx_v_port, PyObject *__pyx_v_directions) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -16695,7 +17534,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_30setLabelPort(struct __pyx_obj_11
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("setLabelPort", 0);
 
-  /* "MagDatabase.pyx":497
+  /* "MagDatabase.pyx":522
  *     def setLabelPort(self, labname, port, directions):
  * 
  *         self.labels[labname].setPort(port, directions)             # <<<<<<<<<<<<<<
@@ -16704,9 +17543,9 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_30setLabelPort(struct __pyx_obj_11
 */
   if (unlikely(__pyx_v_self->labels == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 497, __pyx_L1_error)
+    __PYX_ERR(0, 522, __pyx_L1_error)
   }
-  __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_self->labels, __pyx_v_labname); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 497, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_self->labels, __pyx_v_labname); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 522, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_2 = __pyx_t_3;
   __Pyx_INCREF(__pyx_t_2);
@@ -16716,12 +17555,12 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_30setLabelPort(struct __pyx_obj_11
     __pyx_t_1 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_setPort, __pyx_callargs+__pyx_t_4, (3-__pyx_t_4) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 497, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 522, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":495
+  /* "MagDatabase.pyx":520
  * 
  * 
  *     def setLabelPort(self, labname, port, directions):             # <<<<<<<<<<<<<<
@@ -16744,7 +17583,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_30setLabelPort(struct __pyx_obj_11
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":174
+/* "MagDatabase.pyx":180
  * 
  * cdef class Cell:
  *     cdef public dict layers             # <<<<<<<<<<<<<<
@@ -16808,7 +17647,7 @@ static int __pyx_pf_11MagDatabase_4Cell_6layers_2__set__(struct __pyx_obj_11MagD
   __Pyx_RefNannySetupContext("__set__", 0);
   __pyx_t_1 = __pyx_v_value;
   __Pyx_INCREF(__pyx_t_1);
-  if (!(likely(PyDict_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("dict", __pyx_t_1))) __PYX_ERR(0, 174, __pyx_L1_error)
+  if (!(likely(PyDict_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("dict", __pyx_t_1))) __PYX_ERR(0, 180, __pyx_L1_error)
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v_self->layers);
   __Pyx_DECREF(__pyx_v_self->layers);
@@ -16858,7 +17697,7 @@ static int __pyx_pf_11MagDatabase_4Cell_6layers_4__del__(struct __pyx_obj_11MagD
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":175
+/* "MagDatabase.pyx":181
  * cdef class Cell:
  *     cdef public dict layers
  *     cdef public str name             # <<<<<<<<<<<<<<
@@ -16922,7 +17761,7 @@ static int __pyx_pf_11MagDatabase_4Cell_4name_2__set__(struct __pyx_obj_11MagDat
   __Pyx_RefNannySetupContext("__set__", 0);
   __pyx_t_1 = __pyx_v_value;
   __Pyx_INCREF(__pyx_t_1);
-  if (!(likely(PyUnicode_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("str", __pyx_t_1))) __PYX_ERR(0, 175, __pyx_L1_error)
+  if (!(likely(PyUnicode_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("str", __pyx_t_1))) __PYX_ERR(0, 181, __pyx_L1_error)
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v_self->name);
   __Pyx_DECREF(__pyx_v_self->name);
@@ -16972,7 +17811,7 @@ static int __pyx_pf_11MagDatabase_4Cell_4name_4__del__(struct __pyx_obj_11MagDat
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":176
+/* "MagDatabase.pyx":182
  *     cdef public dict layers
  *     cdef public str name
  *     cdef public str tech             # <<<<<<<<<<<<<<
@@ -17036,7 +17875,7 @@ static int __pyx_pf_11MagDatabase_4Cell_4tech_2__set__(struct __pyx_obj_11MagDat
   __Pyx_RefNannySetupContext("__set__", 0);
   __pyx_t_1 = __pyx_v_value;
   __Pyx_INCREF(__pyx_t_1);
-  if (!(likely(PyUnicode_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("str", __pyx_t_1))) __PYX_ERR(0, 176, __pyx_L1_error)
+  if (!(likely(PyUnicode_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("str", __pyx_t_1))) __PYX_ERR(0, 182, __pyx_L1_error)
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v_self->tech);
   __Pyx_DECREF(__pyx_v_self->tech);
@@ -17086,7 +17925,7 @@ static int __pyx_pf_11MagDatabase_4Cell_4tech_4__del__(struct __pyx_obj_11MagDat
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":177
+/* "MagDatabase.pyx":183
  *     cdef public str name
  *     cdef public str tech
  *     cdef public list transistors             # <<<<<<<<<<<<<<
@@ -17150,7 +17989,7 @@ static int __pyx_pf_11MagDatabase_4Cell_11transistors_2__set__(struct __pyx_obj_
   __Pyx_RefNannySetupContext("__set__", 0);
   __pyx_t_1 = __pyx_v_value;
   __Pyx_INCREF(__pyx_t_1);
-  if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_1))) __PYX_ERR(0, 177, __pyx_L1_error)
+  if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_1))) __PYX_ERR(0, 183, __pyx_L1_error)
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v_self->transistors);
   __Pyx_DECREF(__pyx_v_self->transistors);
@@ -17200,12 +18039,12 @@ static int __pyx_pf_11MagDatabase_4Cell_11transistors_4__del__(struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":178
+/* "MagDatabase.pyx":184
  *     cdef public str tech
  *     cdef public list transistors
  *     cdef public list uses             # <<<<<<<<<<<<<<
  *     cdef public dict labels
- * 
+ *     cdef public Rect bbox
 */
 
 /* Python wrapper */
@@ -17264,7 +18103,7 @@ static int __pyx_pf_11MagDatabase_4Cell_4uses_2__set__(struct __pyx_obj_11MagDat
   __Pyx_RefNannySetupContext("__set__", 0);
   __pyx_t_1 = __pyx_v_value;
   __Pyx_INCREF(__pyx_t_1);
-  if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_1))) __PYX_ERR(0, 178, __pyx_L1_error)
+  if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_1))) __PYX_ERR(0, 184, __pyx_L1_error)
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v_self->uses);
   __Pyx_DECREF(__pyx_v_self->uses);
@@ -17314,12 +18153,12 @@ static int __pyx_pf_11MagDatabase_4Cell_4uses_4__del__(struct __pyx_obj_11MagDat
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":179
+/* "MagDatabase.pyx":185
  *     cdef public list transistors
  *     cdef public list uses
  *     cdef public dict labels             # <<<<<<<<<<<<<<
+ *     cdef public Rect bbox
  * 
- *     def __init__(self):
 */
 
 /* Python wrapper */
@@ -17378,7 +18217,7 @@ static int __pyx_pf_11MagDatabase_4Cell_6labels_2__set__(struct __pyx_obj_11MagD
   __Pyx_RefNannySetupContext("__set__", 0);
   __pyx_t_1 = __pyx_v_value;
   __Pyx_INCREF(__pyx_t_1);
-  if (!(likely(PyDict_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("dict", __pyx_t_1))) __PYX_ERR(0, 179, __pyx_L1_error)
+  if (!(likely(PyDict_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("dict", __pyx_t_1))) __PYX_ERR(0, 185, __pyx_L1_error)
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v_self->labels);
   __Pyx_DECREF(__pyx_v_self->labels);
@@ -17428,6 +18267,120 @@ static int __pyx_pf_11MagDatabase_4Cell_6labels_4__del__(struct __pyx_obj_11MagD
   return __pyx_r;
 }
 
+/* "MagDatabase.pyx":186
+ *     cdef public list uses
+ *     cdef public dict labels
+ *     cdef public Rect bbox             # <<<<<<<<<<<<<<
+ * 
+ *     def __init__(self):
+*/
+
+/* Python wrapper */
+static PyObject *__pyx_pw_11MagDatabase_4Cell_4bbox_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_11MagDatabase_4Cell_4bbox_1__get__(PyObject *__pyx_v_self) {
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
+  __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
+  __pyx_r = __pyx_pf_11MagDatabase_4Cell_4bbox___get__(((struct __pyx_obj_11MagDatabase_Cell *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_11MagDatabase_4Cell_4bbox___get__(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__", 0);
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF((PyObject *)__pyx_v_self->bbox);
+  __pyx_r = ((PyObject *)__pyx_v_self->bbox);
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* Python wrapper */
+static int __pyx_pw_11MagDatabase_4Cell_4bbox_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value); /*proto*/
+static int __pyx_pw_11MagDatabase_4Cell_4bbox_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value) {
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
+  __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
+  __pyx_r = __pyx_pf_11MagDatabase_4Cell_4bbox_2__set__(((struct __pyx_obj_11MagDatabase_Cell *)__pyx_v_self), ((PyObject *)__pyx_v_value));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static int __pyx_pf_11MagDatabase_4Cell_4bbox_2__set__(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v_value) {
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__set__", 0);
+  __pyx_t_1 = __pyx_v_value;
+  __Pyx_INCREF(__pyx_t_1);
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_mstate_global->__pyx_ptype_11MagDatabase_Rect))))) __PYX_ERR(0, 186, __pyx_L1_error)
+  __Pyx_GIVEREF(__pyx_t_1);
+  __Pyx_GOTREF((PyObject *)__pyx_v_self->bbox);
+  __Pyx_DECREF((PyObject *)__pyx_v_self->bbox);
+  __pyx_v_self->bbox = ((struct __pyx_obj_11MagDatabase_Rect *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* function exit code */
+  __pyx_r = 0;
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("MagDatabase.Cell.bbox.__set__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = -1;
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* Python wrapper */
+static int __pyx_pw_11MagDatabase_4Cell_4bbox_5__del__(PyObject *__pyx_v_self); /*proto*/
+static int __pyx_pw_11MagDatabase_4Cell_4bbox_5__del__(PyObject *__pyx_v_self) {
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__del__ (wrapper)", 0);
+  __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
+  __pyx_r = __pyx_pf_11MagDatabase_4Cell_4bbox_4__del__(((struct __pyx_obj_11MagDatabase_Cell *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static int __pyx_pf_11MagDatabase_4Cell_4bbox_4__del__(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self) {
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__del__", 0);
+  __Pyx_INCREF(Py_None);
+  __Pyx_GIVEREF(Py_None);
+  __Pyx_GOTREF((PyObject *)__pyx_v_self->bbox);
+  __Pyx_DECREF((PyObject *)__pyx_v_self->bbox);
+  __pyx_v_self->bbox = ((struct __pyx_obj_11MagDatabase_Rect *)Py_None);
+
+  /* function exit code */
+  __pyx_r = 0;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
 /* "(tree fragment)":1
  * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
  *     cdef tuple state
@@ -17435,15 +18388,15 @@ static int __pyx_pf_11MagDatabase_4Cell_6labels_4__del__(struct __pyx_obj_11MagD
 */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11MagDatabase_4Cell_33__reduce_cython__(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_11MagDatabase_4Cell_37__reduce_cython__(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_11MagDatabase_4Cell_33__reduce_cython__ = {"__reduce_cython__", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_33__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_11MagDatabase_4Cell_33__reduce_cython__(PyObject *__pyx_v_self, 
+static PyMethodDef __pyx_mdef_11MagDatabase_4Cell_37__reduce_cython__ = {"__reduce_cython__", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_37__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_11MagDatabase_4Cell_37__reduce_cython__(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -17469,14 +18422,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   const Py_ssize_t __pyx_kwds_len = unlikely(__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
   if (unlikely(__pyx_kwds_len < 0)) return NULL;
   if (unlikely(__pyx_kwds_len > 0)) {__Pyx_RejectKeywords("__reduce_cython__", __pyx_kwds); return NULL;}
-  __pyx_r = __pyx_pf_11MagDatabase_4Cell_32__reduce_cython__(((struct __pyx_obj_11MagDatabase_Cell *)__pyx_v_self));
+  __pyx_r = __pyx_pf_11MagDatabase_4Cell_36__reduce_cython__(((struct __pyx_obj_11MagDatabase_Cell *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11MagDatabase_4Cell_32__reduce_cython__(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self) {
+static PyObject *__pyx_pf_11MagDatabase_4Cell_36__reduce_cython__(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self) {
   PyObject *__pyx_v_state = 0;
   PyObject *__pyx_v__dict = 0;
   int __pyx_v_use_setstate;
@@ -17495,36 +18448,39 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_32__reduce_cython__(struct __pyx_o
   /* "(tree fragment)":5
  *     cdef object _dict
  *     cdef bint use_setstate
- *     state = (self.labels, self.layers, self.name, self.tech, self.transistors, self.uses)             # <<<<<<<<<<<<<<
+ *     state = (self.bbox, self.labels, self.layers, self.name, self.tech, self.transistors, self.uses)             # <<<<<<<<<<<<<<
  *     _dict = getattr(self, '__dict__', None)
  *     if _dict is not None and _dict:
 */
-  __pyx_t_1 = PyTuple_New(6); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 5, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(7); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_INCREF((PyObject *)__pyx_v_self->bbox);
+  __Pyx_GIVEREF((PyObject *)__pyx_v_self->bbox);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)__pyx_v_self->bbox)) != (0)) __PYX_ERR(1, 5, __pyx_L1_error);
   __Pyx_INCREF(__pyx_v_self->labels);
   __Pyx_GIVEREF(__pyx_v_self->labels);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_self->labels) != (0)) __PYX_ERR(1, 5, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_self->labels) != (0)) __PYX_ERR(1, 5, __pyx_L1_error);
   __Pyx_INCREF(__pyx_v_self->layers);
   __Pyx_GIVEREF(__pyx_v_self->layers);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_self->layers) != (0)) __PYX_ERR(1, 5, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_v_self->layers) != (0)) __PYX_ERR(1, 5, __pyx_L1_error);
   __Pyx_INCREF(__pyx_v_self->name);
   __Pyx_GIVEREF(__pyx_v_self->name);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_v_self->name) != (0)) __PYX_ERR(1, 5, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 3, __pyx_v_self->name) != (0)) __PYX_ERR(1, 5, __pyx_L1_error);
   __Pyx_INCREF(__pyx_v_self->tech);
   __Pyx_GIVEREF(__pyx_v_self->tech);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 3, __pyx_v_self->tech) != (0)) __PYX_ERR(1, 5, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 4, __pyx_v_self->tech) != (0)) __PYX_ERR(1, 5, __pyx_L1_error);
   __Pyx_INCREF(__pyx_v_self->transistors);
   __Pyx_GIVEREF(__pyx_v_self->transistors);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 4, __pyx_v_self->transistors) != (0)) __PYX_ERR(1, 5, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 5, __pyx_v_self->transistors) != (0)) __PYX_ERR(1, 5, __pyx_L1_error);
   __Pyx_INCREF(__pyx_v_self->uses);
   __Pyx_GIVEREF(__pyx_v_self->uses);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 5, __pyx_v_self->uses) != (0)) __PYX_ERR(1, 5, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 6, __pyx_v_self->uses) != (0)) __PYX_ERR(1, 5, __pyx_L1_error);
   __pyx_v_state = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
   /* "(tree fragment)":6
  *     cdef bint use_setstate
- *     state = (self.labels, self.layers, self.name, self.tech, self.transistors, self.uses)
+ *     state = (self.bbox, self.labels, self.layers, self.name, self.tech, self.transistors, self.uses)
  *     _dict = getattr(self, '__dict__', None)             # <<<<<<<<<<<<<<
  *     if _dict is not None and _dict:
  *         state += (_dict,)
@@ -17535,7 +18491,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_32__reduce_cython__(struct __pyx_o
   __pyx_t_1 = 0;
 
   /* "(tree fragment)":7
- *     state = (self.labels, self.layers, self.name, self.tech, self.transistors, self.uses)
+ *     state = (self.bbox, self.labels, self.layers, self.name, self.tech, self.transistors, self.uses)
  *     _dict = getattr(self, '__dict__', None)
  *     if _dict is not None and _dict:             # <<<<<<<<<<<<<<
  *         state += (_dict,)
@@ -17575,12 +18531,12 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_32__reduce_cython__(struct __pyx_o
  *         state += (_dict,)
  *         use_setstate = True             # <<<<<<<<<<<<<<
  *     else:
- *         use_setstate = self.labels is not None or self.layers is not None or self.name is not None or self.tech is not None or self.transistors is not None or self.uses is not None
+ *         use_setstate = self.bbox is not None or self.labels is not None or self.layers is not None or self.name is not None or self.tech is not None or self.transistors is not None or self.uses is not None
 */
     __pyx_v_use_setstate = 1;
 
     /* "(tree fragment)":7
- *     state = (self.labels, self.layers, self.name, self.tech, self.transistors, self.uses)
+ *     state = (self.bbox, self.labels, self.layers, self.name, self.tech, self.transistors, self.uses)
  *     _dict = getattr(self, '__dict__', None)
  *     if _dict is not None and _dict:             # <<<<<<<<<<<<<<
  *         state += (_dict,)
@@ -17592,11 +18548,17 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_32__reduce_cython__(struct __pyx_o
   /* "(tree fragment)":11
  *         use_setstate = True
  *     else:
- *         use_setstate = self.labels is not None or self.layers is not None or self.name is not None or self.tech is not None or self.transistors is not None or self.uses is not None             # <<<<<<<<<<<<<<
+ *         use_setstate = self.bbox is not None or self.labels is not None or self.layers is not None or self.name is not None or self.tech is not None or self.transistors is not None or self.uses is not None             # <<<<<<<<<<<<<<
  *     if use_setstate:
- *         return __pyx_unpickle_Cell, (type(self), 0x8cc10a5, None), state
+ *         return __pyx_unpickle_Cell, (type(self), 0x175f6fd, None), state
 */
   /*else*/ {
+    __pyx_t_3 = (((PyObject *)__pyx_v_self->bbox) != Py_None);
+    if (!__pyx_t_3) {
+    } else {
+      __pyx_t_2 = __pyx_t_3;
+      goto __pyx_L6_bool_binop_done;
+    }
     __pyx_t_3 = (__pyx_v_self->labels != ((PyObject*)Py_None));
     if (!__pyx_t_3) {
     } else {
@@ -17636,19 +18598,19 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_32__reduce_cython__(struct __pyx_o
 
   /* "(tree fragment)":12
  *     else:
- *         use_setstate = self.labels is not None or self.layers is not None or self.name is not None or self.tech is not None or self.transistors is not None or self.uses is not None
+ *         use_setstate = self.bbox is not None or self.labels is not None or self.layers is not None or self.name is not None or self.tech is not None or self.transistors is not None or self.uses is not None
  *     if use_setstate:             # <<<<<<<<<<<<<<
- *         return __pyx_unpickle_Cell, (type(self), 0x8cc10a5, None), state
+ *         return __pyx_unpickle_Cell, (type(self), 0x175f6fd, None), state
  *     else:
 */
   if (__pyx_v_use_setstate) {
 
     /* "(tree fragment)":13
- *         use_setstate = self.labels is not None or self.layers is not None or self.name is not None or self.tech is not None or self.transistors is not None or self.uses is not None
+ *         use_setstate = self.bbox is not None or self.labels is not None or self.layers is not None or self.name is not None or self.tech is not None or self.transistors is not None or self.uses is not None
  *     if use_setstate:
- *         return __pyx_unpickle_Cell, (type(self), 0x8cc10a5, None), state             # <<<<<<<<<<<<<<
+ *         return __pyx_unpickle_Cell, (type(self), 0x175f6fd, None), state             # <<<<<<<<<<<<<<
  *     else:
- *         return __pyx_unpickle_Cell, (type(self), 0x8cc10a5, state)
+ *         return __pyx_unpickle_Cell, (type(self), 0x175f6fd, state)
 */
     __Pyx_XDECREF(__pyx_r);
     __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_pyx_unpickle_Cell); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 13, __pyx_L1_error)
@@ -17658,9 +18620,9 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_32__reduce_cython__(struct __pyx_o
     __Pyx_INCREF(((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
     __Pyx_GIVEREF(((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
     if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self)))) != (0)) __PYX_ERR(1, 13, __pyx_L1_error);
-    __Pyx_INCREF(__pyx_mstate_global->__pyx_int_147591333);
-    __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_147591333);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_mstate_global->__pyx_int_147591333) != (0)) __PYX_ERR(1, 13, __pyx_L1_error);
+    __Pyx_INCREF(__pyx_mstate_global->__pyx_int_24508157);
+    __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_24508157);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_mstate_global->__pyx_int_24508157) != (0)) __PYX_ERR(1, 13, __pyx_L1_error);
     __Pyx_INCREF(Py_None);
     __Pyx_GIVEREF(Py_None);
     if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 2, Py_None) != (0)) __PYX_ERR(1, 13, __pyx_L1_error);
@@ -17681,17 +18643,17 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_32__reduce_cython__(struct __pyx_o
 
     /* "(tree fragment)":12
  *     else:
- *         use_setstate = self.labels is not None or self.layers is not None or self.name is not None or self.tech is not None or self.transistors is not None or self.uses is not None
+ *         use_setstate = self.bbox is not None or self.labels is not None or self.layers is not None or self.name is not None or self.tech is not None or self.transistors is not None or self.uses is not None
  *     if use_setstate:             # <<<<<<<<<<<<<<
- *         return __pyx_unpickle_Cell, (type(self), 0x8cc10a5, None), state
+ *         return __pyx_unpickle_Cell, (type(self), 0x175f6fd, None), state
  *     else:
 */
   }
 
   /* "(tree fragment)":15
- *         return __pyx_unpickle_Cell, (type(self), 0x8cc10a5, None), state
+ *         return __pyx_unpickle_Cell, (type(self), 0x175f6fd, None), state
  *     else:
- *         return __pyx_unpickle_Cell, (type(self), 0x8cc10a5, state)             # <<<<<<<<<<<<<<
+ *         return __pyx_unpickle_Cell, (type(self), 0x175f6fd, state)             # <<<<<<<<<<<<<<
  * def __setstate_cython__(self, __pyx_state):
  *     __pyx_unpickle_Cell__set_state(self, __pyx_state)
 */
@@ -17704,9 +18666,9 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_32__reduce_cython__(struct __pyx_o
     __Pyx_INCREF(((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
     __Pyx_GIVEREF(((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self))));
     if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject *)Py_TYPE(((PyObject *)__pyx_v_self)))) != (0)) __PYX_ERR(1, 15, __pyx_L1_error);
-    __Pyx_INCREF(__pyx_mstate_global->__pyx_int_147591333);
-    __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_147591333);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_mstate_global->__pyx_int_147591333) != (0)) __PYX_ERR(1, 15, __pyx_L1_error);
+    __Pyx_INCREF(__pyx_mstate_global->__pyx_int_24508157);
+    __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_24508157);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_mstate_global->__pyx_int_24508157) != (0)) __PYX_ERR(1, 15, __pyx_L1_error);
     __Pyx_INCREF(__pyx_v_state);
     __Pyx_GIVEREF(__pyx_v_state);
     if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_v_state) != (0)) __PYX_ERR(1, 15, __pyx_L1_error);
@@ -17746,21 +18708,21 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_32__reduce_cython__(struct __pyx_o
 
 /* "(tree fragment)":16
  *     else:
- *         return __pyx_unpickle_Cell, (type(self), 0x8cc10a5, state)
+ *         return __pyx_unpickle_Cell, (type(self), 0x175f6fd, state)
  * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
  *     __pyx_unpickle_Cell__set_state(self, __pyx_state)
 */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11MagDatabase_4Cell_35__setstate_cython__(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_11MagDatabase_4Cell_39__setstate_cython__(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_11MagDatabase_4Cell_35__setstate_cython__ = {"__setstate_cython__", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_35__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_11MagDatabase_4Cell_35__setstate_cython__(PyObject *__pyx_v_self, 
+static PyMethodDef __pyx_mdef_11MagDatabase_4Cell_39__setstate_cython__ = {"__setstate_cython__", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_39__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_11MagDatabase_4Cell_39__setstate_cython__(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -17826,7 +18788,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11MagDatabase_4Cell_34__setstate_cython__(((struct __pyx_obj_11MagDatabase_Cell *)__pyx_v_self), __pyx_v___pyx_state);
+  __pyx_r = __pyx_pf_11MagDatabase_4Cell_38__setstate_cython__(((struct __pyx_obj_11MagDatabase_Cell *)__pyx_v_self), __pyx_v___pyx_state);
 
   /* function exit code */
   for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
@@ -17836,7 +18798,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11MagDatabase_4Cell_34__setstate_cython__(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_11MagDatabase_4Cell_38__setstate_cython__(struct __pyx_obj_11MagDatabase_Cell *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -17847,7 +18809,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_34__setstate_cython__(struct __pyx
   __Pyx_RefNannySetupContext("__setstate_cython__", 0);
 
   /* "(tree fragment)":17
- *         return __pyx_unpickle_Cell, (type(self), 0x8cc10a5, state)
+ *         return __pyx_unpickle_Cell, (type(self), 0x175f6fd, state)
  * def __setstate_cython__(self, __pyx_state):
  *     __pyx_unpickle_Cell__set_state(self, __pyx_state)             # <<<<<<<<<<<<<<
 */
@@ -17865,7 +18827,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_34__setstate_cython__(struct __pyx
 
   /* "(tree fragment)":16
  *     else:
- *         return __pyx_unpickle_Cell, (type(self), 0x8cc10a5, state)
+ *         return __pyx_unpickle_Cell, (type(self), 0x175f6fd, state)
  * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
  *     __pyx_unpickle_Cell__set_state(self, __pyx_state)
 */
@@ -17884,7 +18846,7 @@ static PyObject *__pyx_pf_11MagDatabase_4Cell_34__setstate_cython__(struct __pyx
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":506
+/* "MagDatabase.pyx":531
  *     cdef public dict cells
  * 
  *     def __init__(self):             # <<<<<<<<<<<<<<
@@ -17926,14 +18888,14 @@ static int __pyx_pf_11MagDatabase_11MagDatabase___init__(struct __pyx_obj_11MagD
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "MagDatabase.pyx":507
+  /* "MagDatabase.pyx":532
  * 
  *     def __init__(self):
  *         self.cells = {}             # <<<<<<<<<<<<<<
  * 
  *     def createCell(self, str name):
 */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 507, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 532, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v_self->cells);
@@ -17941,7 +18903,7 @@ static int __pyx_pf_11MagDatabase_11MagDatabase___init__(struct __pyx_obj_11MagD
   __pyx_v_self->cells = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":506
+  /* "MagDatabase.pyx":531
  *     cdef public dict cells
  * 
  *     def __init__(self):             # <<<<<<<<<<<<<<
@@ -17961,7 +18923,7 @@ static int __pyx_pf_11MagDatabase_11MagDatabase___init__(struct __pyx_obj_11MagD
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":509
+/* "MagDatabase.pyx":534
  *         self.cells = {}
  * 
  *     def createCell(self, str name):             # <<<<<<<<<<<<<<
@@ -18008,32 +18970,32 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_name,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 509, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 534, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 509, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 534, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "createCell", 0) < (0)) __PYX_ERR(0, 509, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "createCell", 0) < (0)) __PYX_ERR(0, 534, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 1; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("createCell", 1, 1, 1, i); __PYX_ERR(0, 509, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("createCell", 1, 1, 1, i); __PYX_ERR(0, 534, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 509, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 534, __pyx_L3_error)
     }
     __pyx_v_name = ((PyObject*)values[0]);
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("createCell", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 509, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("createCell", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 534, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -18044,7 +19006,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_name), (&PyUnicode_Type), 1, "name", 1))) __PYX_ERR(0, 509, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_name), (&PyUnicode_Type), 1, "name", 1))) __PYX_ERR(0, 534, __pyx_L1_error)
   __pyx_r = __pyx_pf_11MagDatabase_11MagDatabase_2createCell(((struct __pyx_obj_11MagDatabase_MagDatabase *)__pyx_v_self), __pyx_v_name);
 
   /* function exit code */
@@ -18076,7 +19038,7 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_2createCell(struct __pyx_o
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("createCell", 0);
 
-  /* "MagDatabase.pyx":511
+  /* "MagDatabase.pyx":536
  *     def createCell(self, str name):
  * 
  *         c = Cell()             # <<<<<<<<<<<<<<
@@ -18089,13 +19051,13 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_2createCell(struct __pyx_o
     PyObject *__pyx_callargs[2] = {__pyx_t_2, NULL};
     __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_callargs+__pyx_t_3, (1-__pyx_t_3) | (__pyx_t_3*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 511, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 536, __pyx_L1_error)
     __Pyx_GOTREF((PyObject *)__pyx_t_1);
   }
   __pyx_v_c = ((struct __pyx_obj_11MagDatabase_Cell *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":513
+  /* "MagDatabase.pyx":538
  *         c = Cell()
  * 
  *         c.name = name             # <<<<<<<<<<<<<<
@@ -18108,7 +19070,7 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_2createCell(struct __pyx_o
   __Pyx_DECREF(__pyx_v_c->name);
   __pyx_v_c->name = __pyx_v_name;
 
-  /* "MagDatabase.pyx":515
+  /* "MagDatabase.pyx":540
  *         c.name = name
  * 
  *         self.cells[name] = c             # <<<<<<<<<<<<<<
@@ -18117,11 +19079,11 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_2createCell(struct __pyx_o
 */
   if (unlikely(__pyx_v_self->cells == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 515, __pyx_L1_error)
+    __PYX_ERR(0, 540, __pyx_L1_error)
   }
-  if (unlikely((PyDict_SetItem(__pyx_v_self->cells, __pyx_v_name, ((PyObject *)__pyx_v_c)) < 0))) __PYX_ERR(0, 515, __pyx_L1_error)
+  if (unlikely((PyDict_SetItem(__pyx_v_self->cells, __pyx_v_name, ((PyObject *)__pyx_v_c)) < 0))) __PYX_ERR(0, 540, __pyx_L1_error)
 
-  /* "MagDatabase.pyx":509
+  /* "MagDatabase.pyx":534
  *         self.cells = {}
  * 
  *     def createCell(self, str name):             # <<<<<<<<<<<<<<
@@ -18144,7 +19106,7 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_2createCell(struct __pyx_o
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":517
+/* "MagDatabase.pyx":542
  *         self.cells[name] = c
  * 
  *     def addRectToCell(self, str name, str layer, int xbot, int ybot, int xtop, int ytop):             # <<<<<<<<<<<<<<
@@ -18196,67 +19158,67 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_name,&__pyx_mstate_global->__pyx_n_u_layer,&__pyx_mstate_global->__pyx_n_u_xbot_2,&__pyx_mstate_global->__pyx_n_u_ybot_2,&__pyx_mstate_global->__pyx_n_u_xtop_2,&__pyx_mstate_global->__pyx_n_u_ytop_2,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 517, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 542, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  6:
         values[5] = __Pyx_ArgRef_FASTCALL(__pyx_args, 5);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 517, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 542, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  5:
         values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 517, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 542, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  4:
         values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 517, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 542, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  3:
         values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 517, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 542, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 517, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 542, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 517, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 542, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "addRectToCell", 0) < (0)) __PYX_ERR(0, 517, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "addRectToCell", 0) < (0)) __PYX_ERR(0, 542, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 6; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("addRectToCell", 1, 6, 6, i); __PYX_ERR(0, 517, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("addRectToCell", 1, 6, 6, i); __PYX_ERR(0, 542, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 6)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 517, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 542, __pyx_L3_error)
       values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 517, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 542, __pyx_L3_error)
       values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 517, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 542, __pyx_L3_error)
       values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 517, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 542, __pyx_L3_error)
       values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 517, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 542, __pyx_L3_error)
       values[5] = __Pyx_ArgRef_FASTCALL(__pyx_args, 5);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 517, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 542, __pyx_L3_error)
     }
     __pyx_v_name = ((PyObject*)values[0]);
     __pyx_v_layer = ((PyObject*)values[1]);
-    __pyx_v_xbot = __Pyx_PyLong_As_int(values[2]); if (unlikely((__pyx_v_xbot == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 517, __pyx_L3_error)
-    __pyx_v_ybot = __Pyx_PyLong_As_int(values[3]); if (unlikely((__pyx_v_ybot == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 517, __pyx_L3_error)
-    __pyx_v_xtop = __Pyx_PyLong_As_int(values[4]); if (unlikely((__pyx_v_xtop == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 517, __pyx_L3_error)
-    __pyx_v_ytop = __Pyx_PyLong_As_int(values[5]); if (unlikely((__pyx_v_ytop == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 517, __pyx_L3_error)
+    __pyx_v_xbot = __Pyx_PyLong_As_int(values[2]); if (unlikely((__pyx_v_xbot == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 542, __pyx_L3_error)
+    __pyx_v_ybot = __Pyx_PyLong_As_int(values[3]); if (unlikely((__pyx_v_ybot == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 542, __pyx_L3_error)
+    __pyx_v_xtop = __Pyx_PyLong_As_int(values[4]); if (unlikely((__pyx_v_xtop == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 542, __pyx_L3_error)
+    __pyx_v_ytop = __Pyx_PyLong_As_int(values[5]); if (unlikely((__pyx_v_ytop == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 542, __pyx_L3_error)
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("addRectToCell", 1, 6, 6, __pyx_nargs); __PYX_ERR(0, 517, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("addRectToCell", 1, 6, 6, __pyx_nargs); __PYX_ERR(0, 542, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -18267,8 +19229,8 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_name), (&PyUnicode_Type), 1, "name", 1))) __PYX_ERR(0, 517, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_layer), (&PyUnicode_Type), 1, "layer", 1))) __PYX_ERR(0, 517, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_name), (&PyUnicode_Type), 1, "name", 1))) __PYX_ERR(0, 542, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_layer), (&PyUnicode_Type), 1, "layer", 1))) __PYX_ERR(0, 542, __pyx_L1_error)
   __pyx_r = __pyx_pf_11MagDatabase_11MagDatabase_4addRectToCell(((struct __pyx_obj_11MagDatabase_MagDatabase *)__pyx_v_self), __pyx_v_name, __pyx_v_layer, __pyx_v_xbot, __pyx_v_ybot, __pyx_v_xtop, __pyx_v_ytop);
 
   /* function exit code */
@@ -18304,7 +19266,7 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_4addRectToCell(struct __py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("addRectToCell", 0);
 
-  /* "MagDatabase.pyx":519
+  /* "MagDatabase.pyx":544
  *     def addRectToCell(self, str name, str layer, int xbot, int ybot, int xtop, int ytop):
  * 
  *         self.cells[name].addRect(layer, xbot, ybot, xtop, ytop)             # <<<<<<<<<<<<<<
@@ -18313,19 +19275,19 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_4addRectToCell(struct __py
 */
   if (unlikely(__pyx_v_self->cells == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 519, __pyx_L1_error)
+    __PYX_ERR(0, 544, __pyx_L1_error)
   }
-  __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_self->cells, __pyx_v_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 519, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_self->cells, __pyx_v_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 544, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_2 = __pyx_t_3;
   __Pyx_INCREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyLong_From_int(__pyx_v_xbot); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 519, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyLong_From_int(__pyx_v_xbot); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 544, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyLong_From_int(__pyx_v_ybot); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 519, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyLong_From_int(__pyx_v_ybot); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 544, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = __Pyx_PyLong_From_int(__pyx_v_xtop); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 519, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyLong_From_int(__pyx_v_xtop); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 544, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = __Pyx_PyLong_From_int(__pyx_v_ytop); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 519, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyLong_From_int(__pyx_v_ytop); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 544, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_t_8 = 0;
   {
@@ -18337,12 +19299,12 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_4addRectToCell(struct __py
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 519, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 544, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":517
+  /* "MagDatabase.pyx":542
  *         self.cells[name] = c
  * 
  *     def addRectToCell(self, str name, str layer, int xbot, int ybot, int xtop, int ytop):             # <<<<<<<<<<<<<<
@@ -18369,7 +19331,7 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_4addRectToCell(struct __py
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":521
+/* "MagDatabase.pyx":546
  *         self.cells[name].addRect(layer, xbot, ybot, xtop, ytop)
  * 
  *     def setCellTech(self, str name, str tech):             # <<<<<<<<<<<<<<
@@ -18417,39 +19379,39 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_name,&__pyx_mstate_global->__pyx_n_u_tech,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 521, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 546, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 521, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 546, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 521, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 546, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "setCellTech", 0) < (0)) __PYX_ERR(0, 521, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "setCellTech", 0) < (0)) __PYX_ERR(0, 546, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 2; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("setCellTech", 1, 2, 2, i); __PYX_ERR(0, 521, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("setCellTech", 1, 2, 2, i); __PYX_ERR(0, 546, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 521, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 546, __pyx_L3_error)
       values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 521, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 546, __pyx_L3_error)
     }
     __pyx_v_name = ((PyObject*)values[0]);
     __pyx_v_tech = ((PyObject*)values[1]);
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("setCellTech", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 521, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("setCellTech", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 546, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -18460,8 +19422,8 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_name), (&PyUnicode_Type), 1, "name", 1))) __PYX_ERR(0, 521, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_tech), (&PyUnicode_Type), 1, "tech", 1))) __PYX_ERR(0, 521, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_name), (&PyUnicode_Type), 1, "name", 1))) __PYX_ERR(0, 546, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_tech), (&PyUnicode_Type), 1, "tech", 1))) __PYX_ERR(0, 546, __pyx_L1_error)
   __pyx_r = __pyx_pf_11MagDatabase_11MagDatabase_6setCellTech(((struct __pyx_obj_11MagDatabase_MagDatabase *)__pyx_v_self), __pyx_v_name, __pyx_v_tech);
 
   /* function exit code */
@@ -18493,7 +19455,7 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_6setCellTech(struct __pyx_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("setCellTech", 0);
 
-  /* "MagDatabase.pyx":523
+  /* "MagDatabase.pyx":548
  *     def setCellTech(self, str name, str tech):
  * 
  *         self.cells[name].setTech(tech)             # <<<<<<<<<<<<<<
@@ -18502,9 +19464,9 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_6setCellTech(struct __pyx_
 */
   if (unlikely(__pyx_v_self->cells == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 523, __pyx_L1_error)
+    __PYX_ERR(0, 548, __pyx_L1_error)
   }
-  __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_self->cells, __pyx_v_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 523, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_self->cells, __pyx_v_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 548, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_2 = __pyx_t_3;
   __Pyx_INCREF(__pyx_t_2);
@@ -18514,12 +19476,12 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_6setCellTech(struct __pyx_
     __pyx_t_1 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_setTech, __pyx_callargs+__pyx_t_4, (2-__pyx_t_4) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 523, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 548, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":521
+  /* "MagDatabase.pyx":546
  *         self.cells[name].addRect(layer, xbot, ybot, xtop, ytop)
  * 
  *     def setCellTech(self, str name, str tech):             # <<<<<<<<<<<<<<
@@ -18542,7 +19504,7 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_6setCellTech(struct __pyx_
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":525
+/* "MagDatabase.pyx":550
  *         self.cells[name].setTech(tech)
  * 
  *     def setCellUse(self, str name, str new_cell, str inst_name):             # <<<<<<<<<<<<<<
@@ -18591,38 +19553,38 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_name,&__pyx_mstate_global->__pyx_n_u_new_cell,&__pyx_mstate_global->__pyx_n_u_inst_name,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 525, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 550, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  3:
         values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 525, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 550, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 525, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 550, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 525, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 550, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "setCellUse", 0) < (0)) __PYX_ERR(0, 525, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "setCellUse", 0) < (0)) __PYX_ERR(0, 550, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 3; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("setCellUse", 1, 3, 3, i); __PYX_ERR(0, 525, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("setCellUse", 1, 3, 3, i); __PYX_ERR(0, 550, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 3)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 525, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 550, __pyx_L3_error)
       values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 525, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 550, __pyx_L3_error)
       values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 525, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 550, __pyx_L3_error)
     }
     __pyx_v_name = ((PyObject*)values[0]);
     __pyx_v_new_cell = ((PyObject*)values[1]);
@@ -18630,7 +19592,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("setCellUse", 1, 3, 3, __pyx_nargs); __PYX_ERR(0, 525, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("setCellUse", 1, 3, 3, __pyx_nargs); __PYX_ERR(0, 550, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -18641,9 +19603,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_name), (&PyUnicode_Type), 1, "name", 1))) __PYX_ERR(0, 525, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_new_cell), (&PyUnicode_Type), 1, "new_cell", 1))) __PYX_ERR(0, 525, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_inst_name), (&PyUnicode_Type), 1, "inst_name", 1))) __PYX_ERR(0, 525, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_name), (&PyUnicode_Type), 1, "name", 1))) __PYX_ERR(0, 550, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_new_cell), (&PyUnicode_Type), 1, "new_cell", 1))) __PYX_ERR(0, 550, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_inst_name), (&PyUnicode_Type), 1, "inst_name", 1))) __PYX_ERR(0, 550, __pyx_L1_error)
   __pyx_r = __pyx_pf_11MagDatabase_11MagDatabase_8setCellUse(((struct __pyx_obj_11MagDatabase_MagDatabase *)__pyx_v_self), __pyx_v_name, __pyx_v_new_cell, __pyx_v_inst_name);
 
   /* function exit code */
@@ -18675,7 +19637,7 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_8setCellUse(struct __pyx_o
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("setCellUse", 0);
 
-  /* "MagDatabase.pyx":527
+  /* "MagDatabase.pyx":552
  *     def setCellUse(self, str name, str new_cell, str inst_name):
  * 
  *        return self.cells[name].addUse(new_cell, inst_name)             # <<<<<<<<<<<<<<
@@ -18685,9 +19647,9 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_8setCellUse(struct __pyx_o
   __Pyx_XDECREF(__pyx_r);
   if (unlikely(__pyx_v_self->cells == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 527, __pyx_L1_error)
+    __PYX_ERR(0, 552, __pyx_L1_error)
   }
-  __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_self->cells, __pyx_v_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 527, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_self->cells, __pyx_v_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 552, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_2 = __pyx_t_3;
   __Pyx_INCREF(__pyx_t_2);
@@ -18697,14 +19659,14 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_8setCellUse(struct __pyx_o
     __pyx_t_1 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_addUse, __pyx_callargs+__pyx_t_4, (3-__pyx_t_4) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 527, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 552, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "MagDatabase.pyx":525
+  /* "MagDatabase.pyx":550
  *         self.cells[name].setTech(tech)
  * 
  *     def setCellUse(self, str name, str new_cell, str inst_name):             # <<<<<<<<<<<<<<
@@ -18725,7 +19687,7 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_8setCellUse(struct __pyx_o
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":529
+/* "MagDatabase.pyx":554
  *        return self.cells[name].addUse(new_cell, inst_name)
  * 
  *     def setCellUseTransform(self, name, cell_inst, a, b, c, d, e, f):             # <<<<<<<<<<<<<<
@@ -18779,68 +19741,68 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_name,&__pyx_mstate_global->__pyx_n_u_cell_inst,&__pyx_mstate_global->__pyx_n_u_a_2,&__pyx_mstate_global->__pyx_n_u_b_2,&__pyx_mstate_global->__pyx_n_u_c_2,&__pyx_mstate_global->__pyx_n_u_d_2,&__pyx_mstate_global->__pyx_n_u_e_2,&__pyx_mstate_global->__pyx_n_u_f_2,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 529, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 554, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  8:
         values[7] = __Pyx_ArgRef_FASTCALL(__pyx_args, 7);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 529, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 554, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  7:
         values[6] = __Pyx_ArgRef_FASTCALL(__pyx_args, 6);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 529, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 554, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  6:
         values[5] = __Pyx_ArgRef_FASTCALL(__pyx_args, 5);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 529, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 554, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  5:
         values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 529, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 554, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  4:
         values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 529, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 554, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  3:
         values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 529, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 554, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 529, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 554, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 529, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 554, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "setCellUseTransform", 0) < (0)) __PYX_ERR(0, 529, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "setCellUseTransform", 0) < (0)) __PYX_ERR(0, 554, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 8; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("setCellUseTransform", 1, 8, 8, i); __PYX_ERR(0, 529, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("setCellUseTransform", 1, 8, 8, i); __PYX_ERR(0, 554, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 8)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 529, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 554, __pyx_L3_error)
       values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 529, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 554, __pyx_L3_error)
       values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 529, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 554, __pyx_L3_error)
       values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 529, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 554, __pyx_L3_error)
       values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 529, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 554, __pyx_L3_error)
       values[5] = __Pyx_ArgRef_FASTCALL(__pyx_args, 5);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 529, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 554, __pyx_L3_error)
       values[6] = __Pyx_ArgRef_FASTCALL(__pyx_args, 6);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 529, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 554, __pyx_L3_error)
       values[7] = __Pyx_ArgRef_FASTCALL(__pyx_args, 7);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 529, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 554, __pyx_L3_error)
     }
     __pyx_v_name = values[0];
     __pyx_v_cell_inst = values[1];
@@ -18853,7 +19815,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("setCellUseTransform", 1, 8, 8, __pyx_nargs); __PYX_ERR(0, 529, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("setCellUseTransform", 1, 8, 8, __pyx_nargs); __PYX_ERR(0, 554, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -18886,18 +19848,18 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_10setCellUseTransform(stru
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("setCellUseTransform", 0);
 
-  /* "MagDatabase.pyx":531
+  /* "MagDatabase.pyx":556
  *     def setCellUseTransform(self, name, cell_inst, a, b, c, d, e, f):
  * 
  *         self.cells[name].setUseTransform(cell_inst, a, b, c, d, e, f)             # <<<<<<<<<<<<<<
  * 
- *     def dump(self):
+ *     def setCellBBox(self, name, xbot, ybot, xtop, ytop):
 */
   if (unlikely(__pyx_v_self->cells == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 531, __pyx_L1_error)
+    __PYX_ERR(0, 556, __pyx_L1_error)
   }
-  __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_self->cells, __pyx_v_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 531, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_self->cells, __pyx_v_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 556, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_2 = __pyx_t_3;
   __Pyx_INCREF(__pyx_t_2);
@@ -18907,12 +19869,12 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_10setCellUseTransform(stru
     __pyx_t_1 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_setUseTransform, __pyx_callargs+__pyx_t_4, (8-__pyx_t_4) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 531, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 556, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":529
+  /* "MagDatabase.pyx":554
  *        return self.cells[name].addUse(new_cell, inst_name)
  * 
  *     def setCellUseTransform(self, name, cell_inst, a, b, c, d, e, f):             # <<<<<<<<<<<<<<
@@ -18935,8 +19897,194 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_10setCellUseTransform(stru
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":533
+/* "MagDatabase.pyx":558
  *         self.cells[name].setUseTransform(cell_inst, a, b, c, d, e, f)
+ * 
+ *     def setCellBBox(self, name, xbot, ybot, xtop, ytop):             # <<<<<<<<<<<<<<
+ * 
+ *         self.cells[name].setBBox(xbot, ybot, xtop, ytop)
+*/
+
+/* Python wrapper */
+static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_13setCellBBox(PyObject *__pyx_v_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+static PyMethodDef __pyx_mdef_11MagDatabase_11MagDatabase_13setCellBBox = {"setCellBBox", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_13setCellBBox, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_13setCellBBox(PyObject *__pyx_v_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  PyObject *__pyx_v_name = 0;
+  PyObject *__pyx_v_xbot = 0;
+  PyObject *__pyx_v_ybot = 0;
+  PyObject *__pyx_v_xtop = 0;
+  PyObject *__pyx_v_ytop = 0;
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject* values[5] = {0,0,0,0,0};
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("setCellBBox (wrapper)", 0);
+  #if !CYTHON_METH_FASTCALL
+  #if CYTHON_ASSUME_SAFE_SIZE
+  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #else
+  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
+  #endif
+  #endif
+  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  {
+    PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_name,&__pyx_mstate_global->__pyx_n_u_xbot_2,&__pyx_mstate_global->__pyx_n_u_ybot_2,&__pyx_mstate_global->__pyx_n_u_xtop_2,&__pyx_mstate_global->__pyx_n_u_ytop_2,0};
+    const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 558, __pyx_L3_error)
+    if (__pyx_kwds_len > 0) {
+      switch (__pyx_nargs) {
+        case  5:
+        values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 558, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  4:
+        values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 558, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  3:
+        values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 558, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  2:
+        values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 558, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  1:
+        values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 558, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      const Py_ssize_t kwd_pos_args = __pyx_nargs;
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "setCellBBox", 0) < (0)) __PYX_ERR(0, 558, __pyx_L3_error)
+      for (Py_ssize_t i = __pyx_nargs; i < 5; i++) {
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("setCellBBox", 1, 5, 5, i); __PYX_ERR(0, 558, __pyx_L3_error) }
+      }
+    } else if (unlikely(__pyx_nargs != 5)) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 558, __pyx_L3_error)
+      values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 558, __pyx_L3_error)
+      values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 558, __pyx_L3_error)
+      values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 558, __pyx_L3_error)
+      values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 558, __pyx_L3_error)
+    }
+    __pyx_v_name = values[0];
+    __pyx_v_xbot = values[1];
+    __pyx_v_ybot = values[2];
+    __pyx_v_xtop = values[3];
+    __pyx_v_ytop = values[4];
+  }
+  goto __pyx_L6_skip;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("setCellBBox", 1, 5, 5, __pyx_nargs); __PYX_ERR(0, 558, __pyx_L3_error)
+  __pyx_L6_skip:;
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __Pyx_AddTraceback("MagDatabase.MagDatabase.setCellBBox", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_11MagDatabase_11MagDatabase_12setCellBBox(((struct __pyx_obj_11MagDatabase_MagDatabase *)__pyx_v_self), __pyx_v_name, __pyx_v_xbot, __pyx_v_ybot, __pyx_v_xtop, __pyx_v_ytop);
+
+  /* function exit code */
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_12setCellBBox(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_name, PyObject *__pyx_v_xbot, PyObject *__pyx_v_ybot, PyObject *__pyx_v_xtop, PyObject *__pyx_v_ytop) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  size_t __pyx_t_4;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("setCellBBox", 0);
+
+  /* "MagDatabase.pyx":560
+ *     def setCellBBox(self, name, xbot, ybot, xtop, ytop):
+ * 
+ *         self.cells[name].setBBox(xbot, ybot, xtop, ytop)             # <<<<<<<<<<<<<<
+ * 
+ *     def dump(self):
+*/
+  if (unlikely(__pyx_v_self->cells == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    __PYX_ERR(0, 560, __pyx_L1_error)
+  }
+  __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_self->cells, __pyx_v_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 560, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_2 = __pyx_t_3;
+  __Pyx_INCREF(__pyx_t_2);
+  __pyx_t_4 = 0;
+  {
+    PyObject *__pyx_callargs[5] = {__pyx_t_2, __pyx_v_xbot, __pyx_v_ybot, __pyx_v_xtop, __pyx_v_ytop};
+    __pyx_t_1 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_setBBox, __pyx_callargs+__pyx_t_4, (5-__pyx_t_4) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 560, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+  }
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "MagDatabase.pyx":558
+ *         self.cells[name].setUseTransform(cell_inst, a, b, c, d, e, f)
+ * 
+ *     def setCellBBox(self, name, xbot, ybot, xtop, ytop):             # <<<<<<<<<<<<<<
+ * 
+ *         self.cells[name].setBBox(xbot, ybot, xtop, ytop)
+*/
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_AddTraceback("MagDatabase.MagDatabase.setCellBBox", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "MagDatabase.pyx":562
+ *         self.cells[name].setBBox(xbot, ybot, xtop, ytop)
  * 
  *     def dump(self):             # <<<<<<<<<<<<<<
  * 
@@ -18944,15 +20092,15 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_10setCellUseTransform(stru
 */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_13dump(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_15dump(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_11MagDatabase_11MagDatabase_13dump = {"dump", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_13dump, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_13dump(PyObject *__pyx_v_self, 
+static PyMethodDef __pyx_mdef_11MagDatabase_11MagDatabase_15dump = {"dump", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_15dump, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_15dump(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -18978,14 +20126,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   const Py_ssize_t __pyx_kwds_len = unlikely(__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
   if (unlikely(__pyx_kwds_len < 0)) return NULL;
   if (unlikely(__pyx_kwds_len > 0)) {__Pyx_RejectKeywords("dump", __pyx_kwds); return NULL;}
-  __pyx_r = __pyx_pf_11MagDatabase_11MagDatabase_12dump(((struct __pyx_obj_11MagDatabase_MagDatabase *)__pyx_v_self));
+  __pyx_r = __pyx_pf_11MagDatabase_11MagDatabase_14dump(((struct __pyx_obj_11MagDatabase_MagDatabase *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_12dump(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self) {
+static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_14dump(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self) {
   PyObject *__pyx_v_c = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -19003,7 +20151,7 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_12dump(struct __pyx_obj_11
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("dump", 0);
 
-  /* "MagDatabase.pyx":535
+  /* "MagDatabase.pyx":564
  *     def dump(self):
  * 
  *         for c in self.cells:             # <<<<<<<<<<<<<<
@@ -19013,9 +20161,9 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_12dump(struct __pyx_obj_11
   __pyx_t_2 = 0;
   if (unlikely(__pyx_v_self->cells == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-    __PYX_ERR(0, 535, __pyx_L1_error)
+    __PYX_ERR(0, 564, __pyx_L1_error)
   }
-  __pyx_t_5 = __Pyx_dict_iterator(__pyx_v_self->cells, 1, ((PyObject *)NULL), (&__pyx_t_3), (&__pyx_t_4)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 535, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_dict_iterator(__pyx_v_self->cells, 1, ((PyObject *)NULL), (&__pyx_t_3), (&__pyx_t_4)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 564, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_1);
   __pyx_t_1 = __pyx_t_5;
@@ -19023,12 +20171,12 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_12dump(struct __pyx_obj_11
   while (1) {
     __pyx_t_6 = __Pyx_dict_iter_next(__pyx_t_1, __pyx_t_3, &__pyx_t_2, &__pyx_t_5, NULL, NULL, __pyx_t_4);
     if (unlikely(__pyx_t_6 == 0)) break;
-    if (unlikely(__pyx_t_6 == -1)) __PYX_ERR(0, 535, __pyx_L1_error)
+    if (unlikely(__pyx_t_6 == -1)) __PYX_ERR(0, 564, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_XDECREF_SET(__pyx_v_c, __pyx_t_5);
     __pyx_t_5 = 0;
 
-    /* "MagDatabase.pyx":536
+    /* "MagDatabase.pyx":565
  * 
  *         for c in self.cells:
  *             self.cells[c].dump()             # <<<<<<<<<<<<<<
@@ -19037,9 +20185,9 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_12dump(struct __pyx_obj_11
 */
     if (unlikely(__pyx_v_self->cells == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 536, __pyx_L1_error)
+      __PYX_ERR(0, 565, __pyx_L1_error)
     }
-    __pyx_t_8 = __Pyx_PyDict_GetItem(__pyx_v_self->cells, __pyx_v_c); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 536, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyDict_GetItem(__pyx_v_self->cells, __pyx_v_c); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 565, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __pyx_t_7 = __pyx_t_8;
     __Pyx_INCREF(__pyx_t_7);
@@ -19049,15 +20197,15 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_12dump(struct __pyx_obj_11
       __pyx_t_5 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_dump, __pyx_callargs+__pyx_t_9, (1-__pyx_t_9) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 536, __pyx_L1_error)
+      if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 565, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
     }
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":533
- *         self.cells[name].setUseTransform(cell_inst, a, b, c, d, e, f)
+  /* "MagDatabase.pyx":562
+ *         self.cells[name].setBBox(xbot, ybot, xtop, ytop)
  * 
  *     def dump(self):             # <<<<<<<<<<<<<<
  * 
@@ -19081,7 +20229,7 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_12dump(struct __pyx_obj_11
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":538
+/* "MagDatabase.pyx":567
  *             self.cells[c].dump()
  * 
  *     def findCellTransistors(self, str name):             # <<<<<<<<<<<<<<
@@ -19090,15 +20238,15 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_12dump(struct __pyx_obj_11
 */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_15findCellTransistors(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_17findCellTransistors(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_11MagDatabase_11MagDatabase_15findCellTransistors = {"findCellTransistors", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_15findCellTransistors, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_15findCellTransistors(PyObject *__pyx_v_self, 
+static PyMethodDef __pyx_mdef_11MagDatabase_11MagDatabase_17findCellTransistors = {"findCellTransistors", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_17findCellTransistors, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_17findCellTransistors(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -19128,32 +20276,32 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_name,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 538, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 567, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 538, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 567, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "findCellTransistors", 0) < (0)) __PYX_ERR(0, 538, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "findCellTransistors", 0) < (0)) __PYX_ERR(0, 567, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 1; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("findCellTransistors", 1, 1, 1, i); __PYX_ERR(0, 538, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("findCellTransistors", 1, 1, 1, i); __PYX_ERR(0, 567, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 538, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 567, __pyx_L3_error)
     }
     __pyx_v_name = ((PyObject*)values[0]);
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("findCellTransistors", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 538, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("findCellTransistors", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 567, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -19164,8 +20312,8 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_name), (&PyUnicode_Type), 1, "name", 1))) __PYX_ERR(0, 538, __pyx_L1_error)
-  __pyx_r = __pyx_pf_11MagDatabase_11MagDatabase_14findCellTransistors(((struct __pyx_obj_11MagDatabase_MagDatabase *)__pyx_v_self), __pyx_v_name);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_name), (&PyUnicode_Type), 1, "name", 1))) __PYX_ERR(0, 567, __pyx_L1_error)
+  __pyx_r = __pyx_pf_11MagDatabase_11MagDatabase_16findCellTransistors(((struct __pyx_obj_11MagDatabase_MagDatabase *)__pyx_v_self), __pyx_v_name);
 
   /* function exit code */
   goto __pyx_L0;
@@ -19184,7 +20332,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_14findCellTransistors(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_name) {
+static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_16findCellTransistors(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_name) {
   CYTHON_UNUSED PyObject *__pyx_v_t = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -19197,7 +20345,7 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_14findCellTransistors(stru
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("findCellTransistors", 0);
 
-  /* "MagDatabase.pyx":540
+  /* "MagDatabase.pyx":569
  *     def findCellTransistors(self, str name):
  * 
  *         t = self.cells[name].find_transistors()             # <<<<<<<<<<<<<<
@@ -19206,9 +20354,9 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_14findCellTransistors(stru
 */
   if (unlikely(__pyx_v_self->cells == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 540, __pyx_L1_error)
+    __PYX_ERR(0, 569, __pyx_L1_error)
   }
-  __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_self->cells, __pyx_v_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 540, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_self->cells, __pyx_v_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 569, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_2 = __pyx_t_3;
   __Pyx_INCREF(__pyx_t_2);
@@ -19218,13 +20366,13 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_14findCellTransistors(stru
     __pyx_t_1 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_find_transistors, __pyx_callargs+__pyx_t_4, (1-__pyx_t_4) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 540, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 569, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_v_t = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":538
+  /* "MagDatabase.pyx":567
  *             self.cells[c].dump()
  * 
  *     def findCellTransistors(self, str name):             # <<<<<<<<<<<<<<
@@ -19248,7 +20396,7 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_14findCellTransistors(stru
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":542
+/* "MagDatabase.pyx":571
  *         t = self.cells[name].find_transistors()
  * 
  *     def findAllTransistors(self):             # <<<<<<<<<<<<<<
@@ -19257,15 +20405,15 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_14findCellTransistors(stru
 */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_17findAllTransistors(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_19findAllTransistors(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_11MagDatabase_11MagDatabase_17findAllTransistors = {"findAllTransistors", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_17findAllTransistors, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_17findAllTransistors(PyObject *__pyx_v_self, 
+static PyMethodDef __pyx_mdef_11MagDatabase_11MagDatabase_19findAllTransistors = {"findAllTransistors", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_19findAllTransistors, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_19findAllTransistors(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -19291,14 +20439,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   const Py_ssize_t __pyx_kwds_len = unlikely(__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
   if (unlikely(__pyx_kwds_len < 0)) return NULL;
   if (unlikely(__pyx_kwds_len > 0)) {__Pyx_RejectKeywords("findAllTransistors", __pyx_kwds); return NULL;}
-  __pyx_r = __pyx_pf_11MagDatabase_11MagDatabase_16findAllTransistors(((struct __pyx_obj_11MagDatabase_MagDatabase *)__pyx_v_self));
+  __pyx_r = __pyx_pf_11MagDatabase_11MagDatabase_18findAllTransistors(((struct __pyx_obj_11MagDatabase_MagDatabase *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_16findAllTransistors(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self) {
+static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_18findAllTransistors(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self) {
   PyObject *__pyx_v_c = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -19315,7 +20463,7 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_16findAllTransistors(struc
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("findAllTransistors", 0);
 
-  /* "MagDatabase.pyx":544
+  /* "MagDatabase.pyx":573
  *     def findAllTransistors(self):
  * 
  *         for c in self.cells:             # <<<<<<<<<<<<<<
@@ -19325,9 +20473,9 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_16findAllTransistors(struc
   __pyx_t_2 = 0;
   if (unlikely(__pyx_v_self->cells == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-    __PYX_ERR(0, 544, __pyx_L1_error)
+    __PYX_ERR(0, 573, __pyx_L1_error)
   }
-  __pyx_t_5 = __Pyx_dict_iterator(__pyx_v_self->cells, 1, ((PyObject *)NULL), (&__pyx_t_3), (&__pyx_t_4)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 544, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_dict_iterator(__pyx_v_self->cells, 1, ((PyObject *)NULL), (&__pyx_t_3), (&__pyx_t_4)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 573, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_1);
   __pyx_t_1 = __pyx_t_5;
@@ -19335,12 +20483,12 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_16findAllTransistors(struc
   while (1) {
     __pyx_t_6 = __Pyx_dict_iter_next(__pyx_t_1, __pyx_t_3, &__pyx_t_2, &__pyx_t_5, NULL, NULL, __pyx_t_4);
     if (unlikely(__pyx_t_6 == 0)) break;
-    if (unlikely(__pyx_t_6 == -1)) __PYX_ERR(0, 544, __pyx_L1_error)
+    if (unlikely(__pyx_t_6 == -1)) __PYX_ERR(0, 573, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_XDECREF_SET(__pyx_v_c, __pyx_t_5);
     __pyx_t_5 = 0;
 
-    /* "MagDatabase.pyx":545
+    /* "MagDatabase.pyx":574
  * 
  *         for c in self.cells:
  *             self.findCellTransistors(c)             # <<<<<<<<<<<<<<
@@ -19354,14 +20502,14 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_16findAllTransistors(struc
       PyObject *__pyx_callargs[2] = {__pyx_t_7, __pyx_v_c};
       __pyx_t_5 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_findCellTransistors, __pyx_callargs+__pyx_t_8, (2-__pyx_t_8) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-      if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 545, __pyx_L1_error)
+      if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 574, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
     }
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":542
+  /* "MagDatabase.pyx":571
  *         t = self.cells[name].find_transistors()
  * 
  *     def findAllTransistors(self):             # <<<<<<<<<<<<<<
@@ -19385,7 +20533,7 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_16findAllTransistors(struc
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":547
+/* "MagDatabase.pyx":576
  *             self.findCellTransistors(c)
  * 
  *     def dumpCellTransistors(self, str name):             # <<<<<<<<<<<<<<
@@ -19394,15 +20542,15 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_16findAllTransistors(struc
 */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_19dumpCellTransistors(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_21dumpCellTransistors(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_11MagDatabase_11MagDatabase_19dumpCellTransistors = {"dumpCellTransistors", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_19dumpCellTransistors, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_19dumpCellTransistors(PyObject *__pyx_v_self, 
+static PyMethodDef __pyx_mdef_11MagDatabase_11MagDatabase_21dumpCellTransistors = {"dumpCellTransistors", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_21dumpCellTransistors, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_21dumpCellTransistors(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -19432,32 +20580,32 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_name,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 547, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 576, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 547, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 576, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "dumpCellTransistors", 0) < (0)) __PYX_ERR(0, 547, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "dumpCellTransistors", 0) < (0)) __PYX_ERR(0, 576, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 1; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("dumpCellTransistors", 1, 1, 1, i); __PYX_ERR(0, 547, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("dumpCellTransistors", 1, 1, 1, i); __PYX_ERR(0, 576, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 547, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 576, __pyx_L3_error)
     }
     __pyx_v_name = ((PyObject*)values[0]);
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("dumpCellTransistors", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 547, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("dumpCellTransistors", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 576, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -19468,8 +20616,8 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_name), (&PyUnicode_Type), 1, "name", 1))) __PYX_ERR(0, 547, __pyx_L1_error)
-  __pyx_r = __pyx_pf_11MagDatabase_11MagDatabase_18dumpCellTransistors(((struct __pyx_obj_11MagDatabase_MagDatabase *)__pyx_v_self), __pyx_v_name);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_name), (&PyUnicode_Type), 1, "name", 1))) __PYX_ERR(0, 576, __pyx_L1_error)
+  __pyx_r = __pyx_pf_11MagDatabase_11MagDatabase_20dumpCellTransistors(((struct __pyx_obj_11MagDatabase_MagDatabase *)__pyx_v_self), __pyx_v_name);
 
   /* function exit code */
   goto __pyx_L0;
@@ -19488,7 +20636,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_18dumpCellTransistors(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_name) {
+static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_20dumpCellTransistors(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_name) {
   PyObject *__pyx_v_cell = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -19500,7 +20648,7 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_18dumpCellTransistors(stru
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("dumpCellTransistors", 0);
 
-  /* "MagDatabase.pyx":549
+  /* "MagDatabase.pyx":578
  *     def dumpCellTransistors(self, str name):
  * 
  *         cell = self.cells[name]             # <<<<<<<<<<<<<<
@@ -19509,14 +20657,14 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_18dumpCellTransistors(stru
 */
   if (unlikely(__pyx_v_self->cells == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 549, __pyx_L1_error)
+    __PYX_ERR(0, 578, __pyx_L1_error)
   }
-  __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_self->cells, __pyx_v_name); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 549, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_self->cells, __pyx_v_name); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 578, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_cell = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":551
+  /* "MagDatabase.pyx":580
  *         cell = self.cells[name]
  * 
  *         cell.dump_transistors(self)             # <<<<<<<<<<<<<<
@@ -19530,12 +20678,12 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_18dumpCellTransistors(stru
     PyObject *__pyx_callargs[2] = {__pyx_t_2, ((PyObject *)__pyx_v_self)};
     __pyx_t_1 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_dump_transistors, __pyx_callargs+__pyx_t_3, (2-__pyx_t_3) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 551, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 580, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":547
+  /* "MagDatabase.pyx":576
  *             self.findCellTransistors(c)
  * 
  *     def dumpCellTransistors(self, str name):             # <<<<<<<<<<<<<<
@@ -19558,7 +20706,7 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_18dumpCellTransistors(stru
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":553
+/* "MagDatabase.pyx":582
  *         cell.dump_transistors(self)
  * 
  *     def getCellTransistors(self, str name):             # <<<<<<<<<<<<<<
@@ -19567,16 +20715,16 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_18dumpCellTransistors(stru
 */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_21getCellTransistors(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_23getCellTransistors(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_11MagDatabase_11MagDatabase_20getCellTransistors, "\n        Returns all transistors in the cell and in all child cells.\n        ");
-static PyMethodDef __pyx_mdef_11MagDatabase_11MagDatabase_21getCellTransistors = {"getCellTransistors", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_21getCellTransistors, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_11MagDatabase_11MagDatabase_20getCellTransistors};
-static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_21getCellTransistors(PyObject *__pyx_v_self, 
+PyDoc_STRVAR(__pyx_doc_11MagDatabase_11MagDatabase_22getCellTransistors, "\n        Returns all transistors in the cell and in all child cells.\n        ");
+static PyMethodDef __pyx_mdef_11MagDatabase_11MagDatabase_23getCellTransistors = {"getCellTransistors", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_23getCellTransistors, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_11MagDatabase_11MagDatabase_22getCellTransistors};
+static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_23getCellTransistors(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -19606,32 +20754,32 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_name,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 553, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 582, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 553, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 582, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "getCellTransistors", 0) < (0)) __PYX_ERR(0, 553, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "getCellTransistors", 0) < (0)) __PYX_ERR(0, 582, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 1; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("getCellTransistors", 1, 1, 1, i); __PYX_ERR(0, 553, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("getCellTransistors", 1, 1, 1, i); __PYX_ERR(0, 582, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 553, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 582, __pyx_L3_error)
     }
     __pyx_v_name = ((PyObject*)values[0]);
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("getCellTransistors", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 553, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("getCellTransistors", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 582, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -19642,8 +20790,8 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_name), (&PyUnicode_Type), 1, "name", 1))) __PYX_ERR(0, 553, __pyx_L1_error)
-  __pyx_r = __pyx_pf_11MagDatabase_11MagDatabase_20getCellTransistors(((struct __pyx_obj_11MagDatabase_MagDatabase *)__pyx_v_self), __pyx_v_name);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_name), (&PyUnicode_Type), 1, "name", 1))) __PYX_ERR(0, 582, __pyx_L1_error)
+  __pyx_r = __pyx_pf_11MagDatabase_11MagDatabase_22getCellTransistors(((struct __pyx_obj_11MagDatabase_MagDatabase *)__pyx_v_self), __pyx_v_name);
 
   /* function exit code */
   goto __pyx_L0;
@@ -19662,7 +20810,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_20getCellTransistors(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_name) {
+static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_22getCellTransistors(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_name) {
   PyObject *__pyx_v_cell = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -19674,7 +20822,7 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_20getCellTransistors(struc
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("getCellTransistors", 0);
 
-  /* "MagDatabase.pyx":558
+  /* "MagDatabase.pyx":587
  *         """
  * 
  *         cell = self.cells[name]             # <<<<<<<<<<<<<<
@@ -19683,14 +20831,14 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_20getCellTransistors(struc
 */
   if (unlikely(__pyx_v_self->cells == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 558, __pyx_L1_error)
+    __PYX_ERR(0, 587, __pyx_L1_error)
   }
-  __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_self->cells, __pyx_v_name); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 558, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_self->cells, __pyx_v_name); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 587, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_cell = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":560
+  /* "MagDatabase.pyx":589
  *         cell = self.cells[name]
  * 
  *         return cell.get_transistors(self)             # <<<<<<<<<<<<<<
@@ -19705,14 +20853,14 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_20getCellTransistors(struc
     PyObject *__pyx_callargs[2] = {__pyx_t_2, ((PyObject *)__pyx_v_self)};
     __pyx_t_1 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_get_transistors, __pyx_callargs+__pyx_t_3, (2-__pyx_t_3) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 560, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 589, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "MagDatabase.pyx":553
+  /* "MagDatabase.pyx":582
  *         cell.dump_transistors(self)
  * 
  *     def getCellTransistors(self, str name):             # <<<<<<<<<<<<<<
@@ -19733,7 +20881,7 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_20getCellTransistors(struc
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":562
+/* "MagDatabase.pyx":591
  *         return cell.get_transistors(self)
  * 
  *     def getCell(self, str name):             # <<<<<<<<<<<<<<
@@ -19742,15 +20890,15 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_20getCellTransistors(struc
 */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_23getCell(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_25getCell(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_11MagDatabase_11MagDatabase_23getCell = {"getCell", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_23getCell, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_23getCell(PyObject *__pyx_v_self, 
+static PyMethodDef __pyx_mdef_11MagDatabase_11MagDatabase_25getCell = {"getCell", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_25getCell, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_25getCell(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -19780,32 +20928,32 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_name,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 562, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 591, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 562, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 591, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "getCell", 0) < (0)) __PYX_ERR(0, 562, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "getCell", 0) < (0)) __PYX_ERR(0, 591, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 1; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("getCell", 1, 1, 1, i); __PYX_ERR(0, 562, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("getCell", 1, 1, 1, i); __PYX_ERR(0, 591, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 562, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 591, __pyx_L3_error)
     }
     __pyx_v_name = ((PyObject*)values[0]);
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("getCell", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 562, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("getCell", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 591, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -19816,8 +20964,8 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_name), (&PyUnicode_Type), 1, "name", 1))) __PYX_ERR(0, 562, __pyx_L1_error)
-  __pyx_r = __pyx_pf_11MagDatabase_11MagDatabase_22getCell(((struct __pyx_obj_11MagDatabase_MagDatabase *)__pyx_v_self), __pyx_v_name);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_name), (&PyUnicode_Type), 1, "name", 1))) __PYX_ERR(0, 591, __pyx_L1_error)
+  __pyx_r = __pyx_pf_11MagDatabase_11MagDatabase_24getCell(((struct __pyx_obj_11MagDatabase_MagDatabase *)__pyx_v_self), __pyx_v_name);
 
   /* function exit code */
   goto __pyx_L0;
@@ -19836,7 +20984,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_22getCell(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_name) {
+static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_24getCell(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_name) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -19845,7 +20993,7 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_22getCell(struct __pyx_obj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("getCell", 0);
 
-  /* "MagDatabase.pyx":564
+  /* "MagDatabase.pyx":593
  *     def getCell(self, str name):
  * 
  *         return self.cells[name]             # <<<<<<<<<<<<<<
@@ -19855,15 +21003,15 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_22getCell(struct __pyx_obj
   __Pyx_XDECREF(__pyx_r);
   if (unlikely(__pyx_v_self->cells == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 564, __pyx_L1_error)
+    __PYX_ERR(0, 593, __pyx_L1_error)
   }
-  __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_self->cells, __pyx_v_name); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 564, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_self->cells, __pyx_v_name); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 593, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "MagDatabase.pyx":562
+  /* "MagDatabase.pyx":591
  *         return cell.get_transistors(self)
  * 
  *     def getCell(self, str name):             # <<<<<<<<<<<<<<
@@ -19882,7 +21030,7 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_22getCell(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":567
+/* "MagDatabase.pyx":596
  * 
  * 
  *     def addLabelToCell(self, cell_name_str, layer, xbot, ybot, xtop, ytop, pos, font, a, b, c, d, labname):             # <<<<<<<<<<<<<<
@@ -19891,15 +21039,15 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_22getCell(struct __pyx_obj
 */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_25addLabelToCell(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_27addLabelToCell(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_11MagDatabase_11MagDatabase_25addLabelToCell = {"addLabelToCell", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_25addLabelToCell, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_25addLabelToCell(PyObject *__pyx_v_self, 
+static PyMethodDef __pyx_mdef_11MagDatabase_11MagDatabase_27addLabelToCell = {"addLabelToCell", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_27addLabelToCell, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_27addLabelToCell(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -19941,98 +21089,98 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_cell_name_str,&__pyx_mstate_global->__pyx_n_u_layer,&__pyx_mstate_global->__pyx_n_u_xbot_2,&__pyx_mstate_global->__pyx_n_u_ybot_2,&__pyx_mstate_global->__pyx_n_u_xtop_2,&__pyx_mstate_global->__pyx_n_u_ytop_2,&__pyx_mstate_global->__pyx_n_u_pos,&__pyx_mstate_global->__pyx_n_u_font,&__pyx_mstate_global->__pyx_n_u_a_2,&__pyx_mstate_global->__pyx_n_u_b_2,&__pyx_mstate_global->__pyx_n_u_c_2,&__pyx_mstate_global->__pyx_n_u_d_2,&__pyx_mstate_global->__pyx_n_u_labname,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 567, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 596, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case 13:
         values[12] = __Pyx_ArgRef_FASTCALL(__pyx_args, 12);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[12])) __PYX_ERR(0, 567, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[12])) __PYX_ERR(0, 596, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 12:
         values[11] = __Pyx_ArgRef_FASTCALL(__pyx_args, 11);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[11])) __PYX_ERR(0, 567, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[11])) __PYX_ERR(0, 596, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 11:
         values[10] = __Pyx_ArgRef_FASTCALL(__pyx_args, 10);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[10])) __PYX_ERR(0, 567, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[10])) __PYX_ERR(0, 596, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 10:
         values[9] = __Pyx_ArgRef_FASTCALL(__pyx_args, 9);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[9])) __PYX_ERR(0, 567, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[9])) __PYX_ERR(0, 596, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  9:
         values[8] = __Pyx_ArgRef_FASTCALL(__pyx_args, 8);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[8])) __PYX_ERR(0, 567, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[8])) __PYX_ERR(0, 596, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  8:
         values[7] = __Pyx_ArgRef_FASTCALL(__pyx_args, 7);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 567, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 596, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  7:
         values[6] = __Pyx_ArgRef_FASTCALL(__pyx_args, 6);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 567, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 596, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  6:
         values[5] = __Pyx_ArgRef_FASTCALL(__pyx_args, 5);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 567, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 596, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  5:
         values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 567, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 596, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  4:
         values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 567, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 596, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  3:
         values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 567, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 596, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 567, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 596, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 567, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 596, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "addLabelToCell", 0) < (0)) __PYX_ERR(0, 567, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "addLabelToCell", 0) < (0)) __PYX_ERR(0, 596, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 13; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("addLabelToCell", 1, 13, 13, i); __PYX_ERR(0, 567, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("addLabelToCell", 1, 13, 13, i); __PYX_ERR(0, 596, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 13)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 567, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 596, __pyx_L3_error)
       values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 567, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 596, __pyx_L3_error)
       values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 567, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 596, __pyx_L3_error)
       values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 567, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 596, __pyx_L3_error)
       values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 567, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 596, __pyx_L3_error)
       values[5] = __Pyx_ArgRef_FASTCALL(__pyx_args, 5);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 567, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 596, __pyx_L3_error)
       values[6] = __Pyx_ArgRef_FASTCALL(__pyx_args, 6);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 567, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 596, __pyx_L3_error)
       values[7] = __Pyx_ArgRef_FASTCALL(__pyx_args, 7);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 567, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 596, __pyx_L3_error)
       values[8] = __Pyx_ArgRef_FASTCALL(__pyx_args, 8);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[8])) __PYX_ERR(0, 567, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[8])) __PYX_ERR(0, 596, __pyx_L3_error)
       values[9] = __Pyx_ArgRef_FASTCALL(__pyx_args, 9);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[9])) __PYX_ERR(0, 567, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[9])) __PYX_ERR(0, 596, __pyx_L3_error)
       values[10] = __Pyx_ArgRef_FASTCALL(__pyx_args, 10);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[10])) __PYX_ERR(0, 567, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[10])) __PYX_ERR(0, 596, __pyx_L3_error)
       values[11] = __Pyx_ArgRef_FASTCALL(__pyx_args, 11);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[11])) __PYX_ERR(0, 567, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[11])) __PYX_ERR(0, 596, __pyx_L3_error)
       values[12] = __Pyx_ArgRef_FASTCALL(__pyx_args, 12);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[12])) __PYX_ERR(0, 567, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[12])) __PYX_ERR(0, 596, __pyx_L3_error)
     }
     __pyx_v_cell_name_str = values[0];
     __pyx_v_layer = values[1];
@@ -20050,7 +21198,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("addLabelToCell", 1, 13, 13, __pyx_nargs); __PYX_ERR(0, 567, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("addLabelToCell", 1, 13, 13, __pyx_nargs); __PYX_ERR(0, 596, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -20061,7 +21209,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11MagDatabase_11MagDatabase_24addLabelToCell(((struct __pyx_obj_11MagDatabase_MagDatabase *)__pyx_v_self), __pyx_v_cell_name_str, __pyx_v_layer, __pyx_v_xbot, __pyx_v_ybot, __pyx_v_xtop, __pyx_v_ytop, __pyx_v_pos, __pyx_v_font, __pyx_v_a, __pyx_v_b, __pyx_v_c, __pyx_v_d, __pyx_v_labname);
+  __pyx_r = __pyx_pf_11MagDatabase_11MagDatabase_26addLabelToCell(((struct __pyx_obj_11MagDatabase_MagDatabase *)__pyx_v_self), __pyx_v_cell_name_str, __pyx_v_layer, __pyx_v_xbot, __pyx_v_ybot, __pyx_v_xtop, __pyx_v_ytop, __pyx_v_pos, __pyx_v_font, __pyx_v_a, __pyx_v_b, __pyx_v_c, __pyx_v_d, __pyx_v_labname);
 
   /* function exit code */
   for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
@@ -20071,7 +21219,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_24addLabelToCell(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_cell_name_str, PyObject *__pyx_v_layer, PyObject *__pyx_v_xbot, PyObject *__pyx_v_ybot, PyObject *__pyx_v_xtop, PyObject *__pyx_v_ytop, PyObject *__pyx_v_pos, PyObject *__pyx_v_font, PyObject *__pyx_v_a, PyObject *__pyx_v_b, PyObject *__pyx_v_c, PyObject *__pyx_v_d, PyObject *__pyx_v_labname) {
+static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_26addLabelToCell(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_cell_name_str, PyObject *__pyx_v_layer, PyObject *__pyx_v_xbot, PyObject *__pyx_v_ybot, PyObject *__pyx_v_xtop, PyObject *__pyx_v_ytop, PyObject *__pyx_v_pos, PyObject *__pyx_v_font, PyObject *__pyx_v_a, PyObject *__pyx_v_b, PyObject *__pyx_v_c, PyObject *__pyx_v_d, PyObject *__pyx_v_labname) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -20083,7 +21231,7 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_24addLabelToCell(struct __
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("addLabelToCell", 0);
 
-  /* "MagDatabase.pyx":569
+  /* "MagDatabase.pyx":598
  *     def addLabelToCell(self, cell_name_str, layer, xbot, ybot, xtop, ytop, pos, font, a, b, c, d, labname):
  * 
  *         self.cells[cell_name_str].addLabel(layer, xbot, ybot, xtop, ytop, pos, font, a, b, c, d, labname)             # <<<<<<<<<<<<<<
@@ -20092,9 +21240,9 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_24addLabelToCell(struct __
 */
   if (unlikely(__pyx_v_self->cells == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 569, __pyx_L1_error)
+    __PYX_ERR(0, 598, __pyx_L1_error)
   }
-  __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_self->cells, __pyx_v_cell_name_str); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 569, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_self->cells, __pyx_v_cell_name_str); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 598, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_2 = __pyx_t_3;
   __Pyx_INCREF(__pyx_t_2);
@@ -20104,12 +21252,12 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_24addLabelToCell(struct __
     __pyx_t_1 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_addLabel, __pyx_callargs+__pyx_t_4, (13-__pyx_t_4) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 569, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 598, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":567
+  /* "MagDatabase.pyx":596
  * 
  * 
  *     def addLabelToCell(self, cell_name_str, layer, xbot, ybot, xtop, ytop, pos, font, a, b, c, d, labname):             # <<<<<<<<<<<<<<
@@ -20132,7 +21280,7 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_24addLabelToCell(struct __
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":572
+/* "MagDatabase.pyx":601
  * 
  * 
  *     def setLabelPort(self, cell_name_str, labname, port, directions):             # <<<<<<<<<<<<<<
@@ -20141,15 +21289,15 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_24addLabelToCell(struct __
 */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_27setLabelPort(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_29setLabelPort(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_11MagDatabase_11MagDatabase_27setLabelPort = {"setLabelPort", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_27setLabelPort, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_27setLabelPort(PyObject *__pyx_v_self, 
+static PyMethodDef __pyx_mdef_11MagDatabase_11MagDatabase_29setLabelPort = {"setLabelPort", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_29setLabelPort, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_29setLabelPort(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -20182,44 +21330,44 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_cell_name_str,&__pyx_mstate_global->__pyx_n_u_labname,&__pyx_mstate_global->__pyx_n_u_port,&__pyx_mstate_global->__pyx_n_u_directions,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 572, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 601, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  4:
         values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 572, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 601, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  3:
         values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 572, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 601, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 572, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 601, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 572, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 601, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "setLabelPort", 0) < (0)) __PYX_ERR(0, 572, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "setLabelPort", 0) < (0)) __PYX_ERR(0, 601, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 4; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("setLabelPort", 1, 4, 4, i); __PYX_ERR(0, 572, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("setLabelPort", 1, 4, 4, i); __PYX_ERR(0, 601, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 4)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 572, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 601, __pyx_L3_error)
       values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 572, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 601, __pyx_L3_error)
       values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 572, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 601, __pyx_L3_error)
       values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 572, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 601, __pyx_L3_error)
     }
     __pyx_v_cell_name_str = values[0];
     __pyx_v_labname = values[1];
@@ -20228,7 +21376,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("setLabelPort", 1, 4, 4, __pyx_nargs); __PYX_ERR(0, 572, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("setLabelPort", 1, 4, 4, __pyx_nargs); __PYX_ERR(0, 601, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -20239,7 +21387,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11MagDatabase_11MagDatabase_26setLabelPort(((struct __pyx_obj_11MagDatabase_MagDatabase *)__pyx_v_self), __pyx_v_cell_name_str, __pyx_v_labname, __pyx_v_port, __pyx_v_directions);
+  __pyx_r = __pyx_pf_11MagDatabase_11MagDatabase_28setLabelPort(((struct __pyx_obj_11MagDatabase_MagDatabase *)__pyx_v_self), __pyx_v_cell_name_str, __pyx_v_labname, __pyx_v_port, __pyx_v_directions);
 
   /* function exit code */
   for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
@@ -20249,7 +21397,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_26setLabelPort(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_cell_name_str, PyObject *__pyx_v_labname, PyObject *__pyx_v_port, PyObject *__pyx_v_directions) {
+static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_28setLabelPort(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_cell_name_str, PyObject *__pyx_v_labname, PyObject *__pyx_v_port, PyObject *__pyx_v_directions) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -20261,7 +21409,7 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_26setLabelPort(struct __py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("setLabelPort", 0);
 
-  /* "MagDatabase.pyx":574
+  /* "MagDatabase.pyx":603
  *     def setLabelPort(self, cell_name_str, labname, port, directions):
  * 
  *         self.cells[cell_name_str].setLabelPort(labname, port, directions)             # <<<<<<<<<<<<<<
@@ -20270,9 +21418,9 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_26setLabelPort(struct __py
 */
   if (unlikely(__pyx_v_self->cells == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 574, __pyx_L1_error)
+    __PYX_ERR(0, 603, __pyx_L1_error)
   }
-  __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_self->cells, __pyx_v_cell_name_str); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 574, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_self->cells, __pyx_v_cell_name_str); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 603, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_2 = __pyx_t_3;
   __Pyx_INCREF(__pyx_t_2);
@@ -20282,12 +21430,12 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_26setLabelPort(struct __py
     __pyx_t_1 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_setLabelPort, __pyx_callargs+__pyx_t_4, (4-__pyx_t_4) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 574, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 603, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "MagDatabase.pyx":572
+  /* "MagDatabase.pyx":601
  * 
  * 
  *     def setLabelPort(self, cell_name_str, labname, port, directions):             # <<<<<<<<<<<<<<
@@ -20310,7 +21458,7 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_26setLabelPort(struct __py
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":576
+/* "MagDatabase.pyx":605
  *         self.cells[cell_name_str].setLabelPort(labname, port, directions)
  * 
  *     def getCellPins(self, cell_name_str):             # <<<<<<<<<<<<<<
@@ -20319,15 +21467,15 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_26setLabelPort(struct __py
 */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_29getCellPins(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_31getCellPins(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_11MagDatabase_11MagDatabase_29getCellPins = {"getCellPins", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_29getCellPins, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_29getCellPins(PyObject *__pyx_v_self, 
+static PyMethodDef __pyx_mdef_11MagDatabase_11MagDatabase_31getCellPins = {"getCellPins", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_31getCellPins, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_31getCellPins(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -20357,32 +21505,32 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_cell_name_str,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 576, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 605, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 576, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 605, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "getCellPins", 0) < (0)) __PYX_ERR(0, 576, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "getCellPins", 0) < (0)) __PYX_ERR(0, 605, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 1; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("getCellPins", 1, 1, 1, i); __PYX_ERR(0, 576, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("getCellPins", 1, 1, 1, i); __PYX_ERR(0, 605, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 576, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 605, __pyx_L3_error)
     }
     __pyx_v_cell_name_str = values[0];
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("getCellPins", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 576, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("getCellPins", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 605, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -20393,7 +21541,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11MagDatabase_11MagDatabase_28getCellPins(((struct __pyx_obj_11MagDatabase_MagDatabase *)__pyx_v_self), __pyx_v_cell_name_str);
+  __pyx_r = __pyx_pf_11MagDatabase_11MagDatabase_30getCellPins(((struct __pyx_obj_11MagDatabase_MagDatabase *)__pyx_v_self), __pyx_v_cell_name_str);
 
   /* function exit code */
   for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
@@ -20403,7 +21551,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_28getCellPins(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_cell_name_str) {
+static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_30getCellPins(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v_cell_name_str) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -20415,7 +21563,7 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_28getCellPins(struct __pyx
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("getCellPins", 0);
 
-  /* "MagDatabase.pyx":578
+  /* "MagDatabase.pyx":607
  *     def getCellPins(self, cell_name_str):
  * 
  *         return self.cells[cell_name_str].getPins(self)             # <<<<<<<<<<<<<<
@@ -20423,9 +21571,9 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_28getCellPins(struct __pyx
   __Pyx_XDECREF(__pyx_r);
   if (unlikely(__pyx_v_self->cells == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 578, __pyx_L1_error)
+    __PYX_ERR(0, 607, __pyx_L1_error)
   }
-  __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_self->cells, __pyx_v_cell_name_str); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 578, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_self->cells, __pyx_v_cell_name_str); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 607, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_2 = __pyx_t_3;
   __Pyx_INCREF(__pyx_t_2);
@@ -20435,14 +21583,14 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_28getCellPins(struct __pyx
     __pyx_t_1 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_getPins, __pyx_callargs+__pyx_t_4, (2-__pyx_t_4) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 578, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 607, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "MagDatabase.pyx":576
+  /* "MagDatabase.pyx":605
  *         self.cells[cell_name_str].setLabelPort(labname, port, directions)
  * 
  *     def getCellPins(self, cell_name_str):             # <<<<<<<<<<<<<<
@@ -20463,7 +21611,7 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_28getCellPins(struct __pyx
   return __pyx_r;
 }
 
-/* "MagDatabase.pyx":504
+/* "MagDatabase.pyx":529
  * cdef class MagDatabase:
  * 
  *     cdef public dict cells             # <<<<<<<<<<<<<<
@@ -20527,7 +21675,7 @@ static int __pyx_pf_11MagDatabase_11MagDatabase_5cells_2__set__(struct __pyx_obj
   __Pyx_RefNannySetupContext("__set__", 0);
   __pyx_t_1 = __pyx_v_value;
   __Pyx_INCREF(__pyx_t_1);
-  if (!(likely(PyDict_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("dict", __pyx_t_1))) __PYX_ERR(0, 504, __pyx_L1_error)
+  if (!(likely(PyDict_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("dict", __pyx_t_1))) __PYX_ERR(0, 529, __pyx_L1_error)
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v_self->cells);
   __Pyx_DECREF(__pyx_v_self->cells);
@@ -20584,15 +21732,15 @@ static int __pyx_pf_11MagDatabase_11MagDatabase_5cells_4__del__(struct __pyx_obj
 */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_31__reduce_cython__(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_33__reduce_cython__(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_11MagDatabase_11MagDatabase_31__reduce_cython__ = {"__reduce_cython__", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_31__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_31__reduce_cython__(PyObject *__pyx_v_self, 
+static PyMethodDef __pyx_mdef_11MagDatabase_11MagDatabase_33__reduce_cython__ = {"__reduce_cython__", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_33__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_33__reduce_cython__(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -20618,14 +21766,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   const Py_ssize_t __pyx_kwds_len = unlikely(__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
   if (unlikely(__pyx_kwds_len < 0)) return NULL;
   if (unlikely(__pyx_kwds_len > 0)) {__Pyx_RejectKeywords("__reduce_cython__", __pyx_kwds); return NULL;}
-  __pyx_r = __pyx_pf_11MagDatabase_11MagDatabase_30__reduce_cython__(((struct __pyx_obj_11MagDatabase_MagDatabase *)__pyx_v_self));
+  __pyx_r = __pyx_pf_11MagDatabase_11MagDatabase_32__reduce_cython__(((struct __pyx_obj_11MagDatabase_MagDatabase *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_30__reduce_cython__(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self) {
+static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_32__reduce_cython__(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self) {
   PyObject *__pyx_v_state = 0;
   PyObject *__pyx_v__dict = 0;
   int __pyx_v_use_setstate;
@@ -20854,15 +22002,15 @@ static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_30__reduce_cython__(struct
 */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_33__setstate_cython__(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_35__setstate_cython__(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_11MagDatabase_11MagDatabase_33__setstate_cython__ = {"__setstate_cython__", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_33__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_33__setstate_cython__(PyObject *__pyx_v_self, 
+static PyMethodDef __pyx_mdef_11MagDatabase_11MagDatabase_35__setstate_cython__ = {"__setstate_cython__", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_35__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_11MagDatabase_11MagDatabase_35__setstate_cython__(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -20928,7 +22076,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11MagDatabase_11MagDatabase_32__setstate_cython__(((struct __pyx_obj_11MagDatabase_MagDatabase *)__pyx_v_self), __pyx_v___pyx_state);
+  __pyx_r = __pyx_pf_11MagDatabase_11MagDatabase_34__setstate_cython__(((struct __pyx_obj_11MagDatabase_MagDatabase *)__pyx_v_self), __pyx_v___pyx_state);
 
   /* function exit code */
   for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
@@ -20938,7 +22086,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_32__setstate_cython__(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_11MagDatabase_11MagDatabase_34__setstate_cython__(struct __pyx_obj_11MagDatabase_MagDatabase *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -21911,7 +23059,7 @@ static PyObject *__pyx_f_11MagDatabase___pyx_unpickle_Transform__set_state(struc
  *     int __Pyx_UpdateUnpickledDict(object, object, Py_ssize_t) except -1
  * def __pyx_unpickle_Cell(__pyx_type, long __pyx_checksum, tuple __pyx_state):             # <<<<<<<<<<<<<<
  *     cdef object __pyx_result
- *     __Pyx_CheckUnpickleChecksum(__pyx_checksum, 0x8cc10a5, 0x9584abb, 0x634e9b1, b'labels, layers, name, tech, transistors, uses')
+ *     __Pyx_CheckUnpickleChecksum(__pyx_checksum, 0x175f6fd, 0x45b085c, 0x1bb0fc6, b'bbox, labels, layers, name, tech, transistors, uses')
 */
 
 /* Python wrapper */
@@ -22042,15 +23190,15 @@ static PyObject *__pyx_pf_11MagDatabase_6__pyx_unpickle_Cell(CYTHON_UNUSED PyObj
   /* "(tree fragment)":6
  * def __pyx_unpickle_Cell(__pyx_type, long __pyx_checksum, tuple __pyx_state):
  *     cdef object __pyx_result
- *     __Pyx_CheckUnpickleChecksum(__pyx_checksum, 0x8cc10a5, 0x9584abb, 0x634e9b1, b'labels, layers, name, tech, transistors, uses')             # <<<<<<<<<<<<<<
+ *     __Pyx_CheckUnpickleChecksum(__pyx_checksum, 0x175f6fd, 0x45b085c, 0x1bb0fc6, b'bbox, labels, layers, name, tech, transistors, uses')             # <<<<<<<<<<<<<<
  *     __pyx_result = Cell.__new__(__pyx_type)
  *     if __pyx_state is not None:
 */
-  __pyx_t_1 = __Pyx_CheckUnpickleChecksum(__pyx_v___pyx_checksum, 0x8cc10a5, 0x9584abb, 0x634e9b1, __pyx_k_labels_layers_name_tech_transist); if (unlikely(__pyx_t_1 == ((int)-1))) __PYX_ERR(1, 6, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CheckUnpickleChecksum(__pyx_v___pyx_checksum, 0x175f6fd, 0x45b085c, 0x1bb0fc6, __pyx_k_bbox_labels_layers_name_tech_tra); if (unlikely(__pyx_t_1 == ((int)-1))) __PYX_ERR(1, 6, __pyx_L1_error)
 
   /* "(tree fragment)":7
  *     cdef object __pyx_result
- *     __Pyx_CheckUnpickleChecksum(__pyx_checksum, 0x8cc10a5, 0x9584abb, 0x634e9b1, b'labels, layers, name, tech, transistors, uses')
+ *     __Pyx_CheckUnpickleChecksum(__pyx_checksum, 0x175f6fd, 0x45b085c, 0x1bb0fc6, b'bbox, labels, layers, name, tech, transistors, uses')
  *     __pyx_result = Cell.__new__(__pyx_type)             # <<<<<<<<<<<<<<
  *     if __pyx_state is not None:
  *         __pyx_unpickle_Cell__set_state(<Cell> __pyx_result, __pyx_state)
@@ -22069,7 +23217,7 @@ static PyObject *__pyx_pf_11MagDatabase_6__pyx_unpickle_Cell(CYTHON_UNUSED PyObj
   __pyx_t_2 = 0;
 
   /* "(tree fragment)":8
- *     __Pyx_CheckUnpickleChecksum(__pyx_checksum, 0x8cc10a5, 0x9584abb, 0x634e9b1, b'labels, layers, name, tech, transistors, uses')
+ *     __Pyx_CheckUnpickleChecksum(__pyx_checksum, 0x175f6fd, 0x45b085c, 0x1bb0fc6, b'bbox, labels, layers, name, tech, transistors, uses')
  *     __pyx_result = Cell.__new__(__pyx_type)
  *     if __pyx_state is not None:             # <<<<<<<<<<<<<<
  *         __pyx_unpickle_Cell__set_state(<Cell> __pyx_result, __pyx_state)
@@ -22094,7 +23242,7 @@ static PyObject *__pyx_pf_11MagDatabase_6__pyx_unpickle_Cell(CYTHON_UNUSED PyObj
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
     /* "(tree fragment)":8
- *     __Pyx_CheckUnpickleChecksum(__pyx_checksum, 0x8cc10a5, 0x9584abb, 0x634e9b1, b'labels, layers, name, tech, transistors, uses')
+ *     __Pyx_CheckUnpickleChecksum(__pyx_checksum, 0x175f6fd, 0x45b085c, 0x1bb0fc6, b'bbox, labels, layers, name, tech, transistors, uses')
  *     __pyx_result = Cell.__new__(__pyx_type)
  *     if __pyx_state is not None:             # <<<<<<<<<<<<<<
  *         __pyx_unpickle_Cell__set_state(<Cell> __pyx_result, __pyx_state)
@@ -22107,7 +23255,7 @@ static PyObject *__pyx_pf_11MagDatabase_6__pyx_unpickle_Cell(CYTHON_UNUSED PyObj
  *         __pyx_unpickle_Cell__set_state(<Cell> __pyx_result, __pyx_state)
  *     return __pyx_result             # <<<<<<<<<<<<<<
  * cdef __pyx_unpickle_Cell__set_state(Cell __pyx_result, __pyx_state: tuple):
- *     __pyx_result.labels = __pyx_state[0]; __pyx_result.layers = __pyx_state[1]; __pyx_result.name = __pyx_state[2]; __pyx_result.tech = __pyx_state[3]; __pyx_result.transistors = __pyx_state[4]; __pyx_result.uses = __pyx_state[5]
+ *     __pyx_result.bbox = __pyx_state[0]; __pyx_result.labels = __pyx_state[1]; __pyx_result.layers = __pyx_state[2]; __pyx_result.name = __pyx_state[3]; __pyx_result.tech = __pyx_state[4]; __pyx_result.transistors = __pyx_state[5]; __pyx_result.uses = __pyx_state[6]
 */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(__pyx_v___pyx_result);
@@ -22119,7 +23267,7 @@ static PyObject *__pyx_pf_11MagDatabase_6__pyx_unpickle_Cell(CYTHON_UNUSED PyObj
  *     int __Pyx_UpdateUnpickledDict(object, object, Py_ssize_t) except -1
  * def __pyx_unpickle_Cell(__pyx_type, long __pyx_checksum, tuple __pyx_state):             # <<<<<<<<<<<<<<
  *     cdef object __pyx_result
- *     __Pyx_CheckUnpickleChecksum(__pyx_checksum, 0x8cc10a5, 0x9584abb, 0x634e9b1, b'labels, layers, name, tech, transistors, uses')
+ *     __Pyx_CheckUnpickleChecksum(__pyx_checksum, 0x175f6fd, 0x45b085c, 0x1bb0fc6, b'bbox, labels, layers, name, tech, transistors, uses')
 */
 
   /* function exit code */
@@ -22139,8 +23287,8 @@ static PyObject *__pyx_pf_11MagDatabase_6__pyx_unpickle_Cell(CYTHON_UNUSED PyObj
  *         __pyx_unpickle_Cell__set_state(<Cell> __pyx_result, __pyx_state)
  *     return __pyx_result
  * cdef __pyx_unpickle_Cell__set_state(Cell __pyx_result, __pyx_state: tuple):             # <<<<<<<<<<<<<<
- *     __pyx_result.labels = __pyx_state[0]; __pyx_result.layers = __pyx_state[1]; __pyx_result.name = __pyx_state[2]; __pyx_result.tech = __pyx_state[3]; __pyx_result.transistors = __pyx_state[4]; __pyx_result.uses = __pyx_state[5]
- *     __Pyx_UpdateUnpickledDict(__pyx_result, __pyx_state, 6)
+ *     __pyx_result.bbox = __pyx_state[0]; __pyx_result.labels = __pyx_state[1]; __pyx_result.layers = __pyx_state[2]; __pyx_result.name = __pyx_state[3]; __pyx_result.tech = __pyx_state[4]; __pyx_result.transistors = __pyx_state[5]; __pyx_result.uses = __pyx_state[6]
+ *     __Pyx_UpdateUnpickledDict(__pyx_result, __pyx_state, 7)
 */
 
 static PyObject *__pyx_f_11MagDatabase___pyx_unpickle_Cell__set_state(struct __pyx_obj_11MagDatabase_Cell *__pyx_v___pyx_result, PyObject *__pyx_v___pyx_state) {
@@ -22156,10 +23304,18 @@ static PyObject *__pyx_f_11MagDatabase___pyx_unpickle_Cell__set_state(struct __p
   /* "(tree fragment)":12
  *     return __pyx_result
  * cdef __pyx_unpickle_Cell__set_state(Cell __pyx_result, __pyx_state: tuple):
- *     __pyx_result.labels = __pyx_state[0]; __pyx_result.layers = __pyx_state[1]; __pyx_result.name = __pyx_state[2]; __pyx_result.tech = __pyx_state[3]; __pyx_result.transistors = __pyx_state[4]; __pyx_result.uses = __pyx_state[5]             # <<<<<<<<<<<<<<
- *     __Pyx_UpdateUnpickledDict(__pyx_result, __pyx_state, 6)
+ *     __pyx_result.bbox = __pyx_state[0]; __pyx_result.labels = __pyx_state[1]; __pyx_result.layers = __pyx_state[2]; __pyx_result.name = __pyx_state[3]; __pyx_result.tech = __pyx_state[4]; __pyx_result.transistors = __pyx_state[5]; __pyx_result.uses = __pyx_state[6]             # <<<<<<<<<<<<<<
+ *     __Pyx_UpdateUnpickledDict(__pyx_result, __pyx_state, 7)
 */
   __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 0, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 12, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_mstate_global->__pyx_ptype_11MagDatabase_Rect))))) __PYX_ERR(1, 12, __pyx_L1_error)
+  __Pyx_GIVEREF(__pyx_t_1);
+  __Pyx_GOTREF((PyObject *)__pyx_v___pyx_result->bbox);
+  __Pyx_DECREF((PyObject *)__pyx_v___pyx_result->bbox);
+  __pyx_v___pyx_result->bbox = ((struct __pyx_obj_11MagDatabase_Rect *)__pyx_t_1);
+  __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 1, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (!(likely(PyDict_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("dict", __pyx_t_1))) __PYX_ERR(1, 12, __pyx_L1_error)
   __Pyx_GIVEREF(__pyx_t_1);
@@ -22167,7 +23323,7 @@ static PyObject *__pyx_f_11MagDatabase___pyx_unpickle_Cell__set_state(struct __p
   __Pyx_DECREF(__pyx_v___pyx_result->labels);
   __pyx_v___pyx_result->labels = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 1, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 12, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 2, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (!(likely(PyDict_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("dict", __pyx_t_1))) __PYX_ERR(1, 12, __pyx_L1_error)
   __Pyx_GIVEREF(__pyx_t_1);
@@ -22175,7 +23331,7 @@ static PyObject *__pyx_f_11MagDatabase___pyx_unpickle_Cell__set_state(struct __p
   __Pyx_DECREF(__pyx_v___pyx_result->layers);
   __pyx_v___pyx_result->layers = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 2, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 12, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 3, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (!(likely(PyUnicode_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("str", __pyx_t_1))) __PYX_ERR(1, 12, __pyx_L1_error)
   __Pyx_GIVEREF(__pyx_t_1);
@@ -22183,7 +23339,7 @@ static PyObject *__pyx_f_11MagDatabase___pyx_unpickle_Cell__set_state(struct __p
   __Pyx_DECREF(__pyx_v___pyx_result->name);
   __pyx_v___pyx_result->name = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 3, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 12, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 4, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (!(likely(PyUnicode_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("str", __pyx_t_1))) __PYX_ERR(1, 12, __pyx_L1_error)
   __Pyx_GIVEREF(__pyx_t_1);
@@ -22191,7 +23347,7 @@ static PyObject *__pyx_f_11MagDatabase___pyx_unpickle_Cell__set_state(struct __p
   __Pyx_DECREF(__pyx_v___pyx_result->tech);
   __pyx_v___pyx_result->tech = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 4, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 12, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 5, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_1))) __PYX_ERR(1, 12, __pyx_L1_error)
   __Pyx_GIVEREF(__pyx_t_1);
@@ -22199,7 +23355,7 @@ static PyObject *__pyx_f_11MagDatabase___pyx_unpickle_Cell__set_state(struct __p
   __Pyx_DECREF(__pyx_v___pyx_result->transistors);
   __pyx_v___pyx_result->transistors = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 5, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 12, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 6, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, 1, __Pyx_ReferenceSharing_FunctionArgument); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_1))) __PYX_ERR(1, 12, __pyx_L1_error)
   __Pyx_GIVEREF(__pyx_t_1);
@@ -22210,17 +23366,17 @@ static PyObject *__pyx_f_11MagDatabase___pyx_unpickle_Cell__set_state(struct __p
 
   /* "(tree fragment)":13
  * cdef __pyx_unpickle_Cell__set_state(Cell __pyx_result, __pyx_state: tuple):
- *     __pyx_result.labels = __pyx_state[0]; __pyx_result.layers = __pyx_state[1]; __pyx_result.name = __pyx_state[2]; __pyx_result.tech = __pyx_state[3]; __pyx_result.transistors = __pyx_state[4]; __pyx_result.uses = __pyx_state[5]
- *     __Pyx_UpdateUnpickledDict(__pyx_result, __pyx_state, 6)             # <<<<<<<<<<<<<<
+ *     __pyx_result.bbox = __pyx_state[0]; __pyx_result.labels = __pyx_state[1]; __pyx_result.layers = __pyx_state[2]; __pyx_result.name = __pyx_state[3]; __pyx_result.tech = __pyx_state[4]; __pyx_result.transistors = __pyx_state[5]; __pyx_result.uses = __pyx_state[6]
+ *     __Pyx_UpdateUnpickledDict(__pyx_result, __pyx_state, 7)             # <<<<<<<<<<<<<<
 */
-  __pyx_t_2 = __Pyx_UpdateUnpickledDict(((PyObject *)__pyx_v___pyx_result), __pyx_v___pyx_state, 6); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(1, 13, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_UpdateUnpickledDict(((PyObject *)__pyx_v___pyx_result), __pyx_v___pyx_state, 7); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(1, 13, __pyx_L1_error)
 
   /* "(tree fragment)":11
  *         __pyx_unpickle_Cell__set_state(<Cell> __pyx_result, __pyx_state)
  *     return __pyx_result
  * cdef __pyx_unpickle_Cell__set_state(Cell __pyx_result, __pyx_state: tuple):             # <<<<<<<<<<<<<<
- *     __pyx_result.labels = __pyx_state[0]; __pyx_result.layers = __pyx_state[1]; __pyx_result.name = __pyx_state[2]; __pyx_result.tech = __pyx_state[3]; __pyx_result.transistors = __pyx_state[4]; __pyx_result.uses = __pyx_state[5]
- *     __Pyx_UpdateUnpickledDict(__pyx_result, __pyx_state, 6)
+ *     __pyx_result.bbox = __pyx_state[0]; __pyx_result.labels = __pyx_state[1]; __pyx_result.layers = __pyx_state[2]; __pyx_result.name = __pyx_state[3]; __pyx_result.tech = __pyx_state[4]; __pyx_result.transistors = __pyx_state[5]; __pyx_result.uses = __pyx_state[6]
+ *     __Pyx_UpdateUnpickledDict(__pyx_result, __pyx_state, 7)
 */
 
   /* function exit code */
@@ -23170,6 +24326,7 @@ static PyObject *__pyx_tp_new_11MagDatabase_Cell(PyTypeObject *t, CYTHON_UNUSED 
   p->transistors = ((PyObject*)Py_None); Py_INCREF(Py_None);
   p->uses = ((PyObject*)Py_None); Py_INCREF(Py_None);
   p->labels = ((PyObject*)Py_None); Py_INCREF(Py_None);
+  p->bbox = ((struct __pyx_obj_11MagDatabase_Rect *)Py_None); Py_INCREF(Py_None);
   return o;
 }
 
@@ -23189,6 +24346,7 @@ static void __pyx_tp_dealloc_11MagDatabase_Cell(PyObject *o) {
   Py_CLEAR(p->transistors);
   Py_CLEAR(p->uses);
   Py_CLEAR(p->labels);
+  Py_CLEAR(p->bbox);
   PyTypeObject *tp = Py_TYPE(o);
   #if CYTHON_USE_TYPE_SLOTS
   (*tp->tp_free)(o);
@@ -23222,6 +24380,9 @@ static int __pyx_tp_traverse_11MagDatabase_Cell(PyObject *o, visitproc v, void *
   if (p->labels) {
     e = (*v)(p->labels, a); if (e) return e;
   }
+  if (p->bbox) {
+    e = (*v)(((PyObject *)p->bbox), a); if (e) return e;
+  }
   return 0;
 }
 
@@ -23239,6 +24400,9 @@ static int __pyx_tp_clear_11MagDatabase_Cell(PyObject *o) {
   Py_XDECREF(tmp);
   tmp = ((PyObject*)p->labels);
   p->labels = ((PyObject*)Py_None); Py_INCREF(Py_None);
+  Py_XDECREF(tmp);
+  tmp = ((PyObject*)p->bbox);
+  p->bbox = ((struct __pyx_obj_11MagDatabase_Rect *)Py_None); Py_INCREF(Py_None);
   Py_XDECREF(tmp);
   return 0;
 }
@@ -23321,6 +24485,19 @@ static int __pyx_setprop_11MagDatabase_4Cell_labels(PyObject *o, PyObject *v, CY
   }
 }
 
+static PyObject *__pyx_getprop_11MagDatabase_4Cell_bbox(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_11MagDatabase_4Cell_4bbox_1__get__(o);
+}
+
+static int __pyx_setprop_11MagDatabase_4Cell_bbox(PyObject *o, PyObject *v, CYTHON_UNUSED void *x) {
+  if (v) {
+    return __pyx_pw_11MagDatabase_4Cell_4bbox_3__set__(o, v);
+  }
+  else {
+    return __pyx_pw_11MagDatabase_4Cell_4bbox_5__del__(o);
+  }
+}
+
 static PyMethodDef __pyx_methods_11MagDatabase_Cell[] = {
   {"setTech", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_3setTech, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
   {"addRect", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_5addRect, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
@@ -23331,14 +24508,16 @@ static PyMethodDef __pyx_methods_11MagDatabase_Cell[] = {
   {"dump_transistors", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_15dump_transistors, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
   {"get_transistors_with_transform", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_17get_transistors_with_transform, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_11MagDatabase_4Cell_16get_transistors_with_transform},
   {"get_transistors", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_19get_transistors, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
-  {"getPins", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_21getPins, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_11MagDatabase_4Cell_20getPins},
-  {"find_transistors", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_23find_transistors, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_11MagDatabase_4Cell_22find_transistors},
-  {"getBbox", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_25getBbox, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
-  {"writeMagFile", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_27writeMagFile, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
-  {"addLabel", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_29addLabel, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
-  {"setLabelPort", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_31setLabelPort, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
-  {"__reduce_cython__", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_33__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
-  {"__setstate_cython__", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_35__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+  {"get_pins_with_transform", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_21get_pins_with_transform, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+  {"getPins", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_23getPins, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_11MagDatabase_4Cell_22getPins},
+  {"find_transistors", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_25find_transistors, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_11MagDatabase_4Cell_24find_transistors},
+  {"setBBox", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_27setBBox, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+  {"getBbox", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_29getBbox, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+  {"writeMagFile", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_31writeMagFile, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+  {"addLabel", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_33addLabel, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+  {"setLabelPort", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_35setLabelPort, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+  {"__reduce_cython__", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_37__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+  {"__setstate_cython__", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_4Cell_39__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
   {0, 0, 0, 0}
 };
 
@@ -23349,6 +24528,7 @@ static struct PyGetSetDef __pyx_getsets_11MagDatabase_Cell[] = {
   {"transistors", __pyx_getprop_11MagDatabase_4Cell_transistors, __pyx_setprop_11MagDatabase_4Cell_transistors, 0, 0},
   {"uses", __pyx_getprop_11MagDatabase_4Cell_uses, __pyx_setprop_11MagDatabase_4Cell_uses, 0, 0},
   {"labels", __pyx_getprop_11MagDatabase_4Cell_labels, __pyx_setprop_11MagDatabase_4Cell_labels, 0, 0},
+  {"bbox", __pyx_getprop_11MagDatabase_4Cell_bbox, __pyx_setprop_11MagDatabase_4Cell_bbox, 0, 0},
   {0, 0, 0, 0, 0}
 };
 #if CYTHON_USE_TYPE_SPECS
@@ -23520,17 +24700,18 @@ static PyMethodDef __pyx_methods_11MagDatabase_MagDatabase[] = {
   {"setCellTech", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_7setCellTech, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
   {"setCellUse", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_9setCellUse, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
   {"setCellUseTransform", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_11setCellUseTransform, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
-  {"dump", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_13dump, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
-  {"findCellTransistors", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_15findCellTransistors, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
-  {"findAllTransistors", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_17findAllTransistors, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
-  {"dumpCellTransistors", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_19dumpCellTransistors, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
-  {"getCellTransistors", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_21getCellTransistors, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_11MagDatabase_11MagDatabase_20getCellTransistors},
-  {"getCell", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_23getCell, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
-  {"addLabelToCell", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_25addLabelToCell, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
-  {"setLabelPort", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_27setLabelPort, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
-  {"getCellPins", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_29getCellPins, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
-  {"__reduce_cython__", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_31__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
-  {"__setstate_cython__", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_33__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+  {"setCellBBox", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_13setCellBBox, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+  {"dump", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_15dump, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+  {"findCellTransistors", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_17findCellTransistors, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+  {"findAllTransistors", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_19findAllTransistors, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+  {"dumpCellTransistors", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_21dumpCellTransistors, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+  {"getCellTransistors", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_23getCellTransistors, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_11MagDatabase_11MagDatabase_22getCellTransistors},
+  {"getCell", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_25getCell, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+  {"addLabelToCell", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_27addLabelToCell, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+  {"setLabelPort", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_29setLabelPort, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+  {"getCellPins", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_31getCellPins, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+  {"__reduce_cython__", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_33__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+  {"__setstate_cython__", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_11MagDatabase_11MagDatabase_35__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
   {0, 0, 0, 0}
 };
 
@@ -23748,15 +24929,15 @@ static int __Pyx_modinit_type_init_code(__pyx_mstatetype *__pyx_mstate) {
   if (PyObject_SetAttr(__pyx_m, __pyx_mstate_global->__pyx_n_u_Transform, (PyObject *) __pyx_mstate->__pyx_ptype_11MagDatabase_Transform) < (0)) __PYX_ERR(0, 115, __pyx_L1_error)
   if (__Pyx_setup_reduce((PyObject *) __pyx_mstate->__pyx_ptype_11MagDatabase_Transform) < (0)) __PYX_ERR(0, 115, __pyx_L1_error)
   #if CYTHON_USE_TYPE_SPECS
-  __pyx_mstate->__pyx_ptype_11MagDatabase_Cell = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_11MagDatabase_Cell_spec, NULL); if (unlikely(!__pyx_mstate->__pyx_ptype_11MagDatabase_Cell)) __PYX_ERR(0, 173, __pyx_L1_error)
-  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_11MagDatabase_Cell_spec, __pyx_mstate->__pyx_ptype_11MagDatabase_Cell) < (0)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_mstate->__pyx_ptype_11MagDatabase_Cell = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_11MagDatabase_Cell_spec, NULL); if (unlikely(!__pyx_mstate->__pyx_ptype_11MagDatabase_Cell)) __PYX_ERR(0, 179, __pyx_L1_error)
+  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_11MagDatabase_Cell_spec, __pyx_mstate->__pyx_ptype_11MagDatabase_Cell) < (0)) __PYX_ERR(0, 179, __pyx_L1_error)
   #else
   __pyx_mstate->__pyx_ptype_11MagDatabase_Cell = &__pyx_type_11MagDatabase_Cell;
   #endif
   #if !CYTHON_COMPILING_IN_LIMITED_API
   #endif
   #if !CYTHON_USE_TYPE_SPECS
-  if (__Pyx_PyType_Ready(__pyx_mstate->__pyx_ptype_11MagDatabase_Cell) < (0)) __PYX_ERR(0, 173, __pyx_L1_error)
+  if (__Pyx_PyType_Ready(__pyx_mstate->__pyx_ptype_11MagDatabase_Cell) < (0)) __PYX_ERR(0, 179, __pyx_L1_error)
   #endif
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount((PyObject*)__pyx_mstate->__pyx_ptype_11MagDatabase_Cell);
@@ -23766,18 +24947,18 @@ static int __Pyx_modinit_type_init_code(__pyx_mstatetype *__pyx_mstate) {
     __pyx_mstate->__pyx_ptype_11MagDatabase_Cell->tp_getattro = PyObject_GenericGetAttr;
   }
   #endif
-  if (PyObject_SetAttr(__pyx_m, __pyx_mstate_global->__pyx_n_u_Cell, (PyObject *) __pyx_mstate->__pyx_ptype_11MagDatabase_Cell) < (0)) __PYX_ERR(0, 173, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject *) __pyx_mstate->__pyx_ptype_11MagDatabase_Cell) < (0)) __PYX_ERR(0, 173, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_mstate_global->__pyx_n_u_Cell, (PyObject *) __pyx_mstate->__pyx_ptype_11MagDatabase_Cell) < (0)) __PYX_ERR(0, 179, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject *) __pyx_mstate->__pyx_ptype_11MagDatabase_Cell) < (0)) __PYX_ERR(0, 179, __pyx_L1_error)
   #if CYTHON_USE_TYPE_SPECS
-  __pyx_mstate->__pyx_ptype_11MagDatabase_MagDatabase = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_11MagDatabase_MagDatabase_spec, NULL); if (unlikely(!__pyx_mstate->__pyx_ptype_11MagDatabase_MagDatabase)) __PYX_ERR(0, 502, __pyx_L1_error)
-  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_11MagDatabase_MagDatabase_spec, __pyx_mstate->__pyx_ptype_11MagDatabase_MagDatabase) < (0)) __PYX_ERR(0, 502, __pyx_L1_error)
+  __pyx_mstate->__pyx_ptype_11MagDatabase_MagDatabase = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_11MagDatabase_MagDatabase_spec, NULL); if (unlikely(!__pyx_mstate->__pyx_ptype_11MagDatabase_MagDatabase)) __PYX_ERR(0, 527, __pyx_L1_error)
+  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_11MagDatabase_MagDatabase_spec, __pyx_mstate->__pyx_ptype_11MagDatabase_MagDatabase) < (0)) __PYX_ERR(0, 527, __pyx_L1_error)
   #else
   __pyx_mstate->__pyx_ptype_11MagDatabase_MagDatabase = &__pyx_type_11MagDatabase_MagDatabase;
   #endif
   #if !CYTHON_COMPILING_IN_LIMITED_API
   #endif
   #if !CYTHON_USE_TYPE_SPECS
-  if (__Pyx_PyType_Ready(__pyx_mstate->__pyx_ptype_11MagDatabase_MagDatabase) < (0)) __PYX_ERR(0, 502, __pyx_L1_error)
+  if (__Pyx_PyType_Ready(__pyx_mstate->__pyx_ptype_11MagDatabase_MagDatabase) < (0)) __PYX_ERR(0, 527, __pyx_L1_error)
   #endif
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount((PyObject*)__pyx_mstate->__pyx_ptype_11MagDatabase_MagDatabase);
@@ -23787,8 +24968,8 @@ static int __Pyx_modinit_type_init_code(__pyx_mstatetype *__pyx_mstate) {
     __pyx_mstate->__pyx_ptype_11MagDatabase_MagDatabase->tp_getattro = PyObject_GenericGetAttr;
   }
   #endif
-  if (PyObject_SetAttr(__pyx_m, __pyx_mstate_global->__pyx_n_u_MagDatabase, (PyObject *) __pyx_mstate->__pyx_ptype_11MagDatabase_MagDatabase) < (0)) __PYX_ERR(0, 502, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject *) __pyx_mstate->__pyx_ptype_11MagDatabase_MagDatabase) < (0)) __PYX_ERR(0, 502, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_mstate_global->__pyx_n_u_MagDatabase, (PyObject *) __pyx_mstate->__pyx_ptype_11MagDatabase_MagDatabase) < (0)) __PYX_ERR(0, 527, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject *) __pyx_mstate->__pyx_ptype_11MagDatabase_MagDatabase) < (0)) __PYX_ERR(0, 527, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -24402,6 +25583,21 @@ __Pyx_RefNannySetupContext("PyInit_MagDatabase", 0);
   if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_centroid, __pyx_t_3) < (0)) __PYX_ERR(0, 169, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
+  /* "MagDatabase.pyx":172
+ *         return self.r.centroid()
+ * 
+ *     def transform(self, t):             # <<<<<<<<<<<<<<
+ * 
+ *         self.r.xbot, self.r.ybot = t.transform_point((self.r.xbot, self.r.ybot))
+*/
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_5Label_9transform, 0, __pyx_mstate_global->__pyx_n_u_Label_transform, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[19])); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
+  PyUnstable_Object_EnableDeferredRefcount(__pyx_t_3);
+  #endif
+  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_transform, __pyx_t_3) < (0)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
   /* "MagDatabase.pyx":149
  * # l = Label(layer, xbot, ybot, xtop, ytop, font, a, b, c, d, labname)
  * 
@@ -24418,229 +25614,259 @@ __Pyx_RefNannySetupContext("PyInit_MagDatabase", 0);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "MagDatabase.pyx":187
- *         self.labels = {}
+  /* "MagDatabase.pyx":195
+ *         self.bbox = Rect(1e9, 1e9, -1e9, -1e9)
  * 
  *     def setTech(self, str tech):             # <<<<<<<<<<<<<<
  *         self.tech = tech
  * 
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_3setTech, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_setTech, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[19])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_3setTech, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_setTech, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[20])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 195, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_setTech, __pyx_t_2) < (0)) __PYX_ERR(0, 187, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_setTech, __pyx_t_2) < (0)) __PYX_ERR(0, 195, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "MagDatabase.pyx":190
+  /* "MagDatabase.pyx":198
  *         self.tech = tech
  * 
  *     def addRect(self, str layer, int xbot, int ybot, int xtop, int ytop):             # <<<<<<<<<<<<<<
  * 
  *         r = Rect(xbot, ybot, xtop, ytop)
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_5addRect, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_addRect, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[20])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 190, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_5addRect, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_addRect, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[21])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 198, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_addRect, __pyx_t_2) < (0)) __PYX_ERR(0, 190, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_addRect, __pyx_t_2) < (0)) __PYX_ERR(0, 198, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "MagDatabase.pyx":199
+  /* "MagDatabase.pyx":207
  *         self.layers[layer].append(r)
  * 
  *     def dump(self):             # <<<<<<<<<<<<<<
  *         print(f"cell {self.name}")
  *         for l in self.layers:
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_7dump, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_dump, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[21])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 199, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_7dump, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_dump, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[22])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 207, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_dump, __pyx_t_2) < (0)) __PYX_ERR(0, 199, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_dump, __pyx_t_2) < (0)) __PYX_ERR(0, 207, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "MagDatabase.pyx":212
+  /* "MagDatabase.pyx":220
  *             print(f" label {v}")
  * 
  *     def addUse(self, name, inst_name):             # <<<<<<<<<<<<<<
  * 
  *         handle = len(self.uses)
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_9addUse, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_addUse, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[22])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 212, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_9addUse, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_addUse, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[23])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 220, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_addUse, __pyx_t_2) < (0)) __PYX_ERR(0, 212, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_addUse, __pyx_t_2) < (0)) __PYX_ERR(0, 220, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "MagDatabase.pyx":219
+  /* "MagDatabase.pyx":227
  *         return handle
  * 
  *     def setUseTransform(self, use, a, b, c, d, e, f):             # <<<<<<<<<<<<<<
  *         self.uses[use]['transform'] = Transform(a, b, c, d, e, f)
  * 
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_11setUseTransform, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_setUseTransform, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[23])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 219, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_11setUseTransform, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_setUseTransform, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[24])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 227, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_setUseTransform, __pyx_t_2) < (0)) __PYX_ERR(0, 219, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_setUseTransform, __pyx_t_2) < (0)) __PYX_ERR(0, 227, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "MagDatabase.pyx":222
+  /* "MagDatabase.pyx":230
  *         self.uses[use]['transform'] = Transform(a, b, c, d, e, f)
  * 
  *     def dump_transistors_with_transform(self, db, transform):             # <<<<<<<<<<<<<<
  *         """
  *         Dump transistors in this cell and in child cells
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_13dump_transistors_with_transform, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_dump_transistors_with_trans, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[24])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 222, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_13dump_transistors_with_transform, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_dump_transistors_with_trans, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[25])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 230, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_dump_transistors_with_transform, __pyx_t_2) < (0)) __PYX_ERR(0, 222, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_dump_transistors_with_transform, __pyx_t_2) < (0)) __PYX_ERR(0, 230, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "MagDatabase.pyx":235
+  /* "MagDatabase.pyx":243
  *             db.cells[u['name']].dump_transistors_with_transform(db, u['transform'].Transform(transform))
  * 
  *     def dump_transistors(self, db):             # <<<<<<<<<<<<<<
  *         self.dump_transistors_with_transform(db, Transform(1, 0, 0, 0, 1, 0))
  * 
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_15dump_transistors, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_dump_transistors, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[25])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 235, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_15dump_transistors, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_dump_transistors, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[26])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 243, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_dump_transistors, __pyx_t_2) < (0)) __PYX_ERR(0, 235, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_dump_transistors, __pyx_t_2) < (0)) __PYX_ERR(0, 243, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "MagDatabase.pyx":238
+  /* "MagDatabase.pyx":246
  *         self.dump_transistors_with_transform(db, Transform(1, 0, 0, 0, 1, 0))
  * 
  *     def get_transistors_with_transform(self, db, transform):             # <<<<<<<<<<<<<<
  *         """
  *         Get transistors in this cell and in child cells
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_17get_transistors_with_transform, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_get_transistors_with_transf, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[26])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 238, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_17get_transistors_with_transform, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_get_transistors_with_transf, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[27])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 246, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_get_transistors_with_transform, __pyx_t_2) < (0)) __PYX_ERR(0, 238, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_get_transistors_with_transform, __pyx_t_2) < (0)) __PYX_ERR(0, 246, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "MagDatabase.pyx":250
+  /* "MagDatabase.pyx":258
  *         return {'self': t, 'children': tt}
  * 
  *     def get_transistors(self, db):             # <<<<<<<<<<<<<<
  *         return self.get_transistors_with_transform(db, Transform(1, 0, 0, 0, 1, 0))
  * 
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_19get_transistors, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_get_transistors, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[27])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 250, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_19get_transistors, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_get_transistors, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[28])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 258, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_get_transistors, __pyx_t_2) < (0)) __PYX_ERR(0, 250, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_get_transistors, __pyx_t_2) < (0)) __PYX_ERR(0, 258, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "MagDatabase.pyx":253
- *         return self.get_transistors_with_transform(db, Transform(1, 0, 0, 0, 1, 0))
+  /* "MagDatabase.pyx":262
+ * 
+ * 
+ *     def get_pins_with_transform(self, db, transform):             # <<<<<<<<<<<<<<
+ * 
+ *         import copy
+*/
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_21get_pins_with_transform, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_get_pins_with_transform, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[29])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 262, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
+  PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
+  #endif
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_get_pins_with_transform, __pyx_t_2) < (0)) __PYX_ERR(0, 262, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "MagDatabase.pyx":282
+ * 
  * 
  *     def getPins(self, db):             # <<<<<<<<<<<<<<
  *         """
  *         Get pins hierarchy
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_21getPins, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_getPins, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[28])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 253, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_23getPins, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_getPins, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[30])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 282, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_getPins, __pyx_t_2) < (0)) __PYX_ERR(0, 253, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_getPins, __pyx_t_2) < (0)) __PYX_ERR(0, 282, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "MagDatabase.pyx":265
- *         return {'self': self.labels, 'children': p}
+  /* "MagDatabase.pyx":289
+ * 
  * 
  *     def find_transistors(self):             # <<<<<<<<<<<<<<
  *         """
  *         Returns a list of Transistor objects for all transistors in the cell
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_23find_transistors, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_find_transistors, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[29])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 265, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_25find_transistors, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_find_transistors, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[31])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 289, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_find_transistors, __pyx_t_2) < (0)) __PYX_ERR(0, 265, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_find_transistors, __pyx_t_2) < (0)) __PYX_ERR(0, 289, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "MagDatabase.pyx":414
+  /* "MagDatabase.pyx":435
+ * 
+ * 
+ *     def setBBox(self, xbot, ybot, xtop, ytop):             # <<<<<<<<<<<<<<
+ *         self.bbox = Rect(xbot, ybot, xtop, ytop)
+ * 
+*/
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_27setBBox, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_setBBox, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[32])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 435, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
+  PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
+  #endif
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_setBBox, __pyx_t_2) < (0)) __PYX_ERR(0, 435, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "MagDatabase.pyx":439
  * 
  * 
  *     def getBbox(self, db):             # <<<<<<<<<<<<<<
  * 
- *         xbot = 1e9
+ *         xbot = self.bbox.xbot
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_25getBbox, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_getBbox, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[30])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 414, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_29getBbox, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_getBbox, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[33])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 439, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_getBbox, __pyx_t_2) < (0)) __PYX_ERR(0, 414, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_getBbox, __pyx_t_2) < (0)) __PYX_ERR(0, 439, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "MagDatabase.pyx":447
+  /* "MagDatabase.pyx":472
  * 
  * 
  *     def writeMagFile(self, db, fname):             # <<<<<<<<<<<<<<
  * 
  *         with open(fname, "w") as f:
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_27writeMagFile, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_writeMagFile, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[31])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 447, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_31writeMagFile, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_writeMagFile, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[34])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 472, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_writeMagFile, __pyx_t_2) < (0)) __PYX_ERR(0, 447, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_writeMagFile, __pyx_t_2) < (0)) __PYX_ERR(0, 472, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "MagDatabase.pyx":488
+  /* "MagDatabase.pyx":513
  * 
  * 
  *     def addLabel(self, layer, xbot, ybot, xtop, ytop, pos, font, a, b, c, d, labname):             # <<<<<<<<<<<<<<
  * 
  *         l = Label(layer, xbot, ybot, xtop, ytop, pos, font, a, b, c, d, labname)
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_29addLabel, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_addLabel, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[32])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 488, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_33addLabel, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_addLabel, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[35])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 513, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_addLabel, __pyx_t_2) < (0)) __PYX_ERR(0, 488, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_addLabel, __pyx_t_2) < (0)) __PYX_ERR(0, 513, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "MagDatabase.pyx":495
+  /* "MagDatabase.pyx":520
  * 
  * 
  *     def setLabelPort(self, labname, port, directions):             # <<<<<<<<<<<<<<
  * 
  *         self.labels[labname].setPort(port, directions)
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_31setLabelPort, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_setLabelPort, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[33])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 495, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_35setLabelPort, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell_setLabelPort, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[36])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 520, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_setLabelPort, __pyx_t_2) < (0)) __PYX_ERR(0, 495, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_setLabelPort, __pyx_t_2) < (0)) __PYX_ERR(0, 520, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "(tree fragment)":1
@@ -24648,7 +25874,7 @@ __Pyx_RefNannySetupContext("PyInit_MagDatabase", 0);
  *     cdef tuple state
  *     cdef object _dict
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_33__reduce_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell___reduce_cython, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[34])); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_37__reduce_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell___reduce_cython, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[37])); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
@@ -24658,11 +25884,11 @@ __Pyx_RefNannySetupContext("PyInit_MagDatabase", 0);
 
   /* "(tree fragment)":16
  *     else:
- *         return __pyx_unpickle_Cell, (type(self), 0x8cc10a5, state)
+ *         return __pyx_unpickle_Cell, (type(self), 0x175f6fd, state)
  * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
  *     __pyx_unpickle_Cell__set_state(self, __pyx_state)
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_35__setstate_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell___setstate_cython, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[35])); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 16, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_4Cell_39__setstate_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Cell___setstate_cython, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[38])); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
@@ -24670,214 +25896,229 @@ __Pyx_RefNannySetupContext("PyInit_MagDatabase", 0);
   if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_Cell, __pyx_mstate_global->__pyx_n_u_setstate_cython, __pyx_t_2) < (0)) __PYX_ERR(1, 16, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "MagDatabase.pyx":509
+  /* "MagDatabase.pyx":534
  *         self.cells = {}
  * 
  *     def createCell(self, str name):             # <<<<<<<<<<<<<<
  * 
  *         c = Cell()
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_3createCell, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase_createCell, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[36])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 509, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_3createCell, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase_createCell, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[39])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 534, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_MagDatabase, __pyx_mstate_global->__pyx_n_u_createCell, __pyx_t_2) < (0)) __PYX_ERR(0, 509, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_MagDatabase, __pyx_mstate_global->__pyx_n_u_createCell, __pyx_t_2) < (0)) __PYX_ERR(0, 534, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "MagDatabase.pyx":517
+  /* "MagDatabase.pyx":542
  *         self.cells[name] = c
  * 
  *     def addRectToCell(self, str name, str layer, int xbot, int ybot, int xtop, int ytop):             # <<<<<<<<<<<<<<
  * 
  *         self.cells[name].addRect(layer, xbot, ybot, xtop, ytop)
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_5addRectToCell, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase_addRectToCell, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[37])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 517, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_5addRectToCell, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase_addRectToCell, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[40])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 542, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_MagDatabase, __pyx_mstate_global->__pyx_n_u_addRectToCell, __pyx_t_2) < (0)) __PYX_ERR(0, 517, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_MagDatabase, __pyx_mstate_global->__pyx_n_u_addRectToCell, __pyx_t_2) < (0)) __PYX_ERR(0, 542, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "MagDatabase.pyx":521
+  /* "MagDatabase.pyx":546
  *         self.cells[name].addRect(layer, xbot, ybot, xtop, ytop)
  * 
  *     def setCellTech(self, str name, str tech):             # <<<<<<<<<<<<<<
  * 
  *         self.cells[name].setTech(tech)
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_7setCellTech, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase_setCellTech, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[38])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 521, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_7setCellTech, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase_setCellTech, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[41])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 546, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_MagDatabase, __pyx_mstate_global->__pyx_n_u_setCellTech, __pyx_t_2) < (0)) __PYX_ERR(0, 521, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_MagDatabase, __pyx_mstate_global->__pyx_n_u_setCellTech, __pyx_t_2) < (0)) __PYX_ERR(0, 546, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "MagDatabase.pyx":525
+  /* "MagDatabase.pyx":550
  *         self.cells[name].setTech(tech)
  * 
  *     def setCellUse(self, str name, str new_cell, str inst_name):             # <<<<<<<<<<<<<<
  * 
  *        return self.cells[name].addUse(new_cell, inst_name)
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_9setCellUse, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase_setCellUse, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[39])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 525, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_9setCellUse, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase_setCellUse, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[42])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 550, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_MagDatabase, __pyx_mstate_global->__pyx_n_u_setCellUse, __pyx_t_2) < (0)) __PYX_ERR(0, 525, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_MagDatabase, __pyx_mstate_global->__pyx_n_u_setCellUse, __pyx_t_2) < (0)) __PYX_ERR(0, 550, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "MagDatabase.pyx":529
+  /* "MagDatabase.pyx":554
  *        return self.cells[name].addUse(new_cell, inst_name)
  * 
  *     def setCellUseTransform(self, name, cell_inst, a, b, c, d, e, f):             # <<<<<<<<<<<<<<
  * 
  *         self.cells[name].setUseTransform(cell_inst, a, b, c, d, e, f)
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_11setCellUseTransform, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase_setCellUseTransform, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[40])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 529, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_11setCellUseTransform, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase_setCellUseTransform, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[43])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 554, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_MagDatabase, __pyx_mstate_global->__pyx_n_u_setCellUseTransform, __pyx_t_2) < (0)) __PYX_ERR(0, 529, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_MagDatabase, __pyx_mstate_global->__pyx_n_u_setCellUseTransform, __pyx_t_2) < (0)) __PYX_ERR(0, 554, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "MagDatabase.pyx":533
+  /* "MagDatabase.pyx":558
  *         self.cells[name].setUseTransform(cell_inst, a, b, c, d, e, f)
+ * 
+ *     def setCellBBox(self, name, xbot, ybot, xtop, ytop):             # <<<<<<<<<<<<<<
+ * 
+ *         self.cells[name].setBBox(xbot, ybot, xtop, ytop)
+*/
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_13setCellBBox, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase_setCellBBox, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[44])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 558, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
+  PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
+  #endif
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_MagDatabase, __pyx_mstate_global->__pyx_n_u_setCellBBox, __pyx_t_2) < (0)) __PYX_ERR(0, 558, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "MagDatabase.pyx":562
+ *         self.cells[name].setBBox(xbot, ybot, xtop, ytop)
  * 
  *     def dump(self):             # <<<<<<<<<<<<<<
  * 
  *         for c in self.cells:
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_13dump, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase_dump, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[41])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 533, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_15dump, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase_dump, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[45])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 562, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_MagDatabase, __pyx_mstate_global->__pyx_n_u_dump, __pyx_t_2) < (0)) __PYX_ERR(0, 533, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_MagDatabase, __pyx_mstate_global->__pyx_n_u_dump, __pyx_t_2) < (0)) __PYX_ERR(0, 562, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "MagDatabase.pyx":538
+  /* "MagDatabase.pyx":567
  *             self.cells[c].dump()
  * 
  *     def findCellTransistors(self, str name):             # <<<<<<<<<<<<<<
  * 
  *         t = self.cells[name].find_transistors()
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_15findCellTransistors, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase_findCellTransistors, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[42])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 538, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_17findCellTransistors, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase_findCellTransistors, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[46])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 567, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_MagDatabase, __pyx_mstate_global->__pyx_n_u_findCellTransistors, __pyx_t_2) < (0)) __PYX_ERR(0, 538, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_MagDatabase, __pyx_mstate_global->__pyx_n_u_findCellTransistors, __pyx_t_2) < (0)) __PYX_ERR(0, 567, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "MagDatabase.pyx":542
+  /* "MagDatabase.pyx":571
  *         t = self.cells[name].find_transistors()
  * 
  *     def findAllTransistors(self):             # <<<<<<<<<<<<<<
  * 
  *         for c in self.cells:
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_17findAllTransistors, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase_findAllTransistors, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[43])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 542, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_19findAllTransistors, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase_findAllTransistors, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[47])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 571, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_MagDatabase, __pyx_mstate_global->__pyx_n_u_findAllTransistors, __pyx_t_2) < (0)) __PYX_ERR(0, 542, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_MagDatabase, __pyx_mstate_global->__pyx_n_u_findAllTransistors, __pyx_t_2) < (0)) __PYX_ERR(0, 571, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "MagDatabase.pyx":547
+  /* "MagDatabase.pyx":576
  *             self.findCellTransistors(c)
  * 
  *     def dumpCellTransistors(self, str name):             # <<<<<<<<<<<<<<
  * 
  *         cell = self.cells[name]
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_19dumpCellTransistors, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase_dumpCellTransistors, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[44])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 547, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_21dumpCellTransistors, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase_dumpCellTransistors, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[48])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 576, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_MagDatabase, __pyx_mstate_global->__pyx_n_u_dumpCellTransistors, __pyx_t_2) < (0)) __PYX_ERR(0, 547, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_MagDatabase, __pyx_mstate_global->__pyx_n_u_dumpCellTransistors, __pyx_t_2) < (0)) __PYX_ERR(0, 576, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "MagDatabase.pyx":553
+  /* "MagDatabase.pyx":582
  *         cell.dump_transistors(self)
  * 
  *     def getCellTransistors(self, str name):             # <<<<<<<<<<<<<<
  *         """
  *         Returns all transistors in the cell and in all child cells.
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_21getCellTransistors, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase_getCellTransistors, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[45])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 553, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_23getCellTransistors, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase_getCellTransistors, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[49])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 582, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_MagDatabase, __pyx_mstate_global->__pyx_n_u_getCellTransistors, __pyx_t_2) < (0)) __PYX_ERR(0, 553, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_MagDatabase, __pyx_mstate_global->__pyx_n_u_getCellTransistors, __pyx_t_2) < (0)) __PYX_ERR(0, 582, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "MagDatabase.pyx":562
+  /* "MagDatabase.pyx":591
  *         return cell.get_transistors(self)
  * 
  *     def getCell(self, str name):             # <<<<<<<<<<<<<<
  * 
  *         return self.cells[name]
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_23getCell, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase_getCell, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[46])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 562, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_25getCell, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase_getCell, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[50])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 591, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_MagDatabase, __pyx_mstate_global->__pyx_n_u_getCell, __pyx_t_2) < (0)) __PYX_ERR(0, 562, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_MagDatabase, __pyx_mstate_global->__pyx_n_u_getCell, __pyx_t_2) < (0)) __PYX_ERR(0, 591, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "MagDatabase.pyx":567
+  /* "MagDatabase.pyx":596
  * 
  * 
  *     def addLabelToCell(self, cell_name_str, layer, xbot, ybot, xtop, ytop, pos, font, a, b, c, d, labname):             # <<<<<<<<<<<<<<
  * 
  *         self.cells[cell_name_str].addLabel(layer, xbot, ybot, xtop, ytop, pos, font, a, b, c, d, labname)
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_25addLabelToCell, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase_addLabelToCell, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[47])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 567, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_27addLabelToCell, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase_addLabelToCell, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[51])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 596, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_MagDatabase, __pyx_mstate_global->__pyx_n_u_addLabelToCell, __pyx_t_2) < (0)) __PYX_ERR(0, 567, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_MagDatabase, __pyx_mstate_global->__pyx_n_u_addLabelToCell, __pyx_t_2) < (0)) __PYX_ERR(0, 596, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "MagDatabase.pyx":572
+  /* "MagDatabase.pyx":601
  * 
  * 
  *     def setLabelPort(self, cell_name_str, labname, port, directions):             # <<<<<<<<<<<<<<
  * 
  *         self.cells[cell_name_str].setLabelPort(labname, port, directions)
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_27setLabelPort, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase_setLabelPort, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[48])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 572, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_29setLabelPort, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase_setLabelPort, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[52])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 601, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_MagDatabase, __pyx_mstate_global->__pyx_n_u_setLabelPort, __pyx_t_2) < (0)) __PYX_ERR(0, 572, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_MagDatabase, __pyx_mstate_global->__pyx_n_u_setLabelPort, __pyx_t_2) < (0)) __PYX_ERR(0, 601, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "MagDatabase.pyx":576
+  /* "MagDatabase.pyx":605
  *         self.cells[cell_name_str].setLabelPort(labname, port, directions)
  * 
  *     def getCellPins(self, cell_name_str):             # <<<<<<<<<<<<<<
  * 
  *         return self.cells[cell_name_str].getPins(self)
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_29getCellPins, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase_getCellPins, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[49])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 576, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_31getCellPins, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase_getCellPins, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[53])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 605, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_MagDatabase, __pyx_mstate_global->__pyx_n_u_getCellPins, __pyx_t_2) < (0)) __PYX_ERR(0, 576, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_11MagDatabase_MagDatabase, __pyx_mstate_global->__pyx_n_u_getCellPins, __pyx_t_2) < (0)) __PYX_ERR(0, 605, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "(tree fragment)":1
@@ -24885,7 +26126,7 @@ __Pyx_RefNannySetupContext("PyInit_MagDatabase", 0);
  *     cdef tuple state
  *     cdef object _dict
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_31__reduce_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase___reduce_cython, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[50])); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_33__reduce_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase___reduce_cython, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[54])); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
@@ -24899,7 +26140,7 @@ __Pyx_RefNannySetupContext("PyInit_MagDatabase", 0);
  * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
  *     __pyx_unpickle_MagDatabase__set_state(self, __pyx_state)
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_33__setstate_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase___setstate_cython, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[51])); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 16, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_11MagDatabase_35__setstate_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_MagDatabase___setstate_cython, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[55])); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
@@ -24914,7 +26155,7 @@ __Pyx_RefNannySetupContext("PyInit_MagDatabase", 0);
  *     cdef object __pyx_result
  *     __Pyx_CheckUnpickleChecksum(__pyx_checksum, 0xba15978, 0xfa80661, 0x8acd120, b'xbot, xtop, ybot, ytop')
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_1__pyx_unpickle_Rect, 0, __pyx_mstate_global->__pyx_n_u_pyx_unpickle_Rect, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[52])); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_1__pyx_unpickle_Rect, 0, __pyx_mstate_global->__pyx_n_u_pyx_unpickle_Rect, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[56])); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
@@ -24927,7 +26168,7 @@ __Pyx_RefNannySetupContext("PyInit_MagDatabase", 0);
  *     int __Pyx_CheckUnpickleChecksum(long, long, long, long, const char*) except -1
  *     int __Pyx_UpdateUnpickledDict(object, object, Py_ssize_t) except -1
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_3__pyx_unpickle_Transistor, 0, __pyx_mstate_global->__pyx_n_u_pyx_unpickle_Transistor, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[53])); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_3__pyx_unpickle_Transistor, 0, __pyx_mstate_global->__pyx_n_u_pyx_unpickle_Transistor, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[57])); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
@@ -24942,7 +26183,7 @@ __Pyx_RefNannySetupContext("PyInit_MagDatabase", 0);
  *     cdef object __pyx_result
  *     __Pyx_CheckUnpickleChecksum(__pyx_checksum, 0x2278f6c, 0x79cccda, 0x6b7a59f, b'a, b, c, d, e, f')
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_5__pyx_unpickle_Transform, 0, __pyx_mstate_global->__pyx_n_u_pyx_unpickle_Transform, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[54])); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_5__pyx_unpickle_Transform, 0, __pyx_mstate_global->__pyx_n_u_pyx_unpickle_Transform, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[58])); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
@@ -24955,7 +26196,7 @@ __Pyx_RefNannySetupContext("PyInit_MagDatabase", 0);
  *     int __Pyx_CheckUnpickleChecksum(long, long, long, long, const char*) except -1
  *     int __Pyx_UpdateUnpickledDict(object, object, Py_ssize_t) except -1
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_7__pyx_unpickle_Cell, 0, __pyx_mstate_global->__pyx_n_u_pyx_unpickle_Cell, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[55])); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_7__pyx_unpickle_Cell, 0, __pyx_mstate_global->__pyx_n_u_pyx_unpickle_Cell, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[59])); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
@@ -24970,7 +26211,7 @@ __Pyx_RefNannySetupContext("PyInit_MagDatabase", 0);
  *     cdef object __pyx_result
  *     __Pyx_CheckUnpickleChecksum(__pyx_checksum, 0x57104c5, 0xd656ba4, 0x5c20384, b'cells')
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_9__pyx_unpickle_MagDatabase, 0, __pyx_mstate_global->__pyx_n_u_pyx_unpickle_MagDatabase, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[56])); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_11MagDatabase_9__pyx_unpickle_MagDatabase, 0, __pyx_mstate_global->__pyx_n_u_pyx_unpickle_MagDatabase, NULL, __pyx_mstate_global->__pyx_n_u_MagDatabase, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[60])); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
@@ -25026,8 +26267,8 @@ __Pyx_RefNannySetupContext("PyInit_MagDatabase", 0);
 static int __Pyx_InitCachedBuiltins(__pyx_mstatetype *__pyx_mstate) {
   CYTHON_UNUSED_VAR(__pyx_mstate);
   __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_mstate->__pyx_n_u_print); if (!__pyx_builtin_print) __PYX_ERR(0, 20, __pyx_L1_error)
-  __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_mstate->__pyx_n_u_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(0, 228, __pyx_L1_error)
-  __pyx_builtin_open = __Pyx_GetBuiltinName(__pyx_mstate->__pyx_n_u_open); if (!__pyx_builtin_open) __PYX_ERR(0, 449, __pyx_L1_error)
+  __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_mstate->__pyx_n_u_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(0, 236, __pyx_L1_error)
+  __pyx_builtin_open = __Pyx_GetBuiltinName(__pyx_mstate->__pyx_n_u_open); if (!__pyx_builtin_open) __PYX_ERR(0, 474, __pyx_L1_error)
 
   /* Cached unbound methods */
   __pyx_mstate->__pyx_umethod_PyDict_Type_items.type = (PyObject*)&PyDict_Type;
@@ -25047,31 +26288,42 @@ static int __Pyx_InitCachedConstants(__pyx_mstatetype *__pyx_mstate) {
   CYTHON_UNUSED_VAR(__pyx_mstate);
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "MagDatabase.pyx":236
+  /* "MagDatabase.pyx":193
+ *         self.uses = []
+ *         self.labels = {}
+ *         self.bbox = Rect(1e9, 1e9, -1e9, -1e9)             # <<<<<<<<<<<<<<
+ * 
+ *     def setTech(self, str tech):
+*/
+  __pyx_mstate_global->__pyx_tuple[0] = PyTuple_Pack(4, __pyx_mstate_global->__pyx_float_1e9, __pyx_mstate_global->__pyx_float_1e9, __pyx_mstate_global->__pyx_float_neg_1e9, __pyx_mstate_global->__pyx_float_neg_1e9); if (unlikely(!__pyx_mstate_global->__pyx_tuple[0])) __PYX_ERR(0, 193, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[0]);
+  __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[0]);
+
+  /* "MagDatabase.pyx":244
  * 
  *     def dump_transistors(self, db):
  *         self.dump_transistors_with_transform(db, Transform(1, 0, 0, 0, 1, 0))             # <<<<<<<<<<<<<<
  * 
  *     def get_transistors_with_transform(self, db, transform):
 */
-  __pyx_mstate_global->__pyx_tuple[0] = PyTuple_Pack(6, __pyx_mstate_global->__pyx_int_1, __pyx_mstate_global->__pyx_int_0, __pyx_mstate_global->__pyx_int_0, __pyx_mstate_global->__pyx_int_0, __pyx_mstate_global->__pyx_int_1, __pyx_mstate_global->__pyx_int_0); if (unlikely(!__pyx_mstate_global->__pyx_tuple[0])) __PYX_ERR(0, 236, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[0]);
-  __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[0]);
+  __pyx_mstate_global->__pyx_tuple[1] = PyTuple_Pack(6, __pyx_mstate_global->__pyx_int_1, __pyx_mstate_global->__pyx_int_0, __pyx_mstate_global->__pyx_int_0, __pyx_mstate_global->__pyx_int_0, __pyx_mstate_global->__pyx_int_1, __pyx_mstate_global->__pyx_int_0); if (unlikely(!__pyx_mstate_global->__pyx_tuple[1])) __PYX_ERR(0, 244, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[1]);
+  __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[1]);
 
-  /* "MagDatabase.pyx":449
+  /* "MagDatabase.pyx":474
  *     def writeMagFile(self, db, fname):
  * 
  *         with open(fname, "w") as f:             # <<<<<<<<<<<<<<
  * 
  *             f.write("magic\n")
 */
-  __pyx_mstate_global->__pyx_tuple[1] = PyTuple_Pack(3, Py_None, Py_None, Py_None); if (unlikely(!__pyx_mstate_global->__pyx_tuple[1])) __PYX_ERR(0, 449, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[1]);
-  __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[1]);
+  __pyx_mstate_global->__pyx_tuple[2] = PyTuple_Pack(3, Py_None, Py_None, Py_None); if (unlikely(!__pyx_mstate_global->__pyx_tuple[2])) __PYX_ERR(0, 474, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[2]);
+  __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[2]);
   #if CYTHON_IMMORTAL_CONSTANTS
   {
     PyObject **table = __pyx_mstate->__pyx_tuple;
-    for (Py_ssize_t i=0; i<2; ++i) {
+    for (Py_ssize_t i=0; i<3; ++i) {
       #if PY_VERSION_HEX >= 0x030F0000
       PyUnstable_SetImmortal(table[i]);
       #elif CYTHON_COMPILING_IN_CPYTHON_FREETHREADING
@@ -25102,39 +26354,39 @@ static int __Pyx_InitCachedConstants(__pyx_mstatetype *__pyx_mstate) {
 static int __Pyx_InitConstants(__pyx_mstatetype *__pyx_mstate) {
   CYTHON_UNUSED_VAR(__pyx_mstate);
   {
-    const struct { const unsigned int length: 10; } index[] = {{4},{19},{28},{4},{179},{1},{0},{1},{3},{4},{2},{1},{8},{4},{5},{17},{7},{6},{10},{7},{7},{8},{2},{9},{7},{13},{7},{13},{5},{5},{15},{10},{19},{14},{5},{10},{10},{6},{4},{6},{4},{22},{24},{13},{12},{11},{9},{21},{36},{21},{12},{12},{20},{35},{17},{12},{20},{17},{5},{14},{14},{14},{13},{11},{29},{31},{26},{25},{22},{16},{31},{30},{31},{19},{23},{30},{23},{22},{31},{24},{20},{4},{22},{24},{10},{13},{9},{13},{9},{19},{27},{29},{18},{25},{10},{28},{30},{30},{20},{2},{1},{5},{8},{14},{7},{13},{6},{12},{6},{5},{18},{2},{1},{2},{1},{4},{9},{13},{5},{8},{8},{17},{18},{10},{2},{1},{2},{8},{5},{10},{7},{4},{19},{16},{31},{19},{2},{1},{9},{9},{8},{2},{1},{18},{19},{16},{5},{4},{8},{1},{7},{7},{11},{18},{7},{15},{30},{12},{6},{1},{8},{4},{9},{13},{5},{1},{1},{7},{5},{6},{8},{6},{13},{10},{4},{8},{2},{5},{7},{7},{6},{7},{8},{4},{7},{2},{2},{4},{5},{4},{9},{9},{8},{1},{2},{5},{7},{7},{6},{4},{4},{6},{6},{8},{3},{4},{3},{2},{2},{11},{5},{14},{12},{11},{10},{19},{26},{19},{24},{25},{12},{1},{2},{10},{17},{13},{8},{2},{2},{4},{11},{10},{19},{12},{7},{7},{15},{12},{10},{12},{19},{5},{7},{1},{4},{8},{4},{8},{16},{14},{9},{15},{2},{1},{6},{3},{12},{1},{6},{1},{5},{12},{5},{4},{5},{4},{5},{4},{5},{4},{11},{71},{114},{101},{28},{39},{815},{61},{27},{18},{54},{21},{67},{24},{31},{44},{17},{30},{25},{44},{21},{19},{9},{16},{78},{87},{99},{13},{101},{54},{92},{653},{35},{21},{233},{61},{51},{13},{13},{19},{23},{27},{31},{97},{103},{131},{111},{222},{11},{11},{55},{55},{55},{55},{11}};
-    #if (CYTHON_COMPRESS_STRINGS) == 3 && __PYX_LIMITED_VERSION_HEX >= 0x030e0000 /* compression: zstd (3265 bytes) */
-const char* const cstring = "(\265/\375`\256\033\275e\000\n}\270\032H\360\356\346\001\314\3002\200\244\014rZ\2214`C\212\244\014\362\t\243Q\342J\025 \326\326Hr\313\025\263\022\263\214l\307a\203\207?\003\025\203\r\343\360\275\033|\360\200#\210C\275\360\207\273\301\0037\036?(\270n\005\211\001|\001\220\001\246\001a\230\032\3071\014\022sJ\213\254P\253\243Y\256\304\255\362\035jV>\371\026\3050\225\n\267^Q\025\025[\320R<c;\307\262\252\346\361\324i\032\2069\363\263D\323\020V\252<\207@y\313N\263\251j\027\272\371\232\312\244\326\3410\215\023\236`\261\2340\334\036\250U\021\005\307\022U\371\251E5\325j\030\362\362,\265Y\326\250r\010\315K\365\005\2029g\2313\303\265j<K2\\\361\362\025\206\243\336;: x\030\212\241\026\327Q\253a\330B\323\355N\357\225\245\242d\312\312|kV\311\273\225\250y\006\014\260X\232S\231\347\223*\207\210 \252\373,\263:F\320\242\272\242\233\243\353\270\212\246\035.\235\251\323f\026\267*\263b{\227\242\252\263\260\273\316\202\212\2433u*\233\344x\352Sk3\225w9\362\263\314i\220\250W\"\014M\351p\034\263\206\256\353\310\220\241\3530`\350\350Z\3646s\215v\225j9v\245\030\017O\264\344\231\243\347\231K\035\327\273;u\332\241\274\033\265>\273\025\215ud\207\256e\3534\306\271Y\256\251\216D\273\255\367\316\246\230Zw\267\271\250Qh\265\033\317\334\275\310\274@\310\341\220\323\235\252\346b\251\362\335\305L\315\263\252S\245\251\307n\227\335\211\256x\214\246\343y\305;\315Q\034}\2428\235ij\261;\313n\253(\337\345>\263\312;\325Y\246\254\365\324\0052\027\017\305Z\210\277\356\365\036\316C\205\215\001\221\r\230}\300@\356\307\202\276\365\022\256\203\254\307\216\260\034i\266a\032x\004\026\337\t/\351=q\301\326k\037x|\217\241\003\350\033\254\332\372\255\364\247\344'G\374\021?\377\307\347\373\200\037D}\324\313\277iM-\251\025\361$\356klK\226e \036\361\307\216X\0162\217\215\370\223}\270\034\364\016:\327S\310td\236\354\203\003c\243\005\277\300\"\200\374\310\223B~\310\306P~\277W\345\255qE.\252u\371\354'x\236>\352\005\276\327{{\334\221\013\323\332x\223\267\351\242n\262\021kp\353\245yIw\305\335-\201VkQ\336\325_:\312\306\220'\324""\222\205p`d\274\020\2601dbG<\342\334\256\264[\313\3429/\366\214~bS\330\032\231I\346\301\201\261\340\205'\304\2650\236\344SD\261&\024\013ca\032r4\005\013_[\257fv\271\366:\246\353\312\271Xr3\247(Ut\265\242\\\263J\2765\347a&\365H\232z\217;Ua:tQU3\257\2550\014\022\313\364\\\323\0307\327\255U\326\272\265\232S\025MS4\025\325\230\211\246i\232\246\251\230\246;\006\013O\235\242\261\363\245\367\251\236\351\311]\346FY\347K\213j\030\222d9\236b\250\315uD\303\314\265\271\262\370YfV\030v\210\245\031\264\303]\226\332\034\317\274\nU\347\312O\224$I\262\204\261VU\353PD\367\211\216\001\246\034\200@\013\003@{[nv__\253\362=7\254(\267$-\3505\220\017\315\237l<\023\356C\347\373_\316O\315\276\231\313\214\303\031\236\201M\260\010\014\246\250\356\313\246\323\216R.\236\367\334gD\272\326c$\367\244\325H*\373\262\345w\345\345^\355=\271&\227\344r\256\346\262\234|\205\316_\037\032\375\264\200$\366\272\2513P\221D\023%~\t\022\237\204\3167\341\017\366`\021\334z5$\370\260\217\034\"}\374\222\037\373\327;\260\253\214\006\344\1772\020\023\246\030\226g\205=\361\374\310\004\002\244>z\3508\036{\343\371\233~\023ks{ \225\1776\361M\000}\240\235\357\232)\230\325\300\344\233\361\262\2701'>\003\211l3\332\022\023\014\000Fm\227\306EY`\3627:\205\376A\233\241`\025x\223\360xWi\344\025\335\t.\000\267\325\226\336\005\313\345N\"\3623\273\322\200\345\030\234|\0166\366\236_)\231X\033\317\321[\254F\t\013\343b\t\260_\013\301\300_\331\314f\230\272\014Kbk8\326D\306\301\236\2048\227\204\357\340\275\246W\306\225\3216\337\205\374\216\216\014\316k\276Dk[^\303\203p;\264&\276\266\003\017K2\212\271\316\341\204\345B\206r\367\020\343U\014\304\036\217w\211y\365\004\244\216r\300@\334\372\351.\331\244\344S\014\3045>\005\246\243\230\304\"\311\357\364\000\335\204\204\303\350x\201\300$\326|\253\023\350*[2\212\263\377\274\252\257\364\032v\0242\304\365\002\334\307\006`C<b\215E\005\271\315h[\276D\232\341\254\372\005m\326\362\226\360\351\0262\014\362\202p\360U0\311\004\210b\357=\263gY\001\033\021\305A\360\205W\200+\241\373\255\236@4\244\t\265\0260""\020\305\233\272\265Z\033\n\024\3338n'Nl%J|\337v:m\033\\\274\376+\375\251\370\305\357\203;\260\352])hc\274\014\237!P\305\264\334\227'\\\t\034\324\200{A\020\004AvD\342f%X\205\253\361\322:\310\371\024f6p(B8\360G\335\3043\3016/\212[R\320\"\271c\373*1\315b`\001o\311\251}0\340\307t>\304\212\214zd.!\rQ\234\375\003Q\314\261\240\014$\200&\364\345|\324LE\203c.*#?\344\300\320F\333\002\363\303\272\200\337\027\003\314N\247W\244G\277\262\242\221\372k\360\367\314F3mF\001\3465\255\350E\365\031\236\205k%!\261\326S>\336\007e\2242\022k.\n\022\026v\224\201h\314D\370%\362\302\274\264\000@\036MHc#\261\001\001m#F\350\350\340\340l!Bl55\233\347i)b\256\357Z\377\312?g}\026\212\217\242\374\345\352\257N\374\023\341\017{~\2177\353\201]`\022\314\301\245w\223\361\034&\356-\225\264\255\317\365\334\233\366f\305\316\304\033\271i\275\375\374l>>\033\010n(\324&B\304FC\263\315l3Z\013\014\214\027,V\374\025\260\0173\277\031\364\203T_E~2\365S<\237g\347\357\234f\036/\243\373\000l\271:\256\212\273\203\362\340\0362\274\374\276>W\345\265=\246\202\346\250\342\322\016\251\234B$\"\"I\n\222t\2220\010I\3034\216\005\365\001\362\371$\t9\204\2301\304\020\231\022\t$\022\021IR\224\024\246\003\201\000)L\023\350\305\"\265>R\003\t\000J\2402a\221&\204\320vn@\202\311\241\311\325\036k\326\337\274\002y=\230w\206\216\247\217`\027#\364\301\256\366\016\002\240<\323\022$\316\202W\001\372\205\311e\315\305\217f\212\271\354w\026\275\000\212\016\022\357\357h\036\340\342\211W\210v\016\260\251jN\223\325\2656W$y\356{G\371\202\372NsA\244\266~\257)J\220\275\302\026\014~\365\0330l\033\010D\033\237\000\264R\313\355|V\177L\025\013\332*jQ-\217\001Gx\213\032\004\017_PEOW\"\277\2553\377\270|@\004\215\212\353\350D\243\0303!\266\221\360\373q\t=\3305\240\312@\365\313\300k\206\271\001)\002X\017\236\030d\341\002\361}\276\367|\252\037M\252^\016\300K\216Gxt\346\021\"\213\304\342KE\210I\255\001\342\244\036EI\301\266\010\0166(\320T\376\243\303\3220r\030\225q\037Q15\210\030\033\332\275\327b{\323\326\004\256v\243\277\352\334\t\325n\\P\361\3544r\260S\347""\277\223\225\216\240\3348\212\354SJ\263\007\017\253b\300\035\201\r\273\021c\321\377\363\353~\254\327N\340\262\347\340\207x!\325\256\237k\335\366\357\351\024\010\252\314\345\256|\205<\267~\316h\240\323o\257\336\020\367\221\215N\362\322\316\212\322\225&\025\320w\255\326\022X\322N:\301\021>QWc\377X\n\004\323\275E\326\307\005\201\3514>\310\215\021K\306|\3313\201\351\363G}\326\373G\034\010\255\362\022\356\341\"\030\311\034+\301\025\022\223\013\233\003\302\255\200\037M\352\220\303\346\206h\"\030vR\341U\"\2243%j\023\204\205?\360\014\2315\231\254+1\014\261\320sI\310j\227+\234^p\313\2156\217\230'9\247\311\323\371\315\ruGF\177Q\371\231-\014\306j\215\037\020\232\212\225\272\362*L\226\361\023?\214\353W\302g\363\317\303\270\301\376\275\220St\024R\020k0\206\345\262\177_,\227\314`\344t*\001\242\261\223\253\204\001\342\256[8\0067\272\346H&y\214j\017O\"\000V\016\260o\377\230C\007.\272\037\2058\257\033\330\302\306*\r\010\265v\354\3455\246\202\204.\221\225 \346To!\332ezr\251\221r\350r\244<\006\nf\313\252\322^5\023>j2\340\225\220\215\272\314\363\354UE\033E\301\363Q\253\217\311\224\211\241\336\"D\000l\003LT\374l\2300I_\0146\305\366e\026\254~K\261~\001\004=g3B\025\343M\323\01400\022m\260\201\250\217r\212\024\353\354\234\2278\304\311\362\033\354\232\020\344\337\301\377'\034\223a\307\032F\240\006\301\276\355\000\305\277r\232\317\264\240\250\002\333\320\201\031\026|\374\231~J\361\363\2742\357\206\324Z\031\265\016\241\207\224~\0040\352g\220\302\311\315\263\224Y\221G\210\247\2712G\022+\025\251\307\n<}\232*q\317\374\354\247W\252\036\243B\221TIeZ\330<I\243~s\271G\024\354\027\267\373\331\246\235I\206\340\367u\232;\367\254\003\205\372D\031\366C\257H-Y\371\315\352D\034\367\"%\311<\217\332'\306a\320\231\220\027\036\254\2030\243W\366\213xP\206\371f?\003\307i\342\266 x?l/\250!^bm\203\277\341\20280}\320\314\237\020}\2428\300\275N\0228C\203\300z'b0.f\206W^\031A0\206\350\300\364M\024\307\r1h\332\276\341\022\275\177Z\0278d\235k$\212/\000\300\035d\316j\341\260/y9\370\376\201\226\204\340+.\335D\212\226%""\242\203\274R(A\261a\001\323\262\371u\310\001\223\344\356$@\203\332\331\242)*\323@\213]Q\221\224r,kv\035\026\n\023\3232\273\020\250~\301q\376\274\275\021\371*A~\363'Y.\322Q\241MNWy\2601\207\360/\026O\007\320\300\210k\272\317#\214I\306\220\300\360\275\264\323\227\200\222:p\325\206\313d\235\344DUw\274i\376\316\342:\25684\231\225\377\260l\002\207\361\017Zo\240\343e\215\323\361o\003#Mx\254\302\376\2303\272Vn\366\325O\327z\254J\373q\263+\0050\370\300\"+\250\204\204J\021\245\210\312\201\240\013)\346@8O\313=-\312)\243\003P\021\350>\2522\350\207\372s\316%\267\232\237pZ\004\021\235\257l*\375\340u\242_\310\221F0\364\246\337`\3242\030\210\235\004\264\263\310\3567\342\372?=C\364U\021\313\017A\313\247>\316cYp\231l\266}\373U\r\220\213\300\223K\364\253G[\317\337s\271\302Ca\035@\242\002}\265{aT\005\362flz\346>\335\342BP?,\206\317B}p\235\263W\306\007\3767\001\371\262|\320\210\267g\013\216\235\246n\000vB\236\3255\342\r\236\030\307\020g\001\005\236T\215\264\316\253i\252{{\353\313L\333E\010\222K\301\365\213\3545\216a\004\374bL\313\260\032>\001h\021\243\323\327;A\261\243*o\013\212\214\310<\261\232\353\030\220\236B{\333c\373\373\030\320a\036n|\002\210,=B\300d\320\211v\026%p\323n!\243\005ud'E\303\327u\260N+,9Y\256\230}c6\021\032!>H(\375\353\266\371\037;\326\312@\304}f*\276\374\202B'\374\006[K\261@4N9\"\2151\311&!\343\236\346SE0\255\331Gh\325\033\360\232\234\\\343\000\005\312\374tl\345\210aB\377\310E8R*\355\241u-\326\035\004\250\003";
-    PyObject *data = __Pyx_DecompressString(cstring, 3265, 3);
+    const struct { const unsigned int length: 10; } index[] = {{4},{19},{28},{4},{179},{1},{0},{1},{3},{4},{2},{1},{8},{4},{5},{17},{7},{6},{10},{7},{7},{8},{2},{9},{7},{13},{7},{13},{5},{5},{15},{10},{19},{14},{5},{10},{10},{6},{4},{6},{4},{22},{24},{13},{12},{11},{9},{21},{36},{21},{12},{12},{28},{20},{35},{12},{17},{12},{20},{17},{5},{14},{14},{14},{13},{15},{11},{29},{31},{26},{25},{22},{16},{31},{30},{31},{19},{23},{30},{23},{23},{22},{31},{24},{20},{4},{22},{24},{10},{13},{9},{13},{9},{19},{27},{29},{18},{25},{10},{28},{30},{30},{20},{2},{1},{5},{8},{14},{7},{13},{6},{12},{6},{5},{18},{2},{1},{2},{1},{4},{9},{13},{5},{8},{8},{17},{18},{4},{10},{2},{1},{2},{8},{8},{5},{10},{7},{4},{19},{16},{31},{19},{2},{1},{9},{9},{8},{2},{1},{18},{19},{16},{5},{4},{8},{1},{7},{7},{11},{18},{7},{23},{15},{30},{12},{6},{1},{8},{4},{9},{13},{5},{1},{1},{3},{7},{5},{6},{8},{6},{13},{10},{4},{8},{2},{5},{7},{7},{6},{7},{8},{4},{7},{2},{2},{4},{5},{4},{9},{9},{8},{1},{2},{5},{7},{7},{6},{4},{4},{6},{6},{8},{3},{4},{3},{2},{2},{11},{5},{14},{12},{11},{10},{19},{26},{19},{24},{25},{12},{1},{2},{10},{17},{13},{8},{2},{2},{4},{7},{11},{11},{10},{19},{12},{7},{7},{15},{12},{10},{12},{19},{5},{7},{1},{4},{8},{4},{8},{16},{14},{9},{15},{2},{1},{6},{3},{12},{1},{6},{1},{5},{12},{5},{4},{5},{4},{5},{4},{5},{4},{11},{71},{114},{101},{28},{39},{815},{127},{66},{27},{18},{54},{21},{67},{24},{31},{44},{17},{30},{25},{23},{44},{21},{19},{9},{16},{19},{78},{87},{99},{13},{101},{54},{92},{653},{35},{21},{61},{51},{13},{249},{13},{19},{23},{27},{32},{31},{97},{103},{261},{131},{111},{11},{11},{55},{55},{55},{55},{11}};
+    #if (CYTHON_COMPRESS_STRINGS) == 3 && __PYX_LIMITED_VERSION_HEX >= 0x030e0000 /* compression: zstd (3414 bytes) */
+const char* const cstring = "(\265/\375`9\035ej\000\252\200\210\033G\360\356\346\001\314\3002\200\007\030\344\030\241Q0\305\010\215\016\362\t\243Q\342j\025 \326\326H\262K\222\370\322\232\204v\361\276Ux\307\302E\003\005:|\357\006\0336\2707P\300\201\207\315\3378\374\215\307\017\n\256\230Bb\210\001\235\001\263\001\346)\202 \252\265\230\022E\021|\241g(\024\346\224\016W\232\223\240V\305\222\014\n\267\3127\250W\331\344;\014\301T\n\334z=\3253\2149\311\320|\355\374\312\252\232ES\243(\010\346|\242\240\213Ty\376p\362\230\215\346R\325\254s\3635\225G\335\303]z\007<\271^< \370\355\356\323jx~\"y\252\334\324\241\212j\025\0049i\222\272$oT\371\203\346\244\332\372>\236\232\r\232$O\r\327*\321$G0\210\223-\020\024\365\016\321\343\201\203`\010\352p\025\265\n\20216\334\346\364^W\3529\242\253\314\267^\221\234\013\n5\307p\301\365Bs*\363|R\345\017\017Bu\233dV\305\007:T\327s\177p\034WO\024D\206+q\272\314\341V\345\325ko2Tq\0256\307UP}p\245N\345r\024Mmj]\246\362&En\222\031\025\nuP\350:S\032\024\305\234\201\343@0`\340\270\013\027@\270\030\275\313|\243Y\244J\212\034\314\213\203\346I\362\314O\323\3140\034\327\23335\312\235\234\023\2656\271\365|q#\007.fk\364\305yI\256)n<\271\255\367\316e\230Z7\267y\250Sh\225\023\315\314\231&\230\034\360l\340\341LU\363\220T\371\346^\245\346Y\325)\262\324\"\267I\316<\203\370\313\206\3439\210s\232\237;\332<w\270\262\324!g\222\334VO\276\311mf\225s*\223DW\353\211\013\354\210dh\353\0026\217\335`IBb\031\213\202\311t(\266B\314\353]\377\331B\\X\232\021X\200X\004&\341\212$\350ZO\331\372\307v\254\t\273\221\342\r\333\300&p\370FxI\357\212\373\265]\333 \344\373\013]\243{\260j\372S\364\243\343\037G\374\021\"\276\010\240\017\364\375\017\365Q\246\237\323\226ZR[\342I\333\317\330\024\226a#!1\217\035\261\033`!\0361\017&\342\362\3173\350[W\001\353\201u0\221\217\014\217\0246\301 H\370\221'\221|\022\217\241\374z\257\313{\343\212\\T\313\362\331G\360>}\324\005xo\367\376\270#w\246\305\361%\217\323E]\305#\226\301\351k\363\216\356\213\273[\2246kQ\236\325M\235\305c\250\203\221\302H>28b\000\360\030*\261&!\261\334\276\264Z""\213\300o>\354\034\375\304\266\2607\260\022,\344##A\214\016\306\326\316x\222o\021\3052\030/\360\005\242 ?S.\260\265\365Zf\026k\257\"\272\256\234\207$/\263\nR=\203\326\223\353\025\311\267\346\034\314\243\026\307Roq\243\252K\2032\252Z\3465\005A\241\220D\315\025}\361r\335Z]\255[\253\031UO\024=\321P}\225'\212\242(\212\206(\272_.\320\324\350\3712[z\233\252\211\232\234U\356se\266t\250\202\3408\222\242\031\202\272\\\305\023\314\\\227\353\212\233d^\201 HH\226B\033\334$\251K\321\314A\240\312\\\271y\216\3438\222\256\325\252j\r\206\347\0163\032\331\233\272\331my\255\312\377\344\260\242\334\236\264\237\317FD2\177\302\351T6\221T\354\30521\2073\\\003\227\340\022\370kQ]\223\326\323\216R2\236\367\334kJ^$w\245\315H}3i\371}y\2677{On\311%\271\233\233\271\010N\236B\347-\221\004'\261\256\227\272\002\025)<a\342\233(\361K\364\374\022\366\340\016\026\301\351\233\301\300wy#I\344\303x\261{\235\3036\362=\330\310\211\022\r\353\363\302\256t\336$\002\251\213:Y?\221\372N\307\346t>\247\347\274\332\334\022H\345\237I|\022!>+>\020\337\300\343\313\361\"piV<\006\327\007\2054\266\034mJ\t\326\200Q\333\265qY\022\250|\217.\241w\310b\024\354\002\357\023\037\224\016c\362\206n\004W\303M[\322\277`\267\334OJ~f_6\005+\377\203\215\371\316\277\300\224X\034\377\321S\266#\205\235a\261(\254\327:\030\360W6\263\034\245>\201%m\254\n\354\203=\305\266X\305y[^\321\255qM/\277\344'\364\022\025\254\246\304\002V[Ia\001:V\230M\206\215x\014\245 ?\031\364\203N\374\023=\277\307\373\036\317?\305\245\270C\204?!\323<G\362\207H\002\200pl>\363)Y\233\372\016\357\301\345\320\236\360Z\016>\354\311(\266\365\r+\354F2\224\273\016\215w\031\020\353|\274\014M\253\033 u\026\002\003b\251\210.\223U`|\313\200\330\215o\231\351,*\261\220\344C\364\215\256r\262e\200\304(\240\022\313|\332Q\272\312\246\214b\331{^\325_\372M\271\345hS\017C\212w\202\272\205,\216yM\000\365\n\031\036y=x\024D\261\3565\263G\300\302e\"\212\t\301\026^\000.\004\356\247\335\200h(\203\221&\3302\241\227v\301\366~\337\367}\354\210\264\3050\360\n\267\303\3242\370\341\371\022b\034\030""\014\333\023\007\004\376\250\253ht\320\320\321\321\260\321\260\321Z\264\320^/\215\305\322\322TK\221B3a\302\307G\363<MGG;\2354\r/Z\277\205~4\374\341\317w\305\246X\003\347\315\331\230\001G\374\235X\024\247\250V8t%\026\027\346@Jr\305\266\225R\212i`\000o\212\2335\010\360S\232\316\207\330\222\321\017\214\005\243C\024\313\276\201(\266\261\037ld#\203\341\361|T\354\222\301/\231X\204\355\375pO\014\\L\276\327\t\014y\26413\236\303#H!I\001y \215e\324b\022\313\272\010V\206\345\237\367\303\215\370tzEZ\364//\331\250\277\376\376O<\212\263X\002\314oZ\221I\315\334\024'\010X\0216\322\021\302\255\222w\306\324j|>Y\207VB#AB\0331\242\247ggG\373\360A\273\271\321\272.S\361b}\326\372W\376\371\352\257R|\024\037\005\370\301\237\377\323\305?\260\014L\2027\030\346\325&\370\217\322\366\302\244\264\251\347vnN\233\023\304\326\304\264Q\323Z\023!B\003\002\322\276OC\2414\020 4\033\033\255F\253\311\\dd\304h\301\342\263p}W\371K\241/\244\372\252\361\217\251\237\362\371>!~\210\020\223\3506\370R\267\307uqC\240B\270\016\207G~[\236\253\352\332\237R\336@i\003\203\026\250\002\333\216\251\030\232\021\021\221$\005I:\2020\014I\2638M\024\361\r\022\002!I9d\0341dD\204\002\021\211DD\222\024\245\220\351\201\000+M\374(\022<\215`\317\031\n_\346\312\217\256\356}\013\261\375R\231\315\350\214u\366u\210^I\377\2709+\001\257f\224G\017\254\370\355W\201)4\234C\001-\207\034v\036Z\257\003M\315\263\023L \241\317\321:E\026\356\376(\345\000 \024\022\201o\331\230\206\200}pw\223\263t\367\234\247;\331\014^\200\334\210\010\211@\350\215\r\013\275\010\251\035U\334\333I\007\375\331\026\231\334\214\373\201\276!\024r\276\360\241_s.u\267\345V\370\001\321\270\262\254\366c}^D\205\032\003e6\335\321V\365\324\034\246\323\270\376\37229\301\332\376\307\"W\373\"%\216W\271`\240\006\025^\2613\227\263\212\232\366#v/\360Vu\276\307\335,F\0020\t\320\316&s\346\316\307}\366\346\247\217\200L\216\354\022\206\202g\222\227\322\345\221\243k\016\240\347\024V\313\317\366\014\326\273[\305_\315\236@Yf\255\204\315\272u^\343\023\231\\\227\377\\qh\371,\206\222f\317\376""\341D4.\020o\240$\351\200\334CFi?Y\340\005\005{(tY\317\037\032`\264\311\225j\244\0360\313'\375\203N{\320\213oA\214\240\021X\002\3774\017\237\177\223\237\337<~k\363\232\331\311\260<=\332\276\263JM\372\305\"\203m\303P\316Yz,\013\272\313e\310\376\327\215\2053P\374\267\031W\325Mc\003k/\360J\033\223\006.S\n\245\365\263\253a\004& YL\3203}\324S\213\377\231\030\210!kVT8*\013\346\331\230\3577\343\374r\201\373h\203\246\224c\233e\010z\"&\264\221G\344=\230D5\356\263:]\261\210\267\340U\300+\202\307\221Nmf\212>(W\213\204\232\225\302\343\231\270\253\251\201I\371r\014\350\213\312\330\266\367\226\360\031\017\313\337%;\215m\252\0200\004\3355$\2647/\0359>Oi\212c\007#\352\253FVR\002\024\003\213\021&\0060\004\202&P\260+f\203\255\3626dF\267\203\3750w\177\356S\350cf\034\260}Y/\246\203]r\254\370z\372\016\021A\036\336:=\021\247\212n\237W|\200\010\003\214\033w{L!\234\365\205\311\352\013\200y\"\300d\262\003^\270\350%\014s\013z\276\\\251D\303\267a\177m@\243#%\232\247b\317\311\316HA\036]+U?\020\326,\266\336\3641\217/\266\312f\037\014\246\262?\265\351\321\\87\240\357\305|\260\310\275\344&g\371XX\034\004|\244'\2021\223G\206I\366\300\342+\212t\334`\335\333\025\222\345\nwb/\317M\nS\006\330\352\366\366\006\275\020j\3624o\n\200\332\243G1\252\350\335\360\325 \331F\325\260\261Z\307\302&\225\253Q#\247\272Q\245\217\326G\375\017=F\337p\240\203F\022\324\201\013R\210zf \242u\005(\316c\243\023\237\005\311\330hFy\020\260\244M\223h\315\260\321\3777.\250\350\036\373N;!T&\350\270<\313\002_@.6C\236\246\036\231\361\320\314x\324h\326T,\265V\206\332\2170B\263\037N\005\3653\001\313\277\234\262\024d\221\355=w\271\037X\312D*S\214\177{J4\241Dt\223\261W\334O,\244\222?\244A*\2315\3167\036/\033e+V\330\260X\320\247_\332\335\256\221\224|\204\346>\275\202\226\255\237bV\372\200T,\226\366\302\301\212D8D\"\252\337\254\215\332\025\306\026h}\315\253\017\326S\230\355+;F\274\003\307\212i?]\307\351\024\264 p\231\016\336\255\000\317Ys\356\t\0278<\371m0\367W\263\304-F\232\315K\302L\2045\030\335\2248m\305\371,c\024uu\260\321\227J\362Br""\212\272\020:3\t\246,\316h\344\311eVym\275&\336\300\2579\002\243\326o\221CL(^`\026\340\003\317\006T\214\004\326\007Xs|{\031\360\372c.$\034\357b\203\351\0205J\232vn\340t \010\240P6S\266r\225[\252\000\221#f\231R\325\331W\322\334\252\242\251S\201d\np\n\215\304\352\224\363\213\"j\teR\255QZ\177\010\365<|\204\223\265\346\277R\034%r\200\331\321\000\23780\255\214[\035C:|%\355\235\3471M\362\326 \261,\312#\177'\000\300\274\274s\326\031\246\264\247\340T|)\256'\001w\227\251\317\243~\031>\334\361\3715\261\001\335\216\2400\336\202n\345{\316e\341\333*U\376\324\303TG\226\267W\354\314`\017c\026\023\301^V^\013\013]\032\007x`3\372\225\245F#9\202E7\217\302:\241- \377\000/7K\232\252b\276\2718\247#\200\034d\204\375\234\237W\242CC\212\321\212bcZ/\"\021\367o\033\206\235\203\374\006~#\376\376\007\"\201\327'1\020\207\366\345\332\257\206\030\010\026\330C\267I\340~]U\035\020\224\020\003\007\204?^\246\304q\336e\026\252\3053@\256\035f\350\217\255<\330\313pCV\005g3\006\203\010\345\373\373\360GUWi\206\207O@y%j\353\372\313\312\202\261\346\025\214\303\032Z\302\202\004\324~\330C<\270\240\261\232\3601\367`\257\0032y\242+\340\247;m=$\317$t<\026\354\223\345\002\236\027\246\330\321\365u\340\320\002\001.cLl\276\020\306\306P\305\007x\276\333\0040\345\3119%\315\t\022\207\316\325\373{S\242\013\362\203\243\227\301_\"\343RN\276-\354\354\203\372-s\361\207\255\304j\004\\_F\036\250a\201\026O\363YY(\024#3)+\330\353\221q\362\341\014\274\347*4\255Y\201\220\207pAR\030_c\033\316\2706-0C\314g]R\200/(t:7\250\373\005\027ff\242\221n\314@l\273\364[\322d\252\rn1\332\010\205\272\300\\-\243\273\rT\215f\234\016\254|1U\351Z\272\232#e\247=d\247\305\220\007\362o";
+    PyObject *data = __Pyx_DecompressString(cstring, 3414, 3);
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #elif (CYTHON_COMPRESS_STRINGS) == 2 /* compression: bz2 (3325 bytes) */
-const char* const cstring = "BZh91AY&SY=\3059\003\000\002;\377\377\377\377\377\377\377\377\377\375\377\377\377\377\377\377\377\377\300@@@@@@@@@@@@\000@\000`\r=\336\371\320\372=\034\207\000n\303\220\355\262(\311ll\332;\200\370\005\007\337\\7\204\240\212I\r\r\001\223 \323LO\030hi\242l\024\321\004\3154\236S\324h\365\003\010\3010\004d\304\332Ch\236\220\004\241\002h\004b2#$\304\311O\312\236\236\251\3513@\232\000\0001\000\000\310\320\000\000\000\003@\"G\241\251\242M\032\0004\003C@\000h\000\000\030\200\000\r\000\000\000\000\321\215@\022!!(i\3512\237\250\231\242d\323\315A\242h\321\275H\332\201\240\320\r4h44\311\243\322\000\001\240\320h\017P\002%\032\200\006\200\320\333S\364\240\364\325\r\014\200h\320\001\220\000h\321\246\236\204ddhd=@\0004h\001$\200 \204\311\251\244\364\236\324\312=\032cRmOPz\214@\000\014\200\032\036\243A\241\240h\001\243@\000=O\370IbG\t\347\347F\316\030\332\202\023W%\277`\216\233`\316\277\345\260l~\347\360h\240a0\001\314\021\233\373$\256\330\001\311\203%`\004\200 \000N\224,DD`\177\000 A\326\203\266\223\370A\022,H\261\367\370$%\303*~d\316\237\001\006l\204\206\037\031k\030\300\230&\"\"\005(\211M36l\331\2653f\315\230\315\251\251\255\377$.\000`\224\220JF\254\315\204H$\2167(O\023\300\327\251B\336\320JRRV\224\005$\256a3\014\300\3140\311\r\r\266\r\246&\206\3306\230\333m\26141\241\246\031\202JEm\003l\316@\210P^\351\037\255\306\376\000\240\257\014%\370\022a\014\230L\311.\003\227 Jha,\006G\030\2519\256lP\3101\315\332\022\227-\035\324y\255\206B,\036\014\002\302\005\303!\220\014\020U DC303^\n\027ihi6,\024\025X\357\004p\320dJ\211M\010\241\211U\021\356g\305#\001\220s\337R\274\026\262\244\034\352'\002\220\250\304)\221)\027\241\023\020DJ\251H\275^\027\303\275\017\001\023y\"O@\364N\n\201\205)\203))\022R\231m\240\260\360T\260\013,\210E\352\313,\27020T<P\265\202R\013\201Zc\263\311\t\230c\220\036j~\037\267\256\363\253\361w\337\t\260Z\r\3562\014|\265L\"7P\334\224>\013\310\302\351\230K\270tt9D\213\230\211\217\220&\031e\262\005I00\305Q~O\346\353n\311\265\251\310\325\317\266\031\340\223\221\311\333\244\3226R""6B\252\313\037[\020\301 \233\t\234B0x\230\210\340\343\354\004\312\304\350@+\002\313\t\"\242V\364,\271\025U\350\003\353Z\362h\021)\302\3112v\342\240\250\024\273\007mR\264\316\363|\036\354E\261\301\010\364\270\325Fwc%u7\333\375\357\024\2359\324\242\252\252*\233dp&Y0T\2204\324\300Cj\324\343\036\337\276\273I\031\203s\266\276$\310\204JF\220\026K\210\254\233\302Q\221'D\224dR\372\302\250\242\325\257\026\020E\266\375]N\326\302s0**\026H\031\254\271\301E@\242\244H\242)E(\223\335\214c\031\302\006-\235!\326D\2707\003sFM\273gv\017\010PwK\230z\333\245\304\261\330\354\0148OA\215\030\344\264r\273\322\tQ\311P&\311P}X\031\356@M\211\003%q\277~\251\031Y\022'\037\242,\260\362\364\347\\\324hx\333>\222\210!Fl\314\310T\370\016\216)\263$\324j\325\342D\0171\324P\231\006Z\032\025\225\327\273\262h$\304*\266\273H\010A\021\n\312\353*\200\020,\022%\204 @\201\t\023{\336<\200\017\034\272`bc\2022A(\276\370\310\240\311sE_\306\272GK(q\241UO\327\rF1\"e\373%\322\205W\212\252\242\324QD\000\323f+bdmG\010\017\013n\317rQ2T:\206B`\365AVj\342Sh\220\035\n\353\256\333M\232h\276j\217Xzz\222\322\327\005u\326\221\263QE\330k\352\306\252\252Kr\025UWq\254\343\270\333\350\275\307k\021\223P\006(b&\343 2\r\273\014\266\372F\t\245v\252\253/\245XU\272o\242\344\013\202E\301\374\340\220B\004!y;\267U~\343qZRSo\365\272D\211%\264\007\250F1\217\250\347:\233\344\367\327>\352\255\036\214/C&\324\347\347\232Iv\214\036\227k*X\330\3328\345o\240\206)A@\201J\350\005\200g\376\210\237%K\035\202A\336DE\203O\022bm\241&V\\\022\262\342|\266\200\315\007\254\036\204\335\334\370\354\225\245\327\331\251\347l\027\311\254\022\370\004\324r\244U,s\020VT,\034\311\331!\221\002\232J\\!C\330e.\244O\014\352e\024f\204\242\250F\262J\253CIE\347\350\346\346\300u|\313\361\250D\014\017\356\010\267\226\266q\247<\347\0022a\316e\376R\372H!\240\323l9>?\323\251\336\305\340;O-q\364\353@\022\361\312W\313\242\2209\341\232\236\302A\314\342\227\226\262\006}\2172e5\245i\271\331o8\316g\023\221\004\032\310\343)\033\337\326\371!>\210\214\3341\000T\007\250A\352\006-,\232\351""\006\234\303\"'\207\235\203\263\221V^\251\315\004\274,\363\317\365V\236\337\247\223\262\032\372\344`\005\226\234;\321\224\273\n[f!QL\263ywE\267 \361\243\240\244skW\253\006w\2614B\221E\025\036\t\321\312\233\203\207G7{\207Gwv\026*\250[\264\025Q\0310glD\033W\r\030\224\225UU^\377%\360\367=\356j\300\347\334T\240\361}\225\033\273\351\274\337\277~\335\265v\337\227\206\204\031gmi\252&\0102@J*\245\366L\255\003,\341u\023{m\266\331\231\232\217\203Ndds\006b\322\035\310&:3\271\340p\256\204\272\373\266HF{\002H]+\217\260\"\002\212*\251\013\322\352-\243\216\262\371\242\305<\023,\253\020z\322\223\216,u8b\341\327\r\014c\006\323\032L*\"\"\030\026.\"6\206\276\226\236].\333c'\020\0338\"\331D\033\274\262\366\255\317\006*\370I\021]\246\026\340c\3235w\233\255{\367\t\222\010}nc^\345.]~&e\024\324\224kZu\366\"'f8\343\226(r\210\253Z\214*\326\310#\234v\224\321fZ\360\237:\036W\200\351\342\214\005\335~3\252g\"\332a\210\227<\265,\201\357A\354J\330.P.*\223?x\202o\345Y\224d\336\200\216d\317\223.\356\254;2\332\233\214b\307h7g\0347\230\267M\266\3306\201\260c\023Lc\004\336\241=\243=MA0{\337^\235\366\366\250R\3164\224\226j\202'\256\250\252!B\21182\264\311\262j\325\036@\325;\220G\254\325\022\356A\251\001\365=vo8F(\211)\255\233\374Q\246\3510\310\2033*\261Y\251Sf\312\373\237\031\314F\226\313V\025K\033\024\030Yo\221\214\215\267\243\026:\226\337T\220\361\204&C\331\246\314\234\331\270\305\010n\203\215>V\205\252\341j\241S\224\331z|+t\250\341\024\222H\210\364\202\035\364U+F\320\332V\254S#D\264\207\177\2662JA3\315x\351\225\333\260\302\345\246\26255\310<h;x\347KV\277\"\226u\3653\370\336\313Q\031\254%b\341\024\006\273\2177U\021\343\307\333\344g\343\262Y\320\236\224E \332&\022\210h\314\234\027\216\211\274\037\0048\273? \303#\305.\036\340\312\370\010c\0061\241\261\211\203\006\206\232\254\010\351\300z\356\3448\365\233D\320uv=\3531\336\004b\353AA\005T\207y\350\341\301[\"!\005LLD\313\327\354\215\370\265X\2608\261AU\367A\360\213\242\r\037gE\0202u\310\007\277U\021]\214\332\222\031s\363\251ok\035+z\252\273h\032-Xh&\0010""\311\n\2343s.\007\345gh\243\r\033\tp\311<\310!<\2279\213\270O\r3u\247\250o\266\227h\341Bc\210I6\021\253\004\026\2026\266\210\246\367\222\367w6\032\006$\202-u\2131\r\325M\225\343\005\034\335\031\242\330N\213)&\260\355A,hY\241m\024\332\255\343\240\345\206\242\262\201\004jm\261\366MBj\273\332P\034\"*\342\212\374\005\205\350'\034F\326B\330\263k\213]\033A\263\304Zzr9yj\353\310\353\001\306\337\"/\206k\213\201<\241\274\030!\245I\226j\254Vg\236\264\315\3348\310*\302\231\370P\236\360\336g|\211\210\274\027\267mZ\212JNP\3508uk\350\\Z\305@\331|\036\313\026\215\230\031\036%8S'8\327=\320\210G\315\351\004|I\252\006Xa\277\267R\016\016\201\330\005\034\317\343\022\213\270\205\005\363\3213\376\305\317\262\355\007:nI/lR\245,\245\013\013\211\306\225P\257\331\315\252\235\376\013.\272.\367D\263\037(tX\265\324 Y\303\022!t\232\316\346\312$l[\3248\333\014z\3753\033\006\304CYV\201\016y\032\036\234H\207!\000pz\032\317n\227/\332\211\021;\231ViE~\266(o\305\362E\325C?b\240\352\307-\2270\347#\250\034\235\201H\307$\352G\320B\220\256 M\223?\235MZ\231\017\213\256s\010GI\024\020\035`a\010>\027i f\257\237\002>c\344\257\274\2521C\031\306\203\255\254>\337\360\376\220\306\355A%{6\373\272\340\321\312d%\361\362!&\246`\3569\335\210^\000;\376\227\232;\242v\t\265\003\030rHe\020\023J\223~-2aC`\"\310;\3729QP\352D^\201)\260c\304\212\016g\0360\234\035A\035I\335\220^\367\363Nsm\202\250Q\021`\014\250\254i9R\025\341\306y)t\241\025)\005\006Cj\r\341\307\330\246\204\025\026\210\006\223\302\265\210S\372QWYjf\n\3101\264\331\350&\311\350y\337\373\321\327\341\006\216\300(@\341\302\006~C\301\236\352\206\207?\211\030-T}WtMB0\320h\2542=\210:\366\211\353C\353\013\317\221Qs\330\320\200X4\352I\375AjfQ\224\031\332\266+,\006H\321\301*\243\\\325h\265f\340q1\033\032\242&7e\244U\376\201\252]\245\260E\262\243\222zk\rb\253\236t+\000p\3357\374\277\254\345\345\235\250D\351R\320\\^\235\034\256U\305\215.\305\201\3548\275\310g\030\276P\2347\003\250\374\244E\212\226\346\010k6`\363\206s\244K\232r\215kT\264kffe\305bSRr\024\304\307\203-\024SS""\033\207\223\024\270\036l\004\320x3\252\254\332wo\232\254\306\231\205\254A\326\367\337,\243\321\201\235\242\251o\301\244\327\245%&\376\030\377\003f\362_L\006\025q\346\t.\315\223\006\0367s\022\256\332\375\377\315\260\2726u\373\372\352s\246&\273\200\322\225:K!'\023\034\270\024\211p\222\357E\330\341\227-\013\370^\274|\371\274\273v\356Is.\325\266{M&\316e\224\326\374\202\311\242jxnkHI\224F\325\301VL\231e\274\333p\371\254\226vm;\266e\222\245\264\265x\354\346e\346\301\377\336\017\306\333\354{\374\360G\336\r\003t \027\243\260\352)\215\032]\234`\013F\307\003\312\330S\001\r\316v\262^\257|\354\315\257\025\261,\227\271\217\013M{\334\372\222\207PF\357P\313\270h\032\235 \3710t\352\034\355^\216\255]\207x5\235\275\325\246\026H\253\215\tr\263\304T\221\311\355\211\263\235 \216\346\205\311+\253`\203\302<}\rPM\227\252\300\325\231\313\206u\201\375\t\237\302\310\216\036\244[\307\356\346\323r\313\353\205\006\027\267u\320K\274\033k\004\301\242QdU\320\022\310\202a@\355t\303\246\330YUQ\005N\312b\372\205W\205\221p*\006\027\205\0070\203\002\006X\240n\325\203\232\264\337(\275\227\266\324\262\257\231\275\227Z\007h\246\250\242m5wB/x!\332\354'(\224a\231\352D\t\016\030c\332\036|\026\244.\177\005\261\266\313\207\"\342\350\33308\023\2008\207\370\273\222)\302\204\201\356)\310\030";
-    PyObject *data = __Pyx_DecompressString(cstring, 3325, 2);
+    #elif (CYTHON_COMPRESS_STRINGS) == 2 /* compression: bz2 (3478 bytes) */
+const char* const cstring = "BZh91AY&SY%\253\006\004\000\002^\177\377\377\377\377\377\377\377\377\375\377\377\377\377\377\377\377\377\300@@@@@@@@@@@@\000@\000`\r\337v\356\362Pz3f\354\355\223Vn\250JB\314\323M&a\334\003\300\240\004\036\022\204E\022\003\324\000\036\030&\224\3750h\025?\032\002)\372\240\362\236e5\036\243\310\231\246\246O\"h\332\203\324\321\3516\241\264ji\220\022\232\210\t\352i\244\364\304\236\223\321\242\006\210\320OSL\211\3516\232LF\021\200\000\t\350\0204\000\311\202\003\023j\006\220\302&\223P\3224\036\240\006\203\324\0002\006\200\000\000\003@\000\0004\320\000\r\243\322\200H\204D\215M2bdd\243\312y\224\323&\023)\372d5!\350\214\000\310\324\014\2064i\223M#\t\241\204<\201=5\004\032b`\023\000L\021\246\230\000\023\000&\206\206&\000\000\000\001\030F\001\032bd0\004\222\000A\032\2023Jh\r='\246Dz\236\240\014\236\240\000\000\000hz\200\000\0004\000=@\323\240\220\025F\323gk`\347\016d\341\311\224\200\351\331\010\365Y\201\221\317\374\270N\034\201p\014\222(\020\006C*\273\254\257\254\010\222E\344\256\001@@ f\256s32\033\033'\217\036N\217\315\322\351\277w\352:\333\333\373\375\177\263\203\207\262\307\343\333\356\362\363s\310M\014\331\t&G\027vD\203\3343\363\364\341\206\006\2558a\206\032[\0145a\206\030a\262\332\365\232\360\303\200\341\375sM\335f\033\377\002\014X\230-e\307\270\273\222\211\242b\234:\321@P\003\221\022\205\335\200\224\244\022W\024B\272Y[`66\r\214`\230\233l\033LLm\264\301\264\306\333m\211\241\215\r1\260\272\272\311\232\007,\346\024d\270U\036\361/\261\307\255\210TT\014\306\030\244\300\2310\231\222]\003\233$\00142K\023M\306zNf\374P\3104\246\354\245.j;x\323}\331\256\240\210\220\023\000\267\240P\320\320\014)dTXCm\203}L\340V\336j\233\327\255\246\374\325\025\230\356Dk\240\324J\211M\010\241\220]\"\017t.\232\234\207\"\021\204Z\000\327\227!\351\364\254U\202\343T-2s2B& \210\225R\221\202\3000\207t\035\352&\362D\236\201\342\231\005@\314\224\301\224\202D\202S..\005\233\241R\300Z\321\010\274}\254Z\360\324`\250xAs\004\244\027\202\274\322\267\214\023!\246\016:?\317\207\201\347?\344\357>3\226\\\r\356X\247""\r\337\213\336\374\233\2255\317G\n\354/\250\360\276\233\343J\222\315U\255\345\353F\2120\230J\3760\310\204\253\270+\246t\337\333\267\247\332\351\267\036\267 \003\221\312\333\244\301m$m\005U\254\372\331\014\022\t\260\231\304#\007\211\210\216\r\236@L\252\211\316\200V\n\326\331&\213!_\316\273\004X\266\350Z\265\345P(S\213\2512weAP)~n\276\245i\270\363\200\036\3439\035L\357\036\217\337\314\2523\273\372\225\331\342qx|\262v'f\212\252\250\252m\221\307\231d\301R@\323\t\210`\333Vu\021\275\324\335\276\272:\001\301\320\3025\246\215D\"\311\032\340P\001\ts\346F\002\275B\275D\321D\252\240\344B%\232\224\364(\204)\245~>\306\240F\206+\342,\254Y]D\016\031\3308*\025\n\252D\212\"\224E\031\357F$b\367\231ru\207V%\341\272\033\272\262m\353o\203\302\024\035\357\363\016\r\342\362Ul\261q)J\r\004i]ii\307\360E\361\204\261\014\032X\223\221\241\314\002,\014\014g\347\243f\264\221\353\204\344\323\300\247\021\210J\177tX\253\354h\341W'$\350\373\367\270\327\331(\364S]\316s\221t\">ZA\237Yde\226\360#\263}(\265E\253\240\320\257/\277`\334\252\025D]\215\370\221H\212H\274\276\362\350\201\023\001H\301\021\211 @\214\316\222\"\003\023\233\273\262\0000X?\335k.02\316\300y<\224\251\235*\302&u\274\311\1775}\362\336L\342\362\020\212\310\3537w\245%7~\231\271\006\266\241$\205\214\232\221\003\215\243\210\330\256)\260\236 \200c\237\242\311R\252t}\034\212\25032\031\252\317&\325i\021\037\033\357\274\307\023\213\243Cs\030\203G\321\311bb\364_}\344\260\310\241\230\315W-p\204\033%\202I-\005E\372\014\375\270\236u\034I+\246\002\266+`\320X\301`g\264\317\353T\327B\204\223\227\255\000\3053\355\266zX)\t\212X\237\374\310\3221 \253z-Z\315\331\261be!*\277u111X\210\030\241UTb\302\020\242\361\214\343\326c;=\3071\353\327\220\366}\235\302\027\263`\201_\276\366z\022\022c\256E\261\303\220\317c\2028+\3208CE\255f\333\254\234qd<\034\244\303\236\n\223]\234\032\207<+\237\003\351L\023\320\3320E_\326BZ\323\304\315\375\341\245\003\225\026\323\274\026x\205X{)2\301\356\"\316d`=\313m\344\307\244\026\261g\210\244\0349\214\326\003\227k9\206\034\350\316L""\304\230\332T\2213\245B\340\342\373j\035\r\213\320\224\030\250\373XdRP\354\362b\317\236x\313\341\004\314?\267\017xH\325#$o\265\272\375\254\331\354g\201:\273oK\366\345\004,\362Y\226\372\301\207<4\315\361\203\035\255E\004\023\002~'\231\2545\311\003\251\340.u\322:C9\022\203\210\2162\271\271\261\340.)\305\026\302\006P,Br2\326\245cSG\214\014]\254\261\340\035\035\3671\311zSv\315q\266P\243\360\037\024.\355p\337\320\2176\331J\300\243!\253d\222\313\3201:\332\302\006)s\304S\301\222\226\"\035%\302$\335\343\377\261eO\255\317\216vc\020\204&\210\033\r-\2405pk\330j\340\334\202H1\330\t39\267\034\372\331\207S]\371\336M2I%\024]X\243\355\341\252\2005\334A\004B\3335\334\r\240\321\243Ctz9\274\234\375>U$\0333\241i\252&\0104\340%\025R\364\231[\343fq\275\023\203m\266\333m\3434\360\300\265\315\321\2634\255\240L\355\341\226@\337\345\256\026\017/)\024r\352fh\351\226\223\340\030a\010I\021\345jf\3116\025\031ge$\210\343\234\2437H)\346\254\313\346ojq\311\310\245\310\030\323\030\301\264\306\223\025DDC\002\305\310\215\341\334\326\343l\353q\177\r.H6q\305\231\020k\354\313\316nx\361X@\205\021j\232=\264\360\235\035:<\031s\265\2031\334\326U\241\024\252\273\3079$+\352i\363(fn\2033t,\262\332\330\324\002PC\204\2409\206{\316\211>=V\346\256}\366:\334\207\016\306p\024\233z\347\034\346\225I\232\261\251\210\310\324F~!\342\"y.I\025\221\224\220\225\321^0\333\332\224\344\326;\262\003\334\327\326u9%\316G\266\325\220l\221\270\324s\205\363\334\222I\203i\r\215\203\030\232c\030.\013\014\315\371\0336\203@3\002\325\0145\346\355\344Y\3175\2476\253 \017\205\2230\2120\253\0273\252U\313,\245\260\031W2J\rVK6\300\353\001\013\240\320\342h8\323\232J5l4n\312\331\246\341\311\016s\222q\214\334Mm\270\372\221I<\343:[r(\341%H\230CYD\205Dp\241\214\265NA\024N0\316\020\303&\036\224\2513\226\236\"b.pq\243\223r\r\214\\4,y\217O\372o\363u1\211\032\014n!I)\005q\223fU\034\003P\312\340\305)sd#\341\350\311)\330\022 \ru\313^\213V]\352\353\312\261PI\007eb!\327\222D\341\357\226\254\335\\N~X:-t\271@\222u\034\255B\256F\007S\257f\331\244\327\267\253""\315\323\332\220r\320\236\224E \333&\022\210jL\237\206\211\270\036\2063\352\214\032\2557\247,\346\325\310\302d$!\010d\2042\004\t\204\311(\311.\324D\264^a\310Z5\303\361\321\024Jq\374\254\342\234\200\206a \217dL\361\341\216\022E\232\337\232\"\322\340\035\336N\032\032q\227N\002L\346\r\326}\252\327\233\323No\312\232i\013_\224`\361\322\031>\311\335\002;w\367\327*H\313\314\343\211n$\237p\033\313\035u2f\031$\206\032m\007=\264\276\324\353\030\246eI\214L\317+\030g\222uY~C\307c_c\204q2\337G\032\023\007\020$\332Q\253\004\026\2023\255\021M\360\245\353\335\261o\214\200\210\265\354Y\210n\252l\260\030(\352\350\315\026\306tY\004\032A\266\205\203\243\206\271\215-\213;\261\241\306\216E\345\004'[\034!\205YU\206f\330q8\016\021\025yE\206%\214\020N9\315\2552\350\263q\304q\321\264\032\032\353\243l\323\361f8\200ygNH\243\265T\360n\260\356=\3063\301\263Z\223\214e\266\356\005\257\342\346\325\204\341E\230\341\314\3047\206\346n\315R\223\200\265\256k\241\230\304b0\016#_%\\I\253u\t\203w,q9\303\244|\224f3Y\273\272\356y\334k\242\017\212\"\307_\034\201'\201\306\r\024\204\351\203v\333t\323\2328\214\306\220\333|\265\367]\235\324|\036ws\225\355\371\277\263\273&\230\236\363LG\307Q\205AI\322\214\031\356\201\272\334\336bp\t\0109wsx5z\371\001\026\030\307\003\331b\355\020$\262\215$B\366\332\314\364\345\0226.\032\034h6\307\324;]\203=\211\261\020\306\370\341\242C\235\275\037\331\022KI\270\200\2009\037\273\310z\211y]\230\221\023\301\225f\224W\335eKc\317K\266\206}\345A\333\217%\227`\372\310\367Cs\360\024\214rN\314@{d\204\005r\202l\231\341\331\361\252d?\234\177\263\315R\217\344\213\004\007\320\014!\007\302\355$\014\361\275X\021\362\037\025w\213\026\262\311\014g6\017\243t|\316\357\314\2067j\t+\307\267\325\376A\243\244\310K\341\332\204\232\231\203\233\326\372\371\376\005K\363\204FO\231\355\306\3216\035\244*\010\014\010j\312\003k\236\266\275\310\332]\004w\202\322J\034\346af\017\271a\276\311\371N\361\321\333L$\334;\341\322\007(\211m\231\005\375|W,\266P]|p\n\360eE\270\343Y\343\210E/X\264s\227\034\221\242\245\300Pd<""\217o\336\327r\354h(,o\rg>\372\300\020\\\343\216\357\334\267Y\202\360\3669\032\372\t\316t<\274\332\233\232\241\251\312\n\017O\201\343\313\370\016F\276\252\206\036\306(\036\267.}1j\030\310\037\205\240W\340t/\034\315\370\026\357\027\2257B\243\360*.\0060\274!6/\244~\210\270F\300\256Q\224\031\355y\214\006P>\344\342\365\315\303#@\327\314\301\302Z9r\010\221\271\226\362*\370\301\257\257\371\205\240\312\025\262\341\216\355\360\332/R\362!|\002CV?\363\376\3753\234\372q\272\226\353s\033yz}~\277)\333v`\2717\226\337\313]\375\302\3160\2143\007(\350\320h\007\271U\3142\212\266,\006AH\334\"l\226\310\334\312\205\2625'\330EQ\024\307l{\3135f\242\212.;,\034\326\"\250\352\265\312\317v\314\016z\253\332\276\305:\206Fc`\260\320\275\313S\251\366\326\035YY\236\251C\275\362\264UJ\245s\300\303\277\320\244\224\322\241Y\\:\250P\243V\374U~O\311\254e\305\255S\215\253\271\032(\264\r\3067\353%j5Mz\211\302\264\n\030\254\356\225*\254%\"\237\251\300\3461\032s\305\372\342\210\333\323\352\375\024\251S\212\234\351\364\231GQq\027\206zm\366\202y\252mw\266\351\024\241 \"\206\205!E\247\203H\243:\213\347\023\274:nsiN.\213\246\267\177\211\323tt\236\357\372\\\306\221jV\2611\336W\021\2542\343\2324\337\332T\2746\270\245h\366\002l\224\226K\355\355\314\264\345\321\224Y&L\223\331\304\3268$J\223^OZNv\206\326)8\263\223{?\314!\177\020\205N#\331\246z\251\237\250\035\317C\265\320\017X\351^\231\2750\363[\322,\206\213rk\345\226\364\027\243\272\273O\364\327\246\235t\237\315\207\177_\205\013\276\"\312{\036\276\341\2015\370N\251\3243}\337\007\0313\336\322\316\325\315\343!\266\271\2244\321\313\361\"\336\206\344\332o\254\317\024(1\234!\336aK\300\033b\262x\242\221tZ\320\022\310\203\226\352T\016\370L:m\205\325U\020T\376\271\214j\025`\026E\301P0\300(1 \304\201\226(\033\265b\346\271\316\323X\3221e\233a,\254&n\313\332\rX\275\250,Q7\232\303\311\300\234\304;_\034/c\0266J\271E\310\030\316\301'sx\215\006\233B:\317\303\226W\335\200\344`\260\215\363!<\010<\377\305\334\221N\024$\tj\301\201\000";
+    PyObject *data = __Pyx_DecompressString(cstring, 3478, 2);
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #elif (CYTHON_COMPRESS_STRINGS) != 0 /* compression: zlib (3274 bytes) */
-const char* const cstring = "x\332\335W\317\177\323F\026\307\"\204\004\2224&\016\t\005Z\031RB[J\327!\005J\371\264k\342\006\350\002\305\211C\370-di\354\210\330\222,\311I\334\355ns\364QG\035u\324QG\035u\364QG\037\363'\360'\354{#\313\226cC\331\036\366\260\371\304\232\321\233y3\357\347\367=\261,\313\346\352UU\222\313\254\241\361\262.\351\206\242\r!\351\254$\263\002\251T\330G\212L\036)\006a\215-\336`W\032\306\226\"\263\222\316\212\244\"\025\211\306\033\244\322`uC\223\004\203h\270If\037\377\374\370\233\345\233\313,/\213\254F\336\022\301\320Y\275^\024*\274\256\023\235UJl\261.U\014\270\301h\250D\277\312\336/\261\r\245\316\312\204\210\254\241\260*\354\2133\030[Dfub\340\204]\344eY1xCRd\016\330A\354EV\2244\270D\332!\310\275\312Wtr\225=q\3736\313\376\370\343\t\226\375\211\027E\016xHQ\331\013u\202%a\213\010\333*/\311\006n\022%\235/V\010\221\361\t\253\004$\007r\251\302\027I\205\035/\203\226\267X\026\007\375\026[\026$=\334)\262\341\006\340\240\023\235^X\341\033`\211*_\326\005\276B\330\014\273tBU4\203E\031\331q]\251k\002\371V\324\340n83|\205SuM\370\366!_\316\361\006_\344A\001\265\261w\033\315*\227\303-?\032D\330b\r\251Jt\203\257\252\241\257J\212V\245F\274\305\326u\302\342CgW@E\374]\3458\215\210u\201p\002\365\032\307u\250`J8\3038D\007+=@%\242\2275\0207\232o\350\204NE\010\224\356\204\213\205\313P\"\267+\031[\\WP\272\247$\311\342\000c\231\030w\3009\321\374\261$w\351\303\366\376\331\035\240\037\325\3441X=\"\024\300z\321\034\264)\3641\354j\222A\300\370\253R\205PN\372\000KI\262dp\\\364\246\021U\213\336\004\"\033\232\"\205&\303C\361\262\230\377\342\256\034\360C\377\342\200;\342\313\221W\n\nJzh\005]4\270 h\004N;LE\347\034~\307=\205\236-\343\313\350\247\354\007W?\300\014>:|}\207\204\256\035B~\3179zg\025|7\204\274\321o\345\036\265\353\334C\313\335\240\340\270\307\215=\370\345\000\264\270Gd\317X#%\264%\376\006\275\325\241\016\270\211\322\371b\335\320\351,\212\010\372\202\326\245\023e\207h\025^\325\2732u'W\207\220\006\356\216/\r\010\320[4\224\207<`\305^\214\022\3158U\001\220\353\031\2707{\317m\321\332\360\353\302U\232""\351\375\231\027[\355\335\315\363\324>Q\020\367\007s'\200\373\3428\304\032\216\353\200<\316T\025\320\230\3274\276\301\353\rY\220\224\253\202\242)u(\037D\347\212EN\020\020\323\361\007\351\252\033t\"\363U\302\001z\342\213\0369F\330\222*\242F@\023ZX8\210=H\373*\276\302Y\300\214\312\010\244\310\013\333\275\024\342DQ,r\234\210\221\022\016\235b\243\310:\274+\002<\300\030C\262\3510\032\376\t:\0161)G@\177\020\236h8\324\253\264\332\302t\017A\211+\225\006stH^\036\006\334\022\332\246\244\310pD\251.\203\370\345\016\372vR1\226\250\203\311\331\001\347C\030\374aH\346\320\320a$q\320\035\210\025\"E\300\212\376\302_\350/I\347\272\236E\307\350\333\020\017E\\\242\025\025\n\252$\234\340\270*\024N|\032\325z\005Fb\360\241;\341\257\252\210\365\n\\C\217\213\236\202,J\245\022}p\341\234\323\350\000\272\313d7|`\240\310UE\307_e\307\220UY\223u\262\013FW\033\n\004`'\215\271\275h\322\210\022[U\005\025OS\303\013\302A\243\203\240\302i\252Ri\340\017\226\360\251\341S\000\363\253\212\212]\201\n;T,+*T\027^#8\221\3209P\3779\332\244\350\365j\370\246\021\275^\351\254t\354\211S,\377\341\254.\253\222\260\r\006\240\201\333O\212A\341\241\025L\276C\244B\317w\203t\352d\216\253\325\371JhaM[\352\"\t7\200)]\002\331\013_PYM\325E\235TJ1\200\357\301\367\020 \217\203w\247\326vj\372\241rNa\253\343y\230\211\244\304S\233u\301\214\033\002l\235\025\300\013\2163\260\315\202\001\272,xB\267\025A\253\241\324aaK\321\244\337\300{|%|\207 0$h\363\272\321~\010w\r\243^WE8\036:3\370\357\336\275\263\303W\352D\337\245\235G\274\375\340\366\212\212\201?\016nT\361\3075\340\r\177\\\003\336\360\267\237h\217\\\260\323\366u'\271\237}w\371\310\370D3\323\\5/\2309k\324\022\354\244}\311a\234\005\207oO\314\230\231\203\261\223\037X}7zd|\272Y\333\317\036\214\235\265\226\255\035{\335I8\247\035\335]pK\336\212W\363\023\355\261yk\304\272kg\354\273\316u7\345nzY/\217l\237Z)\353\211}\315\346\355\035g\335\035qW\275\213^\336\343\207\356?\030\233\016\246\323v\312~\001\033\177\365\227}\270\361\335\330\221\361\311f\266\271\326\374\315JZ_\333\005\270\327pA\336""\311f\276=6\321\374\331L\231\371\366\304T\223o\326\314D\220L\333\247Pc'\355d\234{\301\362z\260^\010\nO\203\247\317\202g\317\203\347\245\240\244\006j-\250ip\2279f\035\265n\333p\t\034\024L\\q\262N\301=\343\245\275k\236\340\317\370+\276\336J\243\312Is\306\314\232\005+\031\3367g1\326e0\317\244\373\302\237l\201\320\237\240e\336MQ9\321\2167\314\213t\367D\022d\333\264\262\026\010z\262y\313\\\007\215\2631*\356]j\256\233\211\366\304\264y\314\314\203\252\311O\255\344\301t\312\\\265\026\254\262\235\267\371vj\316\324\254\323V\315N\264\347?\013i\357N\034I\316\306\267\314[\307\254\r\360\3645[@\315\333\363g\255\353\340\301\013\366*\232\241}\356\202\275\210t\344\033<\177\036\374\315#\313\222\365\014\274T\353no\237;\217\022\235\265\322\357\227\350sk\027y\300\321\177*\321\rx]\262\237\200[\262\355s\027\355\033(\332\360\363\007%\352l\007\211p\353/\026\1770\2354\317\204\214?\203\245S\263\346\023zA\306\276\357\344c\324\327!\243s\337\245\324\007\366q\273\346$\372\234\204\246/Xsv\302N~\264\003F\377g\0168\361\177\351\000H\227\023\235t\351f0\3443\346p0\315\332\014dW\202\346\360M\367\246\227\361\262a\262\216X\367\355\227nr\237r\345Lp\343xs\336L\342\333\252\2316oZ\231hi\324\344\315zp\356\033'\337\335l\2366w\000\210(\320]\207\034\246\2518m\0367k\326\270M\317\270kf\300\010\213\340\267\364~\\0\300\244\005;k\347)Lt\211\346xp\346KjZH\350\244\371U\230\320(\311\202\311\017\254\007\247:G\304\317\245bj\326\254\305GG'\221\331\374\303\226\234\232{\324\275\346\n\336\014\302k\304\2264\027\301\357;\340\303\353\356,E^\335\277\350\257\267\022\221\370\377\260:{\321\036\337Yc\030\3241B0\177\031\354z\326]qu@\341u\377\250\2379\274}\316\031uJ\000\322\351\336\302\217\366\031\360\304\r\367\2227\352\225\374\325\326\027\255\235`\003\020\365E\360\342u\360\232\017\370b|\357y\207w\032\260\223\017\211(\325=\353\036(\017\201\027\252y\317\314v'8<\262:\227\375\002\206\243\203h\245!\177NC\305\310\267\343\364\330\3625\250Q3vvp9~\032\006\310\0314\351\301p\307M6\237\2307\340\260\314{\0347\331|\035\006u\204\361P\213\246\232\371`*"",\0254jV\232u\363\276\225\267D;\362\364\"F80\007\223i\214\245\203x\221*A!\311\203\213\367\202\317\177\202\2629\342g\375\274_\t\326^\006/_\005\257^\243]0\017\004pu:z)\003\007\250\034\013>\014\270/\255L\030\301]\364jCJ\316\366\351\212\373.G\372\241\2409\3538\204O\374\004\264\325$\024\327]\020\312\260\276\267sP\365/\271\t7\351\246\335\214\233\363\022^\322[\360xL@\006\374\273\014\361\232\014-\334\317\225p\316\270i4S\303JX\247\340\344;\026o\031\2007y\273\010\213)g\rB\232\201C\227]\r\216\274\000\345\276\340\237\3623\376\035\237\367\215\326R+\337*\006\217\363A~\r\316\236L\322P\237\207\274\244>\312\230\331hr\027\216\316\331\t\300\273\311\251\376\225\007`\003\210\010h\020f\035>\3067m\216@\004bv\306\216\310Z\233\230\217v\331\311C\274\356\272\274[\363\022\270\367(\344\001\366%\320B\240=O\003<\034\003\357\362}@\227\241\215K\326\336\2040\310;e7\017\374\273\036\217}\020\2361F\301\245\303=J\355\220\261\177\201{\240oq\273\013\023p\300:5\315\206{\321]sk\361\205\002\004\340\025W\204^d\031N\235h\345\250m6\202\215'\301\223bP\2046\246\034\224\267\203\355JP\331\013\366~\017~\377\327\273#G\376\235\270\303\300p\207Y\301a\205\371\025\207_\231u\034\326\231\002\016\005\346)\016O\231g8<c\010\016\204)1m\320\357\216\271\325\021\366\236s\317\315\272\371\270\016\265\020\271\2359\032\034\213\340\303\264\227\3513\363\020\323\215c\002\3307\261\344@\000\204ff\274E?\351\247\375%\177\263\225\r\335\276\031l\206\035\032\027po\2027\000)[\301\226\024Ho\203\267\325\240j\004F=\250\357\004;\r\220\365\267D\026E\3162\375\252\256\342\260\312<\304\341!\363\010\207G\221\376k8\254E\032?\307\3419\363\002\207\027\314K&\022\3658\326S\200?Zw\272z\355\323\322\223\200tz\002\305\260\000\353G\235e\360\343u\357\024xf\327\027Z\210\257\307\247\232\242y\t\002\177\226V\320\267n\002\371\0002\332\375\217\2014\244m_{z\206V\236\013\0204\251\2634\255\377\022\245\017\344\2300\361!\320\237\332O1\310\333\023 \000T\234\242\225hO\317\201\302\211\277FA\275\014z\363%{\324\246\225\353\223\246F+W\030=\313\020&#\316*MuL\n\303\377\256\225h\245Z""\233A\001\342\027\234\034z\230\004\244\0241\243\375\023\200+\013\200\242\013\266\010\237\035\204\202\317\210\227\003\210\314\265\216A\230\010A\036\032\371\215\220\3050\227\314g\026\037Z\3310\257G\230\024\275\\u\3060L\373\326\017\260\307?\217\271\034v\037\323\275\005\330\023\314\\\304\224\356\034\037\314,Q\371\033~\242\363!p\261\265\016)\270\237\200\022pl\252Y0\223\355\221\250c\270\002-\323\310\361\375\235\346& D\n\233\375S&\2405X\353\000\036\006T\020\350\346p\007\006A\360\311\025'\007\262\315y'\375\033-\274;N\311\364.\230\243\271\264l\357:\242\233\376\330\313j\275k\276\240\030\262\350\236\365\356\372\231\203~J\266w\315\274\225\n\316\177\203\305\354\277Sh\326\021\340\253\215\363\357\266\276\013\036\303G\026\24404\003\350\324\236\010_C\252\324\334\343\356?\375\305V\362\240\237\222\356\211\220\202\002\226\202\334J\201|)\220$\345\026\274\344_\320\370+\374\\\005\220\331\366\347\260#\352\243${\327\235\2010\223l\003\032\232\005\267\014E\350\263\226\001\337\210\037\257\375M\350h\277\240\237\276[^\331\337\200\310(\004\371P}!\020\000\231\001\265\340\033s7\330\005X\376\003P\346\357L\016\301&\307\344q\310G\010\374\n\207W\314\033\034\3360\"\016\"\363\026\207\267L\r\207\032\2431\037\355\317\366\010\366,P\271qz\231~\235\327\366\023\007#\237[\265\200\375\233{\322\373\301\337\206\342\332\036\231\201\032\276G\277\035\340\350\337\261\375i\217]\202&\177\327\221\275l{\344d3\363\036\266\357i\027\227\217\261}\r\270\376\300\233\362\371\017\261\335\002\000\312\207&\355\260a\363\364\312\273\332J|\210\355\007k\213~y\364\330\240\231\007\021\037\265\322\035\266\366\0106Z\243\016\377\037z\002B\247";
-    PyObject *data = __Pyx_DecompressString(cstring, 3274, 1);
+    #elif (CYTHON_COMPRESS_STRINGS) != 0 /* compression: zlib (3423 bytes) */
+const char* const cstring = "x\332\335XK{\323f\026\306J\010\t$\020\203CB\201\251\014)\241-\245\343\020.\245<\3558I\303\245@qb\022\356\252,\313\211\210c\311\222\234\304\235v\312\322K-\265\324RK-\275\364\322K-\275\314O\340'\314{>Y\216\034\033zY\314b\362D\372\356\347;\327\367\034\231\347y~\261\262\245)\245u\336\324\305\222\241\030\246\252\367\2312x\245\304Kr\261\310?VK\362c\325\224ysC4\371\205\252\271\241\226x\305\340\363rQ\311\311\272h\312\305*o\230\272\"\231\262N\233J\374\223\037\236|5wk\216\027Ky^\227\337\312\222i\360F%'\025E\303\220\r^-\360\271\212R4q\203Y\325d\343*\177\277\300W\325\n_\222\345<o\252\274\206}\321\003\346\206\\\342\r\331\244\016?#\226J\252)\232\212Z\022p\034l\317\360yE\307%\312\266L\247\227\304\242!_\345\217\336\271\303\363\337}w\224\347\277\027\363y\001g\344\234\272\033\310\204%iC\22665Q)\231\264)\257\030b\256(\313%zcU\006\347\230.\024\305\234\\\344G\326!\345m\236\247\306\270\315\257K\212\021\354\314\363\301\006\234`\035\203]X\024\253\320\304\226\270nHbQ\346S\374\354QM\325M\236x\344G\014\265\242K\362\327y\035w\203f0\004UC\227\276~$\256/\212\246\230\023!\200V\335\275Cj-\255\007[\2763ei\2037\225-\3310\305--\260UA\325\267\230\022o\363\025C\346\351e\360\013\020\221\236\253\202\240\313\371\212$\013\022\263\232 \264g\241J\3200\017\314CK\017I\210p\260\014v\303\376SCf\335<\034\245\323\021\"\356\322wR\330Q\314\r\241\303(\333SPJ\371\236\203\353\2629\017\343\204\375'J\2513/\300\302}\t\321Z\037:\177t?d\237\237o_\205>\223\370\t\254\023Nd\241\345\260\017\251\263]\207wt\305\224a\244%\245(\263\223\354\005\215*%\305\024\204p\244\313\232\036\216$\271d\352\252\022\250\226\210\322e\301\240\303X\304\354Q\017\3501_\367b\217\025\243\313\2411\263*1~`\205,\333\273 \3512\250\035\234%\233\036\034\323\236\354\276\232\243\313d\336\364GW?r\030\346;x}{\212<\242\317\364\007\350\030\301*\331\271\3174Y\270\317\364\323n\345\357\317f\373\230\251\313u\004\341Iu\027\317\" Px,\357\232\313r\201TLO\257\021\333\263=\326c\363b\256b\032\254\027\372\r\033\220\322YG\335\226\365\242\250\031\035\236:\235\253}\246z\356\216.""\3650\260\277h\252\217D \317nd&\354\t\232\n\310\334\327\373~\357\003\267\205k\375\257\013V\031nt\307jdu\377nQd\372\t}\273\333\307\333~\335\345\336\001r\tB;ePO\323\200\355\242\256\213U\321\250\226$E\275*\251\272ZA2\222\r!\227\023$\2112\004=\010j\303d\235\222\270%\013\300b\032\030\241a\244\r\245\230\327eH\302\322\224\000\227\0048l\321\020\264p\230\204\221\344\234(mJ\252V\335\217.!\237\317\347\362\262\254\321\264 \344\311k\202\246\235\306T\000\236\220W%\274\240\230>\001w\020g\377\000w\373\250W\220\241\013\010\"\353\324T\266X\036Gw\227`L(\024z\303\270O\350\036\204\362\002\351\251\240\226@\242P)\201\375\3656\256\267\2435\022\313\275\361\333\206\375\017 \376\001`\3778\316\013d\213\300\331\004\224#\371\242\254\204\010M&\245'0\251b\010\035\343\223\355\214M\270L\016\377\264\312\2628\222\270\"\035\025\204-$kz\233[\225\"Z\331\024\003\243\343oK\315W\212\270\211Q\014\337R)\257\024\n\354%\004}Ag\r\264R\222w\202\027\271SiK5\350)n\233%\255\244\227\014y\007\346\320\252*\334\264\035\354\302n\330\251\206\341\257i\222F\324\264\340\202\240\321Y#i\240\246\251\305*=X\242\267No\t\206\321T\215*\021\r;4JQ\0322\225\250\313\324Q\310l\2509\004V\030\031\225\255`\244\313F\245\330^i\253\224\272Tr\004\275JIS\244M(\200\271v\367T\0040\017\254P\210\036\230\312\356\233\257w\236\331Y\020\312\025\261\030hX\327g;x#\364 OgB\336\r\006$\254\256\031yC.\026\332\025@$ID\022\303>\354\367I\000Q\320og\362v\305p\240X`p\327\366\005\364\362rAdZ\354\200\240\320\007\020\333+\300\031A0\251\330C\203Z\017o\324|!$\233j\005\013\033\252\256\374\002{\212\305`\014\2670\025\024\233\235\0208\200\327\246Y\251hy\220G}\210\377\316\335\333\333b\261\"\033;\254\256\211\0267\302nN5\351\021p\243F\217P\305\210\036\241\212\021=\357b\255\301\013N\322\271\341\306\337\245\337_>42ZK\325\226\254\013\326\242=dKN\334\271\344r\356\264+\266FOY\251\275\341c\037Y}?thd\274V~\227\336\033>k\317\331\333\316\212\033sO\273\2067\355\025\352\013\365r#\326\032\236\262\007\355\273N\312\271\353\336\360\022\336Z=]\317\320\261O\354\204\275\352\\sDg\333]\361\006""\275\245\372\305z\246.\366\335\2777<\356\217'\235\204\363\022\033\177j\3145p\343\373\341C#c\265tm\271\366\213\035\267\277t\262\270\327\364\300\357X-\323\032\036\255\375`%\254Lk\364xM\254\225\255\230\037O:'Ib7\351\246\334{\376\334\212\277\222\365\263\317\374g\317\375\347/\374\027\005\277\240\371Z\331/\353\270\313\032\266\007\354;\016.\001!\177\364\212\233v\263\336\231z\262~\255.5N5\026\032F3I\"\307\255SV\332\312\332\361\340\276I\233\263/C=c\336\313\306X\023L\237 \315\274?\316\370$=\336\264.\262\335\243q\360\266f\247m0z\254v\333Z\201\304\351\310,\355\235\255\255X\261\326\350\270u\330\312@\324\370'v|o<a-\331\323\366\272\223q\304Vb\322\322\355\323v\331\211\265\246\376\021\314\275?z(>\021\3352e\037\266\237\302\322\327\034\211$oM\235\265o\300\202\027\234%RC\353\334\005g\206\346\351\\/\375)\330[\244#\263\366sX\251\334\331\336:w\2368:k'?\314\321\247\366\016\235\201\241\377\220\243\233\030\316:\2530K\272u\356\242s\223X\353O\277\227\243\366vpD[\037\330\342\336x\334:\023\034\374\001\232NLX\253\354\202\224s\337\315Df\337\004\007\335\373\036\233}\350\034q\312n\254\313H\244\372\254=\351\304\234\370\2376\300\320\377\314\000G\377/\r\200\250:1\276\207hJ\357\355\2070\002\232\202\330\037\347\035\016\341\025cA|\313\277\366c3\325\\\364\237d\374\314\262\277\374\306\177\263\341o(\276\362vo\0301O\307\027j\025\200\326\021\240\022\210 \026\231=\317\020/\301\220\263\276\010\242\215\002\376\260\375\212\340\220\316\315\327\326\261\361\244}\313I\371\323s\336\274\227\257_\250\337\005\352\350M\026\351\037[\017(,Zp\245\221\332\224\025\247\321\222\225\264n\331\251pi\310\022\255\212\177\356+7\323\331l\235\266\266\001\206\014lo\000G\030\034\214[G\254\262=\3420\032w\255\024\0141\003\337I\276\213\352\006\2708\355\244\235\014\203\252\316\2445\342\237\371\234\231\027\240\022\017\305$N\246-\261g\335?\331&\021\245\313\330\324\355\t[\014I\307\351\260\365\273\243\270eo\300\273\346I\365S\004\361\341\261\2705\003\337\333\206\037\335\360&\030\372\033\215\213\215\225f,d\377G\273\275\227\364q\335\036\246\300\212L""\370S\227a\332\263\336\202g \023\2544\006\032\251\203\333'\335!\267\200D\221<\270p\0329d\325\213\354\377\3169\003\037\271\351]\252\017\325\013\215\245\346g\315m\377)\300\376\245\377\022\216\"\372b.\272\367\274+\272U\354\024\203Ib\366\236}\017:AL\004\322\337\263\322\235\0165\217\355d8^\264cm\271\333\367?\200\212Y\223\267\223\210v\342-\323\212\316G\226\257!\243\236r\322\275\313\354\20265r\2453\244\374\275\376&\036\253\255Z7A,\365\001\023\217\325\336\004!\030f$d\316\343\265\214\177<Hl\3610V\356\333\031;\357\204>1C\361\210\303\376X\222\274n/\232R\013H{\0318\303\256\377\351\367H\362\203\215t#\323(\372\313\257\374W\257\375\327oH5\024\264\022\234\"\031\016\326q\002\"G\334\224\\\363s;\025\370z\007k[\000\220\211.Yi\337\345P\276\256\240\356P ]\215\241\024\330\001S\246\375\215\263\210\032\345\222\027\363\342^\322Ky\213\365X=^\237\256\213\024\352\034L>\007\317\216\007\032\356>\025s\317xIRS\025V=\t\312\363\266h\233@\307\214\223\303b\302]\206\363s :\347\351 y\001\305I\266q\262\221j\3147\304\206\331\234mf\232\271\000\221@{,\316\202b\n\021\314l\224\262\322a\347.H/:1\240\363\330\361\356\225\207\320\001<\002\345\314\204+F\316\215[\203pJ\212\343\010\211\264\275F\221\353\254\273\031\270\360\216'z\345z\214\366\016 0\250\212B\301C\372<\r 9\014\353\212]\260\234beV\332Y\203\033d\334u/\203\363;u\221\2526\2421\314`\250}z\210\351!\345<\300=\250\262\274\316\302(\010\2540\325<\365.z\313^9\272\220\205\003^\001<&\353s\240:\332F\353\247\376\323U\1775\347\347Pt\255\373\353\233\376f\321/\356\372\273\277\372\277\376\366\376\320\241\377\304\34694\363\334\0025\013\334O\324\374\304\255P\263\302e\251\311r\317\250y\306=\247\3469'S#s\005\256\005\371\346\255\2156\263\367\334{^\332\313De(\007y\306\235d\3161\003\033&\353\251.5\367Q\335\010\005\200s\213\022$\034 P3W\237i\304\033\311\306lc\255\231\016\314\276\346\257\005\365\244\340\013?\373?\003e\332\031\311\177\273\345o\231\276Y\361+\333\376v\025\274\376\022K\023\313i\256[\324%j\226\270G\324<\342\036S\3638\224\177\231\232\345P\342\027\324\274\340^R\363\222{""\305\205\254\036\241\354\017\240dI\262#\0279\3728\322L\002V\237\265\263X\037p\347`\307\033\365\223\260\314NCb\211\353\310\361Z\336\272\004\307\237`\371\376\255\027\243\330=Q\323\031\364\007J\235\203\366\006\335%\026\001\344+f\343z3\326L4\327\374,\314\n\331\003\301e_.\204\207\211\255\030\302m\032\3402\355\344\361\355 \263\230\034\254/\0029\026\233\207\241=\311\317\240\032\177\032\0341\255Y\353\271\315\300\230\006\327\355X\353\303\235\036L`\025sk\374\024K\230\027\340\301\211\263\014c\376\326L\027\342r\001\n!\352\2369\317(\342\2022b\310\312\201\237\361I\022\363\357\315\004r\322\315\227\234!\247#\370\215\020\243\302\301Uw\230\334\266k}\217\276P\316Sl\003\330\217\322\327Xg\001{\374S\027)\304\003\314\037\247\361\227\360\342Eo\004\216\037$\331k\201\361[\301\356Yf\330j#\326\376\314\271\330\\A\310\276\213\341\370\341\343\265\254\025o\r\206\265\310\025\024\204\203G\336m\327\326\200(\t\372\2249i\001\335!\320\036^&2\016jU\332Q\006m\377\304\025\334\032\363&\353\307\0327\233\304[t&\265\177\301$\213\2759g\307\315{\311?{Yy\377\232\317\030\346\314xgQ\220\245\366\272g\322\335\327\334\307\302\031|\250\256\003\302'\233\203\315\307\376\013\324\006\302\237\227\360\006\342\3500\373v\275\207\333\2567\007\232s\315]\177\rD$_\002\266!\356\361M\271\343\357\000\330~G\234\376\213[\244p]\344\036P\363\200\313P\223\341V\251Y\r\003\37355\257\271\267\324\274\345\312\324\224\271mj\266\271*5U\3567j~\343\026\006\0103\006\036P\363`\340\307\201\277\254\204);\341\237\377\212*\200\277f\325\tW\302\207\271\320\270\333\274\356?\301w\364\032\223\231B~\237\205/\201/e\357\210\367\357\306L3\276\327=\223\334g!\201\254\237\000 %\300_\002\234$\274l=\3767\314\376\005\375\"\001d\336\204%c{\3353q\372\275\203J!\024\004\324\275\314~\242(\277\213\355\r~j\227}\376\237\336\261\372\267\215M\344\354\326\340)\224\006\273\354\003\n\244\177\245\252\2525|\t_:;n\251\236n\r\036\253\245>p\354\033V/f\"\307(\320\036\326\2177\304\217\035\273\r(\311\004B\266\217QM\366\272~\265\031\373\330\261o\355\r\366\371\265\177\014_\023`\361q3\331>""\326\032\244\372m\310\025\377\013\212\342\333\362";
+    PyObject *data = __Pyx_DecompressString(cstring, 3423, 1);
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #else /* compression: none (7342 bytes) */
-const char* const bytes = "    Dumping transistor Dumping transistors in cell NoneNote that Cython is deliberately stricter than PEP-484 and rejects subclasses of builtin types. If you need to pass subclasses then set the 'annotation_typing' directive to False. \n<<  >>\n  ?add_notebox cell << checkpaint >>\ndisableenable<< end >>\nflabel \tgate:  gates: gcisenabled label << labels >>\n layer magscale 1 2\nport rect \tsource/drain:  sources: src/MagDatabase.pyx<stringsource>tech timestamp transform type: use  uses CellCell.__reduce_cython__Cell.__setstate_cython__Cell.addLabelCell.addRectCell.addUseCell.dumpCell.dump_transistorsCell.dump_transistors_with_transformCell.find_transistorsCell.getBboxCell.getPinsCell.get_transistorsCell.get_transistors_with_transformCell.setLabelPortCell.setTechCell.setUseTransformCell.writeMagFileLabelLabel.__init__Label.__repr__Label.centroidLabel.setPortMagDatabaseMagDatabase.__reduce_cython__MagDatabase.__setstate_cython__MagDatabase.addLabelToCellMagDatabase.addRectToCellMagDatabase.createCellMagDatabase.dumpMagDatabase.dumpCellTransistorsMagDatabase.findAllTransistorsMagDatabase.findCellTransistorsMagDatabase.getCellMagDatabase.getCellPinsMagDatabase.getCellTransistorsMagDatabase.setCellTechMagDatabase.setCellUseMagDatabase.setCellUseTransformMagDatabase.setLabelPort__Pyx_PyDict_NextRefRectRect.__reduce_cython__Rect.__setstate_cython__Rect.abutsRect.centroidRect.dumpRect.overlapsTransformTransform.TransformTransform.__reduce_cython__Transform.__setstate_cython__Transform.toMatrixTransform.transform_pointTransistorTransistor.__reduce_cython__Transistor.__setstate_cython__Transistor.dump_with_transformTransistor.transform_aaabutsaddLabeladdLabelToCelladdRectaddRectToCelladdUse__annotate__appendarrayasyncio.coroutines_bb_cccellcell_instcell_name_strcellscentroidchildren__class_getitem__cline_in_tracebackcreateCell_dddb__dict___dictdirections__doc__dumpdumpCellTransistorsdump_transistorsdump_transistors_with_transformdump_with_transform_ee__enter__enumerate__exi""t___fffindAllTransistorsfindCellTransistorsfind_transistorsfnamefont__func__ggetBboxgetCellgetCellPinsgetCellTransistorsgetPinsget_transistorsget_transistors_with_transform__getstate__handlei__init__instinst_name_is_coroutineitemskllabnamelayermagic\n__main__matmul__metaclass____module__name__name__ncndiffndiff_cndiff_rndiffc__new__new_cellnmosnmoslvtnpnrnsewnumpyopenoverlap_xoverlap_yoverlapsppcpdiffpdiff_cpdiff_rpdiffcpmospolypoly_cpoly_rpolycontpopportpospppr__prepare__print__pyx_checksum__pyx_result__pyx_state__pyx_type__pyx_unpickle_Cell__pyx_unpickle_MagDatabase__pyx_unpickle_Rect__pyx_unpickle_Transform__pyx_unpickle_Transistor__qualname__rr2__reduce____reduce_cython____reduce_ex____repr__rpsdselfsetCellTechsetCellUsesetCellUseTransformsetLabelPortsetPortsetTechsetUseTransform__set_name__setdefault__setstate____setstate_cython__state__str__ttech__test__timetoMatrixtouch_horizontaltouch_verticaltransformtransform_pointttuupdateuseuse_setstatevvalueswwritewriteMagFile_xbotxbot_xtopxtop_ybotybot_ytopytop\200\001\330\004\"\240!\2406\250\021\200A\360(\000\t\014\2101\210F\220\"\220D\230\006\230c\240\021\240&\250\002\250$\250a\330\014\023\2201\340\010\013\2101\210F\220\"\220D\230\006\230c\240\021\240&\250\002\250$\250a\330\014\023\2201\360\006\000\t\020\210q\200A\340\010\033\2304\230v\240S\250\001\250\026\250s\260$\260f\270C\270q\300\001\330\010\030\230\004\230G\2401\240G\2506\260\024\260W\270A\270Q\360\006\000\t\032\230\024\230V\2403\240a\240v\250S\260\004\260F\270#\270Q\270a\330\010\030\230\004\230G\2401\240G\2506\260\024\260W\270A\270Q\340\010\020\320\020!\240\024\240[\260\004\260O\3004\300q\200A\360\010\000\t\r\210A\210R\210z\230\021\230+\240T\250\026\250t\2601\340\010\r\210Q\330\010\014\210E\220\024\220Q\330\014\016\210a\210q\220\001\320\021!\240\022\2406\250\021\250!\2501\250H\3204S\320ST\320TX\320XY\320YZ\320Zf\320fp\320pq\320qr\340\010\020\220\010\230\003\230<\240q\200A\330\010\014\320\014,\250A\250T\260\031\270!\2703\270c\300\023\300C\300s\310!\200A\340""\010\021\220\023\220A\220T\230\021\330\010\014\210E\220\027\230\002\230(\240&\250\r\260[\300\r\310Q\340\010\017\210q\200A\360\016\000\t\r\210A\340\010\013\2107\220#\220T\230\021\330\014\021\220\024\220W\230A\230Q\330\010\013\210:\220S\230\004\230A\330\014\021\220\024\220W\230A\230Q\340\010\013\2102\210S\220\001\330\014\020\220\005\220Q\360\010\000\021\032\230\021\340\020\024\220F\230$\230g\240Q\240a\330\024\027\220r\230\026\230q\240\001\330\030\036\230g\240Q\240a\360\n\000\021\025\220F\230$\230g\240Q\240a\330\024\030\230\005\230U\240!\2403\240c\250\021\250!\330\030\033\2306\240\021\240\"\240F\250!\2501\330\034\"\240'\250\021\250!\360\n\000\021\032\230\021\340\020\024\220F\230$\230g\240Q\240a\330\024\030\230\006\230a\330\030\033\2302\230Y\240a\240q\330\034\"\240'\250\021\250!\330\034\035\360\010\000\021\033\230!\340\020\024\220F\230$\230g\240Q\240a\330\024\027\220r\230\026\230q\240\001\330\030\037\230w\240a\240q\360\006\000\021\025\220F\230$\230g\240Q\240a\330\024\030\230\005\230U\240!\2403\240c\250\021\250!\330\030\033\2307\240!\2402\240V\2501\250A\330\034#\2407\250!\2501\360\010\000\021\033\230!\340\020\024\220F\230$\230g\240Q\240a\330\024\030\230\006\230a\330\030\033\2302\230Y\240a\240q\330\034#\2407\250!\2501\330\034\035\340\020\024\220J\230a\340\020\021\220\031\230!\340\020\024\220E\230\021\330\024\025\220V\2307\240!\2401\240I\250Q\340\020\024\220E\230\021\330\024\025\220^\2407\250!\2501\250I\260Q\340\020\024\220L\240\007\240q\250\001\340\010\013\2107\220#\220T\230\021\330\014\020\220\005\220T\230\027\240\001\240\021\360\010\000\021\032\230\021\340\020\024\220F\230$\230g\240Q\240a\330\024\027\220r\230\026\230q\240\001\330\030\036\230g\240Q\240a\360\006\000\021\025\220F\230$\230g\240Q\240a\330\024\030\230\005\230U\240!\2403\240c\250\021\250!\330\030\033\2306\240\021\240\"\240F\250!\2501\330\034\"\240'\250\021\250!\360\n\000\021\032\230\021\340\020\024\220F\230$\230g\240Q\240a\330\024\030\230\006\230a\330\030\033\2302\230Y\240a\240q\330\034\"\240'\250\021\250!""\330\034\035\360\n\000\021\033\230!\340\020\024\220F\230$\230g\240Q\240a\330\024\027\220r\230\026\230q\240\001\330\030\037\230w\240a\240q\360\006\000\021\025\220F\230$\230g\240Q\240a\330\024\030\230\005\230U\240!\2403\240c\250\021\250!\330\030\033\2307\240!\2402\240V\2501\250A\330\034#\2407\250!\2501\360\010\000\021\033\230!\340\020\024\220F\230$\230g\240Q\240a\330\024\030\230\006\230a\330\030\033\2302\230Y\240a\240q\330\034#\2407\250!\2501\330\034\035\340\020\024\220J\230a\340\020\021\220\031\230!\340\020\024\220E\230\021\330\024\025\220V\2307\240!\2401\240I\250Q\340\020\024\220E\230\021\330\024\025\220^\2407\250!\2501\250I\260Q\340\020\024\220L\240\007\240q\250\001\200A\360\n\000\t\r\210A\340\010\014\210E\220\024\220Q\330\014\r\210Q\210a\210q\320\020 \240\002\240&\250\001\250\021\250!\2508\2608\2701\270A\340\010\020\220\010\230\004\230I\240\\\260\021\200A\340\010\014\210D\220\001\340\010\t\210\030\220\021\340\010\014\210F\220!\2208\2301\200A\340\010\014\210D\220\006\220a\220u\320\034-\250Q\200A\340\010\014\210D\220\001\220\026\220v\230V\2401\340\010\013\2106\220\027\230\004\230A\330\014\020\220\007\220q\230\t\240\021\340\010\014\210G\2201\220F\230'\240\021\240!\200A\340\010\014\210E\220\024\220Q\330\014\020\320\020$\240A\240Q\200A\330\010\014\210E\220\024\220Q\330\014\020\220\t\320\031)\250\021\250!\330\014\021\220\021\220*\230A\230Q\340\010\014\210F\220$\220a\330\014\020\220\t\320\031)\250\021\250!\330\014\021\220\021\320\022$\240A\240Q\200A\340\010\014\210E\220\024\220Q\330\014\020\220\006\220a\220r\230\025\230a\200A\330\010\014\210E\220\021\220$\220a\220\177\240i\250q\260\003\2603\260c\270\023\270C\270q\200A\340\010\014\210E\220\021\220'\230\026\230v\240V\2506\260\025\260f\270C\270s\300#\300S\310\001\340\010\014\210G\2201\220K\230q\200A\340\010\014\210F\220!\2205\230\010\240\001\240\021\200A\340\010\014\210F\220!\2205\320\030(\250\001\250\033\260C\260s\270#\270S\300\003\3001\200A\340\010\014\210F\220!\2205\230\010\240\001\240\027\250\006\250f\260F\270!\200A""\340\010\014\210F\220!\220>\240\031\250!\2507\260&\270\006\270f\300F\310%\310v\320UX\320X[\320[^\320^a\320ab\200A\340\010\014\210F\220!\220>\240\035\250a\250y\270\006\270a\200A\340\010\014\210G\2201\220H\230H\240A\240V\2501\200A\330\010\014\210H\220A\200A\330\010\014\210H\220A\330\010\014\210N\230!\200A\340\010\014\210J\220a\330\010\014\210J\220d\230!\2306\240\026\240v\250Q\330\010\014\210J\220a\330\010\014\210J\220a\330\010\014\210J\220d\230!\2303\230c\240\023\240A\330\010\014\210J\220a\330\010\014\210J\220a\330\010\014\210N\230!\200A\340\010\014\210J\220a\340\010\t\210\031\220$\220a\340\010\014\210E\220\024\220Q\330\014\020\220\t\320\031)\250\021\250!\330\014\r\210V\2207\230!\2301\340\010\014\210F\220$\220a\330\014\020\220\t\320\031)\250\021\250!\330\014\r\210^\2307\240!\2401\340\010\017\210q\200A\360\010\000\t\016\210Q\320\016,\250A\250T\260\021\340\010\014\210C\210u\220I\230Q\230d\240!\330\014\021\220\021\320\022'\240q\250\001\330\014\r\320\r!\240\021\240!\340\010\014\210E\220\024\220Q\330\014\016\210f\220A\220Q\220a\220x\320\037?\270q\300\004\300A\300Q\300l\320R\\\320\\]\320]^\200A\330\010\r\210Q\210c\220\021\220!\200A\330\010\r\210Q\210g\220Q\220d\230!\330\010\014\210E\220\024\220Q\330\014\021\220\021\220)\2301\230A\330\014\020\220\005\220T\230\027\240\001\240\021\330\020\021\220\025\220a\340\010\014\210E\220\024\220Q\330\014\021\220\021\220(\230!\2301\340\010\014\210C\210u\220D\230\007\230v\240Q\330\014\021\220\021\220)\2301\230A\200A\340\010\r\210R\210w\220a\220t\2309\240D\250\002\250&\260\001\260\021\260!\2601\260D\270\001\270\021\270$\270a\340\010\020\220\002\220!\2204\220r\230\021\230!\200A\340\010\r\210R\210w\220a\220t\2309\240D\250\001\250\031\260!\340\010\017\210y\230\001\230\022\2301\230B\230a\230t\2402\240Q\240b\250\001\250\024\250R\250q\260\002\260!\2604\260r\270\021\270\"\270A\270T\300\022\3001\300B\300a\300t\3102\310Q\310b\320PQ\320QR\200A\340\r\021\220\021\220'\230\030\240\021\340\014\r\210V\2201\220A\340\014\r\210V\2201\220G\2301\230D\240\001""\360\006\000\r\016\210V\2201\220A\340\014\r\210V\2201\220L\240\001\240\023\240A\240T\250\025\250a\340\014\r\210V\2201\220A\340\014\020\220\004\220H\230A\230Q\340\014\r\210V\2201\220G\2301\230A\230W\240A\240Q\240g\250Q\250a\250w\260a\260q\270\001\340\014\020\220\003\2205\230\004\230G\2406\250\021\330\020\021\220\026\220q\230\005\230Q\230a\340\020\024\220E\230\021\330\024\025\220V\2301\230G\2401\240A\240W\250A\250Q\250g\260Q\260a\260w\270a\270q\300\001\340\014\020\220\010\230\004\230A\330\020\021\220\026\220q\230\006\230a\230t\2401\240J\250a\250t\2601\260A\330\020\021\220\026\220q\230\014\240A\240S\250\001\250\024\250U\260#\260R\260q\330\020\021\220\026\220q\230\014\240A\240T\250\021\250,\260d\270!\2704\270q\300\014\310D\320PQ\320QU\320UV\320Vb\320bf\320fg\320gk\320kl\320lx\320x|\320|}\360\000\000~\001B\002\360\000\000B\002C\002\360\000\000C\002O\002\360\000\000O\002S\002\360\000\000S\002T\002\360\000\000T\002X\002\360\000\000X\002Y\002\360\000\000Y\002e\002\360\000\000e\002f\002\330\020\024\220B\220h\230a\230t\2401\240H\250H\260A\260Q\330\020\021\220\026\220q\230\006\230a\230q\240\007\240q\250\001\250\027\260\001\260\021\260'\270\021\270!\2701\340\014\r\210V\2201\220A\340\014\020\220\003\2205\230\004\230G\2406\250\021\330\020\021\220\026\220q\230\t\240\021\240!\2408\2501\250A\250R\250w\260a\260q\270\002\270'\300\021\300!\3002\300W\310A\310Q\310b\320PW\320WX\320XY\320Y_\320_`\320`a\320ah\320hi\320ij\320jm\320mt\320tu\320uv\320vy\360\000\000z\001A\002\360\000\000A\002B\002\360\000\000B\002C\002\360\000\000C\002F\002\360\000\000F\002M\002\360\000\000M\002N\002\360\000\000N\002O\002\360\000\000O\002R\002\360\000\000R\002Y\002\360\000\000Y\002Z\002\360\000\000Z\002[\002\360\000\000[\002\\\002\330\020\021\220\026\220q\230\007\230q\240\001\240\027\250\001\250\021\250!\340\014\r\210V\2201\220A\200A\340\010\020\220\001\220\024\220V\2302\230T\240\027\250\003\2504\250t\2606\270\022\2704\270w\300c\310\021\200A\340\007\016\210d\220&\230\001\230\025\230g\240Q\240j\260\001\200A""\340\010\017\210q\330\010\017\210q\330\010\017\210q\330\010\017\210q\340\010\014\210C\210u\220D\230\007\230v\240Q\330\014\020\220\005\220Q\330\020\023\2201\220F\230\"\230A\330\024\033\2301\230A\330\020\023\2201\220F\230\"\230A\330\024\033\2301\230A\330\020\023\2201\220F\230\"\230A\330\024\033\2301\230A\330\020\023\2201\220F\230\"\230A\330\024\033\2301\230A\340\010\014\210E\220\024\220Q\330\014\020\220\002\220(\230!\2301\230A\230X\240X\250Q\250a\330\014\017\210q\220\006\220b\230\001\330\020\027\220q\230\001\330\014\017\210q\220\006\220b\230\001\330\020\027\220q\230\001\330\014\017\210q\220\006\220b\230\001\330\020\027\220q\230\001\330\014\017\210q\220\006\220b\230\001\330\020\027\220q\230\001\340\010\017\210t\2201\220F\230&\240\006\240a\200A\330\010\017\210r\220\021\220$\220h\230a\230t\2404\240q\250\004\250F\260!\2604\260w\270a\270t\3005\310\001\310\024\310W\320TU\320UY\320Y`\320`a\320ae\320ef\200A\330\010\017\210r\220\026\220q\230\001\230\021\230$\230d\240$\240d\250$\250e\2601\260D\270\004\270D\300\004\300D\310\005\310Q\310c\320QT\320TU\200A\330\010\017\210t\2202\220Y\230a\200A\340\010\017\210t\2206\230\021\230!\200A\340\010\017\210t\2206\230\021\230.\250\010\260\001\260\021\200A\340\010\017\210t\2206\230\021\230!\340\010\014\320\014\035\230Q\230a\200A\360\n\000\t\020\210t\2206\230\021\230!\340\010\017\210t\320\023#\2401\240A\200A\330\010\017\210t\320\0232\260!\2604\260y\300\001\300\023\300C\300s\310#\310S\320PQ\200\001\360\010\000\005\016\210T\220\021\330\004\014\210G\2201\220F\230,\240a\330\004\007\200v\210W\220E\230\024\230Q\330\010\022\220!\330\010\027\220q\340\010\027\220t\2307\240'\250\021\330\004\007\200q\330\010\017\320\017,\250D\260\001\260\027\270\013\3007\310!\340\010\017\320\017,\250D\260\001\260\027\270\013\3001\200\001\360\010\000\005\016\210T\220\027\230\004\230G\2404\240w\250d\260!\330\004\014\210G\2201\220F\230,\240a\330\004\007\200v\210W\220E\230\024\230Q\330\010\022\220!\330\010\027\220q\340\010\027\220q\330\004\007\200q\330\010\017\320\017%\240T""\250\021\250'\260\033\270G\3001\340\010\017\320\017%\240T\250\021\250'\260\033\270A\200\001\360\010\000\005\016\210T\220\030\230\024\320\035-\250T\260\021\330\004\014\210G\2201\220F\230,\240a\330\004\007\200v\210W\220E\230\024\230Q\330\010\022\220!\330\010\027\220q\340\010\027\220t\2307\240'\250\025\250c\260\024\260_\300G\3105\320PS\320SW\320W^\320^e\320ef\330\004\007\200q\330\010\017\320\017+\2504\250q\260\007\260{\300'\310\021\340\010\017\320\017+\2504\250q\260\007\260{\300!\200\001\360\010\000\005\016\210T\220\024\220T\230\024\230T\240\024\240T\250\024\250T\260\024\260T\270\021\330\004\014\210G\2201\220F\230,\240a\330\004\007\200v\210W\220E\230\024\230Q\330\010\022\220!\330\010\027\220q\340\010\027\220q\330\004\007\200q\330\010\017\320\017*\250$\250a\250w\260k\300\027\310\001\340\010\017\320\017*\250$\250a\250w\260k\300\021\200\001\360\010\000\005\016\210T\220\031\230$\230i\240t\2507\260$\260g\270T\300\036\310t\320ST\330\004\014\210G\2201\220F\230,\240a\330\004\007\200v\210W\220E\230\024\230Q\330\010\022\220!\330\010\027\220q\340\010\027\220t\2308\2407\250%\250s\260$\260h\270g\300U\310#\310T\320QW\320W^\320^c\320cf\320fj\320jp\320pw\320w|\320|\177\360\000\000@\002D\002\360\000\000D\002Q\002\360\000\000Q\002X\002\360\000\000X\002]\002\360\000\000]\002`\002\360\000\000`\002d\002\360\000\000d\002j\002\360\000\000j\002q\002\360\000\000q\002r\002\330\004\007\200q\330\010\017\320\017%\240T\250\021\250'\260\033\270G\3001\340\010\017\320\017%\240T\250\021\250'\260\033\270A\200\001\330\004)\250\021\250&\260\001\200\001\330\004(\250\001\250\026\250q\200\001\340\004\037\230q\320 0\260\013\270;\300k\320QR\330\004\023\2204\220x\230q\240\001\330\004\007\200|\2207\230!\330\010&\240a\240w\250n\270A\330\004\013\2101\200\001\340\004\037\230q\320 0\260\013\270;\300k\320QR\330\004\023\2209\230H\240A\240Q\330\004\007\200|\2207\230!\330\010+\2501\250L\270\016\300a\330\004\013\2101\200\001\340\004\037\230q\320 0\260\013\270;\300k\320QR\330\004\023\220:\230X\240Q\240a\330\004\007\200|""\2207\230!\330\010,\250A\250]\270.\310\001\330\004\013\2101\200\001\340\004\037\230q\320 0\260\013\270;\300k\320QR\330\004\023\220;\230h\240a\240q\330\004\007\200|\2207\230!\330\010-\250Q\250n\270N\310!\330\004\013\2101\200\001\330\004'\240q\250\006\250a";
+    #else /* compression: none (7737 bytes) */
+const char* const bytes = "    Dumping transistor Dumping transistors in cell NoneNote that Cython is deliberately stricter than PEP-484 and rejects subclasses of builtin types. If you need to pass subclasses then set the 'annotation_typing' directive to False. \n<<  >>\n  ?add_notebox cell << checkpaint >>\ndisableenable<< end >>\nflabel \tgate:  gates: gcisenabled label << labels >>\n layer magscale 1 2\nport rect \tsource/drain:  sources: src/MagDatabase.pyx<stringsource>tech timestamp transform type: use  uses CellCell.__reduce_cython__Cell.__setstate_cython__Cell.addLabelCell.addRectCell.addUseCell.dumpCell.dump_transistorsCell.dump_transistors_with_transformCell.find_transistorsCell.getBboxCell.getPinsCell.get_pins_with_transformCell.get_transistorsCell.get_transistors_with_transformCell.setBBoxCell.setLabelPortCell.setTechCell.setUseTransformCell.writeMagFileLabelLabel.__init__Label.__repr__Label.centroidLabel.setPortLabel.transformMagDatabaseMagDatabase.__reduce_cython__MagDatabase.__setstate_cython__MagDatabase.addLabelToCellMagDatabase.addRectToCellMagDatabase.createCellMagDatabase.dumpMagDatabase.dumpCellTransistorsMagDatabase.findAllTransistorsMagDatabase.findCellTransistorsMagDatabase.getCellMagDatabase.getCellPinsMagDatabase.getCellTransistorsMagDatabase.setCellBBoxMagDatabase.setCellTechMagDatabase.setCellUseMagDatabase.setCellUseTransformMagDatabase.setLabelPort__Pyx_PyDict_NextRefRectRect.__reduce_cython__Rect.__setstate_cython__Rect.abutsRect.centroidRect.dumpRect.overlapsTransformTransform.TransformTransform.__reduce_cython__Transform.__setstate_cython__Transform.toMatrixTransform.transform_pointTransistorTransistor.__reduce_cython__Transistor.__setstate_cython__Transistor.dump_with_transformTransistor.transform_aaabutsaddLabeladdLabelToCelladdRectaddRectToCelladdUse__annotate__appendarrayasyncio.coroutines_bb_cccellcell_instcell_name_strcellscentroidchildren__class_getitem__cline_in_tracebackcopycreateCell_dddbdeepcopy__dict___dictdirections__doc__dumpdumpCellTransistorsdu""mp_transistorsdump_transistors_with_transformdump_with_transform_ee__enter__enumerate__exit___fffindAllTransistorsfindCellTransistorsfind_transistorsfnamefont__func__ggetBboxgetCellgetCellPinsgetCellTransistorsgetPinsget_pins_with_transformget_transistorsget_transistors_with_transform__getstate__handlei__init__instinst_name_is_coroutineitemskllablabnamelayermagic\n__main__matmul__metaclass____module__name__name__ncndiffndiff_cndiff_rndiffc__new__new_cellnmosnmoslvtnpnrnsewnumpyopenoverlap_xoverlap_yoverlapsppcpdiffpdiff_cpdiff_rpdiffcpmospolypoly_cpoly_rpolycontpopportpospppr__prepare__print__pyx_checksum__pyx_result__pyx_state__pyx_type__pyx_unpickle_Cell__pyx_unpickle_MagDatabase__pyx_unpickle_Rect__pyx_unpickle_Transform__pyx_unpickle_Transistor__qualname__rr2__reduce____reduce_cython____reduce_ex____repr__rpsdselfsetBBoxsetCellBBoxsetCellTechsetCellUsesetCellUseTransformsetLabelPortsetPortsetTechsetUseTransform__set_name__setdefault__setstate____setstate_cython__state__str__ttech__test__timetoMatrixtouch_horizontaltouch_verticaltransformtransform_pointttuupdateuseuse_setstatevvalueswwritewriteMagFile_xbotxbot_xtopxtop_ybotybot_ytopytop\200\001\330\004\"\240!\2406\250\021\200A\360(\000\t\014\2101\210F\220\"\220D\230\006\230c\240\021\240&\250\002\250$\250a\330\014\023\2201\340\010\013\2101\210F\220\"\220D\230\006\230c\240\021\240&\250\002\250$\250a\330\014\023\2201\360\006\000\t\020\210q\200A\340\010\033\2304\230v\240S\250\001\250\026\250s\260$\260f\270C\270q\300\001\330\010\030\230\004\230G\2401\240G\2506\260\024\260W\270A\270Q\360\006\000\t\032\230\024\230V\2403\240a\240v\250S\260\004\260F\270#\270Q\270a\330\010\030\230\004\230G\2401\240G\2506\260\024\260W\270A\270Q\340\010\020\320\020!\240\024\240[\260\004\260O\3004\300q\200A\360\010\000\t\r\210A\210R\210z\230\021\230+\240T\250\026\250t\2601\340\010\r\210Q\330\010\014\210E\220\024\220Q\330\014\016\210a\210q\220\001\320\021!\240\022\2406\250\021\250!\2501\250H\3204S\320ST\320TX\320XY\320YZ\320Zf\320fp\320pq\320q""r\340\010\020\220\010\230\003\230<\240q\200A\330\010\014\320\014,\250A\250T\260\031\270!\2703\270c\300\023\300C\300s\310!\200A\340\010\021\220\023\220A\220T\230\021\330\010\014\210E\220\027\230\002\230(\240&\250\r\260[\300\r\310Q\340\010\017\210q\200A\360\016\000\t\r\210A\340\010\013\2107\220#\220T\230\021\330\014\021\220\024\220W\230A\230Q\330\010\013\210:\220S\230\004\230A\330\014\021\220\024\220W\230A\230Q\340\010\013\2102\210S\220\001\330\014\020\220\005\220Q\360\010\000\021\032\230\021\340\020\024\220F\230$\230g\240Q\240a\330\024\027\220r\230\026\230q\240\001\330\030\036\230g\240Q\240a\360\n\000\021\025\220F\230$\230g\240Q\240a\330\024\030\230\005\230U\240!\2403\240c\250\021\250!\330\030\033\2306\240\021\240\"\240F\250!\2501\330\034\"\240'\250\021\250!\360\n\000\021\032\230\021\340\020\024\220F\230$\230g\240Q\240a\330\024\030\230\006\230a\330\030\033\2302\230Y\240a\240q\330\034\"\240'\250\021\250!\330\034\035\360\010\000\021\033\230!\340\020\024\220F\230$\230g\240Q\240a\330\024\027\220r\230\026\230q\240\001\330\030\037\230w\240a\240q\360\006\000\021\025\220F\230$\230g\240Q\240a\330\024\030\230\005\230U\240!\2403\240c\250\021\250!\330\030\033\2307\240!\2402\240V\2501\250A\330\034#\2407\250!\2501\360\010\000\021\033\230!\340\020\024\220F\230$\230g\240Q\240a\330\024\030\230\006\230a\330\030\033\2302\230Y\240a\240q\330\034#\2407\250!\2501\330\034\035\340\020\024\220J\230a\340\020\021\220\031\230!\340\020\024\220E\230\021\330\024\025\220V\2307\240!\2401\240I\250Q\340\020\024\220E\230\021\330\024\025\220^\2407\250!\2501\250I\260Q\340\020\024\220L\240\007\240q\250\001\340\010\013\2107\220#\220T\230\021\330\014\020\220\005\220T\230\027\240\001\240\021\360\010\000\021\032\230\021\340\020\024\220F\230$\230g\240Q\240a\330\024\027\220r\230\026\230q\240\001\330\030\036\230g\240Q\240a\360\006\000\021\025\220F\230$\230g\240Q\240a\330\024\030\230\005\230U\240!\2403\240c\250\021\250!\330\030\033\2306\240\021\240\"\240F\250!\2501\330\034\"\240'\250\021\250!\360\n\000\021\032""\230\021\340\020\024\220F\230$\230g\240Q\240a\330\024\030\230\006\230a\330\030\033\2302\230Y\240a\240q\330\034\"\240'\250\021\250!\330\034\035\360\n\000\021\033\230!\340\020\024\220F\230$\230g\240Q\240a\330\024\027\220r\230\026\230q\240\001\330\030\037\230w\240a\240q\360\006\000\021\025\220F\230$\230g\240Q\240a\330\024\030\230\005\230U\240!\2403\240c\250\021\250!\330\030\033\2307\240!\2402\240V\2501\250A\330\034#\2407\250!\2501\360\010\000\021\033\230!\340\020\024\220F\230$\230g\240Q\240a\330\024\030\230\006\230a\330\030\033\2302\230Y\240a\240q\330\034#\2407\250!\2501\330\034\035\340\020\024\220J\230a\340\020\021\220\031\230!\340\020\024\220E\230\021\330\024\025\220V\2307\240!\2401\240I\250Q\340\020\024\220E\230\021\330\024\025\220^\2407\250!\2501\250I\260Q\340\020\024\220L\240\007\240q\250\001\200A\340\017\020\340\010\014\210A\340\010\014\210E\220\024\220Q\330\014\r\210Q\210a\210q\320\020 \240\002\240&\250\001\250\021\250!\2508\3203K\3101\310D\320PQ\320QR\320R^\320^h\320hi\320ij\340\010\016\210a\340\010\014\210C\210u\220D\230\007\230v\240Q\330\014\017\210q\220\005\220T\230\031\240!\2401\330\014\017\210q\220\002\220*\230A\230Q\340\010\020\220\010\230\005\230\\\250\021\200A\340\010\014\210B\210g\220T\230\022\2308\2401\320$4\260B\260d\270\"\270G\3004\300r\310\021\330\010\014\210B\210g\220T\230\022\2308\2401\320$4\260B\260d\270\"\270G\3004\300r\310\021\200A\340\010\014\210D\220\001\340\010\t\210\030\220\021\340\010\014\210F\220!\2208\2301\200A\340\010\014\210D\220\006\220a\220u\320\034-\250Q\200A\340\010\014\210D\220\001\220\026\220v\230V\2401\340\010\013\2106\220\027\230\004\230A\330\014\020\220\007\220q\230\t\240\021\340\010\014\210G\2201\220F\230'\240\021\240!\200A\340\010\014\210E\220\024\220Q\330\014\020\320\020$\240A\240Q\200A\330\010\014\210E\220\024\220Q\330\014\020\220\t\320\031)\250\021\250!\330\014\021\220\021\220*\230A\230Q\340\010\014\210F\220$\220a\330\014\020\220\t\320\031)\250\021\250!\330\014\021\220\021\320\022$\240A\240Q\200A\340\010\014\210E\220""\024\220Q\330\014\020\220\006\220a\220r\230\025\230a\200A\330\010\014\210E\220\021\220$\220a\220\177\240i\250q\260\003\2603\260c\270\023\270C\270q\200A\340\010\014\210E\220\021\220'\230\026\230v\240V\2506\260\025\260f\270C\270s\300#\300S\310\001\340\010\014\210G\2201\220K\230q\200A\340\010\014\210F\220!\2205\230\010\240\001\240\021\200A\340\010\014\210F\220!\2205\320\030(\250\001\250\033\260C\260s\270#\270S\300\003\3001\200A\340\010\014\210F\220!\2205\230\010\240\001\240\027\250\006\250f\260F\270!\200A\340\010\014\210F\220!\2205\230\010\240\001\240\026\240v\250V\2601\200A\340\010\014\210F\220!\220>\240\031\250!\2507\260&\270\006\270f\300F\310%\310v\320UX\320X[\320[^\320^a\320ab\200A\340\010\014\210F\220!\220>\240\035\250a\250y\270\006\270a\200A\340\010\014\210G\2201\220H\230H\240A\240V\2501\200A\330\010\014\210H\220A\200A\330\010\014\210H\220A\330\010\014\210N\230!\200A\330\010\014\210H\220D\230\001\230\026\230v\240V\2501\200A\340\010\014\210J\220a\330\010\014\210J\220d\230!\2306\240\026\240v\250Q\330\010\014\210J\220a\330\010\014\210J\220a\330\010\014\210J\220d\230!\2303\230c\240\023\240A\330\010\014\210J\220a\330\010\014\210J\220a\330\010\014\210N\230!\200A\340\010\014\210J\220a\340\010\t\210\031\220$\220a\340\010\014\210E\220\024\220Q\330\014\020\220\t\320\031)\250\021\250!\330\014\r\210V\2207\230!\2301\340\010\014\210F\220$\220a\330\014\020\220\t\320\031)\250\021\250!\330\014\r\210^\2307\240!\2401\340\010\017\210q\200A\360\010\000\t\016\210Q\320\016,\250A\250T\260\021\340\010\014\210C\210u\220I\230Q\230d\240!\330\014\021\220\021\320\022'\240q\250\001\330\014\r\320\r!\240\021\240!\340\010\014\210E\220\024\220Q\330\014\016\210f\220A\220Q\220a\220x\320\037?\270q\300\004\300A\300Q\300l\320R\\\320\\]\320]^\200A\330\010\r\210Q\210c\220\021\220!\200A\330\010\r\210Q\210g\220Q\220d\230!\330\010\014\210E\220\024\220Q\330\014\021\220\021\220)\2301\230A\330\014\020\220\005\220T\230\027\240\001\240\021\330\020\021\220\025\220a\340\010\014\210E\220\024\220Q\330\014\021\220""\021\220(\230!\2301\340\010\014\210C\210u\220D\230\007\230v\240Q\330\014\021\220\021\220)\2301\230A\200A\340\010\r\210R\210w\220a\220t\2309\240D\250\002\250&\260\001\260\021\260!\2601\260D\270\001\270\021\270$\270a\340\010\020\220\002\220!\2204\220r\230\021\230!\200A\340\010\r\210R\210w\220a\220t\2309\240D\250\001\250\031\260!\340\010\017\210y\230\001\230\022\2301\230B\230a\230t\2402\240Q\240b\250\001\250\024\250R\250q\260\002\260!\2604\260r\270\021\270\"\270A\270T\300\022\3001\300B\300a\300t\3102\310Q\310b\320PQ\320QR\200A\340\r\021\220\021\220'\230\030\240\021\340\014\r\210V\2201\220A\340\014\r\210V\2201\220G\2301\230D\240\001\360\006\000\r\016\210V\2201\220A\340\014\r\210V\2201\220L\240\001\240\023\240A\240T\250\025\250a\340\014\r\210V\2201\220A\340\014\020\220\004\220H\230A\230Q\340\014\r\210V\2201\220G\2301\230A\230W\240A\240Q\240g\250Q\250a\250w\260a\260q\270\001\340\014\020\220\003\2205\230\004\230G\2406\250\021\330\020\021\220\026\220q\230\005\230Q\230a\340\020\024\220E\230\021\330\024\025\220V\2301\230G\2401\240A\240W\250A\250Q\250g\260Q\260a\260w\270a\270q\300\001\340\014\020\220\010\230\004\230A\330\020\021\220\026\220q\230\006\230a\230t\2401\240J\250a\250t\2601\260A\330\020\021\220\026\220q\230\014\240A\240S\250\001\250\024\250U\260#\260R\260q\330\020\021\220\026\220q\230\014\240A\240T\250\021\250,\260d\270!\2704\270q\300\014\310D\320PQ\320QU\320UV\320Vb\320bf\320fg\320gk\320kl\320lx\320x|\320|}\360\000\000~\001B\002\360\000\000B\002C\002\360\000\000C\002O\002\360\000\000O\002S\002\360\000\000S\002T\002\360\000\000T\002X\002\360\000\000X\002Y\002\360\000\000Y\002e\002\360\000\000e\002f\002\330\020\024\220B\220h\230a\230t\2401\240H\250H\260A\260Q\330\020\021\220\026\220q\230\006\230a\230q\240\007\240q\250\001\250\027\260\001\260\021\260'\270\021\270!\2701\340\014\r\210V\2201\220A\340\014\020\220\003\2205\230\004\230G\2406\250\021\330\020\021\220\026\220q\230\t\240\021\240!\2408\2501\250A\250R\250w\260a\260q\270\002\270'\300\021\300!\3002\300W\310A\310Q""\310b\320PW\320WX\320XY\320Y_\320_`\320`a\320ah\320hi\320ij\320jm\320mt\320tu\320uv\320vy\360\000\000z\001A\002\360\000\000A\002B\002\360\000\000B\002C\002\360\000\000C\002F\002\360\000\000F\002M\002\360\000\000M\002N\002\360\000\000N\002O\002\360\000\000O\002R\002\360\000\000R\002Y\002\360\000\000Y\002Z\002\360\000\000Z\002[\002\360\000\000[\002\\\002\330\020\021\220\026\220q\230\007\230q\240\001\240\027\250\001\250\021\250!\340\014\r\210V\2201\220A\200A\340\010\020\220\001\220\024\220V\2302\230T\240\027\250\003\2504\250t\2606\270\022\2704\270w\300c\310\021\200A\340\007\016\210d\220&\230\001\230\025\230g\240Q\240j\260\001\200A\330\010\017\210r\220\021\220$\220h\230a\230t\2404\240q\250\004\250F\260!\2604\260w\270a\270t\3005\310\001\310\024\310W\320TU\320UY\320Y`\320`a\320ae\320ef\200A\330\010\017\210r\220\026\220q\230\001\230\021\230$\230d\240$\240d\250$\250e\2601\260D\270\004\270D\300\004\300D\310\005\310Q\310c\320QT\320TU\200A\330\010\017\210t\2202\220Y\230a\200A\340\010\017\210t\2205\230\001\330\010\017\210t\2205\230\001\330\010\017\210t\2205\230\001\330\010\017\210t\2205\230\001\340\010\014\210C\210u\220D\230\007\230v\240Q\330\014\020\220\005\220Q\330\020\023\2201\220F\230\"\230A\330\024\033\2301\230A\330\020\023\2201\220F\230\"\230A\330\024\033\2301\230A\330\020\023\2201\220F\230\"\230A\330\024\033\2301\230A\330\020\023\2201\220F\230\"\230A\330\024\033\2301\230A\340\010\014\210E\220\024\220Q\330\014\020\220\002\220(\230!\2301\230A\230X\240X\250Q\250a\330\014\017\210q\220\006\220b\230\001\330\020\027\220q\230\001\330\014\017\210q\220\006\220b\230\001\330\020\027\220q\230\001\330\014\017\210q\220\006\220b\230\001\330\020\027\220q\230\001\330\014\017\210q\220\006\220b\230\001\330\020\027\220q\230\001\340\010\017\210t\2201\220F\230&\240\006\240a\200A\340\010\017\210t\2206\230\021\230!\200A\340\010\017\210t\2206\230\021\230.\250\010\260\001\260\021\200A\340\010\017\210t\2206\230\021\230!\340\010\014\320\014\035\230Q\230a\200A\360\n\000\t\020\210t\2206\230\021\230!""\340\010\017\210t\320\023#\2401\240A\200A\360\010\000\t\020\210t\320\023+\2501\250D\260\t\270\021\270#\270S\300\003\3003\300c\310\021\200A\330\010\017\210t\320\0232\260!\2604\260y\300\001\300\023\300C\300s\310#\310S\320PQ\200\001\360\010\000\005\016\210T\220\021\330\004\014\210G\2201\220F\230,\240a\330\004\007\200v\210W\220E\230\024\230Q\330\010\022\220!\330\010\027\220q\340\010\027\220t\2307\240'\250\021\330\004\007\200q\330\010\017\320\017,\250D\260\001\260\027\270\013\3007\310!\340\010\017\320\017,\250D\260\001\260\027\270\013\3001\200\001\360\010\000\005\016\210T\220\027\230\004\230G\2404\240w\250d\260!\330\004\014\210G\2201\220F\230,\240a\330\004\007\200v\210W\220E\230\024\230Q\330\010\022\220!\330\010\027\220q\340\010\027\220q\330\004\007\200q\330\010\017\320\017%\240T\250\021\250'\260\033\270G\3001\340\010\017\320\017%\240T\250\021\250'\260\033\270A\200\001\360\010\000\005\016\210T\220\027\230\004\230I\240T\250\031\260$\260g\270T\300\027\310\004\310N\320Z^\320^_\330\004\014\210G\2201\220F\230,\240a\330\004\007\200v\210W\220E\230\024\230Q\330\010\022\220!\330\010\027\220q\340\010\027\220t\2306\240\027\250\005\250S\260\004\260H\270G\3005\310\003\3104\310x\320W^\320^c\320cf\320fj\320jp\320pw\320w|\320|\177\360\000\000@\002D\002\360\000\000D\002J\002\360\000\000J\002Q\002\360\000\000Q\002V\002\360\000\000V\002Y\002\360\000\000Y\002]\002\360\000\000]\002j\002\360\000\000j\002q\002\360\000\000q\002v\002\360\000\000v\002y\002\360\000\000y\002}\002\360\000\000}\002C\003\360\000\000C\003J\003\360\000\000J\003K\003\330\004\007\200q\330\010\017\320\017%\240T\250\021\250'\260\033\270G\3001\340\010\017\320\017%\240T\250\021\250'\260\033\270A\200\001\360\010\000\005\016\210T\220\030\230\024\320\035-\250T\260\021\330\004\014\210G\2201\220F\230,\240a\330\004\007\200v\210W\220E\230\024\230Q\330\010\022\220!\330\010\027\220q\340\010\027\220t\2307\240'\250\025\250c\260\024\260_\300G\3105\320PS\320SW\320W^\320^e\320ef\330\004\007\200q\330\010\017\320\017+\2504\250q\260\007\260{""\300'\310\021\340\010\017\320\017+\2504\250q\260\007\260{\300!\200\001\360\010\000\005\016\210T\220\024\220T\230\024\230T\240\024\240T\250\024\250T\260\024\260T\270\021\330\004\014\210G\2201\220F\230,\240a\330\004\007\200v\210W\220E\230\024\230Q\330\010\022\220!\330\010\027\220q\340\010\027\220q\330\004\007\200q\330\010\017\320\017*\250$\250a\250w\260k\300\027\310\001\340\010\017\320\017*\250$\250a\250w\260k\300\021\200\001\330\004)\250\021\250&\260\001\200\001\330\004(\250\001\250\026\250q\200\001\340\004\037\230q\320 0\260\013\270;\300k\320QR\330\004\023\2204\220x\230q\240\001\330\004\007\200|\2207\230!\330\010&\240a\240w\250n\270A\330\004\013\2101\200\001\340\004\037\230q\320 0\260\013\270;\300k\320QR\330\004\023\2209\230H\240A\240Q\330\004\007\200|\2207\230!\330\010+\2501\250L\270\016\300a\330\004\013\2101\200\001\340\004\037\230q\320 0\260\013\270;\300k\320QR\330\004\023\220:\230X\240Q\240a\330\004\007\200|\2207\230!\330\010,\250A\250]\270.\310\001\330\004\013\2101\200\001\340\004\037\230q\320 0\260\013\270;\300k\320QR\330\004\023\220;\230h\240a\240q\330\004\007\200|\2207\230!\330\010-\250Q\250n\270N\310!\330\004\013\2101\200\001\330\004'\240q\250\006\250a";
     PyObject *data = NULL;
     CYTHON_UNUSED_VAR(__Pyx_DecompressString);
     #endif
     PyObject **stringtab = __pyx_mstate->__pyx_string_tab;
     Py_ssize_t pos = 0;
-    for (int i = 0; i < 270; i++) {
+    for (int i = 0; i < 280; i++) {
       Py_ssize_t bytes_length = index[i].length;
       PyObject *string = PyUnicode_DecodeUTF8(bytes + pos, bytes_length, NULL);
       if (likely(string) && i >= 40) PyUnicode_InternInPlace(&string);
@@ -25145,7 +26397,7 @@ const char* const bytes = "    Dumping transistor Dumping transistors in cell No
       stringtab[i] = string;
       pos += bytes_length;
     }
-    for (int i = 270; i < 325; i++) {
+    for (int i = 280; i < 339; i++) {
       Py_ssize_t bytes_length = index[i].length;
       PyObject *string = PyBytes_FromStringAndSize(bytes + pos, bytes_length);
       stringtab[i] = string;
@@ -25156,15 +26408,15 @@ const char* const bytes = "    Dumping transistor Dumping transistors in cell No
       }
     }
     Py_XDECREF(data);
-    for (Py_ssize_t i = 0; i < 325; i++) {
+    for (Py_ssize_t i = 0; i < 339; i++) {
       if (unlikely(PyObject_Hash(stringtab[i]) == -1)) {
         __PYX_ERR(0, 1, __pyx_L1_error)
       }
     }
     #if CYTHON_IMMORTAL_CONSTANTS
     {
-      PyObject **table = stringtab + 270;
-      for (Py_ssize_t i=0; i<55; ++i) {
+      PyObject **table = stringtab + 280;
+      for (Py_ssize_t i=0; i<59; ++i) {
         #if PY_VERSION_HEX >= 0x030F0000
         PyUnstable_SetImmortal(table[i]);
         #elif CYTHON_COMPILING_IN_CPYTHON_FREETHREADING
@@ -25196,7 +26448,7 @@ const char* const bytes = "    Dumping transistor Dumping transistors in cell No
   {
     PyObject **numbertab = __pyx_mstate->__pyx_number_tab + 2;
     int8_t const cint_constants_1[] = {0,1,100};
-    int32_t const cint_constants_4[] = {36147052L,38472947L,91292869L,147591333L,195123576L};
+    int32_t const cint_constants_4[] = {24508157L,36147052L,38472947L,91292869L,195123576L};
     for (int i = 0; i < 8; i++) {
       numbertab[i] = PyLong_FromLong((i < 3 ? cint_constants_1[i - 0] : cint_constants_4[i - 3]));
       if (unlikely(!numbertab[i])) __PYX_ERR(0, 1, __pyx_L1_error)
@@ -25348,194 +26600,214 @@ static int __Pyx_CreateCodeObjects(__pyx_mstatetype *__pyx_mstate) {
     __pyx_mstate_global->__pyx_codeobj_tab[18] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_centroid, __pyx_mstate->__pyx_kp_b_iso88591_A_t2Ya, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[18])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 187};
+    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 172};
+    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_t};
+    __pyx_mstate_global->__pyx_codeobj_tab[19] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_transform, __pyx_mstate->__pyx_kp_b_iso88591_A_BgT_81_4Bd_G4r_BgT_81_4Bd_G4r, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[19])) goto bad;
+  }
+  {
+    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 195};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_tech};
-    __pyx_mstate_global->__pyx_codeobj_tab[19] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_setTech, __pyx_mstate->__pyx_kp_b_iso88591_A_HA, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[19])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[20] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_setTech, __pyx_mstate->__pyx_kp_b_iso88591_A_HA, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[20])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {6, 0, 0, 7, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 190};
+    const __Pyx_PyCode_New_function_description descr = {6, 0, 0, 7, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 198};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_layer, __pyx_mstate->__pyx_n_u_xbot_2, __pyx_mstate->__pyx_n_u_ybot_2, __pyx_mstate->__pyx_n_u_xtop_2, __pyx_mstate->__pyx_n_u_ytop_2, __pyx_mstate->__pyx_n_u_r};
-    __pyx_mstate_global->__pyx_codeobj_tab[20] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_addRect, __pyx_mstate->__pyx_kp_b_iso88591_A_D_vV1_6_A_q_G1F, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[20])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[21] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_addRect, __pyx_mstate->__pyx_kp_b_iso88591_A_D_vV1_6_A_q_G1F, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[21])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 6, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 199};
+    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 6, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 207};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_l, __pyx_mstate->__pyx_n_u_r, __pyx_mstate->__pyx_n_u_u, __pyx_mstate->__pyx_n_u_k, __pyx_mstate->__pyx_n_u_v};
-    __pyx_mstate_global->__pyx_codeobj_tab[21] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_dump, __pyx_mstate->__pyx_kp_b_iso88591_A_QgQd_E_Q_1A_T_a_E_Q_1_CuD_vQ_1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[21])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[22] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_dump, __pyx_mstate->__pyx_kp_b_iso88591_A_QgQd_E_Q_1A_T_a_E_Q_1_CuD_vQ_1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[22])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {3, 0, 0, 4, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 212};
+    const __Pyx_PyCode_New_function_description descr = {3, 0, 0, 4, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 220};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_name, __pyx_mstate->__pyx_n_u_inst_name, __pyx_mstate->__pyx_n_u_handle};
-    __pyx_mstate_global->__pyx_codeobj_tab[22] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_addUse, __pyx_mstate->__pyx_kp_b_iso88591_A_AT_E_Q_q, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[22])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[23] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_addUse, __pyx_mstate->__pyx_kp_b_iso88591_A_AT_E_Q_q, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[23])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {8, 0, 0, 8, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 219};
+    const __Pyx_PyCode_New_function_description descr = {8, 0, 0, 8, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 227};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_use, __pyx_mstate->__pyx_n_u_a_2, __pyx_mstate->__pyx_n_u_b_2, __pyx_mstate->__pyx_n_u_c_2, __pyx_mstate->__pyx_n_u_d_2, __pyx_mstate->__pyx_n_u_e_2, __pyx_mstate->__pyx_n_u_f_2};
-    __pyx_mstate_global->__pyx_codeobj_tab[23] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_setUseTransform, __pyx_mstate->__pyx_kp_b_iso88591_A_E_a_iq_3c_Cq, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[23])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[24] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_setUseTransform, __pyx_mstate->__pyx_kp_b_iso88591_A_E_a_iq_3c_Cq, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[24])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {3, 0, 0, 6, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 222};
+    const __Pyx_PyCode_New_function_description descr = {3, 0, 0, 6, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 230};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_db, __pyx_mstate->__pyx_n_u_transform, __pyx_mstate->__pyx_n_u_i, __pyx_mstate->__pyx_n_u_t, __pyx_mstate->__pyx_n_u_u};
-    __pyx_mstate_global->__pyx_codeobj_tab[24] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_dump_transistors_with_transform, __pyx_mstate->__pyx_kp_b_iso88591_A_Q_AT_CuIQd_q_E_Q_fAQax_q_AQlR, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[24])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[25] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_dump_transistors_with_transform, __pyx_mstate->__pyx_kp_b_iso88591_A_Q_AT_CuIQd_q_E_Q_fAQax_q_AQlR, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[25])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 235};
+    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 243};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_db};
-    __pyx_mstate_global->__pyx_codeobj_tab[25] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_dump_transistors, __pyx_mstate->__pyx_kp_b_iso88591_A_AT_3c_Cs, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[25])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[26] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_dump_transistors, __pyx_mstate->__pyx_kp_b_iso88591_A_AT_3c_Cs, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[26])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {3, 0, 0, 7, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 238};
+    const __Pyx_PyCode_New_function_description descr = {3, 0, 0, 7, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 246};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_db, __pyx_mstate->__pyx_n_u_transform, __pyx_mstate->__pyx_n_u_t, __pyx_mstate->__pyx_n_u_tt, __pyx_mstate->__pyx_n_u_u, __pyx_mstate->__pyx_n_u_tt};
-    __pyx_mstate_global->__pyx_codeobj_tab[26] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_get_transistors_with_transform, __pyx_mstate->__pyx_kp_b_iso88591_A_ARz_T_t1_Q_E_Q_aq_6_1H4SSTTXXY, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[26])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[27] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_get_transistors_with_transform, __pyx_mstate->__pyx_kp_b_iso88591_A_ARz_T_t1_Q_E_Q_aq_6_1H4SSTTXXY, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[27])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 250};
+    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 258};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_db};
-    __pyx_mstate_global->__pyx_codeobj_tab[27] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_get_transistors, __pyx_mstate->__pyx_kp_b_iso88591_A_t_2_4y_Cs_SPQ, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[27])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[28] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_get_transistors, __pyx_mstate->__pyx_kp_b_iso88591_A_t_2_4y_Cs_SPQ, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[28])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 4, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 253};
-    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_db, __pyx_mstate->__pyx_n_u_p, __pyx_mstate->__pyx_n_u_u};
-    __pyx_mstate_global->__pyx_codeobj_tab[28] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_getPins, __pyx_mstate->__pyx_kp_b_iso88591_A_A_E_Q_Qaq_881A_I, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[28])) goto bad;
+    const __Pyx_PyCode_New_function_description descr = {3, 0, 0, 9, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 262};
+    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_db, __pyx_mstate->__pyx_n_u_transform, __pyx_mstate->__pyx_n_u_copy, __pyx_mstate->__pyx_n_u_p, __pyx_mstate->__pyx_n_u_u, __pyx_mstate->__pyx_n_u_lab, __pyx_mstate->__pyx_n_u_k, __pyx_mstate->__pyx_n_u_v};
+    __pyx_mstate_global->__pyx_codeobj_tab[29] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_get_pins_with_transform, __pyx_mstate->__pyx_kp_b_iso88591_A_A_E_Q_Qaq_83K1DPQQRR_hhiij_a_C, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[29])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 16, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 265};
+    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 282};
+    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_db};
+    __pyx_mstate_global->__pyx_codeobj_tab[30] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_getPins, __pyx_mstate->__pyx_kp_b_iso88591_A_t_1D_S_3c, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[30])) goto bad;
+  }
+  {
+    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 16, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 289};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_l, __pyx_mstate->__pyx_n_u_r, __pyx_mstate->__pyx_n_u_poly_r, __pyx_mstate->__pyx_n_u_rp, __pyx_mstate->__pyx_n_u_i, __pyx_mstate->__pyx_n_u_poly_c, __pyx_mstate->__pyx_n_u_pc, __pyx_mstate->__pyx_n_u_pr, __pyx_mstate->__pyx_n_u_ndiff_r, __pyx_mstate->__pyx_n_u_ndiff_c, __pyx_mstate->__pyx_n_u_nc, __pyx_mstate->__pyx_n_u_nr, __pyx_mstate->__pyx_n_u_t, __pyx_mstate->__pyx_n_u_pdiff_r, __pyx_mstate->__pyx_n_u_pdiff_c};
-    __pyx_mstate_global->__pyx_codeobj_tab[29] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_find_transistors, __pyx_mstate->__pyx_kp_b_iso88591_A_A_7_T_WAQ_S_A_WAQ_2S_Q_F_gQa_r, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[29])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[31] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_find_transistors, __pyx_mstate->__pyx_kp_b_iso88591_A_A_7_T_WAQ_S_A_WAQ_2S_Q_F_gQa_r, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[31])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 10, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 414};
+    const __Pyx_PyCode_New_function_description descr = {5, 0, 0, 5, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 435};
+    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_xbot_2, __pyx_mstate->__pyx_n_u_ybot_2, __pyx_mstate->__pyx_n_u_xtop_2, __pyx_mstate->__pyx_n_u_ytop_2};
+    __pyx_mstate_global->__pyx_codeobj_tab[32] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_setBBox, __pyx_mstate->__pyx_kp_b_iso88591_A_HD_vV1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[32])) goto bad;
+  }
+  {
+    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 10, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 439};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_db, __pyx_mstate->__pyx_n_u_xbot_2, __pyx_mstate->__pyx_n_u_ybot_2, __pyx_mstate->__pyx_n_u_xtop_2, __pyx_mstate->__pyx_n_u_ytop_2, __pyx_mstate->__pyx_n_u_k, __pyx_mstate->__pyx_n_u_v, __pyx_mstate->__pyx_n_u_r, __pyx_mstate->__pyx_n_u_u};
-    __pyx_mstate_global->__pyx_codeobj_tab[30] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_getBbox, __pyx_mstate->__pyx_kp_b_iso88591_A_q_q_q_q_CuD_vQ_Q_1F_A_1A_1F_A, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[30])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[33] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_getBbox, __pyx_mstate->__pyx_kp_b_iso88591_A_t5_t5_t5_t5_CuD_vQ_Q_1F_A_1A_1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[33])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {3, 0, 0, 8, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 447};
+    const __Pyx_PyCode_New_function_description descr = {3, 0, 0, 8, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 472};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_db, __pyx_mstate->__pyx_n_u_fname, __pyx_mstate->__pyx_n_u_f_2, __pyx_mstate->__pyx_n_u_r, __pyx_mstate->__pyx_n_u_k, __pyx_mstate->__pyx_n_u_v, __pyx_mstate->__pyx_n_u_inst};
-    __pyx_mstate_global->__pyx_codeobj_tab[31] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_writeMagFile, __pyx_mstate->__pyx_kp_b_iso88591_A_V1A_V1G1D_V1A_V1L_AT_a_V1A_HAQ, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[31])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[34] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_writeMagFile, __pyx_mstate->__pyx_kp_b_iso88591_A_V1A_V1G1D_V1A_V1L_AT_a_V1A_HAQ, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[34])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {13, 0, 0, 14, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 488};
+    const __Pyx_PyCode_New_function_description descr = {13, 0, 0, 14, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 513};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_layer, __pyx_mstate->__pyx_n_u_xbot_2, __pyx_mstate->__pyx_n_u_ybot_2, __pyx_mstate->__pyx_n_u_xtop_2, __pyx_mstate->__pyx_n_u_ytop_2, __pyx_mstate->__pyx_n_u_pos, __pyx_mstate->__pyx_n_u_font, __pyx_mstate->__pyx_n_u_a_2, __pyx_mstate->__pyx_n_u_b_2, __pyx_mstate->__pyx_n_u_c_2, __pyx_mstate->__pyx_n_u_d_2, __pyx_mstate->__pyx_n_u_labname, __pyx_mstate->__pyx_n_u_l};
-    __pyx_mstate_global->__pyx_codeobj_tab[32] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_addLabel, __pyx_mstate->__pyx_kp_b_iso88591_A_E_vV6_fCs_S_G1Kq, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[32])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[35] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_addLabel, __pyx_mstate->__pyx_kp_b_iso88591_A_E_vV6_fCs_S_G1Kq, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[35])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {4, 0, 0, 4, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 495};
+    const __Pyx_PyCode_New_function_description descr = {4, 0, 0, 4, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 520};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_labname, __pyx_mstate->__pyx_n_u_port, __pyx_mstate->__pyx_n_u_directions};
-    __pyx_mstate_global->__pyx_codeobj_tab[33] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_setLabelPort, __pyx_mstate->__pyx_kp_b_iso88591_A_G1HHAV1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[33])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[36] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_setLabelPort, __pyx_mstate->__pyx_kp_b_iso88591_A_G1HHAV1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[36])) goto bad;
   }
   {
     const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 4, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 1};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_state, __pyx_mstate->__pyx_n_u_dict_2, __pyx_mstate->__pyx_n_u_use_setstate};
-    __pyx_mstate_global->__pyx_codeobj_tab[34] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_stringsource, __pyx_mstate->__pyx_n_u_reduce_cython, __pyx_mstate->__pyx_kp_b_iso88591_T_it7_gT_tST_G1F_a_vWE_Q_q_t87, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[34])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[37] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_stringsource, __pyx_mstate->__pyx_n_u_reduce_cython, __pyx_mstate->__pyx_kp_b_iso88591_T_IT_gT_NZ___G1F_a_vWE_Q_q_t6_S, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[37])) goto bad;
   }
   {
     const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 16};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_pyx_state};
-    __pyx_mstate_global->__pyx_codeobj_tab[35] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_stringsource, __pyx_mstate->__pyx_n_u_setstate_cython, __pyx_mstate->__pyx_kp_b_iso88591_6, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[35])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[38] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_stringsource, __pyx_mstate->__pyx_n_u_setstate_cython, __pyx_mstate->__pyx_kp_b_iso88591_6, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[38])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 3, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 509};
+    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 3, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 534};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_name, __pyx_mstate->__pyx_n_u_c_2};
-    __pyx_mstate_global->__pyx_codeobj_tab[36] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_createCell, __pyx_mstate->__pyx_kp_b_iso88591_A_D_F_81, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[36])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[39] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_createCell, __pyx_mstate->__pyx_kp_b_iso88591_A_D_F_81, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[39])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {7, 0, 0, 7, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 517};
+    const __Pyx_PyCode_New_function_description descr = {7, 0, 0, 7, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 542};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_name, __pyx_mstate->__pyx_n_u_layer, __pyx_mstate->__pyx_n_u_xbot_2, __pyx_mstate->__pyx_n_u_ybot_2, __pyx_mstate->__pyx_n_u_xtop_2, __pyx_mstate->__pyx_n_u_ytop_2};
-    __pyx_mstate_global->__pyx_codeobj_tab[37] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_addRectToCell, __pyx_mstate->__pyx_kp_b_iso88591_A_F_5_fF, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[37])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[40] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_addRectToCell, __pyx_mstate->__pyx_kp_b_iso88591_A_F_5_fF, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[40])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {3, 0, 0, 3, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 521};
+    const __Pyx_PyCode_New_function_description descr = {3, 0, 0, 3, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 546};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_name, __pyx_mstate->__pyx_n_u_tech};
-    __pyx_mstate_global->__pyx_codeobj_tab[38] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_setCellTech, __pyx_mstate->__pyx_kp_b_iso88591_A_F_5, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[38])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[41] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_setCellTech, __pyx_mstate->__pyx_kp_b_iso88591_A_F_5, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[41])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {4, 0, 0, 4, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 525};
+    const __Pyx_PyCode_New_function_description descr = {4, 0, 0, 4, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 550};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_name, __pyx_mstate->__pyx_n_u_new_cell, __pyx_mstate->__pyx_n_u_inst_name};
-    __pyx_mstate_global->__pyx_codeobj_tab[39] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_setCellUse, __pyx_mstate->__pyx_kp_b_iso88591_A_d_gQj, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[39])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[42] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_setCellUse, __pyx_mstate->__pyx_kp_b_iso88591_A_d_gQj, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[42])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {9, 0, 0, 9, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 529};
+    const __Pyx_PyCode_New_function_description descr = {9, 0, 0, 9, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 554};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_name, __pyx_mstate->__pyx_n_u_cell_inst, __pyx_mstate->__pyx_n_u_a_2, __pyx_mstate->__pyx_n_u_b_2, __pyx_mstate->__pyx_n_u_c_2, __pyx_mstate->__pyx_n_u_d_2, __pyx_mstate->__pyx_n_u_e_2, __pyx_mstate->__pyx_n_u_f_2};
-    __pyx_mstate_global->__pyx_codeobj_tab[40] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_setCellUseTransform, __pyx_mstate->__pyx_kp_b_iso88591_A_F_5_Cs_S_1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[40])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[43] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_setCellUseTransform, __pyx_mstate->__pyx_kp_b_iso88591_A_F_5_Cs_S_1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[43])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 533};
+    const __Pyx_PyCode_New_function_description descr = {6, 0, 0, 6, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 558};
+    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_name, __pyx_mstate->__pyx_n_u_xbot_2, __pyx_mstate->__pyx_n_u_ybot_2, __pyx_mstate->__pyx_n_u_xtop_2, __pyx_mstate->__pyx_n_u_ytop_2};
+    __pyx_mstate_global->__pyx_codeobj_tab[44] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_setCellBBox, __pyx_mstate->__pyx_kp_b_iso88591_A_F_5_vV1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[44])) goto bad;
+  }
+  {
+    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 562};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_c_2};
-    __pyx_mstate_global->__pyx_codeobj_tab[41] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_dump, __pyx_mstate->__pyx_kp_b_iso88591_A_E_Q_ar_a, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[41])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[45] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_dump, __pyx_mstate->__pyx_kp_b_iso88591_A_E_Q_ar_a, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[45])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 3, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 538};
+    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 3, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 567};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_name, __pyx_mstate->__pyx_n_u_t};
-    __pyx_mstate_global->__pyx_codeobj_tab[42] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_findCellTransistors, __pyx_mstate->__pyx_kp_b_iso88591_A_D_au_Q, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[42])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[46] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_findCellTransistors, __pyx_mstate->__pyx_kp_b_iso88591_A_D_au_Q, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[46])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 542};
+    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 571};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_c_2};
-    __pyx_mstate_global->__pyx_codeobj_tab[43] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_findAllTransistors, __pyx_mstate->__pyx_kp_b_iso88591_A_E_Q_AQ, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[43])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[47] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_findAllTransistors, __pyx_mstate->__pyx_kp_b_iso88591_A_E_Q_AQ, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[47])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 3, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 547};
+    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 3, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 576};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_name, __pyx_mstate->__pyx_n_u_cell_2};
-    __pyx_mstate_global->__pyx_codeobj_tab[44] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_dumpCellTransistors, __pyx_mstate->__pyx_kp_b_iso88591_A_t6_Qa, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[44])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[48] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_dumpCellTransistors, __pyx_mstate->__pyx_kp_b_iso88591_A_t6_Qa, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[48])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 3, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 553};
+    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 3, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 582};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_name, __pyx_mstate->__pyx_n_u_cell_2};
-    __pyx_mstate_global->__pyx_codeobj_tab[45] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_getCellTransistors, __pyx_mstate->__pyx_kp_b_iso88591_A_t6_t_1A, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[45])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[49] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_getCellTransistors, __pyx_mstate->__pyx_kp_b_iso88591_A_t6_t_1A, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[49])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 562};
+    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 591};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_name};
-    __pyx_mstate_global->__pyx_codeobj_tab[46] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_getCell, __pyx_mstate->__pyx_kp_b_iso88591_A_t6, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[46])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[50] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_getCell, __pyx_mstate->__pyx_kp_b_iso88591_A_t6, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[50])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {14, 0, 0, 14, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 567};
+    const __Pyx_PyCode_New_function_description descr = {14, 0, 0, 14, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 596};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_cell_name_str, __pyx_mstate->__pyx_n_u_layer, __pyx_mstate->__pyx_n_u_xbot_2, __pyx_mstate->__pyx_n_u_ybot_2, __pyx_mstate->__pyx_n_u_xtop_2, __pyx_mstate->__pyx_n_u_ytop_2, __pyx_mstate->__pyx_n_u_pos, __pyx_mstate->__pyx_n_u_font, __pyx_mstate->__pyx_n_u_a_2, __pyx_mstate->__pyx_n_u_b_2, __pyx_mstate->__pyx_n_u_c_2, __pyx_mstate->__pyx_n_u_d_2, __pyx_mstate->__pyx_n_u_labname};
-    __pyx_mstate_global->__pyx_codeobj_tab[47] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_addLabelToCell, __pyx_mstate->__pyx_kp_b_iso88591_A_F_7_fF_vUXX_aab, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[47])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[51] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_addLabelToCell, __pyx_mstate->__pyx_kp_b_iso88591_A_F_7_fF_vUXX_aab, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[51])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {5, 0, 0, 5, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 572};
+    const __Pyx_PyCode_New_function_description descr = {5, 0, 0, 5, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 601};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_cell_name_str, __pyx_mstate->__pyx_n_u_labname, __pyx_mstate->__pyx_n_u_port, __pyx_mstate->__pyx_n_u_directions};
-    __pyx_mstate_global->__pyx_codeobj_tab[48] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_setLabelPort, __pyx_mstate->__pyx_kp_b_iso88591_A_F_ay_a, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[48])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[52] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_setLabelPort, __pyx_mstate->__pyx_kp_b_iso88591_A_F_ay_a, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[52])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 576};
+    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 605};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_cell_name_str};
-    __pyx_mstate_global->__pyx_codeobj_tab[49] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_getCellPins, __pyx_mstate->__pyx_kp_b_iso88591_A_t6_2, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[49])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[53] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_MagDatabase_pyx, __pyx_mstate->__pyx_n_u_getCellPins, __pyx_mstate->__pyx_kp_b_iso88591_A_t6_2, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[53])) goto bad;
   }
   {
     const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 4, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 1};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_state, __pyx_mstate->__pyx_n_u_dict_2, __pyx_mstate->__pyx_n_u_use_setstate};
-    __pyx_mstate_global->__pyx_codeobj_tab[50] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_stringsource, __pyx_mstate->__pyx_n_u_reduce_cython, __pyx_mstate->__pyx_kp_b_iso88591_T_G1F_a_vWE_Q_q_t7_q_D_7_D_1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[50])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[54] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_stringsource, __pyx_mstate->__pyx_n_u_reduce_cython, __pyx_mstate->__pyx_kp_b_iso88591_T_G1F_a_vWE_Q_q_t7_q_D_7_D_1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[54])) goto bad;
   }
   {
     const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 16};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_pyx_state};
-    __pyx_mstate_global->__pyx_codeobj_tab[51] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_stringsource, __pyx_mstate->__pyx_n_u_setstate_cython, __pyx_mstate->__pyx_kp_b_iso88591__9, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[51])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[55] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_stringsource, __pyx_mstate->__pyx_n_u_setstate_cython, __pyx_mstate->__pyx_kp_b_iso88591__9, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[55])) goto bad;
   }
   {
     const __Pyx_PyCode_New_function_description descr = {3, 0, 0, 4, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 4};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_pyx_type, __pyx_mstate->__pyx_n_u_pyx_checksum, __pyx_mstate->__pyx_n_u_pyx_state, __pyx_mstate->__pyx_n_u_pyx_result};
-    __pyx_mstate_global->__pyx_codeobj_tab[52] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_stringsource, __pyx_mstate->__pyx_n_u_pyx_unpickle_Rect, __pyx_mstate->__pyx_kp_b_iso88591_q_0_kQR_4xq_7_awnA_1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[52])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[56] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_stringsource, __pyx_mstate->__pyx_n_u_pyx_unpickle_Rect, __pyx_mstate->__pyx_kp_b_iso88591_q_0_kQR_4xq_7_awnA_1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[56])) goto bad;
   }
   {
     const __Pyx_PyCode_New_function_description descr = {3, 0, 0, 4, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 4};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_pyx_type, __pyx_mstate->__pyx_n_u_pyx_checksum, __pyx_mstate->__pyx_n_u_pyx_state, __pyx_mstate->__pyx_n_u_pyx_result};
-    __pyx_mstate_global->__pyx_codeobj_tab[53] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_stringsource, __pyx_mstate->__pyx_n_u_pyx_unpickle_Transistor, __pyx_mstate->__pyx_kp_b_iso88591_q_0_kQR_XQa_7_A_1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[53])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[57] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_stringsource, __pyx_mstate->__pyx_n_u_pyx_unpickle_Transistor, __pyx_mstate->__pyx_kp_b_iso88591_q_0_kQR_XQa_7_A_1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[57])) goto bad;
   }
   {
     const __Pyx_PyCode_New_function_description descr = {3, 0, 0, 4, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 4};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_pyx_type, __pyx_mstate->__pyx_n_u_pyx_checksum, __pyx_mstate->__pyx_n_u_pyx_state, __pyx_mstate->__pyx_n_u_pyx_result};
-    __pyx_mstate_global->__pyx_codeobj_tab[54] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_stringsource, __pyx_mstate->__pyx_n_u_pyx_unpickle_Transform, __pyx_mstate->__pyx_kp_b_iso88591_q_0_kQR_9HAQ_7_1L_a_1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[54])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[58] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_stringsource, __pyx_mstate->__pyx_n_u_pyx_unpickle_Transform, __pyx_mstate->__pyx_kp_b_iso88591_q_0_kQR_9HAQ_7_1L_a_1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[58])) goto bad;
   }
   {
     const __Pyx_PyCode_New_function_description descr = {3, 0, 0, 4, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 4};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_pyx_type, __pyx_mstate->__pyx_n_u_pyx_checksum, __pyx_mstate->__pyx_n_u_pyx_state, __pyx_mstate->__pyx_n_u_pyx_result};
-    __pyx_mstate_global->__pyx_codeobj_tab[55] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_stringsource, __pyx_mstate->__pyx_n_u_pyx_unpickle_Cell, __pyx_mstate->__pyx_kp_b_iso88591_q_0_kQR_4xq_7_awnA_1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[55])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[59] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_stringsource, __pyx_mstate->__pyx_n_u_pyx_unpickle_Cell, __pyx_mstate->__pyx_kp_b_iso88591_q_0_kQR_4xq_7_awnA_1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[59])) goto bad;
   }
   {
     const __Pyx_PyCode_New_function_description descr = {3, 0, 0, 4, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 4};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_pyx_type, __pyx_mstate->__pyx_n_u_pyx_checksum, __pyx_mstate->__pyx_n_u_pyx_state, __pyx_mstate->__pyx_n_u_pyx_result};
-    __pyx_mstate_global->__pyx_codeobj_tab[56] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_stringsource, __pyx_mstate->__pyx_n_u_pyx_unpickle_MagDatabase, __pyx_mstate->__pyx_kp_b_iso88591_q_0_kQR_haq_7_QnN_1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[56])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[60] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_stringsource, __pyx_mstate->__pyx_n_u_pyx_unpickle_MagDatabase, __pyx_mstate->__pyx_kp_b_iso88591_q_0_kQR_haq_7_QnN_1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[60])) goto bad;
   }
   Py_DECREF(tuple_dedup_map);
   return 0;
@@ -27470,6 +28742,44 @@ static CYTHON_INLINE int __Pyx_PyObject_SetAttrStr(PyObject* obj, PyObject* attr
 }
 #endif
 
+/* RaiseTooManyValuesToUnpack */
+static CYTHON_INLINE void __Pyx_RaiseTooManyValuesError(Py_ssize_t expected) {
+    PyErr_Format(PyExc_ValueError,
+                 "too many values to unpack (expected %" CYTHON_FORMAT_SSIZE_T "d)", expected);
+}
+
+/* RaiseNeedMoreValuesToUnpack */
+static CYTHON_INLINE void __Pyx_RaiseNeedMoreValuesError(Py_ssize_t index) {
+    PyErr_Format(PyExc_ValueError,
+                 "need more than %" CYTHON_FORMAT_SSIZE_T "d value%.1s to unpack",
+                 index, (index == 1) ? "" : "s");
+}
+
+/* IterFinish */
+static CYTHON_INLINE int __Pyx_IterFinish(void) {
+    PyObject* exc_type;
+    __Pyx_PyThreadState_declare
+    __Pyx_PyThreadState_assign
+    exc_type = __Pyx_PyErr_CurrentExceptionType();
+    if (unlikely(exc_type)) {
+        if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration)))
+            return -1;
+        __Pyx_PyErr_Clear();
+        return 0;
+    }
+    return 0;
+}
+
+/* UnpackItemEndCheck */
+static int __Pyx_IternextUnpackEndCheck(PyObject *retval, Py_ssize_t expected) {
+    if (unlikely(retval)) {
+        Py_DECREF(retval);
+        __Pyx_RaiseTooManyValuesError(expected);
+        return -1;
+    }
+    return __Pyx_IterFinish();
+}
+
 /* PyObjectCall2Args (used by PyObjectCallMethod1) */
 static CYTHON_INLINE PyObject* __Pyx_PyObject_Call2Args(PyObject* function, PyObject* arg1, PyObject* arg2) {
     PyObject *args[3] = {NULL, arg1, arg2};
@@ -27627,21 +28937,6 @@ static PyObject *__Pyx_PyDict_GetItem(PyObject *d, PyObject* key) {
 }
 #endif
 
-/* IterFinish (used by dict_iter) */
-static CYTHON_INLINE int __Pyx_IterFinish(void) {
-    PyObject* exc_type;
-    __Pyx_PyThreadState_declare
-    __Pyx_PyThreadState_assign
-    exc_type = __Pyx_PyErr_CurrentExceptionType();
-    if (unlikely(exc_type)) {
-        if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration)))
-            return -1;
-        __Pyx_PyErr_Clear();
-        return 0;
-    }
-    return 0;
-}
-
 /* PyObjectCallNoArg (used by PyObjectCallMethod0) */
 static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func) {
     PyObject *arg[2] = {NULL, NULL};
@@ -27669,29 +28964,6 @@ static PyObject* __Pyx_PyObject_CallMethod0(PyObject* obj, PyObject* method_name
 bad:
     return result;
 #endif
-}
-
-/* RaiseNeedMoreValuesToUnpack (used by UnpackTuple2) */
-static CYTHON_INLINE void __Pyx_RaiseNeedMoreValuesError(Py_ssize_t index) {
-    PyErr_Format(PyExc_ValueError,
-                 "need more than %" CYTHON_FORMAT_SSIZE_T "d value%.1s to unpack",
-                 index, (index == 1) ? "" : "s");
-}
-
-/* RaiseTooManyValuesToUnpack (used by UnpackItemEndCheck) */
-static CYTHON_INLINE void __Pyx_RaiseTooManyValuesError(Py_ssize_t expected) {
-    PyErr_Format(PyExc_ValueError,
-                 "too many values to unpack (expected %" CYTHON_FORMAT_SSIZE_T "d)", expected);
-}
-
-/* UnpackItemEndCheck (used by UnpackTuple2) */
-static int __Pyx_IternextUnpackEndCheck(PyObject *retval, Py_ssize_t expected) {
-    if (unlikely(retval)) {
-        Py_DECREF(retval);
-        __Pyx_RaiseTooManyValuesError(expected);
-        return -1;
-    }
-    return __Pyx_IterFinish();
 }
 
 /* RaiseNoneIterError (used by UnpackTupleError) */
@@ -28097,6 +29369,144 @@ static CYTHON_INLINE PyObject* __Pyx_PyLong_AddObjC(PyObject *op1, PyObject *op2
 }
 #endif
 
+/* HasAttr (used by ImportImpl) */
+#if __PYX_LIMITED_VERSION_HEX < 0x030d0000
+static CYTHON_INLINE int __Pyx_HasAttr(PyObject *o, PyObject *n) {
+    PyObject *r;
+    if (unlikely(!PyUnicode_Check(n))) {
+        PyErr_SetString(PyExc_TypeError,
+                        "hasattr(): attribute name must be string");
+        return -1;
+    }
+    r = __Pyx_PyObject_GetAttrStrNoError(o, n);
+    if (!r) {
+        return (unlikely(PyErr_Occurred())) ? -1 : 0;
+    } else {
+        Py_DECREF(r);
+        return 1;
+    }
+}
+#endif
+
+/* ImportImpl (used by Import) */
+static int __Pyx__Import_GetModule(PyObject *qualname, PyObject **module) {
+    PyObject *imported_module = PyImport_GetModule(qualname);
+    if (unlikely(!imported_module)) {
+        *module = NULL;
+        if (PyErr_Occurred()) {
+            return -1;
+        }
+        return 0;
+    }
+    *module = imported_module;
+    return 1;
+}
+static int __Pyx__Import_Lookup(PyObject *qualname, PyObject *const *imported_names, Py_ssize_t len_imported_names, PyObject **module) {
+    PyObject *imported_module;
+    PyObject *top_level_package_name;
+    Py_ssize_t i;
+    int status, module_found;
+    Py_ssize_t dot_index;
+    module_found = __Pyx__Import_GetModule(qualname, &imported_module);
+    if (unlikely(!module_found || module_found == -1)) {
+        *module = NULL;
+        return module_found;
+    }
+    if (imported_names) {
+        for (i = 0; i < len_imported_names; i++) {
+            PyObject *imported_name = imported_names[i];
+#if __PYX_LIMITED_VERSION_HEX < 0x030d0000
+            int has_imported_attribute = PyObject_HasAttr(imported_module, imported_name);
+#else
+            int has_imported_attribute = PyObject_HasAttrWithError(imported_module, imported_name);
+            if (unlikely(has_imported_attribute == -1)) goto error;
+#endif
+            if (!has_imported_attribute) {
+                goto not_found;
+            }
+        }
+        *module = imported_module;
+        return 1;
+    }
+    dot_index = PyUnicode_FindChar(qualname, '.', 0, PY_SSIZE_T_MAX, 1);
+    if (dot_index == -1) {
+        *module = imported_module;
+        return 1;
+    }
+    if (unlikely(dot_index == -2)) goto error;
+    top_level_package_name = PyUnicode_Substring(qualname, 0, dot_index);
+    if (unlikely(!top_level_package_name)) goto error;
+    Py_DECREF(imported_module);
+    status = __Pyx__Import_GetModule(top_level_package_name, module);
+    Py_DECREF(top_level_package_name);
+    return status;
+error:
+    Py_DECREF(imported_module);
+    *module = NULL;
+    return -1;
+not_found:
+    Py_DECREF(imported_module);
+    *module = NULL;
+    return 0;
+}
+static PyObject *__Pyx__Import(PyObject *name, PyObject *const *imported_names, Py_ssize_t len_imported_names, PyObject *qualname, PyObject *moddict, int level) {
+    PyObject *module = 0;
+    PyObject *empty_dict = 0;
+    PyObject *from_list = 0;
+    int module_found;
+    if (!qualname) {
+        qualname = name;
+    }
+    module_found = __Pyx__Import_Lookup(qualname, imported_names, len_imported_names, &module);
+    if (likely(module_found == 1)) {
+        return module;
+    } else if (unlikely(module_found == -1)) {
+        return NULL;
+    }
+    empty_dict = PyDict_New();
+    if (unlikely(!empty_dict))
+        goto bad;
+    if (imported_names) {
+#if CYTHON_COMPILING_IN_CPYTHON
+        from_list = __Pyx_PyList_FromArray(imported_names, len_imported_names);
+        if (unlikely(!from_list))
+            goto bad;
+#else
+        from_list = PyList_New(len_imported_names);
+        if (unlikely(!from_list)) goto bad;
+        for (Py_ssize_t i=0; i<len_imported_names; ++i) {
+            if (PyList_SetItem(from_list, i, __Pyx_NewRef(imported_names[i])) < 0) goto bad;
+        }
+#endif
+    }
+    if (level == -1) {
+        const char* package_sep = strchr(__Pyx_MODULE_NAME, '.');
+        if (package_sep != (0)) {
+            module = PyImport_ImportModuleLevelObject(
+                name, moddict, empty_dict, from_list, 1);
+            if (unlikely(!module)) {
+                if (unlikely(!PyErr_ExceptionMatches(PyExc_ImportError)))
+                    goto bad;
+                PyErr_Clear();
+            }
+        }
+        level = 0;
+    }
+    if (!module) {
+        module = PyImport_ImportModuleLevelObject(
+            name, moddict, empty_dict, from_list, level);
+    }
+bad:
+    Py_XDECREF(from_list);
+    Py_XDECREF(empty_dict);
+    return module;
+}
+
+/* Import */
+static PyObject *__Pyx_Import(PyObject *name, PyObject *const *imported_names, Py_ssize_t len_imported_names, PyObject *qualname, int level) {
+    return __Pyx__Import(name, imported_names, len_imported_names, qualname, __pyx_mstate_global->__pyx_d, level);
+}
+
 /* PyObjectLookupSpecial */
 #if CYTHON_USE_PYTYPE_LOOKUP && CYTHON_USE_TYPE_SLOTS
 static CYTHON_INLINE PyObject* __Pyx__PyObject_LookupSpecial(PyObject* obj, PyObject* attr_name, int with_error) {
@@ -28399,6 +29809,26 @@ bad:
     Py_XDECREF(local_tb);
     return -1;
 #endif
+}
+
+/* ExtTypeTest */
+static CYTHON_INLINE int __Pyx_TypeTest(PyObject *obj, PyTypeObject *type) {
+    __Pyx_TypeName obj_type_name;
+    __Pyx_TypeName type_name;
+    if (unlikely(!type)) {
+        PyErr_SetString(PyExc_SystemError, "Missing type object");
+        return 0;
+    }
+    if (likely(__Pyx_TypeCheck(obj, type)))
+        return 1;
+    obj_type_name = __Pyx_PyType_GetFullyQualifiedName(Py_TYPE(obj));
+    type_name = __Pyx_PyType_GetFullyQualifiedName(type);
+    PyErr_Format(PyExc_TypeError,
+                 "Cannot convert " __Pyx_FMT_TYPENAME " to " __Pyx_FMT_TYPENAME,
+                 obj_type_name, type_name);
+    __Pyx_DECREF_TypeName(obj_type_name);
+    __Pyx_DECREF_TypeName(type_name);
+    return 0;
 }
 
 /* AllocateExtensionType */
@@ -28893,144 +30323,6 @@ __PYX_GOOD:
     Py_XDECREF(setstate);
     Py_XDECREF(setstate_cython);
     return ret;
-}
-
-/* HasAttr (used by ImportImpl) */
-#if __PYX_LIMITED_VERSION_HEX < 0x030d0000
-static CYTHON_INLINE int __Pyx_HasAttr(PyObject *o, PyObject *n) {
-    PyObject *r;
-    if (unlikely(!PyUnicode_Check(n))) {
-        PyErr_SetString(PyExc_TypeError,
-                        "hasattr(): attribute name must be string");
-        return -1;
-    }
-    r = __Pyx_PyObject_GetAttrStrNoError(o, n);
-    if (!r) {
-        return (unlikely(PyErr_Occurred())) ? -1 : 0;
-    } else {
-        Py_DECREF(r);
-        return 1;
-    }
-}
-#endif
-
-/* ImportImpl (used by Import) */
-static int __Pyx__Import_GetModule(PyObject *qualname, PyObject **module) {
-    PyObject *imported_module = PyImport_GetModule(qualname);
-    if (unlikely(!imported_module)) {
-        *module = NULL;
-        if (PyErr_Occurred()) {
-            return -1;
-        }
-        return 0;
-    }
-    *module = imported_module;
-    return 1;
-}
-static int __Pyx__Import_Lookup(PyObject *qualname, PyObject *const *imported_names, Py_ssize_t len_imported_names, PyObject **module) {
-    PyObject *imported_module;
-    PyObject *top_level_package_name;
-    Py_ssize_t i;
-    int status, module_found;
-    Py_ssize_t dot_index;
-    module_found = __Pyx__Import_GetModule(qualname, &imported_module);
-    if (unlikely(!module_found || module_found == -1)) {
-        *module = NULL;
-        return module_found;
-    }
-    if (imported_names) {
-        for (i = 0; i < len_imported_names; i++) {
-            PyObject *imported_name = imported_names[i];
-#if __PYX_LIMITED_VERSION_HEX < 0x030d0000
-            int has_imported_attribute = PyObject_HasAttr(imported_module, imported_name);
-#else
-            int has_imported_attribute = PyObject_HasAttrWithError(imported_module, imported_name);
-            if (unlikely(has_imported_attribute == -1)) goto error;
-#endif
-            if (!has_imported_attribute) {
-                goto not_found;
-            }
-        }
-        *module = imported_module;
-        return 1;
-    }
-    dot_index = PyUnicode_FindChar(qualname, '.', 0, PY_SSIZE_T_MAX, 1);
-    if (dot_index == -1) {
-        *module = imported_module;
-        return 1;
-    }
-    if (unlikely(dot_index == -2)) goto error;
-    top_level_package_name = PyUnicode_Substring(qualname, 0, dot_index);
-    if (unlikely(!top_level_package_name)) goto error;
-    Py_DECREF(imported_module);
-    status = __Pyx__Import_GetModule(top_level_package_name, module);
-    Py_DECREF(top_level_package_name);
-    return status;
-error:
-    Py_DECREF(imported_module);
-    *module = NULL;
-    return -1;
-not_found:
-    Py_DECREF(imported_module);
-    *module = NULL;
-    return 0;
-}
-static PyObject *__Pyx__Import(PyObject *name, PyObject *const *imported_names, Py_ssize_t len_imported_names, PyObject *qualname, PyObject *moddict, int level) {
-    PyObject *module = 0;
-    PyObject *empty_dict = 0;
-    PyObject *from_list = 0;
-    int module_found;
-    if (!qualname) {
-        qualname = name;
-    }
-    module_found = __Pyx__Import_Lookup(qualname, imported_names, len_imported_names, &module);
-    if (likely(module_found == 1)) {
-        return module;
-    } else if (unlikely(module_found == -1)) {
-        return NULL;
-    }
-    empty_dict = PyDict_New();
-    if (unlikely(!empty_dict))
-        goto bad;
-    if (imported_names) {
-#if CYTHON_COMPILING_IN_CPYTHON
-        from_list = __Pyx_PyList_FromArray(imported_names, len_imported_names);
-        if (unlikely(!from_list))
-            goto bad;
-#else
-        from_list = PyList_New(len_imported_names);
-        if (unlikely(!from_list)) goto bad;
-        for (Py_ssize_t i=0; i<len_imported_names; ++i) {
-            if (PyList_SetItem(from_list, i, __Pyx_NewRef(imported_names[i])) < 0) goto bad;
-        }
-#endif
-    }
-    if (level == -1) {
-        const char* package_sep = strchr(__Pyx_MODULE_NAME, '.');
-        if (package_sep != (0)) {
-            module = PyImport_ImportModuleLevelObject(
-                name, moddict, empty_dict, from_list, 1);
-            if (unlikely(!module)) {
-                if (unlikely(!PyErr_ExceptionMatches(PyExc_ImportError)))
-                    goto bad;
-                PyErr_Clear();
-            }
-        }
-        level = 0;
-    }
-    if (!module) {
-        module = PyImport_ImportModuleLevelObject(
-            name, moddict, empty_dict, from_list, level);
-    }
-bad:
-    Py_XDECREF(from_list);
-    Py_XDECREF(empty_dict);
-    return module;
-}
-
-/* Import */
-static PyObject *__Pyx_Import(PyObject *name, PyObject *const *imported_names, Py_ssize_t len_imported_names, PyObject *qualname, int level) {
-    return __Pyx__Import(name, imported_names, len_imported_names, qualname, __pyx_mstate_global->__pyx_d, level);
 }
 
 /* dict_setdefault (used by FetchCommonType) */

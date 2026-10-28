@@ -49,12 +49,16 @@ cdef class MagParser:
                 elif s.startswith("use"):
                     new_cell = s.split()[1]
 
-                    newfile = os.path.dirname(filename) + "/" + new_cell + ".mag"
+            
+                    if (len(s.split()) > 3):
+                        newfile = os.path.expanduser(s.split()[3]) + "/" + new_cell + ".mag"
+                    else:
+                        newfile = os.path.dirname(filename) + "/" + new_cell + ".mag"
 
                     try:
                         self.parse(newfile, db)
-                    except:
-                        pass
+                    except Exception as e:
+                        print(f"Error: {e} ")
 
                     cell_inst = db.setCellUse(cell_name_str, new_cell, s.split()[2])
 
@@ -70,6 +74,18 @@ cdef class MagParser:
                     f = int(parms[6])
 
                     db.setCellUseTransform(cell_name_str, cell_inst, a, b, c, d, e, f)
+
+                elif s.startswith("box"):
+
+                    parms = s.split()
+
+                    blx = int(parms[1])
+                    bly = int(parms[2])
+                    trx = int(parms[3])
+                    _try = int(parms[4])
+
+                    db.setCellBBox(new_cell, blx, bly, trx, _try)
+
 
                 elif s.startswith("<<"):
 
@@ -103,19 +119,26 @@ cdef class MagParser:
                     ss = s.split()
 
                     layer = ss[1] 
-                    xbot = int(ss[2])
-                    ybot = int(ss[3])
-                    xtop = int(ss[4])
-                    ytop = int(ss[5])
+                    
+                    idx = 2
+                    try:
+                        a = int(ss[2])
+                    except:
+                        idx = 3
 
-                    pos  = int(ss[6])
-                    font = ss[7]
-                    a    = int(ss[8])
-                    b    = int(ss[9])
-                    c    = int(ss[10])
-                    d    = int(ss[11])
+                    xbot = int(ss[idx])
+                    ybot = int(ss[idx + 1])
+                    xtop = int(ss[idx + 2])
+                    ytop = int(ss[idx + 3])
 
-                    labname = ss[12]
+                    pos  = int(ss[idx + 4])
+                    font = ss[idx + 5]
+                    a    = int(ss[idx + 6])
+                    b    = int(ss[idx + 7])
+                    c    = int(ss[idx + 8])
+                    d    = int(ss[idx + 9])
+
+                    labname = ss[idx + 10]
 
                     db.addLabelToCell(cell_name_str, layer, xbot, ybot, xtop, ytop, pos, font, a, b, c, d, labname)
 
