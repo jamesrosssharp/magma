@@ -532,7 +532,10 @@ cdef class MagDatabase:
         self.cells = {}
 
     def createCell(self, str name):
-        
+       
+        if name in self.cells:
+            return
+
         c = Cell()
 
         c.name = name 
@@ -549,7 +552,7 @@ cdef class MagDatabase:
 
     def setCellUse(self, str name, str new_cell, str inst_name):
 
-       return self.cells[name].addUse(new_cell, inst_name)
+        return self.cells[name].addUse(new_cell, inst_name)
 
     def setCellUseTransform(self, name, cell_inst, a, b, c, d, e, f):
     

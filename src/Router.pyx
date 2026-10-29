@@ -90,27 +90,50 @@ class Router:
         if (self.layer == 'metal1' and layer == 'metal2') or (self.layer == 'metal2' and layer == 'metal1'):
             l = 'via1'
 
-            self.cell.addRect(l, self.cursor_x - w / 2, self.cursor_y - h / 2, self.cursor_x + w / 2, self.cursor_y + w / 2)
+            self.cell.addRect(l, self.cursor_x - w / 2, self.cursor_y - h / 2, self.cursor_x + w / 2, self.cursor_y + h / 2)
 
             self.layer = layer
     
         elif (self.layer == 'metal2' and layer == 'metal3') or (self.layer == 'metal3' and layer == 'metal2'):
             l = 'via2'
 
-            self.cell.addRect(l, self.cursor_x - w / 2, self.cursor_y - h / 2, self.cursor_x + w / 2, self.cursor_y + w / 2)
+            self.cell.addRect(l, self.cursor_x - w / 2, self.cursor_y - h / 2, self.cursor_x + w / 2, self.cursor_y + h / 2)
 
             self.layer = layer
  
         elif (self.layer == 'metal1' and layer == 'locali') or (self.layer == 'locali' and layer == 'metal1'):
             l = 'viali'
 
-            self.cell.addRect(l, self.cursor_x - w / 2, self.cursor_y - h / 2, self.cursor_x + w / 2, self.cursor_y + w / 2)
+            self.cell.addRect(l, self.cursor_x - w / 2, self.cursor_y - h / 2, self.cursor_x + w / 2, self.cursor_y + h / 2)
 
             self.layer = layer
     
         else:
 
             raise ValueError(f"Unknown layer pair: {self.layer} {layer}")
+
+    def redundantVias(self, layer, w, h, sq):
+
+        if (self.layer == 'metal1' and layer == 'metal2') or (self.layer == 'metal2' and layer == 'metal1'):
+            l = 'via1'
+        elif (self.layer == 'metal2' and layer == 'metal3') or (self.layer == 'metal3' and layer == 'metal2'):
+            l = 'via2'
+        elif (self.layer == 'metal1' and layer == 'locali') or (self.layer == 'locali' and layer == 'metal1'):
+            l = 'viali'
+        else:
+            raise ValueError(f"Unknown layer pair: {self.layer} {layer}")
+
+        num_h = sq // (w)
+        num_v = sq // (h)
+
+        print(f"{num_h} {num_v}")
+
+        for i in range(-num_h//4 + 1, num_h//4 + 1):
+            for j in range(-num_v//4 + 1, num_v//4 + 1):
+                self.cell.addRect(l, self.cursor_x - w / 2 + i*2*w, self.cursor_y - h / 2 + j*2*h, self.cursor_x + w / 2 + i*2*w, self.cursor_y + h / 2 + j*2*h) 
+
+        self.layer = layer
+
 
     def push(self):
         self.stack.append((self.cursor_x, self.cursor_y, self.layer, self.width))

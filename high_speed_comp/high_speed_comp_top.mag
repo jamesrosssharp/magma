@@ -1,12 +1,12 @@
 magic
 tech sky130A
 magscale 1 2
-timestamp 1793181809
+timestamp 1793265126
 << metal1 >>
-rect -300 5400 -100 5600
+rect -800 5400 -600 5600
 rect 1000 5400 1200 5600
 rect 2200 5400 2400 5600
-rect 3000 5400 3200 5600
+rect 3400 5400 3600 5600
 rect 600 -2600 800 -2400
 rect 2000 -2600 2200 -2400
 use strong_arm_latch_routed  x1
@@ -50,12 +50,12 @@ flabel metal1 600 -2600 800 -2400 0 FreeSans 1600 0 0 0 VINP
 port 0 nsew
 flabel metal1 2000 -2600 2108 -2400 0 FreeSans 1600 0 0 0 VINN
 port 1 nsew
-flabel metal1 3000 5400 3200 5600 0 FreeSans 1600 0 0 0 VSS
-port 3 nsew
 flabel metal1 1000 5400 1200 5600 0 FreeSans 1600 0 0 0 COMP_OUT
 port 5 nsew
 flabel metal1 2200 5400 2400 5600 0 FreeSans 1600 0 0 0 CLK
 port 4 nsew
-flabel metal1 -300 5400 -100 5600 0 FreeSans 1600 0 0 0 VDD
+flabel metal1 -800 5400 -600 5600 0 FreeSans 1600 0 0 0 VDD
 port 2 nsew
+flabel metal1 3400 5400 3600 5600 0 FreeSans 1600 0 0 0 VSS
+port 3 nsew
 << end >>

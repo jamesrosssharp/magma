@@ -47,14 +47,51 @@ for ppp in pp:
 
 a = p['self']['VDD'].centroid()
 b = p['children']['x2']['self']['VDD'].centroid()
+c = p['children']['x9']['self']['VPWR'].centroid()
+d = p['children']['x1']['self']['VDD'].centroid()
 
-mw1 = 200
+mw1 = 400
 
-r.begin(a[0], a[1], "metal1")
-r.routeTo('s', b[1], mw1)
-r.routeTo('e', b[0], mw1)
+r.begin  (a[0], a[1], "metal1")
+r.routeTo('s',  c[1],  mw1)
+r.push()
+r.routeTo('e',  c[0], 100)
+r.pop()
+r.routeTo('s',  b[1],  mw1)
+r.push()
+r.routeTo('e',  b[0],  200)
+r.pop()
+r.routeTo('s',  d[1],  mw1)
+r.routeTo('e',  d[0],  200)
 
+# Route VSS
 
+# 1. Route digital
+
+a = p['self']['VSS'].centroid()
+b = p['children']['x8']['self']['VGND'].centroid()
+c = p['children']['x2']['self']['VSS'].centroid()
+d = p['children']['x1']['self']['VSS'].centroid()
+
+mw1 = 400
+
+r.begin  (a[0], a[1], "metal1")
+r.routeTo('s',  b[1],  mw1)
+r.push()
+r.routeTo('w',  b[0],  100)
+r.pop()
+r.routeTo('s',  c[1] - 300,  mw1)
+r.push()
+r.via('metal2', 60, 60)
+r.routeTo('w', c[0], 200)
+r.via('metal1', 60, 60)
+r.routeTo('n', c[1], 100)
+r.pop()
+r.routeTo('s', d[1] - 200, mw1)
+r.via('metal2', 60, 60)
+r.routeTo('w', d[0], 200)
+r.via('metal1', 60, 60)
+r.routeTo('n', d[1], 100)
 
 top.writeMagFile(db, "high_speed_comp/high_speed_comp_top_routed.mag")
 

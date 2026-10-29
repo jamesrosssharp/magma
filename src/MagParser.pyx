@@ -123,7 +123,7 @@ cdef class MagParser:
                     idx = 2
                     try:
                         a = int(ss[2])
-                    except:
+                    except Exception as e:
                         idx = 3
 
                     xbot = int(ss[idx])
@@ -139,6 +139,8 @@ cdef class MagParser:
                     d    = int(ss[idx + 9])
 
                     labname = ss[idx + 10]
+
+                    print(f"{cell_name_str} {labname}")
 
                     db.addLabelToCell(cell_name_str, layer, xbot, ybot, xtop, ytop, pos, font, a, b, c, d, labname)
 

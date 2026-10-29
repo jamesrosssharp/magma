@@ -1,56 +1,74 @@
 magic
 tech sky130A
 magscale 1 2
-timestamp 1793181826
+timestamp 1793268030
 << checkpaint >>
-rect -425 -3363 3517 5600
+rect -900 -3363 3700 5700
 << metal1 >>
-rect -300 5400 -100 5600
+rect -800 5400 -600 5600
 rect 1000 5400 1200 5600
 rect 2200 5400 2400 5600
-rect 3000 5400 3200 5600
+rect 3400 5400 3600 5600
 rect 600 -2600 800 -2400
 rect 2000 -2600 2200 -2400
 rect 594 -2550 750 -2450
 rect 594 -2550 694 -2047
 rect 2004 -2550 2175 -2450
 rect 2075 -2550 2175 -2036
-rect -300 3389 -100 5600
-rect -300 3389 1481 3589
+rect -900 4886 -500 5700
+rect -750 5036 45 5136
+rect -900 3289 -500 5286
+rect -800 3389 1481 3589
+rect -900 927 -500 3689
+rect -800 1027 -2 1227
+rect 3300 4349 3700 5700
+rect 2886 4499 3550 4599
+rect 3300 1400 3700 4749
+rect 650 1550 750 1950
+rect 3300 -2500 3700 1800
+rect 1335 -2350 1435 -2050
+<< via1 >>
+rect 3470 1570 3530 1630
+rect 670 1570 730 1630
+rect 3470 -2330 3530 -2270
+rect 1355 -2330 1415 -2270
+<< metal2 >>
+rect 600 1500 3600 1700
+rect 1285 -2400 3600 -2200
 use strong_arm_latch_routed  x1
-timestamp 1793181726
+timestamp 1793267930
 transform 1 0 -701 0 1 1163
 box -425 -3363 3517 719
 use post_amplifier_routed  x2
-timestamp 1793181726
+timestamp 1793267930
 transform 1 0 -545 0 1 3167
 box -211 -1367 2860 422
 use sky130_fd_sc_hd__dfxtp_2  x3
-timestamp 1793181726
+timestamp 1793267930
 transform 1 0 38 0 1 4548
 box -38 -48 1602 592
 use sky130_fd_sc_hd__clkinv_4  x4
-timestamp 1793181726
+timestamp 1793267930
 transform 1 0 1970 0 1 4548
 box -38 -48 682 592
 use sky130_fd_sc_hd__decap_3  x5
-timestamp 1793181726
+timestamp 1793267930
 transform 1 0 1602 0 1 4548
 box -38 -48 314 592
 use sky130_fd_sc_hd__tapvpwrvgnd_1  x6
-timestamp 1793181726
+timestamp 1793267930
 transform 1 0 1878 0 1 4548
 box -38 -48 130 592
 use sky130_fd_sc_hd__decap_3  x7
-timestamp 1793181726
+timestamp 1793267930
 transform 1 0 2614 0 1 4548
 box -38 -48 314 592
 use sky130_fd_sc_hd__tapvpwrvgnd_1  x8
-timestamp 1793181726
+timestamp 1793267930
 transform 1 0 2890 0 1 4548
 box -38 -48 130 592
 use sky130_fd_sc_hd__tapvpwrvgnd_1  x9
-timestamp 1793181726
+timestamp 1793267930
 transform 1 0 -53 0 1 4548
 box -38 -48 130 592
 << labels >>
@@ -58,12 +76,12 @@ flabel metal1 600 -2600 800 -2400 0 FreeSans 1600 0 0 0 VINP
 port 0 nsew
 flabel metal1 2000 -2600 2108 -2400 0 FreeSans 1600 0 0 0 VINN
 port 1 nsew
-flabel metal1 3000 5400 3200 5600 0 FreeSans 1600 0 0 0 VSS
-port 3 nsew
 flabel metal1 1000 5400 1200 5600 0 FreeSans 1600 0 0 0 COMP_OUT
 port 5 nsew
 flabel metal1 2200 5400 2400 5600 0 FreeSans 1600 0 0 0 CLK
 port 4 nsew
-flabel metal1 -300 5400 -100 5600 0 FreeSans 1600 0 0 0 VDD
+flabel metal1 -800 5400 -600 5600 0 FreeSans 1600 0 0 0 VDD
 port 2 nsew
+flabel metal1 3400 5400 3600 5600 0 FreeSans 1600 0 0 0 VSS
+port 3 nsew
 << end >>
