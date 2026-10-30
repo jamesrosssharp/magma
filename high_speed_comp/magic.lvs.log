@@ -16,39 +16,36 @@ The following types are not handled by extraction and will be treated as non-ele
 Scaled tech values by 2 / 1 to match internal grid scaling
 Loading sky130A Device Generator Menu ...
 Using technology "sky130A", version 1.0.495-0-ga918dc7
-File <high_speed_comp_top_routed.mag> is already locked by pid 6378.  Opening read-only.
 Cell high_speed_comp_top_routed read from current working directory
-File </home/jrsharp/old_home_mnt/asic/sky130_pdk/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag/sky130_fd_sc_hd__tapvpwrvgnd_1.mag> is already locked by pid 6378.  Opening read-only.
 Cell sky130_fd_sc_hd__tapvpwrvgnd_1 read from path /home/jrsharp/old_home_mnt/asic/sky130_pdk/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
-File <sky130_fd_sc_hd__decap_3.mag> is already locked by pid 6378.  Opening read-only.
+Warning: cell <sky130_fd_sc_hd__decap_3> from file sky130_fd_sc_hd__decap_3.mag is not writeable
 Cell sky130_fd_sc_hd__decap_3 read from current working directory
-File </home/jrsharp/old_home_mnt/asic/sky130_pdk/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag/sky130_fd_sc_hd__clkinv_4.mag> is already locked by pid 6378.  Opening read-only.
 Cell sky130_fd_sc_hd__clkinv_4 read from path /home/jrsharp/old_home_mnt/asic/sky130_pdk/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
-File <sky130_fd_sc_hd__dfxtp_2.mag> is already locked by pid 6378.  Opening read-only.
+Warning: cell <sky130_fd_sc_hd__dfxtp_2> from file sky130_fd_sc_hd__dfxtp_2.mag is not writeable
 Cell sky130_fd_sc_hd__dfxtp_2 read from current working directory
-File <post_amplifier_routed.mag> is already locked by pid 6378.  Opening read-only.
+Warning: cell <post_amplifier_routed> from file post_amplifier_routed.mag is not writeable
 Cell post_amplifier_routed read from current working directory
-File <sky130_fd_pr__pfet_01v8_5ETXLA.mag> is already locked by pid 6378.  Opening read-only.
+Warning: cell <sky130_fd_pr__pfet_01v8_5ETXLA> from file sky130_fd_pr__pfet_01v8_5ETXLA.mag is not writeable
 Cell sky130_fd_pr__pfet_01v8_5ETXLA read from current working directory
-File <sky130_fd_pr__nfet_01v8_D6NL62.mag> is already locked by pid 6378.  Opening read-only.
+Warning: cell <sky130_fd_pr__nfet_01v8_D6NL62> from file sky130_fd_pr__nfet_01v8_D6NL62.mag is not writeable
 Cell sky130_fd_pr__nfet_01v8_D6NL62 read from current working directory
-File <strong_arm_latch_routed.mag> is already locked by pid 6378.  Opening read-only.
+Warning: cell <strong_arm_latch_routed> from file strong_arm_latch_routed.mag is not writeable
 Cell strong_arm_latch_routed read from current working directory
-File <sky130_fd_pr__pfet_01v8_MV5BJT.mag> is already locked by pid 6378.  Opening read-only.
+Warning: cell <sky130_fd_pr__pfet_01v8_MV5BJT> from file sky130_fd_pr__pfet_01v8_MV5BJT.mag is not writeable
 Cell sky130_fd_pr__pfet_01v8_MV5BJT read from current working directory
-File <sky130_fd_pr__pfet_01v8_7PVLUA.mag> is already locked by pid 6378.  Opening read-only.
+Warning: cell <sky130_fd_pr__pfet_01v8_7PVLUA> from file sky130_fd_pr__pfet_01v8_7PVLUA.mag is not writeable
 Cell sky130_fd_pr__pfet_01v8_7PVLUA read from current working directory
-File <sky130_fd_pr__pfet_01v8_NRXS53.mag> is already locked by pid 6378.  Opening read-only.
+Warning: cell <sky130_fd_pr__pfet_01v8_NRXS53> from file sky130_fd_pr__pfet_01v8_NRXS53.mag is not writeable
 Cell sky130_fd_pr__pfet_01v8_NRXS53 read from current working directory
-File <sky130_fd_pr__pfet_01v8_CZ2BPM.mag> is already locked by pid 6378.  Opening read-only.
+Warning: cell <sky130_fd_pr__pfet_01v8_CZ2BPM> from file sky130_fd_pr__pfet_01v8_CZ2BPM.mag is not writeable
 Cell sky130_fd_pr__pfet_01v8_CZ2BPM read from current working directory
-File <sky130_fd_pr__nfet_01v8_WXMB3T.mag> is already locked by pid 6378.  Opening read-only.
+Warning: cell <sky130_fd_pr__nfet_01v8_WXMB3T> from file sky130_fd_pr__nfet_01v8_WXMB3T.mag is not writeable
 Cell sky130_fd_pr__nfet_01v8_WXMB3T read from current working directory
-File <sky130_fd_pr__nfet_01v8_CQH6Q5.mag> is already locked by pid 6378.  Opening read-only.
+Warning: cell <sky130_fd_pr__nfet_01v8_CQH6Q5> from file sky130_fd_pr__nfet_01v8_CQH6Q5.mag is not writeable
 Cell sky130_fd_pr__nfet_01v8_CQH6Q5 read from current working directory
-File <sky130_fd_pr__nfet_01v8_lvt_URSRNG.mag> is already locked by pid 6378.  Opening read-only.
+Warning: cell <sky130_fd_pr__nfet_01v8_lvt_URSRNG> from file sky130_fd_pr__nfet_01v8_lvt_URSRNG.mag is not writeable
 Cell sky130_fd_pr__nfet_01v8_lvt_URSRNG read from current working directory
-File <sky130_fd_pr__nfet_01v8_lvt_GVGYYV.mag> is already locked by pid 6378.  Opening read-only.
+Warning: cell <sky130_fd_pr__nfet_01v8_lvt_GVGYYV> from file sky130_fd_pr__nfet_01v8_lvt_GVGYYV.mag is not writeable
 Cell sky130_fd_pr__nfet_01v8_lvt_GVGYYV read from current working directory
 Processing timestamp mismatches.
 Timestamp mismatches found in these cells: sky130_fd_sc_hd__tapvpwrvgnd_1, sky130_fd_sc_hd__decap_3, sky130_fd_sc_hd__clkinv_4, sky130_fd_sc_hd__dfxtp_2, post_amplifier_routed, strong_arm_latch_routed, sky130_fd_pr__pfet_01v8_MV5BJT, sky130_fd_pr__pfet_01v8_7PVLUA, sky130_fd_pr__pfet_01v8_NRXS53, sky130_fd_pr__pfet_01v8_CZ2BPM, sky130_fd_pr__nfet_01v8_WXMB3T, sky130_fd_pr__nfet_01v8_CQH6Q5, sky130_fd_pr__nfet_01v8_lvt_URSRNG, sky130_fd_pr__nfet_01v8_lvt_GVGYYV.
