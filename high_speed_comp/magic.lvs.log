@@ -1,0 +1,90 @@
+
+Magic 8.3 revision 676 - Compiled on Mon Jul 20 10:33:11 UTC 2026.
+Starting magic under Tcl interpreter
+Using the terminal as the console.
+Using NULL graphics device.
+Processing system .magicrc file
+Switching to WIRING tool.
+Switching to NETLIST tool.
+Switching to PICK tool.
+Switching to BOX tool.
+Sourcing design .magicrc for technology sky130A ...
+2 Magic internal units = 1 Lambda
+Input style sky130(): scaleFactor=2, multiplier=2
+The following types are not handled by extraction and will be treated as non-electrical types:
+    ubm 
+Scaled tech values by 2 / 1 to match internal grid scaling
+Loading sky130A Device Generator Menu ...
+Using technology "sky130A", version 1.0.495-0-ga918dc7
+File <high_speed_comp_top_routed.mag> is already locked by pid 6378.  Opening read-only.
+Cell high_speed_comp_top_routed read from current working directory
+File </home/jrsharp/old_home_mnt/asic/sky130_pdk/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag/sky130_fd_sc_hd__tapvpwrvgnd_1.mag> is already locked by pid 6378.  Opening read-only.
+Cell sky130_fd_sc_hd__tapvpwrvgnd_1 read from path /home/jrsharp/old_home_mnt/asic/sky130_pdk/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
+File <sky130_fd_sc_hd__decap_3.mag> is already locked by pid 6378.  Opening read-only.
+Cell sky130_fd_sc_hd__decap_3 read from current working directory
+File </home/jrsharp/old_home_mnt/asic/sky130_pdk/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag/sky130_fd_sc_hd__clkinv_4.mag> is already locked by pid 6378.  Opening read-only.
+Cell sky130_fd_sc_hd__clkinv_4 read from path /home/jrsharp/old_home_mnt/asic/sky130_pdk/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
+File <sky130_fd_sc_hd__dfxtp_2.mag> is already locked by pid 6378.  Opening read-only.
+Cell sky130_fd_sc_hd__dfxtp_2 read from current working directory
+File <post_amplifier_routed.mag> is already locked by pid 6378.  Opening read-only.
+Cell post_amplifier_routed read from current working directory
+File <sky130_fd_pr__pfet_01v8_5ETXLA.mag> is already locked by pid 6378.  Opening read-only.
+Cell sky130_fd_pr__pfet_01v8_5ETXLA read from current working directory
+File <sky130_fd_pr__nfet_01v8_D6NL62.mag> is already locked by pid 6378.  Opening read-only.
+Cell sky130_fd_pr__nfet_01v8_D6NL62 read from current working directory
+File <strong_arm_latch_routed.mag> is already locked by pid 6378.  Opening read-only.
+Cell strong_arm_latch_routed read from current working directory
+File <sky130_fd_pr__pfet_01v8_MV5BJT.mag> is already locked by pid 6378.  Opening read-only.
+Cell sky130_fd_pr__pfet_01v8_MV5BJT read from current working directory
+File <sky130_fd_pr__pfet_01v8_7PVLUA.mag> is already locked by pid 6378.  Opening read-only.
+Cell sky130_fd_pr__pfet_01v8_7PVLUA read from current working directory
+File <sky130_fd_pr__pfet_01v8_NRXS53.mag> is already locked by pid 6378.  Opening read-only.
+Cell sky130_fd_pr__pfet_01v8_NRXS53 read from current working directory
+File <sky130_fd_pr__pfet_01v8_CZ2BPM.mag> is already locked by pid 6378.  Opening read-only.
+Cell sky130_fd_pr__pfet_01v8_CZ2BPM read from current working directory
+File <sky130_fd_pr__nfet_01v8_WXMB3T.mag> is already locked by pid 6378.  Opening read-only.
+Cell sky130_fd_pr__nfet_01v8_WXMB3T read from current working directory
+File <sky130_fd_pr__nfet_01v8_CQH6Q5.mag> is already locked by pid 6378.  Opening read-only.
+Cell sky130_fd_pr__nfet_01v8_CQH6Q5 read from current working directory
+File <sky130_fd_pr__nfet_01v8_lvt_URSRNG.mag> is already locked by pid 6378.  Opening read-only.
+Cell sky130_fd_pr__nfet_01v8_lvt_URSRNG read from current working directory
+File <sky130_fd_pr__nfet_01v8_lvt_GVGYYV.mag> is already locked by pid 6378.  Opening read-only.
+Cell sky130_fd_pr__nfet_01v8_lvt_GVGYYV read from current working directory
+Processing timestamp mismatches.
+Timestamp mismatches found in these cells: sky130_fd_sc_hd__tapvpwrvgnd_1, sky130_fd_sc_hd__decap_3, sky130_fd_sc_hd__clkinv_4, sky130_fd_sc_hd__dfxtp_2, post_amplifier_routed, strong_arm_latch_routed, sky130_fd_pr__pfet_01v8_MV5BJT, sky130_fd_pr__pfet_01v8_7PVLUA, sky130_fd_pr__pfet_01v8_NRXS53, sky130_fd_pr__pfet_01v8_CZ2BPM, sky130_fd_pr__nfet_01v8_WXMB3T, sky130_fd_pr__nfet_01v8_CQH6Q5, sky130_fd_pr__nfet_01v8_lvt_URSRNG, sky130_fd_pr__nfet_01v8_lvt_GVGYYV.
+Extracting sky130_fd_sc_hd__tapvpwrvgnd_1 into /home/jrsharp/old_home_mnt/asic/sky130_pdk/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag/sky130_fd_sc_hd__tapvpwrvgnd_1.ext:
+Processing sky130_fd_sc_hd__tapvpwrvgnd_1
+Extracting sky130_fd_sc_hd__decap_3 into sky130_fd_sc_hd__decap_3.ext:
+Processing sky130_fd_sc_hd__decap_3
+sky130_fd_sc_hd__decap_3: 2 warnings
+Extracting sky130_fd_sc_hd__clkinv_4 into /home/jrsharp/old_home_mnt/asic/sky130_pdk/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag/sky130_fd_sc_hd__clkinv_4.ext:
+Processing sky130_fd_sc_hd__clkinv_4
+Extracting sky130_fd_sc_hd__dfxtp_2 into sky130_fd_sc_hd__dfxtp_2.ext:
+Processing sky130_fd_sc_hd__dfxtp_2
+Extracting sky130_fd_pr__pfet_01v8_5ETXLA into sky130_fd_pr__pfet_01v8_5ETXLA.ext:
+Processing sky130_fd_pr__pfet_01v8_5ETXLA
+Extracting sky130_fd_pr__nfet_01v8_D6NL62 into sky130_fd_pr__nfet_01v8_D6NL62.ext:
+Processing sky130_fd_pr__nfet_01v8_D6NL62
+Extracting post_amplifier_routed into post_amplifier_routed.ext:
+Processing post_amplifier_routed
+Extracting sky130_fd_pr__pfet_01v8_MV5BJT into sky130_fd_pr__pfet_01v8_MV5BJT.ext:
+Processing sky130_fd_pr__pfet_01v8_MV5BJT
+Extracting sky130_fd_pr__pfet_01v8_7PVLUA into sky130_fd_pr__pfet_01v8_7PVLUA.ext:
+Processing sky130_fd_pr__pfet_01v8_7PVLUA
+Extracting sky130_fd_pr__pfet_01v8_NRXS53 into sky130_fd_pr__pfet_01v8_NRXS53.ext:
+Processing sky130_fd_pr__pfet_01v8_NRXS53
+Extracting sky130_fd_pr__pfet_01v8_CZ2BPM into sky130_fd_pr__pfet_01v8_CZ2BPM.ext:
+Processing sky130_fd_pr__pfet_01v8_CZ2BPM
+Extracting sky130_fd_pr__nfet_01v8_WXMB3T into sky130_fd_pr__nfet_01v8_WXMB3T.ext:
+Processing sky130_fd_pr__nfet_01v8_WXMB3T
+Extracting sky130_fd_pr__nfet_01v8_CQH6Q5 into sky130_fd_pr__nfet_01v8_CQH6Q5.ext:
+Processing sky130_fd_pr__nfet_01v8_CQH6Q5
+Extracting sky130_fd_pr__nfet_01v8_lvt_URSRNG into sky130_fd_pr__nfet_01v8_lvt_URSRNG.ext:
+Processing sky130_fd_pr__nfet_01v8_lvt_URSRNG
+Extracting sky130_fd_pr__nfet_01v8_lvt_GVGYYV into sky130_fd_pr__nfet_01v8_lvt_GVGYYV.ext:
+Processing sky130_fd_pr__nfet_01v8_lvt_GVGYYV
+Extracting strong_arm_latch_routed into strong_arm_latch_routed.ext:
+Processing strong_arm_latch_routed
+Extracting high_speed_comp_top_routed into high_speed_comp_top_routed.ext:
+Processing high_speed_comp_top_routed
+exttospice finished.
