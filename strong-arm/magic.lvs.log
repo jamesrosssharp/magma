@@ -16,23 +16,22 @@ The following types are not handled by extraction and will be treated as non-ele
 Scaled tech values by 2 / 1 to match internal grid scaling
 Loading sky130A Device Generator Menu ...
 Using technology "sky130A", version 1.0.495-0-ga918dc7
-File <strong_arm_latch_routed.mag> is already locked by pid 6169.  Opening read-only.
+File <strong_arm_latch_routed.mag> is already locked by pid 6378.  Opening read-only.
 Cell strong_arm_latch_routed read from current working directory
-File <sky130_fd_pr__pfet_01v8_MV5BJT.mag> is already locked by pid 6169.  Opening read-only.
+File <sky130_fd_pr__pfet_01v8_MV5BJT.mag> is already locked by pid 6378.  Opening read-only.
 Cell sky130_fd_pr__pfet_01v8_MV5BJT read from current working directory
-File <sky130_fd_pr__pfet_01v8_7PVLUA.mag> is already locked by pid 6169.  Opening read-only.
+File <sky130_fd_pr__pfet_01v8_7PVLUA.mag> is already locked by pid 6378.  Opening read-only.
 Cell sky130_fd_pr__pfet_01v8_7PVLUA read from current working directory
-File <sky130_fd_pr__pfet_01v8_NRXS53.mag> is already locked by pid 6169.  Opening read-only.
+File <sky130_fd_pr__pfet_01v8_NRXS53.mag> is already locked by pid 6378.  Opening read-only.
 Cell sky130_fd_pr__pfet_01v8_NRXS53 read from current working directory
-File <sky130_fd_pr__pfet_01v8_CZ2BPM.mag> is already locked by pid 6169.  Opening read-only.
+File <sky130_fd_pr__pfet_01v8_CZ2BPM.mag> is already locked by pid 6378.  Opening read-only.
 Cell sky130_fd_pr__pfet_01v8_CZ2BPM read from current working directory
-File <sky130_fd_pr__nfet_01v8_WXMB3T.mag> is already locked by pid 6169.  Opening read-only.
+File <sky130_fd_pr__nfet_01v8_WXMB3T.mag> is already locked by pid 6378.  Opening read-only.
 Cell sky130_fd_pr__nfet_01v8_WXMB3T read from current working directory
-File <sky130_fd_pr__nfet_01v8_CQH6Q5.mag> is already locked by pid 6169.  Opening read-only.
 Cell sky130_fd_pr__nfet_01v8_CQH6Q5 read from current working directory
-File <sky130_fd_pr__nfet_01v8_lvt_URSRNG.mag> is already locked by pid 6169.  Opening read-only.
+File <sky130_fd_pr__nfet_01v8_lvt_URSRNG.mag> is already locked by pid 6378.  Opening read-only.
 Cell sky130_fd_pr__nfet_01v8_lvt_URSRNG read from current working directory
-File <sky130_fd_pr__nfet_01v8_lvt_GVGYYV.mag> is already locked by pid 6169.  Opening read-only.
+File <sky130_fd_pr__nfet_01v8_lvt_GVGYYV.mag> is already locked by pid 6378.  Opening read-only.
 Cell sky130_fd_pr__nfet_01v8_lvt_GVGYYV read from current working directory
 Processing timestamp mismatches.
 Timestamp mismatches found in these cells: sky130_fd_pr__pfet_01v8_MV5BJT, sky130_fd_pr__pfet_01v8_7PVLUA, sky130_fd_pr__pfet_01v8_NRXS53, sky130_fd_pr__pfet_01v8_CZ2BPM, sky130_fd_pr__nfet_01v8_WXMB3T, sky130_fd_pr__nfet_01v8_CQH6Q5, sky130_fd_pr__nfet_01v8_lvt_URSRNG, sky130_fd_pr__nfet_01v8_lvt_GVGYYV.

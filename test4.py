@@ -118,6 +118,7 @@ mw1 = 100
 r.begin(a[0], a[1], 'metal1')
 r.routeTo('n', (a[1] + b[1]) / 2, mw1)
 r.routeTo('w', b[0], mw1)
+r.route('n', 400, mw1)
 r.via('metal2', 55, 55)
 r.routeTo('n', b[1] - 20, mw1)
 r.via('metal1', 52, 52)
@@ -153,6 +154,51 @@ r.via('metal1', 52, 52)
 r.route('n', 0, 64)
 r.via('locali', 38, 38)
 
+# Route x4 Y to x1 CLK
+
+a = p['children']['x1']['self']['CLK'].centroid()
+b = p['children']['x4']['self']['Y'].centroid()
+
+r.begin(a[0], a[1], 'metal1')
+r.via('metal2', 60, 60)
+#r.route('w', 200, 100)
+r.route('n',a[1] + (b[1] - a[1])*13//20, 100)
+r.routeTo('e', b[0], 100)
+r.routeTo('n', b[1], 100)
+r.via('metal1', 52, 52)
+r.route('n', 0, 64)
+r.via('locali', 38, 38)
+
+# Connect x1 VOUT_MINUS to x2 VLAT_MINUS
+
+a = p['children']['x1']['self']['VOUT_MINUS'].centroid()
+b = p['children']['x2']['self']['VLAT_MINUS'].centroid()
+
+r.begin(a[0], a[1], 'metal1')
+r.via('metal2', 60, 60)
+r.route('n', 0, 100)
+r.via('metal3', 80, 80)
+r.routeTo('n', b[1], 120)
+r.routeTo('w', b[0], 120)
+r.via('metal2', 80, 80)
+r.route('n', 0, 100)
+r.via('metal1', 60, 60)
+
+# Connect x1 VOUT_PLUS to x2 VLAT_PLUS
+
+a = p['children']['x1']['self']['VOUT_PLUS'].centroid()
+b = p['children']['x2']['self']['VLAT_PLUS'].centroid()
+
+r.begin(a[0], a[1], 'metal1')
+r.route('w', 200, 100)
+r.via('metal2', 60, 60)
+r.route('n', 0, 100)
+r.via('metal3', 80, 80)
+r.routeTo('n', b[1], 120)
+r.routeTo('e', b[0], 120)
+r.via('metal2', 80, 80)
+r.route('n', 0, 100)
+r.via('metal1', 60, 60)
 
 
 top.writeMagFile(db, "high_speed_comp/high_speed_comp_top_routed.mag")
