@@ -42,7 +42,7 @@ def load_corner(corner):
                 out_point = i
                 break
     
-        if 1:
+        if 0:
             plt.plot(plot['data']['v(inn)'])
             plt.plot(plot['data']['v(inp)'])
             plt.plot(plot['data']['v(comp_out)'])
@@ -98,7 +98,7 @@ def load_corner(corner):
     # Print min, max and average power
     print("Power consumption: min {} max {} av {} W".format(np.min(np.array(power_min)), np.max(np.array(power_max)), np.mean(np.array(power_av))))
 
-    print ("Average propagation delay: {} ns".format(np.mean(pds)))
+    print ("Average propagation delay: {} s worst: {} s".format(np.mean(pds), np.max(pds)))
 
     print()
 
