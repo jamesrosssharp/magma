@@ -105,8 +105,8 @@ def load_corner(corner):
     print("Failures: ")
     print(failures)
 
-#for corner in ["tt", "ss", "fs", "sf", "ff"]:
-for corner in ["tt"]:
+for corner in ["tt", "ss", "fs", "sf", "ff"]:
+#for corner in ["tt"]:
     load_corner(corner)
 
 
