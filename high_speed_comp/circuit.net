@@ -1,0 +1,5 @@
+* Simple Example Netlist
+R1 netA netB 10k
+R2 netB 0    5k
+R3 netB 0    5k
+R4 isolated1 isolated2 1meg

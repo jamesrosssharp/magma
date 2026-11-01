@@ -10,6 +10,7 @@ for CELL in high_speed_comp_top_routed; do
 PDK_ROOT=${PDK_ROOT} magic -dnull -noconsole -rcfile ${PDK_ROOT}/${PDK}/libs.tech/magic/${PDK}.magicrc > magic.lvs.log << EOF
 load $CELL
 extract all
+extract warn all
 #extract
 #ext2spice subcircuit off
 ext2spice lvs

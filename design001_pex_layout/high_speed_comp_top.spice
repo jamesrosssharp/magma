@@ -1,0 +1,18 @@
+.inc ../strong-arm/strong_arm_latch_routed.pex.spice
+.inc ../post-amp/post_amplifier_routed.pex.spice
+
+
+** sch_path: /home/jrsharp/home_mnt/asic/high_speed_comparator/xschem/high_speed_comp_top.sch
+.subckt high_speed_comp_top CLK VINP VINN VDD COMP_OUT VSS
+*.PININFO VINP:I VINN:I VDD:I VSS:I CLK:I COMP_OUT:O
+x1 VDD CLK_PRIME net1 net2 VSS VINP VINN strong_arm_latch_routed
+x2 VDD net1 net2 VOUT VSS post_amplifier_routed
+x3 CLK VOUT GND GND VDD VDD COMP_OUT sky130_fd_sc_hd__dfxtp_2
+x4 CLK GND GND VDD VDD CLK_PRIME sky130_fd_sc_hd__clkinv_4
+x5 VSS VSS VDD VDD sky130_fd_sc_hd__decap_3
+x6 VSS VSS VDD VDD sky130_fd_sc_hd__fill_1
+x7 VSS VSS VDD VDD sky130_fd_sc_hd__decap_3
+x8 VSS VSS VDD VDD sky130_fd_sc_hd__fill_1
+.ends
+
+.end

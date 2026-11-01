@@ -1,0 +1,81 @@
+
+Magic 8.3 revision 676 - Compiled on Mon Jul 20 10:33:11 UTC 2026.
+Starting magic under Tcl interpreter
+Using the terminal as the console.
+Using NULL graphics device.
+Processing system .magicrc file
+Switching to WIRING tool.
+Switching to NETLIST tool.
+Switching to PICK tool.
+Switching to BOX tool.
+Sourcing design .magicrc for technology sky130A ...
+2 Magic internal units = 1 Lambda
+Input style sky130(): scaleFactor=2, multiplier=2
+The following types are not handled by extraction and will be treated as non-electrical types:
+    ubm 
+Scaled tech values by 2 / 1 to match internal grid scaling
+Loading sky130A Device Generator Menu ...
+Using technology "sky130A", version 1.0.495-0-ga918dc7
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )
+
+microns:   0.000 x 0.000   ( 0.000,  0.000), ( 0.000,  0.000)
+lambda:     0.00 x 0.00    (  0.00,  0.00 ), (  0.00,  0.00 )
+internal:      0 x 0       (     0,  0    ), (     0,  0    )
+Warning: cell <high_speed_comp_top_routed> from file high_speed_comp_top_routed.mag is not writeable
+Cell high_speed_comp_top_routed read from current working directory
+Warning: cell <sky130_fd_sc_hd__tapvpwrvgnd_1> from file /home/jrsharp/old_home_mnt/asic/sky130_pdk/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag/sky130_fd_sc_hd__tapvpwrvgnd_1.mag is not writeable
+Cell sky130_fd_sc_hd__tapvpwrvgnd_1 read from path /home/jrsharp/old_home_mnt/asic/sky130_pdk/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__decap_3 read from current working directory
+Cell sky130_fd_sc_hd__clkinv_4 read from path /home/jrsharp/old_home_mnt/asic/sky130_pdk/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__dfxtp_2 read from current working directory
+Cell post_amplifier_routed read from current working directory
+Warning: cell <sky130_fd_pr__pfet_01v8_5ETXLA> from file sky130_fd_pr__pfet_01v8_5ETXLA.mag is not writeable
+Cell sky130_fd_pr__pfet_01v8_5ETXLA read from current working directory
+Cell sky130_fd_pr__nfet_01v8_D6NL62 read from current working directory
+Cell strong_arm_latch_routed read from current working directory
+Cell sky130_fd_pr__pfet_01v8_MV5BJT read from current working directory
+Cell sky130_fd_pr__pfet_01v8_7PVLUA read from current working directory
+Cell sky130_fd_pr__pfet_01v8_NRXS53 read from current working directory
+Cell sky130_fd_pr__pfet_01v8_CZ2BPM read from current working directory
+Cell sky130_fd_pr__nfet_01v8_WXMB3T read from current working directory
+Cell sky130_fd_pr__nfet_01v8_CQH6Q5 read from current working directory
+Cell sky130_fd_pr__nfet_01v8_lvt_URSRNG read from current working directory
+Cell sky130_fd_pr__nfet_01v8_lvt_GVGYYV read from current working directory
+Processing timestamp mismatches.
+Timestamp mismatches found in these cells: sky130_fd_sc_hd__tapvpwrvgnd_1, sky130_fd_sc_hd__decap_3, sky130_fd_sc_hd__clkinv_4, sky130_fd_sc_hd__dfxtp_2, post_amplifier_routed, strong_arm_latch_routed, sky130_fd_pr__pfet_01v8_MV5BJT, sky130_fd_pr__pfet_01v8_7PVLUA, sky130_fd_pr__pfet_01v8_NRXS53, sky130_fd_pr__pfet_01v8_CZ2BPM, sky130_fd_pr__nfet_01v8_WXMB3T, sky130_fd_pr__nfet_01v8_CQH6Q5, sky130_fd_pr__nfet_01v8_lvt_URSRNG, sky130_fd_pr__nfet_01v8_lvt_GVGYYV.
+Extracting high_speed_comp_top_routed into extfiles/high_speed_comp_top_routed.ext:
+Processing high_speed_comp_top_routed
+high_speed_comp_top_routed: 4 warnings
+Processing cell high_speed_comp_top_routed for resistance extraction.
+Extracting a_65_4595#
+Extracting x3.D
+Extracting a_231_4595#
+Extracting a_672_4707#
+Extracting a_504_4961#
+Extracting a_1097_4863#
+Extracting a_929_4961#
+Extracting x4.Y
+Extracting a_881_2436#
+Extracting a_932_2929#
+Extracting x2.VLAT_PLUS
+Extracting x2.VLAT_MINUS
+Extracting a_1561_2214#
+Extracting a_929_2214#
+Extracting a_366_n1752#
+Extracting a_1570_n470#
+Extracting a_624_n1752#
+Extracting VSS
+Extracting VDD
+Extracting CLK
+Extracting COMP_OUT
+Extracting VINP
+Extracting VINN
+Total Nets: 28
+Nets extracted: 23 (0.821429)
+Nets output: 4 (0.142857)
+exttospice finished.
+device missing 1 terminal;
+ connecting remainder to node VSS
+device missing 1 terminal;
+ connecting remainder to node VDD

@@ -16,15 +16,30 @@ The following types are not handled by extraction and will be treated as non-ele
 Scaled tech values by 2 / 1 to match internal grid scaling
 Loading sky130A Device Generator Menu ...
 Using technology "sky130A", version 1.0.495-0-ga918dc7
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )
+
+microns:   0.000 x 0.000   ( 0.000,  0.000), ( 0.000,  0.000)
+lambda:     0.00 x 0.00    (  0.00,  0.00 ), (  0.00,  0.00 )
+internal:      0 x 0       (     0,  0    ), (     0,  0    )
+Warning: cell <post_amplifier_routed> from file post_amplifier_routed.mag is not writeable
 Cell post_amplifier_routed read from current working directory
+Warning: cell <sky130_fd_pr__pfet_01v8_5ETXLA> from file sky130_fd_pr__pfet_01v8_5ETXLA.mag is not writeable
 Cell sky130_fd_pr__pfet_01v8_5ETXLA read from current working directory
+Warning: cell <sky130_fd_pr__nfet_01v8_D6NL62> from file sky130_fd_pr__nfet_01v8_D6NL62.mag is not writeable
 Cell sky130_fd_pr__nfet_01v8_D6NL62 read from current working directory
-Processing timestamp mismatches.
-Timestamp mismatches found in these cells: sky130_fd_pr__pfet_01v8_5ETXLA, sky130_fd_pr__nfet_01v8_D6NL62.
-Extracting sky130_fd_pr__pfet_01v8_5ETXLA into sky130_fd_pr__pfet_01v8_5ETXLA.ext:
-Processing sky130_fd_pr__pfet_01v8_5ETXLA
-Extracting sky130_fd_pr__nfet_01v8_D6NL62 into sky130_fd_pr__nfet_01v8_D6NL62.ext:
-Processing sky130_fd_pr__nfet_01v8_D6NL62
-Extracting post_amplifier_routed into post_amplifier_routed.ext:
+Extracting post_amplifier_routed into extfiles/post_amplifier_routed.ext:
 Processing post_amplifier_routed
+Processing cell post_amplifier_routed for resistance extraction.
+Extracting a_1426_n731#
+Extracting a_1477_n238#
+Extracting a_2106_n953#
+Extracting a_1474_n953#
+Extracting VSS
+Extracting VDD
+Extracting VLAT_PLUS
+Extracting VLAT_MINUS
+Total Nets: 9
+Nets extracted: 8 (0.888889)
+Nets output: 1 (0.111111)
 exttospice finished.
