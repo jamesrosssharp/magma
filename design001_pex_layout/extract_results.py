@@ -42,7 +42,7 @@ def load_corner(corner):
                 out_point = i
                 break
     
-        if 0:
+        if 1:
             plt.plot(plot['data']['v(inn)'])
             plt.plot(plot['data']['v(inp)'])
             plt.plot(plot['data']['v(comp_out)'])

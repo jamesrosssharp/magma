@@ -215,5 +215,18 @@ b = p['children']['x8']['self']['VGND'].centroid()
 r.begin(a[0], a[1], 'metal1')
 r.routeTo('e', b[0], 100)
 
+a = p['children']['x9']['self']['VPWR'].centroid()
+b = p['children']['x8']['self']['VPWR'].centroid()
+
+r.begin(a[0], a[1], 'locali')
+r.routeTo('e', b[0], 100)
+
+a = p['children']['x9']['self']['VGND'].centroid()
+b = p['children']['x8']['self']['VGND'].centroid()
+
+r.begin(a[0], a[1], 'locali')
+r.routeTo('e', b[0], 100)
+
+
 
 top.writeMagFile(db, "high_speed_comp/high_speed_comp_top_routed.mag")
