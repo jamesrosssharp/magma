@@ -297,8 +297,9 @@ r.routeTo('n', b[1], mw1)
 r.pop()
 r.route('e', 170, mw1)
 r.route('n', 130, mw1)
-r.routeTo('e', prt[0] - 40, mw1)
+r.routeTo('e', prt[0] - 80, mw1)
 r.routeTo('n', prt[1], mw1)
+r.routeTo('e', prt[0], mw1)
 
 # Route gate of XM5 to drain of XM4
 

@@ -22,6 +22,7 @@ select top cell
 extract warn all
 extract do resistance
 extract do unique
+#extract do local
 extract path extfiles
 extract all
 #ext2sim labels on
