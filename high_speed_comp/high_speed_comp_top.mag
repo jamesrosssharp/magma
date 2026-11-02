@@ -1,10 +1,7 @@
 magic
 tech sky130A
 magscale 1 2
-timestamp 1793561998
-<< error_s >>
-rect 2699 -537 2729 -535
-rect 2671 -565 2729 -563
+timestamp 1793265126
 << metal1 >>
 rect -800 5400 -600 5600
 rect 1000 5400 1200 5600
@@ -13,9 +10,9 @@ rect 3400 5400 3600 5600
 rect 600 -2600 800 -2400
 rect 2000 -2600 2200 -2400
 use strong_arm_latch_routed  x1
-timestamp 1793561837
-transform 1 0 -701 0 1 1063
-box 600 -3363 3600 394
+timestamp 1793008649
+transform 1 0 -701 0 1 1163
+box 501 -3363 3517 374
 use post_amplifier_routed  x2
 timestamp 1793008813
 transform 1 0 -545 0 1 3167

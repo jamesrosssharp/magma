@@ -157,25 +157,20 @@ sky130_fd_pr__special_nfet_01v8 (4)        |sky130_fd_pr__special_nfet_01v8 (4)
 Number of devices: 24                      |Number of devices: 24                      
 Number of nets: 18                         |Number of nets: 18                         
 ---------------------------------------------------------------------------------------
-Netlists match uniquely with port errors.
+Netlists match uniquely.
 
 Subcircuit pins:
 Circuit 1: sky130_fd_sc_hd__dfxtp_2        |Circuit 2: sky130_fd_sc_hd__dfxtp_2        
 -------------------------------------------|-------------------------------------------
-a_381_47#                                  |(no pin, node is a_381_47#)                
 VPB                                        |VPB                                        
 VNB                                        |VNB                                        
 VGND                                       |VGND                                       
-a_27_47#                                   |(no pin, node is a_27_47#)                 
 VPWR                                       |VPWR                                       
-a_193_47#                                  |(no pin, node is a_193_47#)                
-a_1059_315#                                |(no pin, node is a_1059_315#)              
-a_634_159#                                 |(no pin, node is a_634_159#)               
 D                                          |D                                          
 Q                                          |Q                                          
 CLK                                        |CLK                                        
 ---------------------------------------------------------------------------------------
-Cell pin lists for sky130_fd_sc_hd__dfxtp_2 and sky130_fd_sc_hd__dfxtp_2 altered to match.
+Cell pin lists are equivalent.
 Device classes sky130_fd_sc_hd__dfxtp_2 and sky130_fd_sc_hd__dfxtp_2 are equivalent.
 
 Class sky130_fd_sc_hd__clkinv_4 (0):  Merged 8 parallel devices.
@@ -236,60 +231,25 @@ sky130_fd_sc_hd__dfxtp_2 (1)               |sky130_fd_sc_hd__dfxtp_2 (1)
 sky130_fd_sc_hd__clkinv_4 (1)              |sky130_fd_sc_hd__clkinv_4 (1)              
 sky130_fd_sc_hd__decap_3 (2->1)            |sky130_fd_sc_hd__decap_3 (2->1)            
 Number of devices: 5                       |Number of devices: 5                       
-Number of nets: 10 **Mismatch**            |Number of nets: 15 **Mismatch**            
+Number of nets: 10                         |Number of nets: 10                         
 ---------------------------------------------------------------------------------------
-NET mismatches: Class fragments follow (with fanout counts):
-Circuit 1: high_speed_comp_top_routed      |Circuit 2: high_speed_comp_top_routed      
-
----------------------------------------------------------------------------------------
-Net: VDD                                   |Net: VDD                                   
-  strong_arm_latch_routed/VDD = 1          |  strong_arm_latch_routed/VDD = 1          
-  post_amplifier_routed/VDD = 1            |  post_amplifier_routed/VDD = 1            
-  sky130_fd_sc_hd__dfxtp_2/VPB = 1         |  sky130_fd_sc_hd__dfxtp_2/VPB = 1         
-  sky130_fd_sc_hd__dfxtp_2/VPWR = 1        |  sky130_fd_sc_hd__dfxtp_2/VPWR = 1        
-  sky130_fd_sc_hd__clkinv_4/VPB = 1        |  sky130_fd_sc_hd__clkinv_4/VPB = 1        
-  sky130_fd_sc_hd__clkinv_4/VPWR = 1       |  sky130_fd_sc_hd__clkinv_4/VPWR = 1       
-  sky130_fd_sc_hd__decap_3/VPB = 1         |  sky130_fd_sc_hd__decap_3/VPB = 1         
-  sky130_fd_sc_hd__decap_3/VPWR = 1        |  sky130_fd_sc_hd__decap_3/VPWR = 1        
-  sky130_fd_sc_hd__dfxtp_2/a_27_47# = 1    |                                           
-  sky130_fd_sc_hd__dfxtp_2/a_1059_315# = 1 |                                           
-  sky130_fd_sc_hd__dfxtp_2/a_193_47# = 1   |                                           
-  sky130_fd_sc_hd__dfxtp_2/a_634_159# = 1  |                                           
-  sky130_fd_sc_hd__dfxtp_2/a_381_47# = 1   |                                           
-                                           |                                           
-(no matching net)                          |Net: dummy_12                              
-                                           |  sky130_fd_sc_hd__dfxtp_2/proxya_193_47#  
-                                           |                                           
-(no matching net)                          |Net: dummy_13                              
-                                           |  sky130_fd_sc_hd__dfxtp_2/proxya_634_159# 
-                                           |                                           
-(no matching net)                          |Net: dummy_14                              
-                                           |  sky130_fd_sc_hd__dfxtp_2/proxya_381_47#  
-                                           |                                           
-(no matching net)                          |Net: dummy_15                              
-                                           |  sky130_fd_sc_hd__dfxtp_2/proxya_27_47# = 
-                                           |                                           
-(no matching net)                          |Net: dummy_11                              
-                                           |  sky130_fd_sc_hd__dfxtp_2/proxya_1059_315 
----------------------------------------------------------------------------------------
-Netlists do not match.
-Port matching may fail to disambiguate symmetries.
+Netlists match uniquely.
 
 Subcircuit pins:
 Circuit 1: high_speed_comp_top_routed      |Circuit 2: high_speed_comp_top_routed      
 -------------------------------------------|-------------------------------------------
-VDD                                        |(no pin, node is dummy_11)                 
-VSS                                        |VSS                                        
-COMP_OUT                                   |COMP_OUT                                   
-VINN                                       |VINN                                       
 VINP                                       |VINP                                       
+VINN                                       |VINN                                       
+COMP_OUT                                   |COMP_OUT                                   
 CLK                                        |CLK                                        
-(no pin, node is VDD)                      |VDD                                        
+VDD                                        |VDD                                        
+VSS                                        |VSS                                        
 ---------------------------------------------------------------------------------------
-Cell pin lists for high_speed_comp_top_routed and high_speed_comp_top_routed altered to match.
+Cell pin lists are equivalent.
 Device classes high_speed_comp_top_routed and high_speed_comp_top_routed are equivalent.
 
-Final result: Top level cell failed pin matching.
+Final result: Circuits match uniquely.
+.
 
 The following cells had property errors:
  strong_arm_latch_routed

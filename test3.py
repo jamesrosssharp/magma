@@ -93,7 +93,7 @@ j = t['children']['XM7']['self'][0].source_drains[1]
 m1w = 80
 
 r.begin(prt[0], prt[1], 'metal1')
-#r.route('n', 280, m1w)
+r.route('n', 280, m1w)
 r.routeTo('e', a[0], m1w)
 r.push()
 r.routeTo('s', a[1], m1w)
@@ -145,7 +145,7 @@ r.pop()
 
 for x in np.linspace(a[0], h[0], 8):
     print(x)
-    r.begin(x, prt[1], 'metal1')
+    r.begin(x, prt[1] + 280, 'metal1')
     r.via('locali', 50, 50)
         
 

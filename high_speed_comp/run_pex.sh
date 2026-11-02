@@ -21,14 +21,12 @@ cellname rename myflat $CELL
 select top cell
 extract warn all
 extract path extfiles
-extract do local
+extract do unique
+extract do resistance
+extresist threshold 10000
 extract all
-ext2sim labels on
-ext2sim
-extresist tolerance 1
-extresist
 ext2spice lvs
-ext2spice cthresh 1
+ext2spice cthresh 0.1
 ext2spice extresist on
 ext2spice -p extfiles -o $CELL.pex.spice
 feedback why

@@ -58,13 +58,16 @@ Warning: cell <sky130_fd_pr__nfet_01v8_lvt_GVGYYV> from file sky130_fd_pr__nfet_
 Cell sky130_fd_pr__nfet_01v8_lvt_GVGYYV read from current working directory
 Processing timestamp mismatches.
 Timestamp mismatches found in these cells: sky130_fd_sc_hd__tapvpwrvgnd_1, sky130_fd_sc_hd__decap_3, sky130_fd_sc_hd__clkinv_4, sky130_fd_sc_hd__dfxtp_2, post_amplifier_routed, strong_arm_latch_routed, sky130_fd_pr__pfet_01v8_MV5BJT, sky130_fd_pr__pfet_01v8_7PVLUA, sky130_fd_pr__pfet_01v8_NRXS53, sky130_fd_pr__pfet_01v8_CZ2BPM, sky130_fd_pr__nfet_01v8_WXMB3T, sky130_fd_pr__nfet_01v8_CQH6Q5, sky130_fd_pr__nfet_01v8_lvt_URSRNG, sky130_fd_pr__nfet_01v8_lvt_GVGYYV.
-Extracting high_speed_comp_top_routed into high_speed_comp_top_routed.ext:
+Extracting high_speed_comp_top_routed into extfiles/high_speed_comp_top_routed.ext:
 Processing high_speed_comp_top_routed
-high_speed_comp_top_routed: 9 warnings
-exttosim finished.
-Extracting x3.VNB
+high_speed_comp_top_routed: 4 warnings
+Processing cell high_speed_comp_top_routed for resistance extraction.
+Extracting a_65_4595#
 Extracting x3.D
+Extracting a_231_4595#
+Extracting a_672_4707#
 Extracting a_504_4961#
+Extracting a_1097_4863#
 Extracting a_929_4961#
 Extracting x4.Y
 Extracting a_881_2436#
@@ -73,18 +76,20 @@ Extracting x2.VLAT_PLUS
 Extracting x2.VLAT_MINUS
 Extracting a_1561_2214#
 Extracting a_929_2214#
-Extracting a_366_n1852#
-Extracting a_1570_n570#
-Extracting a_624_n1852#
+Extracting a_366_n1752#
+Extracting a_1570_n470#
+Extracting a_624_n1752#
+Extracting VSS
 Extracting VDD
 Extracting CLK
 Extracting COMP_OUT
 Extracting VINP
 Extracting VINN
-Total Nets: 24
-Nets extracted: 19 (0.791667)
-Nets output: 2 (0.083333)
+Total Nets: 28
+Nets extracted: 23 (0.821429)
+Nets output: 4 (0.142857)
+exttospice finished.
 device missing 1 terminal;
- connecting remainder to node x3.VNB
+ connecting remainder to node VSS
 device missing 1 terminal;
  connecting remainder to node VDD
