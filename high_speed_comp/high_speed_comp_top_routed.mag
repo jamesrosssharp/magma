@@ -1,7 +1,7 @@
 magic
 tech sky130A
 magscale 1 2
-timestamp 1793528405
+timestamp 1793602303
 << checkpaint >>
 rect -1100 -3363 3900 5900
 << metal1 >>
@@ -89,6 +89,8 @@ rect 2549 4767 2587 4805
 rect 323 4745 365 4807
 rect 44 5260 2340 5340
 rect 63 4765 105 4827
+rect -30 5061 2963 5111
+rect -32 4524 2961 4574
 << via2 >>
 rect 2676 -243 2756 -163
 rect 1513 1871 1593 1951
@@ -100,39 +102,39 @@ rect 1493 1851 2776 1971
 rect -355 -257 -235 1966
 rect -355 1846 1279 1966
 use strong_arm_latch_routed  x1
-timestamp 1793528305
+timestamp 1793602203
 transform 1 0 -701 0 1 1163
 box -425 -3363 3517 719
 use post_amplifier_routed  x2
-timestamp 1793528305
+timestamp 1793602203
 transform 1 0 -545 0 1 3167
 box -211 -1367 2860 422
 use sky130_fd_sc_hd__dfxtp_2  x3
-timestamp 1793528305
+timestamp 1793602203
 transform 1 0 38 0 1 4548
 box -38 -48 1602 592
 use sky130_fd_sc_hd__clkinv_4  x4
-timestamp 1793528305
+timestamp 1793602203
 transform 1 0 1970 0 1 4548
 box -38 -48 682 592
 use sky130_fd_sc_hd__decap_3  x5
-timestamp 1793528305
+timestamp 1793602203
 transform 1 0 1602 0 1 4548
 box -38 -48 314 592
 use sky130_fd_sc_hd__tapvpwrvgnd_1  x6
-timestamp 1793528305
+timestamp 1793602203
 transform 1 0 1878 0 1 4548
 box -38 -48 130 592
 use sky130_fd_sc_hd__decap_3  x7
-timestamp 1793528305
+timestamp 1793602203
 transform 1 0 2614 0 1 4548
 box -38 -48 314 592
 use sky130_fd_sc_hd__tapvpwrvgnd_1  x8
-timestamp 1793528305
+timestamp 1793602203
 transform 1 0 2890 0 1 4548
 box -38 -48 130 592
 use sky130_fd_sc_hd__tapvpwrvgnd_1  x9
-timestamp 1793528305
+timestamp 1793602203
 transform 1 0 -53 0 1 4548
 box -38 -48 130 592
 << labels >>

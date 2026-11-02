@@ -23,7 +23,7 @@ extract warn all
 extract path extfiles
 extract do unique
 extract do resistance
-extresist threshold 10000
+extresist tolerance 0
 extract all
 ext2spice lvs
 ext2spice cthresh 0.1
