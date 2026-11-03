@@ -79,8 +79,8 @@ Extracting a_929_2214#
 Extracting a_366_n1852#
 Extracting a_1570_n570#
 Extracting a_624_n1852#
-Extracting VSS
-Extracting VDD
+Extracting VSS!
+Extracting VDD!
 Extracting CLK
 Extracting COMP_OUT
 Extracting VINP
@@ -89,3 +89,7 @@ Total Nets: 28
 Nets extracted: 23 (0.821429)
 Nets output: 4 (0.142857)
 exttospice finished.
+device missing 1 terminal;
+ connecting remainder to node VSS!
+device missing 1 terminal;
+ connecting remainder to node VDD!

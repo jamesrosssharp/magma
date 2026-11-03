@@ -2,8 +2,8 @@
 # Usage: run_rcx.sh <cellname>
 # where <cellname> is a magic layout (<cellname>.mag)
 
-PDK_ROOT=/home/jrsharp/old_home_mnt/asic/sky130_pdk/share/pdk/
-PDK=sky130A
+PDK_ROOT=${1:-"/home/jrsharp/old_home_mnt/asic/sky130_pdk/share/pdk/"}
+PDK=${2:-sky130A}
 
 for CELL in high_speed_comp_top_routed; do
 
@@ -22,18 +22,15 @@ select top cell
 extract warn all
 extract do resistance
 extract do unique
-#extract do local
+extract do local
 extract path extfiles
+extresist threshold 10
 extract all
-#ext2sim labels on
-#ext2sim
-extresist threshold 10000
 ext2spice lvs
 ext2spice cthresh 0.1
 ext2spice extresist on
-ext2spice
 ext2spice -p extfiles -o $CELL.pex.spice
-#feedback why
+feedback why
 quit -noprompt
 EOF
 

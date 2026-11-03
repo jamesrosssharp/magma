@@ -293,8 +293,8 @@ flabel metal1 1000 5400 1200 5600 0 FreeSans 1600 0 0 0 COMP_OUT
 port 5 nsew
 flabel metal1 2200 5400 2400 5600 0 FreeSans 1600 0 0 0 CLK
 port 4 nsew
-flabel metal1 -800 5400 -600 5600 0 FreeSans 1600 0 0 0 VDD
+flabel metal1 -800 5400 -600 5600 0 FreeSans 1600 0 0 0 VDD!
 port 2 nsew
-flabel metal1 3400 5400 3600 5600 0 FreeSans 1600 0 0 0 VSS
+flabel metal1 3400 5400 3600 5600 0 FreeSans 1600 0 0 0 VSS!
 port 3 nsew
 << end >>

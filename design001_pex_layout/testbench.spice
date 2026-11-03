@@ -49,7 +49,7 @@ X1 INP INN VDD VSS CLK COMP_OUT high_speed_comp_top_routed
   dowhile run < = 100
     save vdd i(vvdd) temperat clk comp_out inn inp v(x1.x2.vlat_minus) v(x1.x2.vlat_plus)
     *save all
-    tran 0.1n 1200n uic
+    tran 0.1n 600n uic
     write ${RAW_FILE}
     let run = run + 1
     reset
