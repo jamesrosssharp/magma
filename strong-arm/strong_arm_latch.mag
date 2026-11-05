@@ -1,7 +1,7 @@
 magic
 tech sky130A
 magscale 1 2
-timestamp 1793561713
+timestamp 1793871439
 << error_s >>
 rect 1164 116 1222 122
 rect 1584 116 1642 122
@@ -41,9 +41,9 @@ rect 1910 -1643 1922 -1609
 rect 1910 -1649 1968 -1643
 << metal1 >>
 rect 610 194 810 394
-rect 600 -800 800 -600
 rect 600 -1600 800 -1400
 rect 3400 -1600 3600 -1400
+rect 600 -2000 800 -1800
 rect 1245 -3360 1445 -3160
 rect 1986 -3363 2186 -3163
 rect 2726 -3349 2926 -3149
@@ -100,10 +100,10 @@ flabel metal1 2726 -3349 2926 -3149 0 FreeSans 256 0 0 0 VINN
 port 6 nsew
 flabel metal1 610 194 807 394 0 FreeSans 256 0 0 0 VDD
 port 0 nsew
-flabel metal1 604 -800 797 -600 0 FreeSans 256 0 0 0 CLK
-port 1 nsew
 flabel metal1 600 -1600 800 -1400 0 FreeSans 256 0 0 0 VOUT_PLUS
 port 2 nsew
 flabel metal1 3400 -1600 3600 -1400 0 FreeSans 256 0 0 0 VOUT_MINUS
 port 3 nsew
+flabel metal1 604 -2000 797 -1800 0 FreeSans 256 0 0 0 CLK
+port 1 nsew
 << end >>

@@ -53,11 +53,12 @@ a = t['children']['XM9']['self'][0].gates[0]
 b = t['children']['XM11']['self'][0].gates[0]
 
 r.begin(prt[0], prt[1], 'metal1')
-r.routeTo('s', a[1] - 20, 80)
+r.route('s', 900, 80)
 r.via('metal2', 60, 60)
 r.route('s', 0, 100)
 r.via('metal3', 80, 80)
 r.routeTo('e', (a[0] + b[0]) / 2, 120)
+r.routeTo('n', a[1], 120)
 
 r.begin(a[0], a[1] - 20, 'metal1')
 r.routeTo('e', b[0], 80)

@@ -2,7 +2,7 @@
 # Usage: run_rcx.sh <cellname>
 # where <cellname> is a magic layout (<cellname>.mag)
 
-PDK_ROOT=/home/jrsharp/old_home_mnt/asic/sky130_pdk/share/pdk/
+PDK_ROOT=/opt/pdk/
 PDK=sky130A
 
 for CELL in strong_arm_latch_routed; do
