@@ -55,10 +55,14 @@ cdef class MagParser:
                     else:
                         newfile = os.path.dirname(filename) + "/" + new_cell + ".mag"
 
-                    try:
-                        self.parse(newfile, db)
-                    except Exception as e:
-                        print(f"Error: {e} ")
+                    # Each cell definition is parsed once; later uses only add an
+                    # instance. A cell that failed to load is retried, since a later
+                    # use may give a different path.
+                    if not db.isCellLoaded(new_cell):
+                        try:
+                            self.parse(newfile, db)
+                        except Exception as e:
+                            print(f"Error: {e} ")
 
                     cell_inst = db.setCellUse(cell_name_str, new_cell, s.split()[2])
 
@@ -152,5 +156,7 @@ cdef class MagParser:
                     directions = ss[2]
                     
                     db.setLabelPort(cell_name_str, labname, port, directions)
+
+        db.markCellLoaded(cell_name_str)
 
 

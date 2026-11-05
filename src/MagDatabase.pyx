@@ -527,9 +527,17 @@ cdef class Cell:
 cdef class MagDatabase:
 
     cdef public dict cells
+    cdef public set loaded
 
     def __init__(self):
         self.cells = {}
+        self.loaded = set()   # cells whose .mag file has been fully parsed
+
+    def markCellLoaded(self, str name):
+        self.loaded.add(name)
+
+    def isCellLoaded(self, str name):
+        return name in self.loaded
 
     def createCell(self, str name):
        
