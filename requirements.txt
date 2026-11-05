@@ -1,0 +1,9 @@
+# Build the magma framework (python3 setup.py build_ext)
+Cython>=3.0
+setuptools
+numpy>=1.22
+
+# 3D .mag viewer (mag_viewer3d.py); also needs an OpenGL 3.3 capable driver
+PySide6>=6.2
+
+# Tested with: Cython 3.3.0, setuptools 83.0.0, numpy 2.5.2, PySide6 6.11.2, Python 3.14
