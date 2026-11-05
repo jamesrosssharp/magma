@@ -1,7 +1,7 @@
 *schematic netlist 
 
 
-.include /home/jrsharp/old_home_mnt/asic/sky130_pdk/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice
+.include /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice
 
 
 ** sch_path: /home/jrsharp/old_home_mnt/asic/high_speed_comparator/xschem/high_speed_comp_top.sch

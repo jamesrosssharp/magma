@@ -73,8 +73,7 @@ XXM7 VOUT VSS m1_2115_n873# VSS sky130_fd_pr__nfet_01v8_D6NL62
 XXM8 VDD m1_2115_n873# VOUT VDD sky130_fd_pr__pfet_01v8_5ETXLA
 .ends
 
-.subckt sky130_fd_sc_hd__dfxtp_2 CLK D VGND VNB VPB VPWR Q a_1059_315# a_193_47# a_634_159#
-+ a_381_47# a_27_47#
+.subckt sky130_fd_sc_hd__dfxtp_2 CLK D VGND VNB VPB VPWR Q
 X0 Q a_1059_315# VGND VNB sky130_fd_pr__nfet_01v8 ad=0.08775 pd=0.92 as=0.08775 ps=0.92 w=0.65 l=0.15
 X1 VPWR a_1059_315# Q VPB sky130_fd_pr__pfet_01v8_hvt ad=0.26 pd=2.52 as=0.135 ps=1.27 w=1 l=0.15
 X2 a_891_413# a_193_47# a_634_159# VNB sky130_fd_pr__special_nfet_01v8 ad=0.0684 pd=0.74 as=0.0989 ps=0.995 w=0.36 l=0.15
@@ -124,7 +123,7 @@ X1 VGND VPWR VGND VNB sky130_fd_pr__nfet_01v8 ad=0.143 pd=1.62 as=0.286 ps=3.24 
 .subckt high_speed_comp_top_routed VINP VINN VDD VSS CLK COMP_OUT
 Xx1 VDD x4/Y x2/VLAT_PLUS x2/VLAT_MINUS VINP VINN VSS strong_arm_latch_routed
 Xx2 VDD x2/VLAT_PLUS x2/VLAT_MINUS x3/D VSS post_amplifier_routed
-Xx3 CLK x3/D VSS VSS VDD VDD COMP_OUT VDD VDD VDD VDD VDD sky130_fd_sc_hd__dfxtp_2
+Xx3 CLK x3/D VSS VSS VDD VDD COMP_OUT sky130_fd_sc_hd__dfxtp_2
 Xx4 CLK VSS VSS VDD VDD x4/Y sky130_fd_sc_hd__clkinv_4
 Xx5 VSS VSS VDD VDD sky130_fd_sc_hd__decap_3
 Xx7 VSS VSS VDD VDD sky130_fd_sc_hd__decap_3

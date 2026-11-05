@@ -2,7 +2,7 @@
 # Usage: run_rcx.sh <cellname>
 # where <cellname> is a magic layout (<cellname>.mag)
 
-PDK_ROOT=${1:-"/home/jrsharp/old_home_mnt/asic/sky130_pdk/share/pdk/"}
+PDK_ROOT=${1:-"/opt/pdk/"}
 PDK=${2:-sky130A}
 
 for CELL in high_speed_comp_top_routed; do

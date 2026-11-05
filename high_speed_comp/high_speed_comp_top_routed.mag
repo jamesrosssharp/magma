@@ -294,7 +294,7 @@ port 5 nsew
 flabel metal1 2200 5400 2400 5600 0 FreeSans 1600 0 0 0 CLK
 port 4 nsew
 flabel metal1 -800 5400 -600 5600 0 FreeSans 1600 0 0 0 VDD!
-port 2 nsew
+port 2 nsew power bidirectional
 flabel metal1 3400 5400 3600 5600 0 FreeSans 1600 0 0 0 VSS!
-port 3 nsew
+port 3 nsew ground bidirectional
 << end >>
