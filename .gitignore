@@ -2,4 +2,4 @@ gemini/
 *.so
 build/
 *.swp
-src/__py_cache__
+src/__pycache__/

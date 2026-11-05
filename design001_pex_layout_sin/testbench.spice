@@ -1,0 +1,61 @@
+Test bench for high speed comparator
+
+.lib /home/jrsharp/old_home_mnt/asic/sky130_pdk/share/pdk/sky130A/libs.tech/combined/sky130.lib.spice ${CORNER}
+.inc /home/jrsharp/old_home_mnt/asic/sky130_pdk/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice
+
+.inc ../high_speed_comp/high_speed_comp_top_routed.pex.spice
+*.inc high_speed_comp_top.spice
+
+** Supply voltage
+*.param VCCGAUSS = agauss(1.8, 0.05, 1)
+*.param VCC = 'VCCGAUSS'
+.param VCC = 1.8
+
+** Common mode voltage
+.param VDLGAUSS = agauss(0.9, 0.33, 1)
+.param VDL = VDLGAUSS
+
+** Temperature 
+*.param TEMPGAUSS = agauss(40, 30, 1)
+*.option temp = 'TEMPGAUSS'
+.option temp = 25
+
+*.param trans_time = agauss(500n, 10n, 1)
+.param trans_time = 500n
+
+.param DELTA = 0.1
+
+E5 TEMPERAT VSS VOL=' temper '
+
+VCLK CLK GND PULSE(0 1.8 0 1NS 1NS 5NS 10NS 0)
+VVSS VSS GND 0
+VVDD VDD GND 'VCC'
+
+VPLUS INP GND 'VDL'
+VMINUS INN GND SIN(0.9 0.9 50Meg 0 0 0)
+
+X1 INP INN VDD VSS CLK COMP_OUT  high_speed_comp_top_routed
+*.subckt high_speed_comp_top CLK VINP VINN VDD COMP_OUT VSS
+*X1 CLK INN INP VDD COMP_OUT VSS high_speed_comp_top
+
+.control
+*  set filetype=ascii 
+  setseed  8
+  reset
+  let run = 1
+  save all
+  op
+  write ${RAW_FILE}
+  reset
+  set appendwrite
+  dowhile run < = 100
+    save vdd i(vvdd) temperat clk comp_out inn inp v(x1.x2.vlat_minus) v(x1.x2.vlat_plus)
+    *save all
+    tran 0.1n 100n uic
+    write ${RAW_FILE}
+    let run = run + 1
+    reset
+  end
+  quit 0
+.endc
+

@@ -120,7 +120,7 @@ def load_corner(corner):
     print(failures)
 
 #for corner in ["tt", "ss", "fs", "sf", "ff"]:
-for corner in ["tt", "ss", "sf"]:
+for corner in ["tt", "ss", "fs", "sf"]:
     load_corner(corner)
 
 plt.figure(figsize=(8, 6))
