@@ -25,6 +25,8 @@ Cell sky130_fd_pr__nfet_01v8_WXMB3T read from current working directory
 Cell sky130_fd_pr__nfet_01v8_CQH6Q5 read from current working directory
 Cell sky130_fd_pr__nfet_01v8_lvt_URSRNG read from current working directory
 Cell sky130_fd_pr__nfet_01v8_lvt_GVGYYV read from current working directory
+Processing timestamp mismatches.
+Timestamp mismatches found in these cells: sky130_fd_pr__pfet_01v8_MV5BJT, sky130_fd_pr__pfet_01v8_7PVLUA, sky130_fd_pr__pfet_01v8_NRXS53, sky130_fd_pr__pfet_01v8_CZ2BPM, sky130_fd_pr__nfet_01v8_WXMB3T, sky130_fd_pr__nfet_01v8_CQH6Q5, sky130_fd_pr__nfet_01v8_lvt_URSRNG, sky130_fd_pr__nfet_01v8_lvt_GVGYYV.
 Extracting sky130_fd_pr__pfet_01v8_MV5BJT into sky130_fd_pr__pfet_01v8_MV5BJT.ext:
 Processing sky130_fd_pr__pfet_01v8_MV5BJT
 Extracting sky130_fd_pr__pfet_01v8_7PVLUA into sky130_fd_pr__pfet_01v8_7PVLUA.ext:

@@ -10,7 +10,7 @@ import numpy as np
 p = MagParser.MagParser()
 db = MagDatabase.MagDatabase()
 
-p.parse("high_speed_comp/high_speed_comp_top.mag", db)
+p.parse("high_speed_comp/high_speed_comp_top.mag", db, "~/.ciel/sky130A")
 
 #db.dump()
 
@@ -159,14 +159,17 @@ r.via('locali', 38, 38)
 a = p['children']['x1']['self']['CLK'].centroid()
 b = p['children']['x4']['self']['Y'].centroid()
 
-r.begin(a[0], a[1], 'metal1')
-r.via('metal2', 60, 60)
-r.route('w', 600, 300)
+r.begin(a[0], a[1], 'metal3')
+r.via('metal4', 60, 60)
 r.route('n',a[1] + (b[1] - a[1])*19//20, 300)
 r.routeTo('e', b[0], 300)
 r.routeTo('n', b[1] - 400, 300)
-r.routeTo('n', b[1], 150)
+r.via('metal3', 120, 120)
+r.route('n', 0, 150)
+r.via('metal2', 80, 80)
+r.route('n', 0, 100)
 r.via('metal1', 52, 52)
+r.routeTo('n', b[1], 150)
 r.route('n', 0, 64)
 r.via('locali', 38, 38)
 

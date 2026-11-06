@@ -101,6 +101,13 @@ class Router:
 
             self.layer = layer
  
+        elif (self.layer == 'metal4' and layer == 'metal3') or (self.layer == 'metal3' and layer == 'metal4'):
+            l = 'via3'
+
+            self.cell.addRect(l, self.cursor_x - w / 2, self.cursor_y - h / 2, self.cursor_x + w / 2, self.cursor_y + h / 2)
+
+            self.layer = layer
+ 
         elif (self.layer == 'metal1' and layer == 'locali') or (self.layer == 'locali' and layer == 'metal1'):
             l = 'viali'
 
@@ -118,6 +125,8 @@ class Router:
             l = 'via1'
         elif (self.layer == 'metal2' and layer == 'metal3') or (self.layer == 'metal3' and layer == 'metal2'):
             l = 'via2'
+        elif (self.layer == 'metal4' and layer == 'metal3') or (self.layer == 'metal3' and layer == 'metal4'):
+            l = 'via3'
         elif (self.layer == 'metal1' and layer == 'locali') or (self.layer == 'locali' and layer == 'metal1'):
             l = 'viali'
         else:
