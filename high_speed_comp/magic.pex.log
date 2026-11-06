@@ -57,7 +57,7 @@ Cell sky130_fd_pr__nfet_01v8_lvt_URSRNG read from current working directory
 Warning: cell <sky130_fd_pr__nfet_01v8_lvt_GVGYYV> from file sky130_fd_pr__nfet_01v8_lvt_GVGYYV.mag is not writeable
 Cell sky130_fd_pr__nfet_01v8_lvt_GVGYYV read from current working directory
 Processing timestamp mismatches.
-Timestamp mismatches found in these cells: sky130_fd_sc_hd__tapvpwrvgnd_1, sky130_fd_sc_hd__decap_3, sky130_fd_sc_hd__clkinv_4, sky130_fd_sc_hd__dfxtp_2, post_amplifier_routed, strong_arm_latch_routed, sky130_fd_pr__nfet_01v8_CQH6Q5.
+Timestamp mismatches found in these cells: sky130_fd_sc_hd__tapvpwrvgnd_1, sky130_fd_sc_hd__decap_3, sky130_fd_sc_hd__clkinv_4, sky130_fd_sc_hd__dfxtp_2, post_amplifier_routed, strong_arm_latch_routed, sky130_fd_pr__pfet_01v8_MV5BJT, sky130_fd_pr__pfet_01v8_7PVLUA, sky130_fd_pr__pfet_01v8_NRXS53, sky130_fd_pr__pfet_01v8_CZ2BPM, sky130_fd_pr__nfet_01v8_WXMB3T, sky130_fd_pr__nfet_01v8_CQH6Q5, sky130_fd_pr__nfet_01v8_lvt_URSRNG, sky130_fd_pr__nfet_01v8_lvt_GVGYYV.
 Extracting high_speed_comp_top_routed into extfiles/high_speed_comp_top_routed.ext:
 Processing high_speed_comp_top_routed
 high_speed_comp_top_routed: 4 warnings
@@ -87,7 +87,7 @@ Extracting VINP
 Extracting VINN
 Total Nets: 28
 Nets extracted: 23 (0.821429)
-Nets output: 4 (0.142857)
+Nets output: 3 (0.107143)
 exttospice finished.
 device missing 1 terminal;
  connecting remainder to node VSS

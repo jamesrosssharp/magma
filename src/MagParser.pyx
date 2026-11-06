@@ -109,6 +109,7 @@ cdef class MagParser:
                     if not db.isCellLoaded(new_cell):
                         try:
                             self.parse(newfile, db, lib_path)
+                            print(f"Got cell {newfile}")
                         except Exception as e:
                             print(f"Error: {e} ")
 
