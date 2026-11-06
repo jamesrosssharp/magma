@@ -547,17 +547,9 @@ class ViewerWindow(QMainWindow):
 def load(mag_file, lib_paths):
     parser = MagParser.MagParser()
     db = MagDatabase.MagDatabase()
-    parser.parse(mag_file, db)
-
-    # Resolve cells the parser could not find next to their parent
-    for name, cell in list(db.cells.items()):
-        if cell.layers or cell.uses:
-            continue
-        for d in lib_paths:
-            f = os.path.join(os.path.expanduser(d), name + ".mag")
-            if os.path.exists(f):
-                parser.parse(f, db)
-                break
+    # Cells not found next to their parent are searched for in the
+    # sub directories of each lib path, in order
+    parser.parse(mag_file, db, lib_paths)
 
     top = os.path.splitext(os.path.basename(mag_file))[0]
     return db, top
@@ -567,7 +559,7 @@ def main():
     ap = argparse.ArgumentParser(description="3D viewer for Magic .mag cell hierarchies")
     ap.add_argument("mag", help="top-level .mag file")
     ap.add_argument("-L", "--libpath", action="append", default=[],
-                    help="directory to search for unresolved cells (repeatable)")
+                    help="directory whose sub directories are searched for unresolved cells (repeatable)")
     ap.add_argument("--screenshot", metavar="PNG", help="render to an image and exit")
     ap.add_argument("--size", default="1400x900", help="window size, WxH")
     args = ap.parse_args()

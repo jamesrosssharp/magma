@@ -14,10 +14,56 @@ from MagDatabase import MagDatabase
 
 cdef class MagParser:
 
-    def __init__(self):
-        pass
+    # lib_path -> {cell name: .mag file path}, built on first use of each path
+    cdef dict _lib_index
 
-    def parse(self, str filename, db):
+    def __init__(self):
+        self._lib_index = {}
+
+    cdef dict _get_lib_index(self, str lib_path):
+        """Index every .mag file found in the sub directories of lib_path.
+
+        Directories are walked top-down in sorted order, so if a cell name
+        appears more than once the shallowest (then alphabetically first)
+        match wins.
+        """
+        index = self._lib_index.get(lib_path)
+        if index is None:
+            index = {}
+            for root, dirs, files in os.walk(lib_path):
+                dirs.sort()
+                for fname in sorted(files):
+                    if fname.endswith(".mag"):
+                        index.setdefault(fname[:-4], os.path.join(root, fname))
+            self._lib_index[lib_path] = index
+        return index
+
+    def find_cell(self, str cell_name, str default_file, lib_path=None):
+        """Return the .mag file for cell_name.
+
+        default_file is used if it exists; otherwise the sub directories of
+        lib_path (if given) are searched. lib_path may be a single directory
+        or a list of directories, searched in order. Falls back to
+        default_file so the caller reports the original path when the cell
+        cannot be found.
+        """
+        if os.path.isfile(default_file) or not lib_path:
+            return default_file
+        if isinstance(lib_path, str):
+            lib_path = [lib_path]
+        for d in lib_path:
+            found = self._get_lib_index(os.path.expanduser(d)).get(cell_name)
+            if found is not None:
+                return found
+        return default_file
+
+    def parse(self, str filename, db, lib_path=None):
+        """Parse a .mag file and its sub cells into db.
+
+        lib_path: optional directory, or list of directories. A sub cell that cannot be found at the
+        path given by its "use" line (or next to the parent .mag file) is
+        searched for in the sub directories of lib_path.
+        """
 
         cdef str cell_name_str = filename.split('/')[-1].split('\\')[-1]
         if cell_name_str.endswith(".mag"):
@@ -55,12 +101,14 @@ cdef class MagParser:
                     else:
                         newfile = os.path.dirname(filename) + "/" + new_cell + ".mag"
 
+                    newfile = self.find_cell(new_cell, newfile, lib_path)
+
                     # Each cell definition is parsed once; later uses only add an
                     # instance. A cell that failed to load is retried, since a later
                     # use may give a different path.
                     if not db.isCellLoaded(new_cell):
                         try:
-                            self.parse(newfile, db)
+                            self.parse(newfile, db, lib_path)
                         except Exception as e:
                             print(f"Error: {e} ")
 
