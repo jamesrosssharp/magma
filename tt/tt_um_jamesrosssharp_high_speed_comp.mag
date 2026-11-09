@@ -1,15 +1,6 @@
 magic
 tech sky130A
-timestamp 1793702589
-<< checkpaint >>
-rect 10155 20394 13915 23652
-rect 10155 20205 15224 20394
-rect 10155 20139 15861 20205
-rect 10155 19215 16278 20139
-rect 9995 17394 16278 19215
-rect 9995 15455 16499 17394
-rect 10059 15072 16499 15455
-rect 10889 13634 16499 15072
+timestamp 1794219008
 << metal4 >>
 rect 3067 22476 3097 22576
 rect 3343 22476 3373 22576
@@ -64,13 +55,21 @@ rect 9385 0 9475 100
 rect 11317 0 11407 100
 rect 13249 0 13339 100
 rect 15181 0 15271 100
-use high_speed_comp_top_routed  high_speed_comp_top_routed_0 ~/code/magma/high_speed_comp
-timestamp 1793607720
-transform 0 1 12185 -1 0 20622
+use flash_converter  flash_converter_0 ../3bit-flash-converter
+timestamp 1794218335
+transform -1 0 8419 0 1 13186
+box 300 -9100 6850 8100
+use flash_converter  flash_converter_1
+timestamp 1794218335
+transform 1 0 8174 0 1 13186
+box 300 -9100 6850 8100
+use high_speed_comp_top_routed  high_speed_comp_top_routed_0 ../3bit-flash-converter
+timestamp 1793956363
+transform 0 -1 4555 -1 0 3067
 box -550 -1400 1950 2950
 use high_speed_comp_top_routed  high_speed_comp_top_routed_1
-timestamp 1793607720
-transform 0 1 12153 -1 0 17843
+timestamp 1793956363
+transform 0 1 12092 -1 0 3139
 box -550 -1400 1950 2950
 << labels >>
 flabel metal4 s 14383 22476 14413 22576 0 FreeSans 240 90 0 0 clk

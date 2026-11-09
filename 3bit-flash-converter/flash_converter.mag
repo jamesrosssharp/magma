@@ -1,0 +1,69 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 1794218335
+use high_speed_comp_top_routed  x1
+timestamp 1793956363
+transform 0 1 7800 -1 0 15100
+box -1100 -2800 3900 5900
+use high_speed_comp_top_routed  x2
+timestamp 1793956363
+transform 0 1 7800 1 0 8100
+box -1100 -2800 3900 5900
+use high_speed_comp_top_routed  x3
+timestamp 1793956363
+transform 0 1 7800 -1 0 6700
+box -1100 -2800 3900 5900
+use high_speed_comp_top_routed  x4
+timestamp 1793956363
+transform 0 1 7800 1 0 -300
+box -1100 -2800 3900 5900
+use high_speed_comp_top_routed  x5
+timestamp 1793956363
+transform 0 1 7800 -1 0 -1700
+box -1100 -2800 3900 5900
+use high_speed_comp_top_routed  x6
+timestamp 1793956363
+transform 0 1 7800 1 0 -8700
+box -1100 -2800 3900 5900
+use high_speed_comp_top_routed  x7
+timestamp 1793956363
+transform 0 1 7800 -1 0 -10100
+box -1100 -2800 3900 5900
+use high_speed_comp_top_routed  x8
+timestamp 1793956363
+transform 0 1 7800 1 0 -17100
+box -1100 -2800 3900 5900
+use sky130_fd_pr__res_high_po_1p41_7LR5SM  XR1
+timestamp 1794217596
+transform 0 1 1323 -1 0 1307
+box -307 -723 307 723
+use sky130_fd_pr__res_high_po_1p41_7LR5SM  XR2
+timestamp 1794217596
+transform 0 1 1323 -1 0 -2893
+box -307 -723 307 723
+use sky130_fd_pr__res_high_po_1p41_7LR5SM  XR3
+timestamp 1794217596
+transform 0 1 1323 -1 0 -2293
+box -307 -723 307 723
+use sky130_fd_pr__res_high_po_1p41_7LR5SM  XR4
+timestamp 1794217596
+transform 0 1 1323 -1 0 -1693
+box -307 -723 307 723
+use sky130_fd_pr__res_high_po_1p41_7LR5SM  XR5
+timestamp 1794217596
+transform 0 1 1323 -1 0 -1093
+box -307 -723 307 723
+use sky130_fd_pr__res_high_po_1p41_7LR5SM  XR6
+timestamp 1794217596
+transform 0 1 1323 -1 0 -493
+box -307 -723 307 723
+use sky130_fd_pr__res_high_po_1p41_7LR5SM  XR7
+timestamp 1794217596
+transform 0 1 1323 -1 0 107
+box -307 -723 307 723
+use sky130_fd_pr__res_high_po_1p41_7LR5SM  XR8
+timestamp 1794217596
+transform 0 1 1323 -1 0 707
+box -307 -723 307 723
+<< end >>
