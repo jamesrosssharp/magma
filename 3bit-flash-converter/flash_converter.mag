@@ -1,69 +1,123 @@
 magic
 tech sky130A
 magscale 1 2
-timestamp 1794218335
+timestamp 1794274403
+<< metal1 >>
+rect 8800 10800 9000 11000
+rect 21200 7000 21400 7200
+rect 21200 6600 21400 6800
+rect 21200 6200 21400 6400
+rect 6800 5800 7000 6000
+rect 21200 5800 21400 6000
+rect 21200 5400 21400 5600
+rect 21200 5000 21400 5200
+rect 21200 4600 21400 4800
+rect 21200 4200 21400 4400
+rect 21200 3800 21400 4000
+rect 9000 800 9200 1000
 use high_speed_comp_top_routed  x1
 timestamp 1793956363
-transform 0 1 7800 -1 0 15100
+transform 0 1 13600 -1 0 19900
 box -1100 -2800 3900 5900
 use high_speed_comp_top_routed  x2
 timestamp 1793956363
-transform 0 1 7800 1 0 8100
+transform 0 1 13600 1 0 12900
 box -1100 -2800 3900 5900
 use high_speed_comp_top_routed  x3
 timestamp 1793956363
-transform 0 1 7800 -1 0 6700
+transform 0 1 13600 -1 0 11500
 box -1100 -2800 3900 5900
 use high_speed_comp_top_routed  x4
 timestamp 1793956363
-transform 0 1 7800 1 0 -300
+transform 0 1 13600 1 0 4500
 box -1100 -2800 3900 5900
 use high_speed_comp_top_routed  x5
 timestamp 1793956363
-transform 0 1 7800 -1 0 -1700
+transform 0 1 13600 -1 0 3100
 box -1100 -2800 3900 5900
 use high_speed_comp_top_routed  x6
 timestamp 1793956363
-transform 0 1 7800 1 0 -8700
+transform 0 1 13600 1 0 -3900
 box -1100 -2800 3900 5900
 use high_speed_comp_top_routed  x7
 timestamp 1793956363
-transform 0 1 7800 -1 0 -10100
+transform 0 1 13600 -1 0 -5300
 box -1100 -2800 3900 5900
 use high_speed_comp_top_routed  x8
 timestamp 1793956363
-transform 0 1 7800 1 0 -17100
+transform 0 1 13600 1 0 -12300
 box -1100 -2800 3900 5900
 use sky130_fd_pr__res_high_po_1p41_7LR5SM  XR1
-timestamp 1794217596
-transform 0 1 1323 -1 0 1307
+timestamp 1794274326
+transform 0 1 8923 -1 0 8107
 box -307 -723 307 723
 use sky130_fd_pr__res_high_po_1p41_7LR5SM  XR2
-timestamp 1794217596
-transform 0 1 1323 -1 0 -2893
+timestamp 1794274326
+transform 0 1 8923 -1 0 7507
 box -307 -723 307 723
 use sky130_fd_pr__res_high_po_1p41_7LR5SM  XR3
-timestamp 1794217596
-transform 0 1 1323 -1 0 -2293
+timestamp 1794274326
+transform 0 1 8923 -1 0 6907
 box -307 -723 307 723
 use sky130_fd_pr__res_high_po_1p41_7LR5SM  XR4
-timestamp 1794217596
-transform 0 1 1323 -1 0 -1693
+timestamp 1794274326
+transform 0 1 8923 -1 0 6307
 box -307 -723 307 723
 use sky130_fd_pr__res_high_po_1p41_7LR5SM  XR5
-timestamp 1794217596
-transform 0 1 1323 -1 0 -1093
+timestamp 1794274326
+transform 0 1 8923 -1 0 5707
 box -307 -723 307 723
 use sky130_fd_pr__res_high_po_1p41_7LR5SM  XR6
-timestamp 1794217596
-transform 0 1 1323 -1 0 -493
+timestamp 1794274326
+transform 0 1 8923 -1 0 5107
 box -307 -723 307 723
 use sky130_fd_pr__res_high_po_1p41_7LR5SM  XR7
-timestamp 1794217596
-transform 0 1 1323 -1 0 107
+timestamp 1794274326
+transform 0 1 8923 -1 0 4507
 box -307 -723 307 723
 use sky130_fd_pr__res_high_po_1p41_7LR5SM  XR8
-timestamp 1794217596
-transform 0 1 1323 -1 0 707
+timestamp 1794274326
+transform 0 1 8923 -1 0 3907
 box -307 -723 307 723
+use sky130_fd_pr__res_high_po_1p41_7LR5SM  XR9
+timestamp 1794274326
+transform 0 1 8923 -1 0 8707
+box -307 -723 307 723
+use sky130_fd_pr__res_high_po_1p41_7LR5SM  XR10
+timestamp 1794274326
+transform 0 1 8923 -1 0 9307
+box -307 -723 307 723
+use sky130_fd_pr__res_high_po_1p41_7LR5SM  XR11
+timestamp 1794274326
+transform 0 1 8923 -1 0 3307
+box -307 -723 307 723
+use sky130_fd_pr__res_high_po_1p41_7LR5SM  XR12
+timestamp 1794274326
+transform 0 1 8923 -1 0 2707
+box -307 -723 307 723
+<< labels >>
+flabel metal1 8800 10800 9000 11000 0 FreeSans 1600 0 0 0 RES_TOP
+port 1 nsew
+flabel metal1 9000 800 9200 1000 0 FreeSans 1600 0 0 0 RES_OUT
+port 2 nsew
+flabel metal1 6800 5800 7000 6000 0 FreeSans 1600 0 0 0 VIN
+port 0 nsew
+flabel metal1 21200 7000 21400 7200 0 FreeSans 1600 0 0 0 O0
+port 3 nsew
+flabel metal1 21200 6600 21400 6800 0 FreeSans 1600 0 0 0 O1
+port 4 nsew
+flabel metal1 21200 6200 21400 6400 0 FreeSans 1600 0 0 0 O2
+port 5 nsew
+flabel metal1 21200 5800 21400 6000 0 FreeSans 1600 0 0 0 O3
+port 6 nsew
+flabel metal1 21200 5400 21400 5600 0 FreeSans 1600 0 0 0 O4
+port 7 nsew
+flabel metal1 21200 5000 21400 5200 0 FreeSans 1600 0 0 0 O5
+port 8 nsew
+flabel metal1 21200 4600 21400 4800 0 FreeSans 1600 0 0 0 O6
+port 9 nsew
+flabel metal1 21200 4200 21400 4400 0 FreeSans 1600 0 0 0 O7
+port 10 nsew
+flabel metal1 21200 3800 21400 4000 0 FreeSans 1600 0 0 0 CLK
+port 11 nsew
 << end >>

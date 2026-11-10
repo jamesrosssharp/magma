@@ -1,7 +1,7 @@
 magic
 tech sky130A
 magscale 1 2
-timestamp 1794217596
+timestamp 1794274326
 << pwell >>
 rect -307 -723 307 723
 << psubdiff >>
@@ -46,11 +46,11 @@ rect 125 -539 131 -142
 rect -131 -551 131 -539
 << labels >>
 rlabel psubdiffcont 0 -670 0 -670 0 B
-port 22 nsew
+port 58 nsew
 rlabel xpolycontact 0 522 0 522 0 R1
-port 23 nsew
+port 59 nsew
 rlabel xpolycontact 0 -522 0 -522 0 R2
-port 24 nsew
+port 60 nsew
 << properties >>
 string FIXED_BBOX -254 -670 254 670
 string gencell sky130_fd_pr__res_high_po_1p41

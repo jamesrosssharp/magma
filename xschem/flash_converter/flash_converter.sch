@@ -5,6 +5,7 @@ K {}
 V {}
 S {}
 E {}
+T {Dummy devices} -630 -50 0 0 0.4 0.4 {}
 N -140 -260 -140 -140 {
 lab=RES_TOP}
 N -140 -170 40 -170 {
@@ -58,23 +59,23 @@ lab=VIN}
 N -210 1100 40 1100 {
 lab=VIN}
 N -40 -260 -40 1240 {
-lab=VIN}
+lab=CLK}
 N -40 1080 40 1080 {
-lab=VIN}
+lab=CLK}
 N -40 900 40 900 {
-lab=VIN}
+lab=CLK}
 N -40 730 40 730 {
-lab=VIN}
+lab=CLK}
 N -40 530 40 530 {
-lab=VIN}
+lab=CLK}
 N -40 340 40 340 {
-lab=VIN}
+lab=CLK}
 N -40 140 40 140 {
-lab=VIN}
+lab=CLK}
 N -40 -40 40 -40 {
-lab=VIN}
+lab=CLK}
 N -40 -210 40 -210 {
-lab=VIN}
+lab=CLK}
 C {high_speed_comp_top.sym} 190 -170 0 0 {name=x1}
 C {high_speed_comp_top.sym} 190 0 0 0 {name=x2}
 C {high_speed_comp_top.sym} 190 180 0 0 {name=x3}
@@ -153,3 +154,32 @@ C {opin.sym} 340 730 0 0 {name=p9 lab=O5
 C {opin.sym} 340 900 0 0 {name=p10 lab=O6}
 C {opin.sym} 340 1080 0 0 {name=p11 lab=O7}
 C {ipin.sym} -40 -250 1 0 {name=p12 lab=CLK}
+C {sky130_fd_pr/res_high_po_1p41.sym} -480 -130 0 0 {name=R9
+L=1.41
+model=res_high_po_1p41
+spiceprefix=X
+mult=1}
+C {sky130_fd_pr/res_high_po_1p41.sym} -350 -130 0 0 {name=R10
+L=1.41
+model=res_high_po_1p41
+spiceprefix=X
+mult=1}
+C {vdd.sym} -350 -100 2 0 {name=l17 lab=VSS}
+C {vdd.sym} 40 -130 3 0 {name=l18 lab=VSS}
+C {vdd.sym} -480 -100 2 0 {name=l19 lab=VSS}
+C {vdd.sym} -350 -160 0 0 {name=l20 lab=VSS}
+C {vdd.sym} -480 -160 0 0 {name=l21 lab=VSS}
+C {sky130_fd_pr/res_high_po_1p41.sym} -630 -130 0 0 {name=R11
+L=1.41
+model=res_high_po_1p41
+spiceprefix=X
+mult=1}
+C {vdd.sym} -630 -100 2 0 {name=l22 lab=VSS}
+C {vdd.sym} -630 -160 0 0 {name=l23 lab=VSS}
+C {sky130_fd_pr/res_high_po_1p41.sym} -770 -130 0 0 {name=R12
+L=1.41
+model=res_high_po_1p41
+spiceprefix=X
+mult=1}
+C {vdd.sym} -770 -100 2 0 {name=l24 lab=VSS}
+C {vdd.sym} -770 -160 0 0 {name=l25 lab=VSS}

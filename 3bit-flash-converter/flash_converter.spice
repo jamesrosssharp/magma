@@ -1,17 +1,6 @@
 ** sch_path: /home/jrsharp/code/magma/xschem/flash_converter/flash_converter.sch
-**.subckt flash_converter VIN RES_TOP RES_OUT O0 O1 O2 O3 O4 O5 O6 O7 CLK
-*.ipin VIN
-*.ipin RES_TOP
-*.opin RES_OUT
-*.opin O0
-*.opin O1
-*.opin O2
-*.opin O3
-*.opin O4
-*.opin O5
-*.opin O6
-*.opin O7
-*.ipin CLK
+.subckt flash_converter VIN RES_TOP RES_OUT O0 O1 O2 O3 O4 O5 O6 O7 CLK
+*.PININFO VIN:I RES_TOP:I RES_OUT:O O0:O O1:O O2:O O3:O O4:O O5:O O6:O O7:O CLK:I
 x1 CLK VIN RES_TOP VDD O0 VSS high_speed_comp_top_routed
 x2 CLK VIN net1 VDD O1 VSS high_speed_comp_top_routed
 x3 CLK VIN net2 VDD O2 VSS high_speed_comp_top_routed
@@ -20,15 +9,19 @@ x5 CLK VIN net4 VDD O4 VSS high_speed_comp_top_routed
 x6 CLK VIN net5 VDD O5 VSS high_speed_comp_top_routed
 x7 CLK VIN net6 VDD O6 VSS high_speed_comp_top_routed
 x8 CLK VIN net7 VDD O7 VSS high_speed_comp_top_routed
-XR1 net1 RES_TOP net8 sky130_fd_pr__res_high_po_1p41 L=1.41 mult=1 m=1
-XR2 net2 net1 net9 sky130_fd_pr__res_high_po_1p41 L=1.41 mult=1 m=1
-XR3 net3 net2 net10 sky130_fd_pr__res_high_po_1p41 L=1.41 mult=1 m=1
-XR4 net4 net3 net11 sky130_fd_pr__res_high_po_1p41 L=1.41 mult=1 m=1
-XR5 net5 net4 net12 sky130_fd_pr__res_high_po_1p41 L=1.41 mult=1 m=1
-XR6 net6 net5 net13 sky130_fd_pr__res_high_po_1p41 L=1.41 mult=1 m=1
-XR7 net7 net6 net14 sky130_fd_pr__res_high_po_1p41 L=1.41 mult=1 m=1
-XR8 RES_OUT net7 net15 sky130_fd_pr__res_high_po_1p41 L=1.41 mult=1 m=1
-**.ends
+XR1 net1 RES_TOP VSS sky130_fd_pr__res_high_po_1p41 L=1.41 mult=1 m=1
+XR2 net2 net1 VSS sky130_fd_pr__res_high_po_1p41 L=1.41 mult=1 m=1
+XR3 net3 net2 VSS sky130_fd_pr__res_high_po_1p41 L=1.41 mult=1 m=1
+XR4 net4 net3 VSS sky130_fd_pr__res_high_po_1p41 L=1.41 mult=1 m=1
+XR5 net5 net4 VSS sky130_fd_pr__res_high_po_1p41 L=1.41 mult=1 m=1
+XR6 net6 net5 VSS sky130_fd_pr__res_high_po_1p41 L=1.41 mult=1 m=1
+XR7 net7 net6 VSS sky130_fd_pr__res_high_po_1p41 L=1.41 mult=1 m=1
+XR8 RES_OUT net7 VSS sky130_fd_pr__res_high_po_1p41 L=1.41 mult=1 m=1
+XR9 VSS VSS VSS sky130_fd_pr__res_high_po_1p41 L=1.41 mult=1 m=1
+XR10 VSS VSS VSS sky130_fd_pr__res_high_po_1p41 L=1.41 mult=1 m=1
+XR11 VSS VSS VSS sky130_fd_pr__res_high_po_1p41 L=1.41 mult=1 m=1
+XR12 VSS VSS VSS sky130_fd_pr__res_high_po_1p41 L=1.41 mult=1 m=1
+.ends
 
 .GLOBAL VDD
 .GLOBAL VSS
