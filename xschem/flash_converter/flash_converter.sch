@@ -183,3 +183,15 @@ spiceprefix=X
 mult=1}
 C {vdd.sym} -770 -100 2 0 {name=l24 lab=VSS}
 C {vdd.sym} -770 -160 0 0 {name=l25 lab=VSS}
+C {vdd.sym} -160 -110 3 0 {name=l26 lab=VSS}
+C {vdd.sym} -160 60 3 0 {name=l27 lab=VSS}
+C {vdd.sym} -160 230 3 0 {name=l28 lab=VSS}
+C {vdd.sym} -160 430 3 0 {name=l29 lab=VSS}
+C {vdd.sym} -160 610 3 0 {name=l30 lab=VSS}
+C {vdd.sym} -160 810 3 0 {name=l31 lab=VSS}
+C {vdd.sym} -160 990 3 0 {name=l32 lab=VSS}
+C {vdd.sym} -160 1170 3 0 {name=l33 lab=VSS}
+C {vdd.sym} -370 -130 3 0 {name=l34 lab=VSS}
+C {vdd.sym} -500 -130 3 0 {name=l35 lab=VSS}
+C {vdd.sym} -650 -130 3 0 {name=l36 lab=VSS}
+C {vdd.sym} -790 -130 3 0 {name=l37 lab=VSS}
