@@ -1,0 +1,17 @@
+** sch_path: /home/jrsharp/code/magma/xschem/1bit_am/1bit_am.sch
+.subckt 1bit_am VDD VSS CLK VIN VOUT PWM_IN
+*.PININFO VDD:I VSS:I CLK:I VIN:I VOUT:O PWM_IN:I
+x1 CLK NET_IN NET_PWM VDD VOUT VSS high_speed_comp_top_routed
+XC1 NET_PWM VSS sky130_fd_pr__cap_mim_m3_2 W=5 L=5 m=100
+XR1 net2 net3 net4 sky130_fd_pr__res_xhigh_po_0p35 L=20 mult=1 m=1
+XR2 net3 NET_PWM net5 sky130_fd_pr__res_xhigh_po_0p35 L=20 mult=1 m=1
+x2 net1 VSS VSS VDD VDD net2 sky130_fd_sc_hd__bufinv_16
+XR3 VDD net6 net7 sky130_fd_pr__res_xhigh_po_0p35 L=20 mult=1 m=1
+XR4 net6 NET_IN net8 sky130_fd_pr__res_xhigh_po_0p35 L=20 mult=1 m=1
+XR5 NET_IN net9 net10 sky130_fd_pr__res_xhigh_po_0p35 L=20 mult=1 m=1
+XR6 net9 VSS net11 sky130_fd_pr__res_xhigh_po_0p35 L=20 mult=1 m=1
+XC2 VIN NET_IN sky130_fd_pr__cap_mim_m3_2 W=5 L=5 m=100
+x3 PWM_IN VSS VSS VDD VDD net1 sky130_fd_sc_hd__inv_1
+.ends
+
+.end

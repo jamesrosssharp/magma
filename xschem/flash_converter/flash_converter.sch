@@ -58,8 +58,6 @@ N -210 920 40 920 {
 lab=VIN}
 N -210 1100 40 1100 {
 lab=VIN}
-N -40 -260 -40 1240 {
-lab=CLK}
 N -40 1080 40 1080 {
 lab=CLK}
 N -40 900 40 900 {
@@ -76,6 +74,12 @@ N -40 -40 40 -40 {
 lab=CLK}
 N -40 -210 40 -210 {
 lab=CLK}
+N -40 -250 -40 1080 {
+lab=CLK}
+N -560 80 -460 80 {
+lab=VDD}
+N -560 110 -460 110 {
+lab=VSS}
 C {high_speed_comp_top.sym} 190 -170 0 0 {name=x1}
 C {high_speed_comp_top.sym} 190 0 0 0 {name=x2}
 C {high_speed_comp_top.sym} 190 180 0 0 {name=x3}
@@ -99,10 +103,6 @@ L=1.41
 model=res_high_po_1p41
 spiceprefix=X
 mult=1}
-C {vdd.sym} 40 -150 3 0 {name=l1 lab=VDD}
-C {vdd.sym} 40 20 3 0 {name=l2 lab=VDD}
-C {vdd.sym} 40 200 3 0 {name=l3 lab=VDD}
-C {vdd.sym} 40 400 3 0 {name=l4 lab=VDD}
 C {sky130_fd_pr/res_high_po_1p41.sym} -140 430 0 0 {name=R4
 L=1.41
 model=res_high_po_1p41
@@ -128,18 +128,6 @@ L=1.41
 model=res_high_po_1p41
 spiceprefix=X
 mult=1}
-C {vdd.sym} 40 -130 3 0 {name=l5 lab=VSS}
-C {vdd.sym} 40 40 3 0 {name=l6 lab=VSS}
-C {vdd.sym} 40 220 3 0 {name=l7 lab=VSS}
-C {vdd.sym} 40 420 3 0 {name=l8 lab=VSS}
-C {vdd.sym} 40 610 3 0 {name=l9 lab=VSS}
-C {vdd.sym} 40 590 3 0 {name=l10 lab=VDD}
-C {vdd.sym} 40 810 3 0 {name=l11 lab=VSS}
-C {vdd.sym} 40 790 3 0 {name=l12 lab=VDD}
-C {vdd.sym} 40 980 3 0 {name=l13 lab=VSS}
-C {vdd.sym} 40 960 3 0 {name=l14 lab=VDD}
-C {vdd.sym} 40 1160 3 0 {name=l15 lab=VSS}
-C {vdd.sym} 40 1140 3 0 {name=l16 lab=VDD}
 C {ipin.sym} -210 -240 1 0 {name=p1 lab=VIN}
 C {ipin.sym} -140 -260 1 0 {name=p2 lab=RES_TOP}
 C {opin.sym} -140 1200 1 0 {name=p3 lab=RES_OUT}
@@ -165,7 +153,6 @@ model=res_high_po_1p41
 spiceprefix=X
 mult=1}
 C {vdd.sym} -350 -100 2 0 {name=l17 lab=VSS}
-C {vdd.sym} 40 -130 3 0 {name=l18 lab=VSS}
 C {vdd.sym} -480 -100 2 0 {name=l19 lab=VSS}
 C {vdd.sym} -350 -160 0 0 {name=l20 lab=VSS}
 C {vdd.sym} -480 -160 0 0 {name=l21 lab=VSS}
@@ -195,3 +182,23 @@ C {vdd.sym} -370 -130 3 0 {name=l34 lab=VSS}
 C {vdd.sym} -500 -130 3 0 {name=l35 lab=VSS}
 C {vdd.sym} -650 -130 3 0 {name=l36 lab=VSS}
 C {vdd.sym} -790 -130 3 0 {name=l37 lab=VSS}
+C {lab_wire.sym} 40 -150 0 0 {name=p13 sig_type=std_logic lab=VDD}
+C {lab_wire.sym} 40 20 0 0 {name=p14 sig_type=std_logic lab=VDD}
+C {lab_wire.sym} 40 200 0 0 {name=p15 sig_type=std_logic lab=VDD}
+C {lab_wire.sym} 40 400 0 0 {name=p16 sig_type=std_logic lab=VDD}
+C {lab_wire.sym} 40 590 0 0 {name=p17 sig_type=std_logic lab=VDD}
+C {lab_wire.sym} 40 790 0 0 {name=p18 sig_type=std_logic lab=VDD}
+C {lab_wire.sym} 40 960 0 0 {name=p19 sig_type=std_logic lab=VDD}
+C {lab_wire.sym} 40 1140 0 0 {name=p20 sig_type=std_logic lab=VDD}
+C {lab_wire.sym} 40 -130 0 0 {name=p21 sig_type=std_logic lab=VSS}
+C {lab_wire.sym} 40 40 0 0 {name=p22 sig_type=std_logic lab=VSS}
+C {lab_wire.sym} 40 220 0 0 {name=p23 sig_type=std_logic lab=VSS}
+C {lab_wire.sym} 40 420 0 0 {name=p24 sig_type=std_logic lab=VSS}
+C {lab_wire.sym} 40 610 0 0 {name=p25 sig_type=std_logic lab=VSS}
+C {lab_wire.sym} 40 810 0 0 {name=p26 sig_type=std_logic lab=VSS}
+C {lab_wire.sym} 40 980 0 0 {name=p27 sig_type=std_logic lab=VSS}
+C {lab_wire.sym} 40 1160 0 0 {name=p28 sig_type=std_logic lab=VSS}
+C {ipin.sym} -560 80 0 0 {name=p29 lab=VDD}
+C {ipin.sym} -560 110 0 0 {name=p30 lab=VSS}
+C {lab_wire.sym} -470 80 0 0 {name=p31 sig_type=std_logic lab=VDD}
+C {lab_wire.sym} -470 110 0 0 {name=p32 sig_type=std_logic lab=VSS}

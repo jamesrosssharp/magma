@@ -1,0 +1,71 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 1794392329
+<< error_s >>
+rect -13088 -131287 -12876 -130966
+<< metal1 >>
+rect -11128 -122546 -10928 -122346
+rect -11128 -122946 -10928 -122746
+rect -11128 -123346 -10928 -123146
+rect -11128 -123746 -10928 -123546
+rect -11128 -124146 -10928 -123946
+rect -11128 -124546 -10928 -124346
+use high_speed_comp_top_routed  x1
+timestamp 1793956363
+transform 1 0 -13732 0 1 -143088
+box -1100 -2800 3900 5900
+use sky130_fd_sc_hd__bufinv_16  x2 $PDKPATH/libs.ref/sky130_fd_sc_hd/mag
+timestamp 1792400971
+transform 1 0 -15376 0 1 -131584
+box -38 -48 2246 592
+use sky130_fd_sc_hd__inv_1  x3 $PDKPATH/libs.ref/sky130_fd_sc_hd/mag
+timestamp 1792400971
+transform 1 0 -13050 0 1 -131548
+box -38 -48 314 592
+use sky130_fd_pr__cap_mim_m3_2_PRPN7K  XC1
+timestamp 1794392329
+transform 1 0 -25670 0 1 -130650
+box -10290 -7000 10312 7000
+use sky130_fd_pr__cap_mim_m3_2_PRPN7K  XC2
+timestamp 1794392329
+transform 1 0 -25882 0 1 -145436
+box -10290 -7000 10312 7000
+use sky130_fd_pr__res_xhigh_po_0p35_N7YJWT  XR1
+timestamp 1794392329
+transform 1 0 -10481 0 1 -131846
+box -201 -2582 201 2582
+use sky130_fd_pr__res_xhigh_po_0p35_N7YJWT  XR2
+timestamp 1794392329
+transform 1 0 -10947 0 1 -131804
+box -201 -2582 201 2582
+use sky130_fd_pr__res_xhigh_po_0p35_N7YJWT  XR3
+timestamp 1794392329
+transform 1 0 -13695 0 1 -149320
+box -201 -2582 201 2582
+use sky130_fd_pr__res_xhigh_po_0p35_N7YJWT  XR4
+timestamp 1794392329
+transform 1 0 -14631 0 1 -149268
+box -201 -2582 201 2582
+use sky130_fd_pr__res_xhigh_po_0p35_N7YJWT  XR5
+timestamp 1794392329
+transform 1 0 -14163 0 1 -149216
+box -201 -2582 201 2582
+use sky130_fd_pr__res_xhigh_po_0p35_N7YJWT  XR6
+timestamp 1794392329
+transform 1 0 -15047 0 1 -149268
+box -201 -2582 201 2582
+<< labels >>
+flabel metal1 -11128 -122946 -10928 -122746 0 FreeSans 1600 0 0 0 VSS
+port 1 nsew
+flabel metal1 -11128 -122546 -10928 -122346 0 FreeSans 1600 0 0 0 VDD
+port 0 nsew
+flabel metal1 -11128 -123346 -10928 -123146 0 FreeSans 1600 0 0 0 CLK
+port 2 nsew
+flabel metal1 -11128 -123746 -10928 -123546 0 FreeSans 1600 0 0 0 VIN
+port 3 nsew
+flabel metal1 -11128 -124146 -10928 -123946 0 FreeSans 1600 0 0 0 VOUT
+port 4 nsew
+flabel metal1 -11128 -124546 -10928 -124346 0 FreeSans 1600 0 0 0 PWM_IN
+port 5 nsew
+<< end >>

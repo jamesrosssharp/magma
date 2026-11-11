@@ -1,0 +1,1 @@
+../flash_converter/strong_arm_latch.sch
