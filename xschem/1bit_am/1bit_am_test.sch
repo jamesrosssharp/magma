@@ -8,13 +8,13 @@ E {}
 B 2 610 -580 1410 -180 {flags=graph
 
 
-ypos1=0
-ypos2=2
+ypos1=-0.4
+ypos2=1.6
 divy=5
 subdivy=1
 unity=1
-x1=9.80446e-07
-x2=1.11248e-05
+
+
 divx=5
 subdivx=1
 xlabmag=1.0
@@ -32,7 +32,7 @@ sim_type=tran
 
 
 digital=0
-y2=2
+y2=1.9139
 
 
 color="4 14 12 7"
@@ -41,7 +41,30 @@ x1.net_pwm
 x1.net_in
 output"
 hilight_wave=6
-y1=0}
+y1=-0.0861141
+x1=2.15e-06
+x2=5.15e-06}
+B 2 1180 -120 1980 280 {flags=graph
+y1=0
+y2=2
+ypos1=0
+ypos2=2
+divy=5
+subdivy=1
+unity=1
+x1=2.15e-06
+x2=5.15e-06
+divx=5
+subdivx=1
+xlabmag=1.0
+ylabmag=1.0
+node=output
+color=4
+dataset=-1
+unitx=1
+logx=0
+logy=0
+}
 N -100 -100 -100 -70 {lab=VDD}
 N -100 -10 -100 60 {lab=GND}
 N -150 110 -150 140 {
@@ -91,7 +114,7 @@ C {code_shown.sym} -590 -390 0 0 {name=s1 only_toplevel=false format="tcleval( @
 .option savecurrents
 .control
 save all
-tran 0.1n 15u
+tran 0.1n 5u
 remzerovec
 write comp_test_tran.raw
 op
