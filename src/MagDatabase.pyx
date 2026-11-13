@@ -135,6 +135,31 @@ cdef class Resistor:
 
         return r
 
+cdef class Capacitor:
+
+    cdef public list contacts
+
+    def __init__(self):
+        self.contacts         = []
+
+    def __repr__(self):
+        return f"contacts: {self.contacts}"
+
+    def dump_with_transform(self, transform):
+        for g in self.contacts:
+            p = transform.transform_point(g)
+            print(f"\tcontact: {p}")
+
+    def transform(self, transform):
+
+        r = Capacitor()
+
+        for c in self.contacts:
+            p = transform.transform_point(c)
+            r.contacts.append(p)
+
+        return r
+
 
 
 cdef class Transform:
@@ -207,6 +232,7 @@ cdef class Cell:
     cdef public str tech
     cdef public list transistors
     cdef public list resistors
+    cdef public list capacitors
     cdef public list uses
     cdef public dict labels
     cdef public Rect bbox
@@ -215,6 +241,7 @@ cdef class Cell:
         self.layers = {}
         self.transistors = []
         self.resistors = []
+        self.capacitors = []
         self.uses = []
         self.labels = {}
         self.bbox = Rect(1e9, 1e9, -1e9, -1e9)
@@ -316,6 +343,22 @@ cdef class Cell:
 
     def get_resistors(self, db):
         return self.get_resistors_with_transform(db, Transform(1, 0, 0, 0, 1, 0))
+
+    def get_capacitors_with_transform(self, db, transform):    
+        """
+        Get resistors in this cell and in child cells
+        """
+        t = [tt.transform(transform) for tt in self.capacitors]
+
+        tt = {}
+        for u in self.uses:
+            tt[u['inst_name']] = db.cells[u['name']].get_capacitors_with_transform(db, u['transform'].Transform(transform))
+
+        return {'self': t, 'children': tt}
+
+    def get_capacitors(self, db):
+        return self.get_capacitors_with_transform(db, Transform(1, 0, 0, 0, 1, 0))
+
 
     def get_pins_with_transform(self, db, transform):
 
@@ -533,6 +576,50 @@ cdef class Cell:
                     t.contacts.append(r.centroid())
 
                 self.resistors.append(t)
+
+    def find_capacitors(self):
+
+        l = []
+
+        if 'xpolyres' in self.layers:
+            l += self.layers['xpolyres']
+        #if 'nmoslvt' in self.layers:
+        #    l += self.layers['nmoslvt']
+
+        if l != []:
+            for r in l:
+
+                # Find all xpolycontact rects which abut the xpolyres rects
+
+                poly_r = []
+
+                for rp in self.layers['xpolycontact']:
+                    if rp.abuts(r):
+                        poly_r.append(rp)
+
+                #for rp in self.layers['xpolycontact']:
+                #    for i in range(0, len(poly_r)):
+                #        if poly_r[i].abuts(rp):
+                #            poly_r.append(rp)
+
+                
+                # Find all viali rects which overlap poly_r
+                
+                poly_c = []
+
+                for pc in self.layers['viali']:
+                    for pr in poly_r:
+                        if pc.overlaps(pr):
+                            poly_c.append(pc)
+                            break
+
+                t = Capacitor() 
+
+                for r in poly_c:
+                    t.contacts.append(r.centroid())
+
+                self.capacitors.append(t)
+
 
 
     def setBBox(self, xbot, ybot, xtop, ytop):
