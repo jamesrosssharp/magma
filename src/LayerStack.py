@@ -30,6 +30,15 @@ _MET3   = (2.7861, 3.6311)
 _MET4   = (4.0211, 4.8661)
 _MET5   = (5.3711, 6.6311)
 
+# MiM capacitor top plates.  sky130A-extract.tech gives each plate a 0.1 um
+# dielectric gap above its bottom-plate metal and a 0.2 um thickness, but its
+# absolute z values (mimcap 2.4661, mimcap2 3.7311) sit one metal level too
+# low (above met2/met3 rather than met3/met4).  Use the PDK offsets relative
+# to the correct bottom plate so the contacts reach the metal above.
+_MIM_GAP, _MIM_THICK = 0.1, 0.2
+_MIMCAP  = (_MET3[1] + _MIM_GAP, _MET3[1] + _MIM_GAP + _MIM_THICK)
+_MIMCAP2 = (_MET4[1] + _MIM_GAP, _MET4[1] + _MIM_GAP + _MIM_THICK)
+
 _NDIFF_COL   = (0.25, 0.70, 0.30, 1.0)
 _PDIFF_COL   = (0.75, 0.60, 0.25, 1.0)
 _CHAN_COL    = (0.80, 0.45, 0.20, 1.0)
@@ -67,6 +76,10 @@ SKY130_LAYERS = [
 
     Layer("poly",         *_POLY, (0.85, 0.20, 0.20, 1.0), True),
     Layer("polycont",     *_span(_POLY, _LI), _CONT_COL, True),
+    # High-sheet-resistance poly resistor body and its contact (xhrpoly is
+    # in the PDK's allpoly alias, so it shares the poly height)
+    Layer("xpolyres",     *_POLY, (0.60, 0.15, 0.40, 1.0), True),
+    Layer("xpolycontact", *_span(_POLY, _LI), _CONT_COL, True),
 
     Layer("locali",       *_LI,   (0.55, 0.40, 0.80, 1.0), True),
     Layer("viali",        *_span(_LI, _MET1), _CONT_COL, True),
@@ -76,8 +89,12 @@ SKY130_LAYERS = [
     Layer("metal2",       *_MET2, (0.85, 0.35, 0.85, 1.0), True),
     Layer("via2",         *_span(_MET2, _MET3), _CONT_COL, True),
     Layer("metal3",       *_MET3, (0.40, 0.80, 0.80, 1.0), True),
+    Layer("mimcap",       *_MIMCAP, (0.55, 0.85, 0.40, 1.0), True),
+    Layer("mimcapcontact", *_span(_MIMCAP, _MET4), _CONT_COL, True),
     Layer("via3",         *_span(_MET3, _MET4), _CONT_COL, True),
     Layer("metal4",       *_MET4, (0.95, 0.75, 0.30, 1.0), True),
+    Layer("mimcap2",      *_MIMCAP2, (0.45, 0.75, 0.35, 1.0), True),
+    Layer("mimcap2contact", *_span(_MIMCAP2, _MET5), _CONT_COL, True),
     Layer("via4",         *_span(_MET4, _MET5), _CONT_COL, True),
     Layer("metal5",       *_MET5, (0.75, 0.90, 0.95, 1.0), True),
 ]

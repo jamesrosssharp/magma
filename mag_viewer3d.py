@@ -58,7 +58,8 @@ GL_DEPTH_BUFFER_BIT = 0x0100
 IDENTITY = MagDatabase.Transform(1, 0, 0, 0, 1, 0)
 
 CONTACT_LAYERS = {"ndiffc", "pdiffc", "nsubdiffcont", "psubdiffcont", "polycont",
-                  "viali", "via1", "via2", "via3", "via4"}
+                  "viali", "via1", "via2", "via3", "via4",
+                  "xpolycontact", "mimcapcontact", "mimcap2contact"}
 CONTACT_INSET_UM = 0.004
 
 # ---------------------------------------------------------------------------
