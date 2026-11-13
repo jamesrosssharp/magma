@@ -70,7 +70,8 @@ cdef class MagParser:
             cell_name_str = cell_name_str[:-4]
         cdef string cell_name = cell_name_str.encode('utf-8')
 
-        db.createCell(cell_name_str)
+        if db.createCell(cell_name_str) is None:
+            return
 
         cdef str cur_layer
 

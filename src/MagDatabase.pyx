@@ -110,6 +110,31 @@ cdef class Transistor:
 
         return t
 
+cdef class Resistor:
+
+    cdef public list contacts
+
+    def __init__(self):
+        self.contacts         = []
+
+    def __repr__(self):
+        return f"contacts: {self.contacts}"
+
+    def dump_with_transform(self, transform):
+        for g in self.contacts:
+            p = transform.transform_point(g)
+            print(f"\tcontact: {p}")
+
+    def transform(self, transform):
+
+        r = Resistor()
+
+        for c in self.contacts:
+            p = transform.transform_point(c)
+            r.contacts.append(p)
+
+        return r
+
 
 
 cdef class Transform:
@@ -181,6 +206,7 @@ cdef class Cell:
     cdef public str name
     cdef public str tech
     cdef public list transistors
+    cdef public list resistors
     cdef public list uses
     cdef public dict labels
     cdef public Rect bbox
@@ -188,6 +214,7 @@ cdef class Cell:
     def __init__(self):
         self.layers = {}
         self.transistors = []
+        self.resistors = []
         self.uses = []
         self.labels = {}
         self.bbox = Rect(1e9, 1e9, -1e9, -1e9)
@@ -243,6 +270,23 @@ cdef class Cell:
     def dump_transistors(self, db):
         self.dump_transistors_with_transform(db, Transform(1, 0, 0, 0, 1, 0))
 
+    def dump_resistors_with_transform(self, db, transform):    
+        """
+        Dump resistors in this cell and in child cells
+        """
+        print(f"Dumping resistors in cell {self.name}")
+
+        for i, t in enumerate(self.resistors):
+            print(f"Dumping resistor {i}")
+            t.dump_with_transform(transform)
+
+        for u in self.uses:
+            db.cells[u['name']].dump_resistors_with_transform(db, u['transform'].Transform(transform))
+
+    def dump_resistors(self, db):
+        self.dump_resistors_with_transform(db, Transform(1, 0, 0, 0, 1, 0))
+
+
     def get_transistors_with_transform(self, db, transform):    
         """
         Get transistors in this cell and in child cells
@@ -258,6 +302,20 @@ cdef class Cell:
     def get_transistors(self, db):
         return self.get_transistors_with_transform(db, Transform(1, 0, 0, 0, 1, 0))
 
+    def get_resistors_with_transform(self, db, transform):    
+        """
+        Get resistors in this cell and in child cells
+        """
+        t = [tt.transform(transform) for tt in self.resistors]
+
+        tt = {}
+        for u in self.uses:
+            tt[u['inst_name']] = db.cells[u['name']].get_resistors_with_transform(db, u['transform'].Transform(transform))
+
+        return {'self': t, 'children': tt}
+
+    def get_resistors(self, db):
+        return self.get_resistors_with_transform(db, Transform(1, 0, 0, 0, 1, 0))
 
     def get_pins_with_transform(self, db, transform):
 
@@ -302,7 +360,9 @@ cdef class Cell:
 
         if l != []:
             for r in l:
-            
+           
+                
+
                 # Find all polysilicon rects which abut the nmos rects
 
                 poly_r = []
@@ -310,7 +370,7 @@ cdef class Cell:
                 for rp in self.layers['poly']:
                     if rp.abuts(r):
                         poly_r.append(rp)
-
+                
                 
 
 
@@ -431,6 +491,49 @@ cdef class Cell:
 
                 self.transistors.append(t)
 
+    def find_resistors(self):
+
+        l = []
+
+        if 'xpolyres' in self.layers:
+            l += self.layers['xpolyres']
+        #if 'nmoslvt' in self.layers:
+        #    l += self.layers['nmoslvt']
+
+        if l != []:
+            for r in l:
+
+                # Find all xpolycontact rects which abut the xpolyres rects
+
+                poly_r = []
+
+                for rp in self.layers['xpolycontact']:
+                    if rp.abuts(r):
+                        poly_r.append(rp)
+
+                #for rp in self.layers['xpolycontact']:
+                #    for i in range(0, len(poly_r)):
+                #        if poly_r[i].abuts(rp):
+                #            poly_r.append(rp)
+
+                
+                # Find all viali rects which overlap poly_r
+                
+                poly_c = []
+
+                for pc in self.layers['viali']:
+                    for pr in poly_r:
+                        if pc.overlaps(pr):
+                            poly_c.append(pc)
+                            break
+
+                t = Resistor() 
+
+                for r in poly_c:
+                    t.contacts.append(r.centroid())
+
+                self.resistors.append(t)
+
 
     def setBBox(self, xbot, ybot, xtop, ytop):
         self.bbox = Rect(xbot, ybot, xtop, ytop)
@@ -542,13 +645,15 @@ cdef class MagDatabase:
     def createCell(self, str name):
        
         if name in self.cells:
-            return
+            return None
 
         c = Cell()
 
         c.name = name 
 
         self.cells[name] = c
+
+        return c
 
     def addRectToCell(self, str name, str layer, int xbot, int ybot, int xtop, int ytop):
 
@@ -598,6 +703,31 @@ cdef class MagDatabase:
         cell = self.cells[name]
 
         return cell.get_transistors(self)
+
+    def findCellResistors(self, str name):
+
+        t = self.cells[name].find_resistors()
+        
+    def findAllResistors(self):
+
+        for c in self.cells:
+            self.findCellResistors(c)
+
+    def dumpCellResistors(self, str name):
+
+        cell = self.cells[name]
+
+        cell.dump_resistors(self)
+
+    def getCellResistors(self, str name):
+        """
+        Returns all transistors in the cell and in all child cells.
+        """
+
+        cell = self.cells[name]
+
+        return cell.get_resistors(self)
+
 
     def getCell(self, str name):
 
