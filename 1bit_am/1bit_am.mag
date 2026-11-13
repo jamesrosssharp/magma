@@ -1,114 +1,93 @@
 magic
 tech sky130A
 magscale 1 2
-timestamp 1794480255
-<< error_s >>
-rect 5653 2988 5688 3022
-rect 5654 2969 5688 2988
-rect 5673 -2070 5688 2969
-rect 5707 2935 5742 2969
-rect 6002 2935 6037 2969
-rect 5707 -2070 5741 2935
-rect 6003 2916 6037 2935
-rect 5707 -2104 5722 -2070
-rect 6022 -2123 6037 2916
-rect 6056 2882 6091 2916
-rect 6351 2882 6386 2916
-rect 6056 -2123 6090 2882
-rect 6352 2863 6386 2882
-rect 6056 -2157 6071 -2123
-rect 6371 -2176 6386 2863
-rect 6405 2829 6440 2863
-rect 6405 -2176 6439 2829
-rect 6405 -2210 6420 -2176
-rect -17211 -12163 -17188 -12102
-rect -17186 -12163 -17134 -12048
-rect -17254 -12321 -17121 -12261
-rect -16937 -12273 -16867 -12225
-rect -17211 -12439 -17188 -12413
-rect -17186 -12439 -17134 -12359
+timestamp 1794534345
 << metal1 >>
-rect 0 0 200 200
-rect 0 -400 200 -200
-rect 0 -800 200 -600
-rect 0 -1200 200 -1000
-rect 0 -1600 200 -1400
-rect 0 -2000 200 -1800
-use sky130_fd_sc_hd__decap_3  sky130_fd_sc_hd__decap_3_0 $PDKPATH/libs.ref/sky130_fd_sc_hd/mag
+rect 10200 -12200 10400 -12000
+rect 10200 -13400 10400 -13200
+rect 10200 -15200 10400 -15000
+rect 10200 -16400 10400 -16200
+rect 10200 -17600 10400 -17400
+rect 10200 -18600 10400 -18400
+use sky130_fd_sc_hd__decap_3  sky130_fd_sc_hd__decap_3_0 ../../../pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
 timestamp 1792400971
-transform 1 0 -5578 0 1 -12438
+transform 1 0 -3556 0 1 -27152
 box -38 -48 314 592
-use sky130_fd_sc_hd__tapvpwrvgnd_1  sky130_fd_sc_hd__tapvpwrvgnd_1_0 $PDKPATH/libs.ref/sky130_fd_sc_hd/mag
+use sky130_fd_sc_hd__tapvpwrvgnd_1  sky130_fd_sc_hd__tapvpwrvgnd_1_0 ../../../pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
 timestamp 1792400971
-transform 1 0 -16899 0 1 -12534
+transform 1 0 -3919 0 1 -27152
 box -38 -48 130 592
 use high_speed_comp_top_routed  x1
 timestamp 1793956363
-transform 1 0 11266 0 1 -13998
+transform 0 1 1800 -1 0 -14100
 box -1100 -2800 3900 5900
-use sky130_fd_sc_hd__inv_1  x2 $PDKPATH/libs.ref/sky130_fd_sc_hd/mag
+use sky130_fd_sc_hd__inv_1  x2 ../../../pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
 timestamp 1792400971
-transform 1 0 -15760 0 1 -12837
+transform 1 0 -4562 0 1 -27152
 box -38 -48 314 592
 use sky130_fd_sc_hd__inv_1  x3
 timestamp 1792400971
-transform 1 0 -16772 0 1 -12683
+transform 1 0 -3829 0 1 -27152
 box -38 -48 314 592
 use sky130_fd_sc_hd__decap_3  x5
 timestamp 1792400971
-transform 1 0 -17213 0 1 -12486
+transform 1 0 -4195 0 1 -27152
 box -38 -48 314 592
 use sky130_fd_sc_hd__tapvpwrvgnd_1  x7
 timestamp 1792400971
-transform 1 0 -17251 0 1 -12582
+transform 1 0 -4287 0 1 -27152
 box -38 -48 130 592
 use sky130_fd_pr__cap_mim_m3_1_ZYJU54  XC1
-timestamp 1794480255
-transform 1 0 3340 0 1 -6025
+timestamp 1794533213
+transform 1 0 3263 0 1 -6200
 box -5863 -6000 5863 6000
 use sky130_fd_pr__cap_mim_m3_1_ZYJU54  XC2
-timestamp 1794480255
-transform 1 0 3353 0 1 -19050
+timestamp 1794533213
+transform 1 0 3463 0 1 -24600
 box -5863 -6000 5863 6000
 use sky130_fd_pr__res_xhigh_po_0p35_V7X9LC  XR1
-timestamp 1794480255
-transform 1 0 -10444 0 1 -5018
+timestamp 1794532927
+transform 1 0 -4599 0 1 -22618
 box -201 -3582 201 3582
 use sky130_fd_pr__res_xhigh_po_0p35_V7X9LC  XR2
-timestamp 1794480255
-transform 1 0 -6199 0 1 -5018
+timestamp 1794532927
+transform 1 0 -3399 0 1 -22618
 box -201 -3582 201 3582
 use sky130_fd_pr__res_xhigh_po_0p35_N7YJWT  XR3
-timestamp 1794480255
-transform 1 0 5523 0 1 476
+timestamp 1794532927
+transform 1 0 -4999 0 1 -3218
 box -201 -2582 201 2582
 use sky130_fd_pr__res_xhigh_po_0p35_N7YJWT  XR4
-timestamp 1794480255
-transform 1 0 5872 0 1 423
+timestamp 1794532927
+transform 1 0 -4599 0 1 -3218
 box -201 -2582 201 2582
 use sky130_fd_pr__res_xhigh_po_0p35_N7YJWT  XR5
-timestamp 1794480255
-transform 1 0 6221 0 1 370
+timestamp 1794532927
+transform 1 0 -4199 0 1 -3218
 box -201 -2582 201 2582
 use sky130_fd_pr__res_xhigh_po_0p35_N7YJWT  XR6
-timestamp 1794480255
-transform 1 0 6570 0 1 317
+timestamp 1794532927
+transform 1 0 -3799 0 1 -3218
 box -201 -2582 201 2582
 use sky130_fd_pr__res_xhigh_po_0p35_V7X9LC  XR7
-timestamp 1794480255
-transform 1 0 -3782 0 1 -5218
+timestamp 1794532927
+transform 1 0 -4199 0 1 -22618
+box -201 -3582 201 3582
+use sky130_fd_pr__res_xhigh_po_0p35_V7X9LC  XR8
+timestamp 1794532927
+transform 1 0 -3799 0 1 -22618
 box -201 -3582 201 3582
 << labels >>
-flabel metal1 0 0 200 200 0 FreeSans 1600 0 0 0 VDD
+flabel metal1 10200 -13400 10400 -13200 0 FreeSans 1600 0 0 0 VDD
 port 0 nsew
-flabel metal1 0 -400 200 -200 0 FreeSans 1600 0 0 0 VSS
+flabel metal1 10200 -17600 10400 -17400 0 FreeSans 1600 0 0 0 VSS
 port 1 nsew
-flabel metal1 0 -800 200 -600 0 FreeSans 1600 0 0 0 CLK
-port 2 nsew
-flabel metal1 0 -1200 200 -1000 0 FreeSans 1600 0 0 0 VIN
-port 3 nsew
-flabel metal1 0 -1600 200 -1400 0 FreeSans 1600 0 0 0 VOUT
+flabel metal1 10200 -15200 10400 -15000 0 FreeSans 1600 0 0 0 VOUT
 port 4 nsew
-flabel metal1 0 -2000 200 -1800 0 FreeSans 1600 0 0 0 PWM_IN
+flabel metal1 10200 -16400 10400 -16200 0 FreeSans 1600 0 0 0 CLK
+port 2 nsew
+flabel metal1 10200 -12200 10400 -12000 0 FreeSans 1600 0 0 0 VIN
+port 3 nsew
+flabel metal1 10200 -18600 10400 -18400 0 FreeSans 1600 0 0 0 PWM_IN
 port 5 nsew
 << end >>
