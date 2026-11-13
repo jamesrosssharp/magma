@@ -581,39 +581,32 @@ cdef class Cell:
 
         l = []
 
-        if 'xpolyres' in self.layers:
-            l += self.layers['xpolyres']
+        if 'mimcap' in self.layers:
+            l += self.layers['mimcap']
         #if 'nmoslvt' in self.layers:
         #    l += self.layers['nmoslvt']
 
         if l != []:
             for r in l:
 
-                # Find all xpolycontact rects which abut the xpolyres rects
-
                 poly_r = []
 
-                for rp in self.layers['xpolycontact']:
-                    if rp.abuts(r):
+                for rp in self.layers['metal3']:
+                    if rp.overlaps(r):
                         poly_r.append(rp)
 
-                #for rp in self.layers['xpolycontact']:
-                #    for i in range(0, len(poly_r)):
-                #        if poly_r[i].abuts(rp):
-                #            poly_r.append(rp)
-
-                
-                # Find all viali rects which overlap poly_r
-                
                 poly_c = []
 
-                for pc in self.layers['viali']:
+                for pc in self.layers['via3']:
                     for pr in poly_r:
                         if pc.overlaps(pr):
                             poly_c.append(pc)
                             break
 
                 t = Capacitor() 
+
+                for r in poly_r:
+                    t.contacts.append(r.centroid())
 
                 for r in poly_c:
                     t.contacts.append(r.centroid())
@@ -814,6 +807,24 @@ cdef class MagDatabase:
         cell = self.cells[name]
 
         return cell.get_resistors(self)
+
+    def findCellCapacitors(self, str name):
+
+        t = self.cells[name].find_capacitors()
+        
+    def findAllCapacitors(self):
+
+        for c in self.cells:
+            self.findCellCapacitors(c)
+
+    def getCellCapacitors(self, str name):
+        """
+        Returns all transistors in the cell and in all child cells.
+        """
+
+        cell = self.cells[name]
+
+        return cell.get_capacitors(self)
 
 
     def getCell(self, str name):

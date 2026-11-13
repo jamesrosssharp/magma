@@ -26,6 +26,12 @@ res = db.getCellResistors('1bit_am')
 
 print(res)
 
+db.findAllCapacitors()
+
+cap = db.getCellCapacitors('1bit_am')
+
+print(cap)
+
 p = db.getCellPins('1bit_am')
 
 #print(p)
