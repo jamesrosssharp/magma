@@ -586,8 +586,12 @@ cdef class Cell:
         #if 'nmoslvt' in self.layers:
         #    l += self.layers['nmoslvt']
 
+        i = 0
+
         if l != []:
             for r in l:
+
+                # print(f"{self.name} {r} {i}")
 
                 poly_r = []
 
@@ -605,14 +609,15 @@ cdef class Cell:
 
                 t = Capacitor() 
 
-                for r in poly_r:
-                    t.contacts.append(r.centroid())
+                #for r in poly_r:
+                t.contacts.append(r.centroid())
 
                 for r in poly_c:
                     t.contacts.append(r.centroid())
 
                 self.capacitors.append(t)
 
+                i += 1
 
 
     def setBBox(self, xbot, ybot, xtop, ytop):
