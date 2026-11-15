@@ -119,6 +119,45 @@ class Router:
 
             raise ValueError(f"Unknown layer pair: {self.layer} {layer}")
 
+    def viaExpansion(self, layer, w, h, w1, h1, w2, h2):
+
+        # Via expansion
+        self.cell.addRect(self.layer, self.cursor_x - w1 // 2, self.cursor_y - h1//2, self.cursor_x + w1 // 2, self.cursor_y +  h1//2)
+        self.cell.addRect(layer, self.cursor_x - w2 // 2, self.cursor_y - h2//2, self.cursor_x + w2 // 2, self.cursor_y +  h2//2)
+
+        if (self.layer == 'metal1' and layer == 'metal2') or (self.layer == 'metal2' and layer == 'metal1'):
+            l = 'via1'
+
+            self.cell.addRect(l, self.cursor_x - w / 2, self.cursor_y - h / 2, self.cursor_x + w / 2, self.cursor_y + h / 2)
+
+            self.layer = layer
+    
+        elif (self.layer == 'metal2' and layer == 'metal3') or (self.layer == 'metal3' and layer == 'metal2'):
+            l = 'via2'
+
+            self.cell.addRect(l, self.cursor_x - w / 2, self.cursor_y - h / 2, self.cursor_x + w / 2, self.cursor_y + h / 2)
+
+            self.layer = layer
+ 
+        elif (self.layer == 'metal4' and layer == 'metal3') or (self.layer == 'metal3' and layer == 'metal4'):
+            l = 'via3'
+
+            self.cell.addRect(l, self.cursor_x - w / 2, self.cursor_y - h / 2, self.cursor_x + w / 2, self.cursor_y + h / 2)
+
+            self.layer = layer
+ 
+        elif (self.layer == 'metal1' and layer == 'locali') or (self.layer == 'locali' and layer == 'metal1'):
+            l = 'viali'
+
+            self.cell.addRect(l, self.cursor_x - w / 2, self.cursor_y - h / 2, self.cursor_x + w / 2, self.cursor_y + h / 2)
+
+            self.layer = layer
+    
+        else:
+
+            raise ValueError(f"Unknown layer pair: {self.layer} {layer}")
+
+
     def redundantVias(self, layer, w, h, sq):
 
         if (self.layer == 'metal1' and layer == 'metal2') or (self.layer == 'metal2' and layer == 'metal1'):

@@ -9,11 +9,11 @@ rect 10200 -15200 10400 -15000
 rect 10200 -16400 10400 -16200
 rect 10200 -17600 10400 -17400
 rect 10200 -18600 10400 -18400
-use sky130_fd_sc_hd__decap_3  sky130_fd_sc_hd__decap_3_0 ../../../pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
+use sky130_fd_sc_hd__decap_3  x4 ../../../pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
 timestamp 1792400971
 transform 1 0 -3090 0 1 -27212
 box -38 -48 314 592
-use sky130_fd_sc_hd__tapvpwrvgnd_1  sky130_fd_sc_hd__tapvpwrvgnd_1_0 ../../../pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
+use sky130_fd_sc_hd__tapvpwrvgnd_1  x6 ../../../pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
 timestamp 1792400971
 transform 1 0 -3453 0 1 -27212
 box -38 -48 130 592
