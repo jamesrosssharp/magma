@@ -429,8 +429,4 @@ MACRO tt_um_jamesrosssharp_high_speed_comp
     PORT
       LAYER met4 ;
         RECT 4.000 5.000 6.000 220.760 ;
-    END
-  END VGND
-END tt_um_jamesrosssharp_high_speed_comp
-END LIBRARY
-
+    
