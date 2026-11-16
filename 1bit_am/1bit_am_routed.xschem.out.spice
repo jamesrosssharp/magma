@@ -1,27 +1,26 @@
-** sch_path: /home/jrsharp/code/magma/xschem/1bit_am/1bit_am.sch
 
 .include /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice
 
-
+** sch_path: /home/jrsharp/code/magma/xschem/1bit_am/1bit_am.sch
 .subckt 1bit_am_routed VDD VSS CLK VIN VOUT PWM_IN
 *.PININFO VDD:I VSS:I CLK:I VIN:I VOUT:O PWM_IN:I
 x1 CLK NET_IN NET_PWM VDD VOUT VSS high_speed_comp_top
-XR2 net2 NET_PWM net3 sky130_fd_pr__res_xhigh_po_0p35 L=30 mult=1 m=1
-XR3 VDD net4 net5 sky130_fd_pr__res_xhigh_po_0p35 L=20 mult=1 m=1
-XR4 net4 NET_IN net6 sky130_fd_pr__res_xhigh_po_0p35 L=20 mult=1 m=1
-XR5 NET_IN net7 net8 sky130_fd_pr__res_xhigh_po_0p35 L=20 mult=1 m=1
-XR6 net7 VSS net9 sky130_fd_pr__res_xhigh_po_0p35 L=20 mult=1 m=1
+XR2 net2 NET_PWM VSS sky130_fd_pr__res_xhigh_po_0p35 L=30 mult=1 m=1
+XR3 VDD net3 VSS sky130_fd_pr__res_xhigh_po_0p35 L=20 mult=1 m=1
+XR4 net3 NET_IN VSS sky130_fd_pr__res_xhigh_po_0p35 L=20 mult=1 m=1
+XR5 NET_IN net4 VSS sky130_fd_pr__res_xhigh_po_0p35 L=20 mult=1 m=1
+XR6 net4 VSS VSS sky130_fd_pr__res_xhigh_po_0p35 L=20 mult=1 m=1
 XC1 VIN NET_IN sky130_fd_pr__cap_mim_m3_1 W=10 L=10 m=20
 XC2 NET_PWM VSS sky130_fd_pr__cap_mim_m3_1 W=10 L=10 m=20
 x4 VSS VSS VDD VDD sky130_fd_sc_hd__decap_3
 x5 VSS VSS VDD VDD sky130_fd_sc_hd__decap_3
 x6 VSS VDD sky130_fd_sc_hd__tapvpwrvgnd_1
 x7 VSS VDD sky130_fd_sc_hd__tapvpwrvgnd_1
-XR1 net10 net11 net12 sky130_fd_pr__res_xhigh_po_0p35 L=30 mult=1 m=1
+XR1 net5 net6 VSS sky130_fd_pr__res_xhigh_po_0p35 L=30 mult=1 m=1
 x3 PWM_IN VSS VSS VDD VDD net1 sky130_fd_sc_hd__inv_1
-XR7 net11 net13 net14 sky130_fd_pr__res_xhigh_po_0p35 L=30 mult=1 m=1
-XR8 net13 net2 net15 sky130_fd_pr__res_xhigh_po_0p35 L=30 mult=1 m=1
-x2 net1 VSS VSS VDD VDD net10 sky130_fd_sc_hd__inv_1
+XR7 net6 net7 VSS sky130_fd_pr__res_xhigh_po_0p35 L=30 mult=1 m=1
+XR8 net7 net2 VSS sky130_fd_pr__res_xhigh_po_0p35 L=30 mult=1 m=1
+x2 net1 VSS VSS VDD VDD net5 sky130_fd_sc_hd__inv_1
 .ends
 
 * expanding   symbol:  /home/jrsharp/code/magma/xschem/flash_converter/high_speed_comp_top.sym # of

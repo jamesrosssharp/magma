@@ -133,23 +133,23 @@ for i in range(0, 3):
 # Route vin to input cap XC1
 
 a = p['self']['VIN'].centroid()
-b = cap['children']['XC1']['self'][3*4+64].contacts[1]
+b = cap['children']['XC1']['self'][0].contacts[0]
 
 r.begin(a[0], a[1], 'metal1')
 r.routeTo('w', b[0], 100)
-r.routeTo('n', b[1] - 1000 - 600, 100)
+r.routeTo('n', b[1] + 800, 100)
 r.viaExpansion('metal2', 100, 100, 120, 120, 120, 120)
 r.viaExpansion('metal3', 100, 100, 120, 120, 120, 120)
 r.viaExpansion('metal4', 100, 100, 120, 120, 120, 120)
 
 # Route input cap to resistor chain
 
-a = cap['children']['XC1']['self'][0].contacts[0]
+a = cap['children']['XC1']['self'][3*4+64].contacts[1]
 b = res['children']['XR4']['self'][0].contacts[0]
 
-r.begin(a[0], a[1] + 800, 'metal4')
+r.begin(a[0], a[1] - 1600, 'metal4')
 r.routeTo('w', b[0], 108)
-r.routeTo('n', b[1], 108)
+r.routeTo('s', b[1], 108)
 r.viaExpansion('metal3', 100, 100, 120, 120, 120, 120)
 r.viaExpansion('metal2', 100, 100, 120, 120, 120, 120)
 r.viaExpansion('metal1', 100, 100, 120, 120, 120, 120)
@@ -271,8 +271,8 @@ a = p['children']['x3']['self']['Y'].centroid()
 b = res['children']['XR1']['self'][0].contacts[1]
 
 r.begin(a[0], a[1], 'locali')
-r.route('e', 100, 34)
-r.viaExpansion('metal1', 34, 34, 38, 38, 60, 60)
+r.route('e', 50, 34)
+r.viaExpansion('metal1', 34, 34, 34, 34, 60, 60)
 r.route('e', 1000, 60)
 r.routeTo('n', b[1] - 300, 60)
 r.routeTo('w', b[0], 60)

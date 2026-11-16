@@ -101,3 +101,11 @@ model=res_xhigh_po_0p35
 spiceprefix=X
 mult=1}
 C {sky130_stdcells/inv_1.sym} -700 -120 0 0 {name=x2 VGND=VSS VNB=VSS VPB=VDD VPWR=VDD prefix=sky130_fd_sc_hd__ }
+C {lab_wire.sym} -260 -380 2 0 {name=p14 sig_type=std_logic lab=VSS}
+C {lab_wire.sym} -260 -320 2 0 {name=p15 sig_type=std_logic lab=VSS}
+C {lab_wire.sym} -260 -260 2 0 {name=p16 sig_type=std_logic lab=VSS}
+C {lab_wire.sym} -260 -200 2 0 {name=p17 sig_type=std_logic lab=VSS}
+C {lab_wire.sym} -440 -140 1 0 {name=p18 sig_type=std_logic lab=VSS}
+C {lab_wire.sym} -510 -140 1 0 {name=p19 sig_type=std_logic lab=VSS}
+C {lab_wire.sym} -570 -140 1 0 {name=p20 sig_type=std_logic lab=VSS}
+C {lab_wire.sym} -630 -140 1 0 {name=p21 sig_type=std_logic lab=VSS}
