@@ -1,0 +1,68 @@
+Test bench for high speed comparator
+
+.lib /home/jrsharp/old_home_mnt/asic/sky130_pdk/share/pdk/sky130A/libs.tech/combined/sky130.lib.spice ${CORNER}
+.inc /home/jrsharp/old_home_mnt/asic/sky130_pdk/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice
+
+
+.inc 1bit_am_routed.pex.spice
+*.inc high_speed_comp_top.spice
+
+** Supply voltage
+.param VCCGAUSS = agauss(1.8, 0.05, 1)
+.param VCC = 'VCCGAUSS'
+
+** Common mode voltage
+.param VDLGAUSS = agauss(0.9, 0.33, 1)
+.param VDL = VDLGAUSS
+
+** Temperature 
+.param TEMPGAUSS = agauss(40, 30, 1)
+.option temp = 'TEMPGAUSS'
+
+.param FREQ = agauss(100Meg, 5Meg, 1)
+.param FREQF = 'FREQ'
+
+.param trans_time = agauss(500n, 10n, 1)
+
+.param DELTA = 0.1
+
+E5 TEMPERAT VSS VOL=' temper '
+E6 FREQ_V VSS VOL=' FREQF '
+
+VCLK CLK GND PULSE(0 1.8 0 0.5NS 0.5NS 2NS 4NS 0)
+VVSS VSS GND 0
+VVDD VDD GND 'VCC'
+
+VPLUS VIN1 GND sin(0.9 20m 'FREQF' 0 0) 
+VNOISE VIN VIN1 DC 0 TRNOISE(1m 10n 0 0)
+*.subckt x1bit_am_routed VDD VSS CLK VIN VOUT PWM_IN
+X1 VDD VSS CLK VIN VOUT PWM_IN x1bit_am_routed
+*.subckt high_speed_comp_top CLK VINP VINN VDD COMP_OUT VSS
+*X1 CLK INN INP VDD COMP_OUT VSS high_speed_comp_top
+
+x2 CLK VOUT VSS VSS VDD VDD PWM_A sky130_fd_sc_hd__dfxtp_1
+x3 CLK PWM_A VSS VSS VDD VDD PWM_IN sky130_fd_sc_hd__dfxtp_1
+
+#.options method=gear trtol=1 cshunt=1f
+
+.control
+*  set filetype=ascii 
+  setseed  8
+  reset
+  let run = 1
+  save all
+  op
+  write ${RAW_FILE}
+  reset
+  set appendwrite
+  dowhile run < = 100
+    save vdd i(vvdd) temperat freq_v clk vout pwm_in vin
+    *save all
+    tran 2n 5000n 0 2n
+    write ${RAW_FILE}
+    let run = run + 1
+    reset
+  end
+  quit 0
+.endc
+

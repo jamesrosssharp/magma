@@ -1,0 +1,107 @@
+
+Magic 8.3 revision 692 - Compiled on Thu Nov  5 01:04:03 UTC 2026.
+Starting magic under Tcl interpreter
+Using the terminal as the console.
+Using NULL graphics device.
+Processing system .magicrc file
+Switching to WIRING tool.
+Switching to NETLIST tool.
+Switching to PICK tool.
+Switching to BOX tool.
+Sourcing design .magicrc for technology sky130A ...
+2 Magic internal units = 1 Lambda
+Input style sky130(): scaleFactor=2, multiplier=2
+The following types are not handled by extraction and will be treated as non-electrical types:
+    ubm 
+Scaled tech values by 2 / 1 to match internal grid scaling
+Loading sky130A Device Generator Menu ...
+Using technology "sky130A", version 1.0.588-105-g792ef67
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )
+
+microns:   0.000 x 0.000   ( 0.000,  0.000), ( 0.000,  0.000)
+lambda:     0.00 x 0.00    (  0.00,  0.00 ), (  0.00,  0.00 )
+internal:      0 x 0       (     0,  0    ), (     0,  0    )
+Warning: cell <1bit_am_routed> from file 1bit_am_routed.mag is not writeable
+Cell 1bit_am_routed read from current working directory
+Warning: cell <sky130_fd_sc_hd__inv_1> from file /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag/sky130_fd_sc_hd__inv_1.mag is not writeable
+Cell sky130_fd_sc_hd__inv_1 read from path /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Warning: cell <sky130_fd_sc_hd__decap_3> from file /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag/sky130_fd_sc_hd__decap_3.mag is not writeable
+Cell sky130_fd_sc_hd__decap_3 read from path /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Warning: cell <sky130_fd_sc_hd__tapvpwrvgnd_1> from file /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag/sky130_fd_sc_hd__tapvpwrvgnd_1.mag is not writeable
+Cell sky130_fd_sc_hd__tapvpwrvgnd_1 read from path /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Warning: cell <sky130_fd_pr__res_xhigh_po_0p35_V7X9LC> from file sky130_fd_pr__res_xhigh_po_0p35_V7X9LC.mag is not writeable
+Cell sky130_fd_pr__res_xhigh_po_0p35_V7X9LC read from current working directory
+Warning: cell <sky130_fd_pr__cap_mim_m3_1_ZYJU54> from file sky130_fd_pr__cap_mim_m3_1_ZYJU54.mag is not writeable
+Cell sky130_fd_pr__cap_mim_m3_1_ZYJU54 read from current working directory
+Warning: cell <high_speed_comp_top_routed> from file high_speed_comp_top_routed.mag is not writeable
+Cell high_speed_comp_top_routed read from current working directory
+Warning: cell <sky130_fd_sc_hd__clkinv_4> from file /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag/sky130_fd_sc_hd__clkinv_4.mag is not writeable
+Cell sky130_fd_sc_hd__clkinv_4 read from path /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Warning: cell <sky130_fd_sc_hd__dfxtp_2> from file /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag/sky130_fd_sc_hd__dfxtp_2.mag is not writeable
+Cell sky130_fd_sc_hd__dfxtp_2 read from path /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Warning: cell <post_amplifier_routed> from file post_amplifier_routed.mag is not writeable
+Cell post_amplifier_routed read from current working directory
+Warning: cell <sky130_fd_pr__pfet_01v8_5ETXLA> from file sky130_fd_pr__pfet_01v8_5ETXLA.mag is not writeable
+Cell sky130_fd_pr__pfet_01v8_5ETXLA read from current working directory
+Warning: cell <sky130_fd_pr__nfet_01v8_D6NL62> from file sky130_fd_pr__nfet_01v8_D6NL62.mag is not writeable
+Cell sky130_fd_pr__nfet_01v8_D6NL62 read from current working directory
+Warning: cell <strong_arm_latch_routed> from file strong_arm_latch_routed.mag is not writeable
+Cell strong_arm_latch_routed read from current working directory
+Warning: cell <sky130_fd_pr__pfet_01v8_MV5BJT> from file sky130_fd_pr__pfet_01v8_MV5BJT.mag is not writeable
+Cell sky130_fd_pr__pfet_01v8_MV5BJT read from current working directory
+Warning: cell <sky130_fd_pr__pfet_01v8_7PVLUA> from file sky130_fd_pr__pfet_01v8_7PVLUA.mag is not writeable
+Cell sky130_fd_pr__pfet_01v8_7PVLUA read from current working directory
+Warning: cell <sky130_fd_pr__pfet_01v8_NRXS53> from file sky130_fd_pr__pfet_01v8_NRXS53.mag is not writeable
+Cell sky130_fd_pr__pfet_01v8_NRXS53 read from current working directory
+Warning: cell <sky130_fd_pr__pfet_01v8_CZ2BPM> from file sky130_fd_pr__pfet_01v8_CZ2BPM.mag is not writeable
+Cell sky130_fd_pr__pfet_01v8_CZ2BPM read from current working directory
+Warning: cell <sky130_fd_pr__nfet_01v8_WXMB3T> from file sky130_fd_pr__nfet_01v8_WXMB3T.mag is not writeable
+Cell sky130_fd_pr__nfet_01v8_WXMB3T read from current working directory
+Warning: cell <sky130_fd_pr__nfet_01v8_CQH6Q5> from file sky130_fd_pr__nfet_01v8_CQH6Q5.mag is not writeable
+Cell sky130_fd_pr__nfet_01v8_CQH6Q5 read from current working directory
+Warning: cell <sky130_fd_pr__nfet_01v8_lvt_URSRNG> from file sky130_fd_pr__nfet_01v8_lvt_URSRNG.mag is not writeable
+Cell sky130_fd_pr__nfet_01v8_lvt_URSRNG read from current working directory
+Warning: cell <sky130_fd_pr__nfet_01v8_lvt_GVGYYV> from file sky130_fd_pr__nfet_01v8_lvt_GVGYYV.mag is not writeable
+Cell sky130_fd_pr__nfet_01v8_lvt_GVGYYV read from current working directory
+Warning: cell <sky130_fd_pr__res_xhigh_po_0p35_N7YJWT> from file sky130_fd_pr__res_xhigh_po_0p35_N7YJWT.mag is not writeable
+Cell sky130_fd_pr__res_xhigh_po_0p35_N7YJWT read from current working directory
+Processing timestamp mismatches.
+Timestamp mismatches found in these cells: sky130_fd_sc_hd__inv_1, sky130_fd_pr__res_xhigh_po_0p35_V7X9LC, sky130_fd_pr__cap_mim_m3_1_ZYJU54, sky130_fd_sc_hd__decap_3, sky130_fd_sc_hd__tapvpwrvgnd_1, high_speed_comp_top_routed, sky130_fd_sc_hd__clkinv_4, sky130_fd_sc_hd__dfxtp_2, post_amplifier_routed, sky130_fd_pr__pfet_01v8_5ETXLA, sky130_fd_pr__nfet_01v8_D6NL62, strong_arm_latch_routed, sky130_fd_pr__pfet_01v8_MV5BJT, sky130_fd_pr__pfet_01v8_7PVLUA, sky130_fd_pr__pfet_01v8_NRXS53, sky130_fd_pr__pfet_01v8_CZ2BPM, sky130_fd_pr__nfet_01v8_WXMB3T, sky130_fd_pr__nfet_01v8_CQH6Q5, sky130_fd_pr__nfet_01v8_lvt_URSRNG, sky130_fd_pr__nfet_01v8_lvt_GVGYYV, sky130_fd_pr__res_xhigh_po_0p35_N7YJWT.
+Extracting 1bit_am_routed into extfiles/1bit_am_routed.ext:
+Processing 1bit_am_routed
+1bit_am_routed: 8 warnings
+Processing cell 1bit_am_routed for resistance extraction.
+Extracting a_6369_n15055#
+Extracting a_n52_n14940#
+Extracting a_n114_n15681#
+Extracting a_6369_n14949#
+Extracting x1.x4.Y
+Extracting x1.x3.D
+Extracting a_6369_n14848#
+Extracting a_6369_n14729#
+Extracting x1.x2.VLAT_PLUS
+Extracting a_3988_n14929#
+Extracting a_4014_n15531#
+Extracting x1.x2.VLAT_MINUS
+Extracting a_n52_n16427#
+Extracting a_3988_n15877#
+Extracting a_4729_n15534#
+Extracting a_6369_n15339#
+Extracting a_6369_n15507#
+Extracting XR1.R2
+Extracting x2.Y
+Extracting VSS
+Extracting VDD
+Extracting CLK
+Extracting VOUT
+Extracting PWM_IN
+Extracting VIN
+Total Nets: 45
+Nets extracted: 25 (0.555556)
+Nets output: 4 (0.088889)
+exttospice finished.
+device missing 1 terminal;
+ connecting remainder to node VSS
+device missing 1 terminal;
+ connecting remainder to node VDD
