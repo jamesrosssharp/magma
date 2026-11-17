@@ -99,7 +99,7 @@ N 650 80 680 80 {
 lab=#net1}
 N 860 60 930 60 {
 lab=PWM}
-C {1bit_am.sym} 190 90 0 0 {name=x1}
+C {1bit_am.sym} 190 100 0 0 {name=x1}
 C {devices/vsource.sym} -150 170 0 0 {name=VPLUS value="sin(0.9 20m 1Meg 0 0)"
 spice_ignore=false}
 C {devices/lab_pin.sym} -150 110 0 0 {name=p35 lab=INP}

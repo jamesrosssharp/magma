@@ -8,11 +8,18 @@ from scipy.fft import rfft, rfftfreq
 from scipy.signal.windows import hann
 
 DEBUG_PLOT = False
+DEBUG_FAIL = False
 
+pass_fail = {}
 
 def load_corner(corner):
 
     plots = load_spice.load_spice("build/{}.raw".format(corner))
+
+    pass_fail[corner] = {}
+    pass_fail[corner]['pass'] = 0
+    pass_fail[corner]['fail'] = 0
+
 
     print("")
     print("")
@@ -35,13 +42,6 @@ def load_corner(corner):
     pds = []
 
     for n, plot in enumerate(plots[1:]):
-
-        if DEBUG_PLOT:
-            plt.plot(plot['data']['v(vout)'], label = 'vout')
-            plt.plot(plot['data']['v(vin)'], label = 'vin')
-            #plt.plot(plot['data']['v(pwm_in)'])
-            plt.legend()
-            plt.show()
 
         # Plot fft of v(vout)
 
@@ -88,29 +88,33 @@ def load_corner(corner):
         amplitude2 = (2.0 / N) * np.abs(yf2) / 0.5
         amplitude_db2 = 20 * np.log10(amplitude2 + 1e-12)  # Avoid log(0)
 
-        if DEBUG_PLOT:
-
-            # 5. Plot the spectrum
-            fig, (ax1) = plt.subplots(1, 1, figsize=(10, 7))
-
-            # Decibel (dBV) Plot
-            ax1.plot(xf, amplitude_db, label = 'VOUT')
-            ax1.plot(xf, amplitude_db2, label = 'VIN')
-            ax1.set_title(f'SPICE Signal FFT (Logarithmic / dBV), freq = {in_freq:0.2e} ')
-            ax1.set_xlabel('Frequency [Hz]')
-            ax1.set_ylabel('Magnitude [dBV]')
-            ax1.set_ylim(-100, 3)
-            ax1.legend()
-            ax1.grid(True)
-
-            plt.tight_layout()
-            plt.show()
+        ii = 0
+        jj = -1
+        for k, f in enumerate(xf):
+            if ii == 0 and f > (in_freq - 10e6):
+                ii = k
+            if jj == -1 and f > (in_freq + 10e6):
+                jj = k
 
         test_pass = False
 
-        if (np.argmax(amplitude) == np.argmax(amplitude2)):
-            test_pass = True
-              
+        if (len(amplitude2[ii:jj]) == 0):
+
+            pass
+
+        else:
+
+            kk = np.argmax(amplitude2[ii:jj])
+            kkk = np.argmax(amplitude[ii:jj])  
+
+            if (np.abs(kkk - kk) <= 1 ):
+                test_pass = True
+
+        if test_pass:
+            pass_fail[corner]['pass'] += 1
+        else:
+            pass_fail[corner]['fail'] += 1
+
         # Skip over startup transients
         power = np.abs(plot['data']['v(vdd)']*plot['data']['i(vvdd)'])[100:]
         power_min.append(np.min(power))
@@ -122,11 +126,41 @@ def load_corner(corner):
         current = np.abs(plot['data']['i(vvdd)'][100:])   
 
 
+
+        if DEBUG_PLOT or (DEBUG_FAIL and not test_pass):
+            plt.plot(plot['data']['v(vout)'], label = 'vout')
+            plt.plot(plot['data']['v(vin)'], label = 'vin')
+            #plt.plot(plot['data']['v(pwm_in)'])
+            plt.legend()
+            plt.show()
+
+            # 5. Plot the spectrum
+            fig, (ax1) = plt.subplots(1, 1, figsize=(10, 7))
+
+            # Decibel (dBV) Plot
+            ax1.plot(xf, amplitude_db, label = 'VOUT')
+            ax1.plot(xf, amplitude_db2, label = 'VIN')
+            ax1.set_title(f'SPICE Signal FFT (Logarithmic / dBV), freq = {in_freq:0.2e}Hz vdd = {vdd:0.2}V temp = {temp:0.2} Deg. C')
+            ax1.set_xlabel('Frequency [Hz]')
+            ax1.set_ylabel('Magnitude [dBV]')
+            ax1.set_ylim(-100, 3)
+            ax1.legend()
+            ax1.grid(True)
+
+            plt.tight_layout()
+            plt.show()
+
+
         print(f"{n},{corner},{np.mean(current):0.2e},{np.mean(power):0.2e},{in_freq:0.2e},{temp:0.2e},{vdd:0.2e},{test_pass}")
 
 
-#for corner in ["tt", "ss", "fs", "sf", "ff"]:
-for corner in ["tt"]:
+for corner in ["tt", "ss", "sf", "fs", "ff"]:
+#for corner in ["ss"]:
     load_corner(corner)
 
+for k, v in pass_fail.items():
+    p = v['pass']
+    f = v['fail']
+    per = p * 100 / (p + f)
+    print(f"Corner {k} pass: {p} fail: {f} {per:1.2f} %") 
 

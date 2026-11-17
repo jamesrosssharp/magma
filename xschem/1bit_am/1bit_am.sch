@@ -109,3 +109,4 @@ C {lab_wire.sym} -440 -140 1 0 {name=p18 sig_type=std_logic lab=VSS}
 C {lab_wire.sym} -510 -140 1 0 {name=p19 sig_type=std_logic lab=VSS}
 C {lab_wire.sym} -570 -140 1 0 {name=p20 sig_type=std_logic lab=VSS}
 C {lab_wire.sym} -630 -140 1 0 {name=p21 sig_type=std_logic lab=VSS}
+C {ipin.sym} -220 10 0 0 {name=p22 lab=VIN_MINUS}

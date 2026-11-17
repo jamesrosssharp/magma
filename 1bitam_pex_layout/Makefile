@@ -4,7 +4,7 @@ BUILD_DIR=build
 
 .PHONY:	extract_results
 
-CORNERS=tt ss sf fs ff
+CORNERS=ss tt sf fs ff
 #CORNERS=tt
 RAW_FILES=$(addprefix $(BUILD_DIR)/,$(addsuffix .raw, $(CORNERS)))
 
