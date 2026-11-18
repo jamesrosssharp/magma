@@ -1,0 +1,106 @@
+** sch_path: /home/jrsharp/code/magma/xschem/tt/tt_um_jamesrosssharp_high_speed_comp.sch
+**.subckt tt_um_jamesrosssharp_high_speed_comp clk ena rst_n ua[0] ua[1] ua[2] ua[3] ua[4] ua[5]
+*+ ua[6] ua[7] ui_in[0] ui_in[1] ui_in[2] ui_in[3] ui_in[4] ui_in[5] ui_in[6] ui_in[7] uio_in[0] uio_in[1]
+*+ uio_in[2] uio_in[3] uio_in[4] uio_in[5] uio_in[6] uio_in[7] uio_oe[0] uio_oe[1] uio_oe[2] uio_oe[3] uio_oe[4]
+*+ uio_oe[5] uio_oe[6] uio_oe[7] uio_out[0] uio_out[1] uio_out[2] uio_out[3] uio_out[4] uio_out[5] uio_out[6]
+*+ uio_out[7] uo_out[0] uo_out[1] uo_out[2] uo_out[3] uo_out[4] uo_out[5] uo_out[6] uo_out[7] VDPWR VGND
+*.ipin clk
+*.ipin ena
+*.ipin rst_n
+*.iopin ua[0]
+*.iopin ua[1]
+*.iopin ua[2]
+*.iopin ua[3]
+*.iopin ua[4]
+*.iopin ua[5]
+*.iopin ua[6]
+*.iopin ua[7]
+*.ipin ui_in[0]
+*.ipin ui_in[1]
+*.ipin ui_in[2]
+*.ipin ui_in[3]
+*.ipin ui_in[4]
+*.ipin ui_in[5]
+*.ipin ui_in[6]
+*.ipin ui_in[7]
+*.ipin uio_in[0]
+*.ipin uio_in[1]
+*.ipin uio_in[2]
+*.ipin uio_in[3]
+*.ipin uio_in[4]
+*.ipin uio_in[5]
+*.ipin uio_in[6]
+*.ipin uio_in[7]
+*.opin uio_oe[0]
+*.opin uio_oe[1]
+*.opin uio_oe[2]
+*.opin uio_oe[3]
+*.opin uio_oe[4]
+*.opin uio_oe[5]
+*.opin uio_oe[6]
+*.opin uio_oe[7]
+*.iopin uio_out[0]
+*.iopin uio_out[1]
+*.iopin uio_out[2]
+*.iopin uio_out[3]
+*.iopin uio_out[4]
+*.iopin uio_out[5]
+*.iopin uio_out[6]
+*.iopin uio_out[7]
+*.opin uo_out[0]
+*.opin uo_out[1]
+*.opin uo_out[2]
+*.opin uo_out[3]
+*.opin uo_out[4]
+*.opin uo_out[5]
+*.opin uo_out[6]
+*.opin uo_out[7]
+*.ipin VDPWR
+*.ipin VGND
+x1 ua[0] VDPWR VGND ui_in[0] clk_prime net1 ua[1] 1bit_am_routed
+x2 net6 clk_prime ua[0] net14 net7 VDPWR VGND net8 net9 net13 net12 net11 net10 net3 flash_converter_routed
+x3 VGND VGND VDPWR VDPWR uio_oe[0] net15 sky130_fd_sc_hd__conb_1
+x4 VGND VGND VDPWR VDPWR uio_oe[1] net16 sky130_fd_sc_hd__conb_1
+x5 VGND VGND VDPWR VDPWR uio_oe[2] net17 sky130_fd_sc_hd__conb_1
+x6 VGND VGND VDPWR VDPWR uio_oe[3] net18 sky130_fd_sc_hd__conb_1
+x7 VGND VGND VDPWR VDPWR uio_oe[4] net19 sky130_fd_sc_hd__conb_1
+x8 VGND VGND VDPWR VDPWR uio_oe[5] net20 sky130_fd_sc_hd__conb_1
+x9 VGND VGND VDPWR VDPWR uio_oe[6] net21 sky130_fd_sc_hd__conb_1
+x10 VGND VGND VDPWR VDPWR uio_oe[7] net22 sky130_fd_sc_hd__conb_1
+x11 clk_prime ua[0] ua[1] VDPWR net2 VGND high_speed_comp_top_routed
+x12 VGND VGND VDPWR VDPWR net23 uo_out[2] sky130_fd_sc_hd__conb_1
+x13 VGND VGND VDPWR VDPWR net24 uo_out[3] sky130_fd_sc_hd__conb_1
+x14 VGND VGND VDPWR VDPWR net25 uo_out[4] sky130_fd_sc_hd__conb_1
+x15 VGND VGND VDPWR VDPWR net26 uo_out[5] sky130_fd_sc_hd__conb_1
+x16 VGND VGND VDPWR VDPWR net27 uo_out[6] sky130_fd_sc_hd__conb_1
+x17 VGND VGND VDPWR VDPWR net28 uo_out[7] sky130_fd_sc_hd__conb_1
+XR11 net6 VDPWR VGND sky130_fd_pr__res_high_po_1p41 L=1.41 mult=1 m=1
+XR1 net3 net4 VGND sky130_fd_pr__res_high_po_1p41 L=1.41 mult=1 m=1
+XR2 net4 net5 VGND sky130_fd_pr__res_high_po_1p41 L=1.41 mult=1 m=1
+XR3 net5 VGND VGND sky130_fd_pr__res_high_po_1p41 L=1.41 mult=1 m=1
+x18 clk VGND VGND VDPWR VDPWR clk_prime sky130_fd_sc_hd__clkbuf_16
+x19 VGND VGND VDPWR VDPWR sky130_fd_sc_hd__decap_3
+x20 VGND VDPWR sky130_fd_sc_hd__tapvpwrvgnd_1
+x21 net2 VGND VGND VDPWR VDPWR uo_out[1] sky130_fd_sc_hd__buf_16
+x22 net1 VGND VGND VDPWR VDPWR uo_out[0] sky130_fd_sc_hd__buf_16
+x23 VGND VGND VDPWR VDPWR sky130_fd_sc_hd__decap_3
+x24 VGND VDPWR sky130_fd_sc_hd__tapvpwrvgnd_1
+x25 VGND VGND VDPWR VDPWR sky130_fd_sc_hd__decap_3
+x26 VGND VDPWR sky130_fd_sc_hd__tapvpwrvgnd_1
+x27 net14 VGND VGND VDPWR VDPWR uio_out[0] sky130_fd_sc_hd__buf_16
+x28 net7 VGND VGND VDPWR VDPWR uio_out[1] sky130_fd_sc_hd__buf_16
+x29 net8 VGND VGND VDPWR VDPWR uio_out[2] sky130_fd_sc_hd__buf_16
+x31 net13 VGND VGND VDPWR VDPWR uio_out[4] sky130_fd_sc_hd__buf_16
+x32 net12 VGND VGND VDPWR VDPWR uio_out[5] sky130_fd_sc_hd__buf_16
+x33 net11 VGND VGND VDPWR VDPWR uio_out[6] sky130_fd_sc_hd__buf_16
+x34 net10 VGND VGND VDPWR VDPWR uio_out[7] sky130_fd_sc_hd__buf_16
+x30 net9 VGND VGND VDPWR VDPWR uio_out[3] sky130_fd_sc_hd__buf_16
+x35 VGND VGND VDPWR VDPWR sky130_fd_sc_hd__decap_3
+x36 VGND VDPWR sky130_fd_sc_hd__tapvpwrvgnd_1
+x37 VGND VGND VDPWR VDPWR sky130_fd_sc_hd__decap_3
+x38 VGND VDPWR sky130_fd_sc_hd__tapvpwrvgnd_1
+x39 VGND VGND VDPWR VDPWR sky130_fd_sc_hd__decap_3
+x40 VGND VDPWR sky130_fd_sc_hd__tapvpwrvgnd_1
+**.ends
+
+.end
