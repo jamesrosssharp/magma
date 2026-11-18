@@ -6,15 +6,15 @@ V {}
 S {}
 E {}
 N -410 -120 -380 -120 {
-lab=NET_PWM}
+lab=VIN_MINUS}
 N -380 -60 -380 -30 {
 lab=VSS}
 N -380 -120 -220 -120 {
-lab=NET_PWM}
+lab=VIN_MINUS}
 N -220 -120 -220 10 {
-lab=NET_PWM}
+lab=VIN_MINUS}
 N -220 10 -140 10 {
-lab=NET_PWM}
+lab=VIN_MINUS}
 N -280 -170 -280 -150 {
 lab=VSS}
 N -280 -290 -180 -290 {
@@ -28,7 +28,7 @@ lab=VDD}
 N -140 -10 -60 -10 {
 lab=NET_IN}
 N -140 10 -60 10 {
-lab=NET_PWM}
+lab=VIN_MINUS}
 N -100 -30 -60 -30 {
 lab=CLK}
 N -390 -290 -280 -290 {
@@ -76,7 +76,6 @@ C {ipin.sym} -100 -30 0 0 {name=p9 lab=CLK}
 C {ipin.sym} -450 -290 0 0 {name=p10 lab=VIN}
 C {opin.sym} 310 -30 0 0 {name=p11 lab=VOUT}
 C {lab_wire.sym} -180 -290 0 0 {name=p12 sig_type=std_logic lab=NET_IN}
-C {lab_wire.sym} -240 -120 0 0 {name=p13 sig_type=std_logic lab=NET_PWM}
 C {sky130_fd_pr/cap_mim_m3_1.sym} -420 -290 3 0 {name=C1 model=cap_mim_m3_1 W=10 L=10 MF=20 spiceprefix=X}
 C {sky130_fd_pr/cap_mim_m3_1.sym} -380 -90 0 0 {name=C2 model=cap_mim_m3_1 W=10 L=10 MF=20 spiceprefix=X}
 C {sky130_stdcells/decap_3.sym} -660 -310 0 0 {name=x4 VGND=VSS VNB=VSS VPB=VDD VPWR=VDD prefix=sky130_fd_sc_hd__ }
