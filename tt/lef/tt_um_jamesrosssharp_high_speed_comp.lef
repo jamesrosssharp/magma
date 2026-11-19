@@ -429,4 +429,24 @@ MACRO tt_um_jamesrosssharp_high_speed_comp
     PORT
       LAYER met4 ;
         RECT 4.000 5.000 6.000 220.760 ;
-    
+    END
+  END VGND
+  OBS
+      LAYER nwell ;
+        RECT 10.910 14.045 155.230 223.130 ;
+      LAYER li1 ;
+        RECT 11.100 14.235 155.050 223.025 ;
+      LAYER met1 ;
+        RECT 7.105 115.000 161.000 223.180 ;
+        RECT 7.105 114.000 162.000 115.000 ;
+        RECT 7.105 9.000 161.000 114.000 ;
+      LAYER met2 ;
+        RECT 6.830 13.250 141.250 206.750 ;
+      LAYER met3 ;
+        RECT 13.345 14.195 132.945 206.010 ;
+      LAYER met4 ;
+        RECT 13.345 20.745 121.435 206.010 ;
+  END
+END tt_um_jamesrosssharp_high_speed_comp
+END LIBRARY
+
