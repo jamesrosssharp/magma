@@ -1,7 +1,7 @@
 magic
 tech sky130A
 magscale 1 2
-timestamp 1794793123
+timestamp 1795077567
 << metal1 >>
 rect 10200 -12200 10400 -12000
 rect 10200 -13400 10400 -13200
@@ -9,6 +9,7 @@ rect 10200 -15200 10400 -15000
 rect 10200 -16400 10400 -16200
 rect 10200 -17600 10400 -17400
 rect 10200 -18600 10400 -18400
+rect 10200 -19800 10400 -19600
 use high_speed_comp_top_routed  x1
 timestamp 1794560065
 transform 0 1 1800 -1 0 -14000
@@ -88,6 +89,8 @@ flabel metal1 10200 -16400 10400 -16200 0 FreeSans 1600 0 0 0 CLK
 port 2 nsew
 flabel metal1 10200 -12200 10400 -12000 0 FreeSans 1600 0 0 0 VIN
 port 3 nsew
-flabel metal1 10200 -18600 10400 -18400 0 FreeSans 1600 0 0 0 PWM_IN
+flabel metal1 10200 -19800 10400 -19600 0 FreeSans 1600 0 0 0 PWM_IN
 port 5 nsew
+flabel metal1 10200 -18600 10400 -18400 0 FreeSans 1600 0 0 0 VIN_MINUS
+port 6 nsew
 << end >>

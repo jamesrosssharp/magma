@@ -165,14 +165,14 @@ X18 C1_3 C2_3 sky130_fd_pr__cap_mim_m3_1 l=10 w=10
 X19 C1_3 C2_3 sky130_fd_pr__cap_mim_m3_1 l=10 w=10
 .ends
 
-.subckt x1bit_am_routed VDD VSS CLK VIN VOUT PWM_IN
-Xx1 XR5/R2 XR2/R1 CLK VOUT VDD VSS high_speed_comp_top_routed
+.subckt x1bit_am_routed VDD VSS CLK VIN VOUT PWM_IN VIN_MINUS
+Xx1 XR5/R2 VIN_MINUS CLK VOUT VDD VSS high_speed_comp_top_routed
 Xx3 x3/A VSS VSS VDD VDD x3/Y sky130_fd_sc_hd__inv_1
 Xx2 PWM_IN VSS VSS VDD VDD x3/A sky130_fd_sc_hd__inv_1
 Xx4 VSS VSS VDD VDD sky130_fd_sc_hd__decap_3
 Xx5 VSS VSS VDD VDD sky130_fd_sc_hd__decap_3
 XXR1 VSS XR7/R2 x3/Y sky130_fd_pr__res_xhigh_po_0p35_V7X9LC
-XXR2 VSS XR2/R1 XR8/R1 sky130_fd_pr__res_xhigh_po_0p35_V7X9LC
+XXR2 VSS VIN_MINUS XR8/R1 sky130_fd_pr__res_xhigh_po_0p35_V7X9LC
 XXR3 VSS XR4/R2 VDD sky130_fd_pr__res_xhigh_po_0p35_N7YJWT
 XXR5 VSS XR6/R2 XR5/R2 sky130_fd_pr__res_xhigh_po_0p35_N7YJWT
 XXR4 VSS XR5/R2 XR4/R2 sky130_fd_pr__res_xhigh_po_0p35_N7YJWT
@@ -180,6 +180,6 @@ XXR6 VSS VSS XR6/R2 sky130_fd_pr__res_xhigh_po_0p35_N7YJWT
 XXR7 VSS XR8/R2 XR7/R2 sky130_fd_pr__res_xhigh_po_0p35_V7X9LC
 XXR8 VSS XR8/R1 XR8/R2 sky130_fd_pr__res_xhigh_po_0p35_V7X9LC
 XXC1 XR5/R2 VIN XR5/R2 VIN XR5/R2 VIN XR5/R2 VIN sky130_fd_pr__cap_mim_m3_1_ZYJU54
-XXC2 VSS XR2/R1 VSS XR2/R1 VSS XR2/R1 VSS XR2/R1 sky130_fd_pr__cap_mim_m3_1_ZYJU54
+XXC2 VSS VIN_MINUS VSS VIN_MINUS VSS VIN_MINUS VSS VIN_MINUS sky130_fd_pr__cap_mim_m3_1_ZYJU54
 .ends
 

@@ -289,10 +289,10 @@ C {sky130_stdcells/decap_3.sym} 540 -10 0 0 {name=x19 VGND=VGND VNB=VGND VPB=VDP
 C {sky130_stdcells/tapvpwrvgnd_1.sym} 360 -10 0 0 {name=x20 VGND=VGND VPWR=VDPWR prefix=sky130_fd_sc_hd__ }
 C {lab_pin.sym} 70 -10 0 0 {name=p99 sig_type=std_logic lab=clk}
 C {lab_pin.sym} 160 -10 2 0 {name=p100 sig_type=std_logic lab=clk_prime}
-C {sky130_stdcells/buf_16.sym} 790 130 0 0 {name=x21 VGND=VGND VNB=VGND VPB=VDPWR VPWR=VDPWR prefix=sky130_fd_sc_hd__ }
+C {sky130_stdcells/buf_4.sym} 790 130 0 0 {name=x21 VGND=VGND VNB=VGND VPB=VDPWR VPWR=VDPWR prefix=sky130_fd_sc_hd__ }
 C {lab_pin.sym} 850 130 2 0 {name=p86 sig_type=std_logic lab=uo_out[1]}
 C {lab_pin.sym} 860 290 2 0 {name=p79 sig_type=std_logic lab=uo_out[0]}
-C {sky130_stdcells/buf_16.sym} 790 290 0 0 {name=x22 VGND=VGND VNB=VGND VPB=VDPWR VPWR=VDPWR prefix=sky130_fd_sc_hd__ }
+C {sky130_stdcells/buf_4.sym} 790 290 0 0 {name=x22 VGND=VGND VNB=VGND VPB=VDPWR VPWR=VDPWR prefix=sky130_fd_sc_hd__ }
 C {sky130_stdcells/decap_3.sym} 1070 150 0 0 {name=x23 VGND=VGND VNB=VGND VPB=VDPWR VPWR=VDPWR prefix=sky130_fd_sc_hd__ }
 C {sky130_stdcells/tapvpwrvgnd_1.sym} 1070 100 0 0 {name=x24 VGND=VGND VPWR=VDPWR prefix=sky130_fd_sc_hd__ }
 C {sky130_stdcells/decap_3.sym} 1080 320 0 0 {name=x25 VGND=VGND VNB=VGND VPB=VDPWR VPWR=VDPWR prefix=sky130_fd_sc_hd__ }
@@ -304,14 +304,14 @@ C {lab_pin.sym} 940 520 2 0 {name=p59 sig_type=std_logic lab=uio_out[3]}
 C {lab_pin.sym} 940 540 2 0 {name=p60 sig_type=std_logic lab=uio_out[4]}
 C {lab_pin.sym} 940 560 2 0 {name=p61 sig_type=std_logic lab=uio_out[5]}
 C {lab_pin.sym} 940 580 2 0 {name=p62 sig_type=std_logic lab=uio_out[6]}
-C {sky130_stdcells/buf_16.sym} 810 460 0 0 {name=x27 VGND=VGND VNB=VGND VPB=VDPWR VPWR=VDPWR prefix=sky130_fd_sc_hd__ }
-C {sky130_stdcells/buf_16.sym} 900 480 0 0 {name=x28 VGND=VGND VNB=VGND VPB=VDPWR VPWR=VDPWR prefix=sky130_fd_sc_hd__ }
-C {sky130_stdcells/buf_16.sym} 810 500 0 0 {name=x29 VGND=VGND VNB=VGND VPB=VDPWR VPWR=VDPWR prefix=sky130_fd_sc_hd__ }
-C {sky130_stdcells/buf_16.sym} 810 540 0 0 {name=x31 VGND=VGND VNB=VGND VPB=VDPWR VPWR=VDPWR prefix=sky130_fd_sc_hd__ }
-C {sky130_stdcells/buf_16.sym} 900 560 0 0 {name=x32 VGND=VGND VNB=VGND VPB=VDPWR VPWR=VDPWR prefix=sky130_fd_sc_hd__ }
-C {sky130_stdcells/buf_16.sym} 810 580 0 0 {name=x33 VGND=VGND VNB=VGND VPB=VDPWR VPWR=VDPWR prefix=sky130_fd_sc_hd__ }
-C {sky130_stdcells/buf_16.sym} 900 600 0 0 {name=x34 VGND=VGND VNB=VGND VPB=VDPWR VPWR=VDPWR prefix=sky130_fd_sc_hd__ }
-C {sky130_stdcells/buf_16.sym} 900 520 0 0 {name=x30 VGND=VGND VNB=VGND VPB=VDPWR VPWR=VDPWR prefix=sky130_fd_sc_hd__ }
+C {sky130_stdcells/buf_4.sym} 810 460 0 0 {name=x27 VGND=VGND VNB=VGND VPB=VDPWR VPWR=VDPWR prefix=sky130_fd_sc_hd__ }
+C {sky130_stdcells/buf_4.sym} 900 480 0 0 {name=x28 VGND=VGND VNB=VGND VPB=VDPWR VPWR=VDPWR prefix=sky130_fd_sc_hd__ }
+C {sky130_stdcells/buf_4.sym} 810 500 0 0 {name=x29 VGND=VGND VNB=VGND VPB=VDPWR VPWR=VDPWR prefix=sky130_fd_sc_hd__ }
+C {sky130_stdcells/buf_4.sym} 810 540 0 0 {name=x31 VGND=VGND VNB=VGND VPB=VDPWR VPWR=VDPWR prefix=sky130_fd_sc_hd__ }
+C {sky130_stdcells/buf_4.sym} 900 560 0 0 {name=x32 VGND=VGND VNB=VGND VPB=VDPWR VPWR=VDPWR prefix=sky130_fd_sc_hd__ }
+C {sky130_stdcells/buf_4.sym} 810 580 0 0 {name=x33 VGND=VGND VNB=VGND VPB=VDPWR VPWR=VDPWR prefix=sky130_fd_sc_hd__ }
+C {sky130_stdcells/buf_4.sym} 900 600 0 0 {name=x34 VGND=VGND VNB=VGND VPB=VDPWR VPWR=VDPWR prefix=sky130_fd_sc_hd__ }
+C {sky130_stdcells/buf_4.sym} 900 520 0 0 {name=x30 VGND=VGND VNB=VGND VPB=VDPWR VPWR=VDPWR prefix=sky130_fd_sc_hd__ }
 C {sky130_stdcells/decap_3.sym} 1300 430 0 0 {name=x35 VGND=VGND VNB=VGND VPB=VDPWR VPWR=VDPWR prefix=sky130_fd_sc_hd__ }
 C {sky130_stdcells/tapvpwrvgnd_1.sym} 1290 380 0 0 {name=x36 VGND=VGND VPWR=VDPWR prefix=sky130_fd_sc_hd__ }
 C {sky130_stdcells/decap_3.sym} 1300 530 0 0 {name=x37 VGND=VGND VNB=VGND VPB=VDPWR VPWR=VDPWR prefix=sky130_fd_sc_hd__ }

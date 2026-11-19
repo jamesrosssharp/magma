@@ -176,6 +176,17 @@ for i in range(0, 3):
     r.routeTo('e', b[0], 108)
     r.route('n', 600, 108)
 
+# Route VIN_MINUS
+
+a = p['self']['VIN_MINUS'].centroid()
+b = cap['children']['XC2']['self'][3*4].contacts[0]
+
+r.begin(a[0], a[1], 'metal1')
+r.routeTo('w', b[0], 100)
+r.routeTo('s', b[1] + 400, 100)
+r.viaExpansion('metal2', 100, 100, 120, 120, 120, 120)
+r.viaExpansion('metal3', 100, 100, 120, 120, 120, 120)
+r.viaExpansion('metal4', 100, 100, 120, 120, 120, 120)
 
 # Route PWM resistor
 

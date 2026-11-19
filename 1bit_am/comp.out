@@ -253,6 +253,7 @@ VOUT                                       |VOUT
 VIN                                        |VIN                                        
 PWM_IN                                     |PWM_IN                                     
 CLK                                        |CLK                                        
+VIN_MINUS                                  |VIN_MINUS                                  
 ---------------------------------------------------------------------------------------
 Cell pin lists are equivalent.
 Device classes x1bit_am_routed and 1bit_am_routed are equivalent.
