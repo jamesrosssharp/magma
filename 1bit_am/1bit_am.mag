@@ -1,7 +1,7 @@
 magic
 tech sky130A
 magscale 1 2
-timestamp 1795077567
+timestamp 1795160073
 << metal1 >>
 rect 10200 -12200 10400 -12000
 rect 10200 -13400 10400 -13200
@@ -46,38 +46,38 @@ use sky130_fd_pr__cap_mim_m3_1_ZYJU54  XC2
 timestamp 1794533213
 transform 1 0 3463 0 1 -24600
 box -5863 -6000 5863 6000
-use sky130_fd_pr__res_xhigh_po_0p35_V7X9LC  XR1
-timestamp 1794532927
-transform 1 0 -3879 0 1 -22738
-box -201 -3582 201 3582
-use sky130_fd_pr__res_xhigh_po_0p35_V7X9LC  XR2
-timestamp 1794532927
-transform 1 0 -2991 0 1 -22738
-box -201 -3582 201 3582
-use sky130_fd_pr__res_xhigh_po_0p35_N7YJWT  XR3
-timestamp 1794532927
-transform 1 0 -3883 0 1 -9466
-box -201 -2582 201 2582
-use sky130_fd_pr__res_xhigh_po_0p35_N7YJWT  XR4
-timestamp 1794532927
-transform 1 0 -3587 0 1 -9466
-box -201 -2582 201 2582
-use sky130_fd_pr__res_xhigh_po_0p35_N7YJWT  XR5
-timestamp 1794532927
-transform 1 0 -3291 0 1 -9466
-box -201 -2582 201 2582
-use sky130_fd_pr__res_xhigh_po_0p35_N7YJWT  XR6
-timestamp 1794532927
-transform 1 0 -2995 0 1 -9466
-box -201 -2582 201 2582
-use sky130_fd_pr__res_xhigh_po_0p35_V7X9LC  XR7
-timestamp 1794532927
-transform 1 0 -3583 0 1 -22738
-box -201 -3582 201 3582
-use sky130_fd_pr__res_xhigh_po_0p35_V7X9LC  XR8
-timestamp 1794532927
-transform 1 0 -3287 0 1 -22738
-box -201 -3582 201 3582
+use sky130_fd_pr__res_xhigh_po_0p35_5GAX62  XR1
+timestamp 1795160073
+transform 1 0 -3992 0 1 -22851
+box -35 -3416 35 3416
+use sky130_fd_pr__res_xhigh_po_0p35_5GAX62  XR2
+timestamp 1795160073
+transform 1 0 -3104 0 1 -22851
+box -35 -3416 35 3416
+use sky130_fd_pr__res_xhigh_po_0p35_LKZTYE  XR3
+timestamp 1795160000
+transform 1 0 -3996 0 1 -9579
+box -35 -2416 35 2416
+use sky130_fd_pr__res_xhigh_po_0p35_LKZTYE  XR4
+timestamp 1795160000
+transform 1 0 -3700 0 1 -9579
+box -35 -2416 35 2416
+use sky130_fd_pr__res_xhigh_po_0p35_LKZTYE  XR5
+timestamp 1795160000
+transform 1 0 -3404 0 1 -9579
+box -35 -2416 35 2416
+use sky130_fd_pr__res_xhigh_po_0p35_LKZTYE  XR6
+timestamp 1795160000
+transform 1 0 -3108 0 1 -9579
+box -35 -2416 35 2416
+use sky130_fd_pr__res_xhigh_po_0p35_5GAX62  XR7
+timestamp 1795160073
+transform 1 0 -3696 0 1 -22851
+box -35 -3416 35 3416
+use sky130_fd_pr__res_xhigh_po_0p35_5GAX62  XR8
+timestamp 1795160073
+transform 1 0 -3400 0 1 -22851
+box -35 -3416 35 3416
 << labels >>
 flabel metal1 10200 -13400 10400 -13200 0 FreeSans 1600 0 0 0 VDD
 port 0 nsew

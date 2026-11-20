@@ -16,15 +16,11 @@ The following types are not handled by extraction and will be treated as non-ele
 Scaled tech values by 2 / 1 to match internal grid scaling
 Loading sky130A Device Generator Menu ...
 Using technology "sky130A", version 1.0.588-105-g792ef67
-Cell tt_um_jamesrosssharp_high_speed_comp read from current working directory
-Cell sky130_fd_sc_hd__conb_1 read from path ../../../pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
-Cell sky130_fd_sc_hd__buf_4 read from path ../../../pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
-Cell sky130_fd_sc_hd__decap_3 read from path ../../../pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
-Cell sky130_fd_sc_hd__tapvpwrvgnd_1 read from path ../../../pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
-Warning: cell <sky130_fd_pr__res_high_po_1p41_7LR5SM> from file sky130_fd_pr__res_high_po_1p41_7LR5SM.mag is not writeable
-Cell sky130_fd_pr__res_high_po_1p41_7LR5SM read from current working directory
+Cell tt_um_jamesrosssharp_high_speed_comp_routed read from current working directory
 Warning: cell <high_speed_comp_top_routed> from file high_speed_comp_top_routed.mag is not writeable
 Cell high_speed_comp_top_routed read from current working directory
+Cell sky130_fd_sc_hd__tapvpwrvgnd_1 read from path /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__decap_3 read from path /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
 Cell sky130_fd_sc_hd__clkinv_4 read from path /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
 Cell sky130_fd_sc_hd__dfxtp_2 read from path /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
 Warning: cell <post_amplifier_routed> from file post_amplifier_routed.mag is not writeable
@@ -51,24 +47,24 @@ Warning: cell <sky130_fd_pr__nfet_01v8_lvt_URSRNG> from file sky130_fd_pr__nfet_
 Cell sky130_fd_pr__nfet_01v8_lvt_URSRNG read from current working directory
 Warning: cell <sky130_fd_pr__nfet_01v8_lvt_GVGYYV> from file sky130_fd_pr__nfet_01v8_lvt_GVGYYV.mag is not writeable
 Cell sky130_fd_pr__nfet_01v8_lvt_GVGYYV read from current working directory
-Cell sky130_fd_sc_hd__clkbuf_16 read from path ../../../pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
-Warning: cell <flash_converter_routed> from file flash_converter_routed.mag is not writeable
-Cell flash_converter_routed read from current working directory
+Cell sky130_fd_sc_hd__conb_1 read from path /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__buf_4 read from path /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
 Warning: cell <1bit_am_routed> from file 1bit_am_routed.mag is not writeable
 Cell 1bit_am_routed read from current working directory
-Warning: cell <sky130_fd_pr__res_xhigh_po_0p35_V7X9LC> from file sky130_fd_pr__res_xhigh_po_0p35_V7X9LC.mag is not writeable
-Cell sky130_fd_pr__res_xhigh_po_0p35_V7X9LC read from current working directory
-Warning: cell <sky130_fd_pr__res_xhigh_po_0p35_N7YJWT> from file sky130_fd_pr__res_xhigh_po_0p35_N7YJWT.mag is not writeable
-Cell sky130_fd_pr__res_xhigh_po_0p35_N7YJWT read from current working directory
+Warning: cell <sky130_fd_pr__res_xhigh_po_0p35_5GAX62> from file sky130_fd_pr__res_xhigh_po_0p35_5GAX62.mag is not writeable
+Cell sky130_fd_pr__res_xhigh_po_0p35_5GAX62 read from current working directory
+Warning: cell <sky130_fd_pr__res_xhigh_po_0p35_LKZTYE> from file sky130_fd_pr__res_xhigh_po_0p35_LKZTYE.mag is not writeable
+Cell sky130_fd_pr__res_xhigh_po_0p35_LKZTYE read from current working directory
 Warning: cell <sky130_fd_pr__cap_mim_m3_1_ZYJU54> from file sky130_fd_pr__cap_mim_m3_1_ZYJU54.mag is not writeable
 Cell sky130_fd_pr__cap_mim_m3_1_ZYJU54 read from current working directory
 Cell sky130_fd_sc_hd__inv_1 read from path /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__clkbuf_16 read from path /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Warning: cell <sky130_fd_pr__res_high_po_1p41_6PMYNV> from file sky130_fd_pr__res_high_po_1p41_6PMYNV.mag is not writeable
+Cell sky130_fd_pr__res_high_po_1p41_6PMYNV read from current working directory
+Warning: cell <flash_converter_routed> from file flash_converter_routed.mag is not writeable
+Cell flash_converter_routed read from current working directory
 Processing timestamp mismatches.
-Timestamp mismatches found in these cells: sky130_fd_sc_hd__clkinv_4, sky130_fd_sc_hd__dfxtp_2, post_amplifier_routed, sky130_fd_pr__pfet_01v8_5ETXLA, sky130_fd_pr__nfet_01v8_D6NL62, strong_arm_latch_routed, sky130_fd_pr__pfet_01v8_MV5BJT, sky130_fd_pr__pfet_01v8_7PVLUA, sky130_fd_pr__pfet_01v8_NRXS53, sky130_fd_pr__pfet_01v8_CZ2BPM, sky130_fd_pr__nfet_01v8_WXMB3T, sky130_fd_pr__nfet_01v8_CQH6Q5, sky130_fd_pr__nfet_01v8_lvt_URSRNG, sky130_fd_pr__nfet_01v8_lvt_GVGYYV, high_speed_comp_top_routed, sky130_fd_sc_hd__decap_3, sky130_fd_sc_hd__tapvpwrvgnd_1, 1bit_am_routed, sky130_fd_pr__res_xhigh_po_0p35_V7X9LC, sky130_fd_pr__res_xhigh_po_0p35_N7YJWT, sky130_fd_pr__cap_mim_m3_1_ZYJU54, sky130_fd_sc_hd__inv_1.
-   Copying output for cell sky130_fd_sc_hd__conb_1 from $PDKPATH/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds
-   Copying output for cell sky130_fd_sc_hd__decap_3 from $PDKPATH/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds
-   Copying output for cell sky130_fd_sc_hd__tapvpwrvgnd_1 from $PDKPATH/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds
-   Copying output for cell sky130_fd_sc_hd__buf_4 from $PDKPATH/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds
+Timestamp mismatches found in these cells: sky130_fd_sc_hd__clkinv_4, sky130_fd_sc_hd__dfxtp_2, post_amplifier_routed, sky130_fd_pr__pfet_01v8_5ETXLA, sky130_fd_pr__nfet_01v8_D6NL62, strong_arm_latch_routed, sky130_fd_pr__pfet_01v8_MV5BJT, sky130_fd_pr__pfet_01v8_7PVLUA, sky130_fd_pr__pfet_01v8_NRXS53, sky130_fd_pr__pfet_01v8_CZ2BPM, sky130_fd_pr__nfet_01v8_WXMB3T, sky130_fd_pr__nfet_01v8_CQH6Q5, sky130_fd_pr__nfet_01v8_lvt_URSRNG, sky130_fd_pr__nfet_01v8_lvt_GVGYYV, sky130_fd_sc_hd__conb_1, sky130_fd_sc_hd__buf_4, high_speed_comp_top_routed, sky130_fd_sc_hd__decap_3, sky130_fd_sc_hd__tapvpwrvgnd_1, 1bit_am_routed, sky130_fd_pr__res_xhigh_po_0p35_5GAX62, sky130_fd_pr__res_xhigh_po_0p35_LKZTYE, sky130_fd_pr__cap_mim_m3_1_ZYJU54, sky130_fd_sc_hd__inv_1, sky130_fd_sc_hd__clkbuf_16, sky130_fd_pr__res_high_po_1p41_6PMYNV, flash_converter_routed.
    Copying output for cell sky130_fd_sc_hd__clkinv_4 from $PDKPATH/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds
    Copying output for cell sky130_fd_sc_hd__dfxtp_2 from $PDKPATH/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds
    Generating output for cell sky130_fd_pr__pfet_01v8_5ETXLA
@@ -83,17 +79,21 @@ Timestamp mismatches found in these cells: sky130_fd_sc_hd__clkinv_4, sky130_fd_
    Generating output for cell sky130_fd_pr__nfet_01v8_lvt_URSRNG
    Generating output for cell sky130_fd_pr__nfet_01v8_lvt_GVGYYV
    Generating output for cell strong_arm_latch_routed
+   Copying output for cell sky130_fd_sc_hd__decap_3 from $PDKPATH/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds
+   Copying output for cell sky130_fd_sc_hd__tapvpwrvgnd_1 from $PDKPATH/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds
    Generating output for cell high_speed_comp_top_routed
-   Generating output for cell sky130_fd_pr__res_high_po_1p41_7LR5SM
-   Copying output for cell sky130_fd_sc_hd__clkbuf_16 from $PDKPATH/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds
-   Generating output for cell flash_converter_routed
-   Generating output for cell sky130_fd_pr__res_xhigh_po_0p35_V7X9LC
-   Generating output for cell sky130_fd_pr__res_xhigh_po_0p35_N7YJWT
+   Copying output for cell sky130_fd_sc_hd__conb_1 from $PDKPATH/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds
+   Copying output for cell sky130_fd_sc_hd__buf_4 from $PDKPATH/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds
+   Generating output for cell sky130_fd_pr__res_xhigh_po_0p35_5GAX62
+   Generating output for cell sky130_fd_pr__res_xhigh_po_0p35_LKZTYE
    Generating output for cell sky130_fd_pr__cap_mim_m3_1_ZYJU54
    Copying output for cell sky130_fd_sc_hd__inv_1 from $PDKPATH/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds
    Generating output for cell 1bit_am_routed
-   Generating output for cell tt_um_jamesrosssharp_high_speed_comp
-Generating LEF output lef/tt_um_jamesrosssharp_high_speed_comp.lef for cell tt_um_jamesrosssharp_high_speed_comp:
-Diagnostic:  Write LEF header for cell tt_um_jamesrosssharp_high_speed_comp
-Diagnostic:  Writing LEF output for cell tt_um_jamesrosssharp_high_speed_comp
+   Generating output for cell sky130_fd_pr__res_high_po_1p41_6PMYNV
+   Generating output for cell flash_converter_routed
+   Copying output for cell sky130_fd_sc_hd__clkbuf_16 from $PDKPATH/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds
+   Generating output for cell tt_um_jamesrosssharp_high_speed_comp_routed
+Generating LEF output lef/tt_um_jamesrosssharp_high_speed_comp.lef for cell tt_um_jamesrosssharp_high_speed_comp_routed:
+Diagnostic:  Write LEF header for cell tt_um_jamesrosssharp_high_speed_comp_routed
+Diagnostic:  Writing LEF output for cell tt_um_jamesrosssharp_high_speed_comp_routed
 Diagnostic:  Scale value is 0.005000
