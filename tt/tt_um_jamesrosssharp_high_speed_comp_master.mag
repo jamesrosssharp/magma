@@ -1,7 +1,7 @@
 magic
 tech sky130A
 magscale 1 2
-timestamp 1795246629
+timestamp 1795254254
 << metal4 >>
 rect 6134 44952 6194 45152
 rect 6686 44952 6746 45152
@@ -58,11 +58,11 @@ rect 26498 0 26678 200
 rect 30362 0 30542 200
 use sky130_fd_sc_hd__tapvpwrvgnd_1  sky130_fd_sc_hd__tapvpwrvgnd_1_0 ../../../pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
 timestamp 1792400971
-transform 1 0 9146 0 1 43976
+transform 1 0 8746 0 1 43976
 box -38 -48 130 592
 use sky130_fd_sc_hd__tapvpwrvgnd_1  sky130_fd_sc_hd__tapvpwrvgnd_1_1
 timestamp 1792400971
-transform 1 0 6846 0 1 43976
+transform 1 0 6446 0 1 43976
 box -38 -48 130 592
 use sky130_fd_sc_hd__tapvpwrvgnd_1  sky130_fd_sc_hd__tapvpwrvgnd_1_2
 timestamp 1792400971
@@ -82,35 +82,35 @@ transform -1 0 39915 0 -1 28791
 box 8400 -13400 20800 21000
 use sky130_fd_sc_hd__conb_1  x3 ../../../pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
 timestamp 1792400971
-transform 1 0 8870 0 1 43976
+transform 1 0 8470 0 1 43976
 box -38 -48 314 592
 use sky130_fd_sc_hd__conb_1  x4
 timestamp 1792400971
-transform 1 0 8594 0 1 43976
+transform 1 0 8194 0 1 43976
 box -38 -48 314 592
 use sky130_fd_sc_hd__conb_1  x5
 timestamp 1792400971
-transform 1 0 8318 0 1 43976
+transform 1 0 7918 0 1 43976
 box -38 -48 314 592
 use sky130_fd_sc_hd__conb_1  x6
 timestamp 1792400971
-transform 1 0 8042 0 1 43976
+transform 1 0 7642 0 1 43976
 box -38 -48 314 592
 use sky130_fd_sc_hd__conb_1  x7
 timestamp 1792400971
-transform 1 0 7766 0 1 43976
+transform 1 0 7366 0 1 43976
 box -38 -48 314 592
 use sky130_fd_sc_hd__conb_1  x8
 timestamp 1792400971
-transform 1 0 7490 0 1 43976
+transform 1 0 7090 0 1 43976
 box -38 -48 314 592
 use sky130_fd_sc_hd__conb_1  x9
 timestamp 1792400971
-transform 1 0 7214 0 1 43976
+transform 1 0 6814 0 1 43976
 box -38 -48 314 592
 use sky130_fd_sc_hd__conb_1  x10
 timestamp 1792400971
-transform 1 0 6938 0 1 43976
+transform 1 0 6538 0 1 43976
 box -38 -48 314 592
 use high_speed_comp_top_routed  x11
 timestamp 1794560065
@@ -204,13 +204,17 @@ use sky130_fd_sc_hd__buf_4  x33
 timestamp 1792400971
 transform -1 0 10802 0 1 43976
 box -38 -48 590 592
+use sky130_fd_sc_hd__buf_4  x34
+timestamp 1792400971
+transform -1 0 10251 0 1 43976
+box -38 -48 590 592
 use sky130_fd_sc_hd__decap_3  x35
 timestamp 1792400971
-transform 1 0 9974 0 1 43976
+transform 1 0 9423 0 1 43976
 box -38 -48 314 592
 use sky130_fd_sc_hd__tapvpwrvgnd_1  x36
 timestamp 1792400971
-transform 1 0 9882 0 1 43976
+transform 1 0 9331 0 1 43976
 box -38 -48 130 592
 use sky130_fd_sc_hd__decap_3  x37
 timestamp 1792400971

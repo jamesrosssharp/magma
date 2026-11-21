@@ -71,16 +71,38 @@ for v, vv in [('VPWR', 'VDPWR'), ('VGND', 'VGND')]:
 
     # Locali body bias
     r.begin(a[0], a[1], 'locali')
-    for i in range(0, 7):
-        r.route('w', (a[0] - b[0]) / 7, 34)
+
+    arr = [(a[0] - b[0]) * 0, 
+           0, 
+           0,
+           0,
+           ((a[0] - b[0]) * 4 / 7) + 600,
+           ((a[0] - b[0]) * 5 / 7),
+           ((a[0] - b[0]) * 6 / 7),
+           ((a[0] - b[0]))
+           ]
+
+    for i in range(0, 8):
+        r.routeTo('w', b[0] + arr[i], 34)
         r.push()
         r.viaExpansion('metal1', 34, 34, 34, 34, 80, 80)
         r.pop()
 
+    arr = [(a[0] - b[0]) / 10, 
+           ((a[0] - b[0]) * 2 / 10), 
+           ((a[0] - b[0]) * 3 / 10),
+           ((a[0] - b[0]) * 4 / 10) ,
+           ((a[0] - b[0]) * 5 / 10) + 100,
+           ((a[0] - b[0]) * 6 / 10) + 100,
+           ((a[0] - b[0]) * 7 / 10) + 100,
+           ((a[0] - b[0]) * 8 / 10),
+           ((a[0] - b[0]) * 9 / 10),
+           ((a[0] - b[0])),
+           ]
 
     r.begin(a[0], a[1], 'metal3')
     for i in range(0, 10):
-        r.route('w', (a[0] - b[0]) / 10, 200)
+        r.routeTo('w', b[0] + arr[i], 200)
         r.push()
         r.viaExpansion('metal2', 120, 120, 200, 200, 140, 140)
         r.viaExpansion('metal1', 60, 60, 140, 140, 80, 80)
@@ -331,6 +353,33 @@ r.routeTo('s', b[1], 100)
 r.viaExpansion('metal1', 100, 100, 120, 120, 120, 120)
 r.routeTo('w', b[0], 100)
 
+# Route O0 - O7 in metal 3 to respective buffers
 
+cell_ports = [
+                ('O0', 'x27'), ('O1', 'x28'), ('O2', 'x29'), ('O3', 'x30'),
+                ('O4', 'x31'), ('O5', 'x32'), ('O6', 'x33'), ('O7', 'x34'),
+              ]
+
+i = 0
+
+for pp, c in cell_ports:
+    a = p['children']['x2']['self'][pp].centroid()
+    b = p['children'][c]['self']['A'].centroid()
+ 
+    arr = [8, 7, 6, 5, 4, 3, 2, 1]
+
+    r.begin(a[0], a[1], 'metal1')
+    r.viaExpansion('metal2', 100, 100, 120, 120, 120, 120)
+    r.viaExpansion('metal3', 100, 100, 120, 120, 120, 120)
+    r.route('w', arr[i] * 200, 100)
+    r.routeTo('n', b[1] - 1000 - arr[i] * 200, 100)
+    r.routeTo('w', b[0], 100)
+    r.viaExpansion('metal2', 100, 100, 120, 120, 120, 120)
+    r.routeTo('n', b[1], 100)
+    r.viaExpansion('metal1', 100, 100, 120, 120, 120, 120)
+    r.viaExpansion('locali', 34, 34, 120, 120, 34, 34)
+
+
+    i += 1
 
 top.writeMagFile(db, "tt/tt_um_jamesrosssharp_high_speed_comp.mag")

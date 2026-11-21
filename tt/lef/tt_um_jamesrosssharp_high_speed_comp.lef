@@ -35,7 +35,7 @@ MACRO tt_um_jamesrosssharp_high_speed_comp
   PIN ua[0]
     DIRECTION INOUT ;
     USE SIGNAL ;
-    ANTENNAGATEAREA 10.000000 ;
+    ANTENNAGATEAREA 90.000000 ;
     PORT
       LAYER met4 ;
         RECT 151.810 0.000 152.710 1.000 ;
@@ -439,11 +439,11 @@ MACRO tt_um_jamesrosssharp_high_speed_comp
   END VGND
   OBS
       LAYER nwell ;
-        RECT 10.910 14.045 144.820 222.790 ;
+        RECT 10.910 22.355 144.820 222.790 ;
       LAYER li1 ;
-        RECT 11.100 14.235 154.575 222.685 ;
+        RECT 11.100 22.545 154.575 222.685 ;
       LAYER met1 ;
-        RECT 6.540 9.000 157.575 222.840 ;
+        RECT 6.540 17.955 157.575 222.840 ;
       LAYER met2 ;
         RECT 6.830 5.700 157.375 222.950 ;
       LAYER met3 ;
@@ -498,11 +498,11 @@ MACRO tt_um_jamesrosssharp_high_speed_comp
         RECT 0.500 138.660 1.000 138.810 ;
         RECT 0.500 135.960 0.650 138.660 ;
         RECT 0.500 135.810 1.000 135.960 ;
-        RECT 0.500 12.500 0.600 135.810 ;
-        RECT 0.500 12.350 1.000 12.500 ;
-        RECT 0.500 9.650 0.650 12.350 ;
-        RECT 0.500 9.500 1.000 9.650 ;
-        RECT 0.500 4.600 0.600 9.500 ;
+        RECT 0.500 42.455 0.600 135.810 ;
+        RECT 0.500 42.305 1.000 42.455 ;
+        RECT 0.500 39.605 0.650 42.305 ;
+        RECT 0.500 39.455 1.000 39.605 ;
+        RECT 0.500 4.600 0.600 39.455 ;
         RECT 3.400 4.600 3.600 221.160 ;
         RECT 6.400 4.600 157.375 221.160 ;
         RECT 0.500 1.400 157.375 4.600 ;
