@@ -4,7 +4,9 @@ Regenerate the 3D layout screenshots used in doc/designs.md.
 Uses mag_viewer3d's offscreen renderer with fixed camera angles, then crops
 each image to its content. Standard cells are resolved from the sky130A PDK:
 
-    PDK_ROOT=/path/to/pdk QT_QPA_PLATFORM=offscreen python3 doc/render_screenshots.py
+    PDK_ROOT=/path/to/pdk QT_QPA_PLATFORM=offscreen python3 doc/render_screenshots.py [image.png ...]
+
+Pass output image names to render only those shots; with no arguments all are rendered.
 
 (PDK_ROOT must contain sky130A/libs.ref/sky130_fd_sc_hd/mag.)
 """
@@ -30,6 +32,10 @@ SHOTS = [
     ("high_speed_comp/post_amplifier_routed.mag", "post_amplifier_iso.png", ISO, 1.0, (1600, 1000)),
     ("1bit_am/1bit_am_routed.mag", "1bit_am_iso.png", ISO, 0.8, (1600, 1000)),
     ("1bit_am/1bit_am_routed.mag", "1bit_am_top.png", TOP, 1.0, (1000, 1400)),
+    ("3bit-flash-converter/flash_converter_routed.mag", "flash_converter_iso.png", ISO, 0.8, (1600, 1000)),
+    ("3bit-flash-converter/flash_converter_routed.mag", "flash_converter_top.png", TOP, 1.0, (1000, 1400)),
+    ("tt/tt_um_jamesrosssharp_high_speed_comp.mag", "tt_top_iso.png", ISO, 0.8, (1600, 1000)),
+    ("tt/tt_um_jamesrosssharp_high_speed_comp.mag", "tt_top_top.png", TOP, 1.0, (1000, 1400)),
 ]
 
 
@@ -53,12 +59,15 @@ def main():
     fmt.setDepthBufferSize(24)
     fmt.setSamples(4)
     QSurfaceFormat.setDefaultFormat(fmt)
+    only = set(sys.argv[1:])
     app = QGuiApplication(sys.argv[:1])  # noqa: F841 (must outlive the renders)
 
     out_dir = os.path.join(ROOT, "doc", "images")
     os.makedirs(out_dir, exist_ok=True)
 
     for mag, png, (yaw, pitch), zoom, (w, h) in SHOTS:
+        if only and png not in only:
+            continue
         db, top = mv.load(os.path.join(ROOT, mag), lib_paths)
         scene = mv.LayoutScene(db, top)
         r = mv.LayoutRenderer(scene)
