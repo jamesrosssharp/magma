@@ -127,31 +127,64 @@ sky130_fd_sc_hd__clkinv_4 (8)              |sky130_fd_sc_hd__clkinv_4 (8)
 sky130_fd_sc_hd__decap_3 (16->1)           |sky130_fd_sc_hd__decap_3 (16->1)           
 sky130_fd_pr__res_high_po_1p41 (12->9)     |sky130_fd_pr__res_high_po_1p41 (12->9)     
 Number of devices: 178                     |Number of devices: 178                     
-Number of nets: 109 **Mismatch**           |Number of nets: 111 **Mismatch**           
+Number of nets: 111                        |Number of nets: 111                        
 ---------------------------------------------------------------------------------------
-NET mismatches: Class fragments follow (with fanout counts):
-Circuit 1: flash_converter_routed          |Circuit 2: flash_converter_routed          
-
----------------------------------------------------------------------------------------
-Net: VIN                                   |Net: VIN                                   
-  sky130_fd_pr__nfet_01v8_lvt/2 = 10       |  sky130_fd_pr__nfet_01v8_lvt/2 = 8        
-  sky130_fd_pr__res_high_po_1p41/(1|2) = 4 |                                           
-                                           |                                           
-(no matching net)                          |Net: net4                                  
-                                           |  sky130_fd_pr__nfet_01v8_lvt/2 = 1        
-                                           |  sky130_fd_pr__res_high_po_1p41/(1|2) = 2 
-                                           |                                           
-(no matching net)                          |Net: net3                                  
-                                           |  sky130_fd_pr__nfet_01v8_lvt/2 = 1        
-                                           |  sky130_fd_pr__res_high_po_1p41/(1|2) = 2 
----------------------------------------------------------------------------------------
-Netlists do not match.
-Port matching may fail to disambiguate symmetries.
+Resolving symmetries by property value.
+Resolving symmetries by pin name.
+Resolving symmetries by net name.
+Netlists match with 1 symmetry with property errors.
+high_speed_comp_top_routed:x1/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM2/sky130_fd_pr__nfet_01v8_lvt:0 vs. high_speed_comp_top:1/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M2:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+high_speed_comp_top_routed:x2/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM1/sky130_fd_pr__nfet_01v8_lvt:0 vs. high_speed_comp_top:2/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M1:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+high_speed_comp_top_routed:x7/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM1/sky130_fd_pr__nfet_01v8_lvt:0 vs. high_speed_comp_top:7/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M1:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+high_speed_comp_top_routed:x4/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM1/sky130_fd_pr__nfet_01v8_lvt:0 vs. high_speed_comp_top:4/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M1:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+high_speed_comp_top_routed:x5/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM1/sky130_fd_pr__nfet_01v8_lvt:0 vs. high_speed_comp_top:5/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M1:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+high_speed_comp_top_routed:x6/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM1/sky130_fd_pr__nfet_01v8_lvt:0 vs. high_speed_comp_top:6/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M1:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+high_speed_comp_top_routed:x3/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM1/sky130_fd_pr__nfet_01v8_lvt:0 vs. high_speed_comp_top:3/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M1:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+high_speed_comp_top_routed:x8/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM1/sky130_fd_pr__nfet_01v8_lvt:0 vs. high_speed_comp_top:8/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M1:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+high_speed_comp_top_routed:x1/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM1/sky130_fd_pr__nfet_01v8_lvt:0 vs. high_speed_comp_top:1/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M1:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+high_speed_comp_top_routed:x8/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM2/sky130_fd_pr__nfet_01v8_lvt:0 vs. high_speed_comp_top:8/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M2:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+high_speed_comp_top_routed:x3/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM2/sky130_fd_pr__nfet_01v8_lvt:0 vs. high_speed_comp_top:3/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M2:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+high_speed_comp_top_routed:x6/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM2/sky130_fd_pr__nfet_01v8_lvt:0 vs. high_speed_comp_top:6/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M2:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+high_speed_comp_top_routed:x5/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM2/sky130_fd_pr__nfet_01v8_lvt:0 vs. high_speed_comp_top:5/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M2:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+high_speed_comp_top_routed:x4/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM2/sky130_fd_pr__nfet_01v8_lvt:0 vs. high_speed_comp_top:4/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M2:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+high_speed_comp_top_routed:x7/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM2/sky130_fd_pr__nfet_01v8_lvt:0 vs. high_speed_comp_top:7/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M2:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+high_speed_comp_top_routed:x2/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM2/sky130_fd_pr__nfet_01v8_lvt:0 vs. high_speed_comp_top:2/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M2:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+high_speed_comp_top_routed:x2/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_URSRNG:XM3/sky130_fd_pr__nfet_01v8_lvt:0 vs. high_speed_comp_top:2/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M3:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+high_speed_comp_top_routed:x7/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_URSRNG:XM3/sky130_fd_pr__nfet_01v8_lvt:0 vs. high_speed_comp_top:7/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M3:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+high_speed_comp_top_routed:x4/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_URSRNG:XM3/sky130_fd_pr__nfet_01v8_lvt:0 vs. high_speed_comp_top:4/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M3:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+high_speed_comp_top_routed:x5/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_URSRNG:XM3/sky130_fd_pr__nfet_01v8_lvt:0 vs. high_speed_comp_top:5/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M3:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+high_speed_comp_top_routed:x6/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_URSRNG:XM3/sky130_fd_pr__nfet_01v8_lvt:0 vs. high_speed_comp_top:6/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M3:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+high_speed_comp_top_routed:x3/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_URSRNG:XM3/sky130_fd_pr__nfet_01v8_lvt:0 vs. high_speed_comp_top:3/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M3:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+high_speed_comp_top_routed:x8/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_URSRNG:XM3/sky130_fd_pr__nfet_01v8_lvt:0 vs. high_speed_comp_top:8/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M3:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+high_speed_comp_top_routed:x1/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_URSRNG:XM3/sky130_fd_pr__nfet_01v8_lvt:0 vs. high_speed_comp_top:1/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M3:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
 
 Subcircuit pins:
 Circuit 1: flash_converter_routed          |Circuit 2: flash_converter_routed          
 -------------------------------------------|-------------------------------------------
-VIN                                        |(no pin, node is net3)                     
 VSS                                        |VSS                                        
 VDD                                        |VDD                                        
 O0                                         |O0                                         
@@ -165,9 +198,13 @@ O1                                         |O1
 RES_OUT                                    |RES_OUT                                    
 CLK                                        |CLK                                        
 RES_TOP                                    |RES_TOP                                    
-(no pin, node is VIN)                      |VIN                                        
+VIN                                        |VIN                                        
 ---------------------------------------------------------------------------------------
-Cell pin lists for flash_converter_routed and flash_converter_routed altered to match.
+Cell pin lists are equivalent.
 Device classes flash_converter_routed and flash_converter_routed are equivalent.
 
-Final result: Top level cell failed pin matching.
+Final result: Circuits match uniquely.
+Property errors were found.
+
+The following cells had property errors:
+ flash_converter_routed

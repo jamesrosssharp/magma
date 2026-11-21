@@ -138,18 +138,18 @@ X0 R1 R2 VSUBS sky130_fd_pr__res_high_po_1p41 l=1.41
 Xx1 VIN RES_TOP CLK O0 VDD VSS high_speed_comp_top_routed
 Xx2 VIN XR2/R2 CLK O1 VDD VSS high_speed_comp_top_routed
 Xx3 VIN XR3/R2 CLK O2 VDD VSS high_speed_comp_top_routed
-Xx4 VIN VIN CLK O3 VDD VSS high_speed_comp_top_routed
-Xx5 VIN VIN CLK O4 VDD VSS high_speed_comp_top_routed
+Xx4 VIN XR4/R2 CLK O3 VDD VSS high_speed_comp_top_routed
+Xx5 VIN XR5/R2 CLK O4 VDD VSS high_speed_comp_top_routed
 Xx6 VIN XR6/R2 CLK O5 VDD VSS high_speed_comp_top_routed
 XXR1 XR2/R2 RES_TOP VSS sky130_fd_pr__res_high_po_1p41_6PMYNV
 Xx7 VIN XR7/R2 CLK O6 VDD VSS high_speed_comp_top_routed
 XXR10 XR10/R1 XR10/R2 VSS sky130_fd_pr__res_high_po_1p41_6PMYNV
 XXR2 XR3/R2 XR2/R2 VSS sky130_fd_pr__res_high_po_1p41_6PMYNV
 Xx8 VIN XR8/R2 CLK O7 VDD VSS high_speed_comp_top_routed
-XXR3 VIN XR3/R2 VSS sky130_fd_pr__res_high_po_1p41_6PMYNV
+XXR3 XR4/R2 XR3/R2 VSS sky130_fd_pr__res_high_po_1p41_6PMYNV
 XXR11 XR11/R1 XR11/R2 VSS sky130_fd_pr__res_high_po_1p41_6PMYNV
-XXR5 XR6/R2 VIN VSS sky130_fd_pr__res_high_po_1p41_6PMYNV
-XXR4 VIN VIN VSS sky130_fd_pr__res_high_po_1p41_6PMYNV
+XXR5 XR6/R2 XR5/R2 VSS sky130_fd_pr__res_high_po_1p41_6PMYNV
+XXR4 XR5/R2 XR4/R2 VSS sky130_fd_pr__res_high_po_1p41_6PMYNV
 XXR12 XR12/R1 XR12/R2 VSS sky130_fd_pr__res_high_po_1p41_6PMYNV
 XXR6 XR7/R2 XR6/R2 VSS sky130_fd_pr__res_high_po_1p41_6PMYNV
 XXR7 XR8/R2 XR7/R2 VSS sky130_fd_pr__res_high_po_1p41_6PMYNV

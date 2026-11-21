@@ -75,7 +75,7 @@ for i in range(1,9):
     r.viaExpansion('metal4', 100, 100, 120, 120, 120, 120)
     r.route('e', 300, 100)
     r.routeTo('s', b[1], 100)
-    r.routeTo('e', b[0] - 500, 100)
+    r.routeTo('e', b[0] - 275, 100)
     r.viaExpansion('metal3', 100, 100, 120, 120, 120, 120)
     r.viaExpansion('metal2', 100, 100, 120, 120, 120, 120)
     r.viaExpansion('metal1', 100, 100, 120, 120, 120, 120)
