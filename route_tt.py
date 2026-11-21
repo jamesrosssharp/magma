@@ -1,5 +1,7 @@
 import sys
 
+
+
 sys.path.append("build/lib.linux-x86_64-cpython-314/")
 
 import MagParser
@@ -465,6 +467,25 @@ for pp, c, dl in cell_ports:
     r.viaExpansion('locali', 34, 34, 120, 120, 34, 34)
     i += 1
 
+# Add GDS art
 
+from PIL import Image
+
+# Load the PNG image
+img = Image.open("gds_art/tt1.png")
+
+im_left = 3000
+im_top  = 1000
+
+pixel_size = 100
+
+im_w = 100
+im_h = 20
+
+for x in range(0, im_w):
+    for y in range(0, im_h):
+        pixel = img.getpixel((x, y))
+        if (pixel == 0):
+            top.addRect('metal4', im_left + (x)*pixel_size, im_top + (im_h - y)*pixel_size,im_left+ ((x)+1)*pixel_size, im_top + ((im_h - y)+1)*pixel_size)            
 
 top.writeMagFile(db, "tt/tt_um_jamesrosssharp_high_speed_comp.mag")
