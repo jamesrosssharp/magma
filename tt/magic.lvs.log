@@ -65,35 +65,61 @@ Warning: cell <flash_converter_routed> from file flash_converter_routed.mag is n
 Cell flash_converter_routed read from current working directory
 Processing timestamp mismatches.
 Timestamp mismatches found in these cells: sky130_fd_sc_hd__clkinv_4, sky130_fd_sc_hd__dfxtp_2, post_amplifier_routed, sky130_fd_pr__pfet_01v8_5ETXLA, sky130_fd_pr__nfet_01v8_D6NL62, strong_arm_latch_routed, sky130_fd_pr__pfet_01v8_MV5BJT, sky130_fd_pr__pfet_01v8_7PVLUA, sky130_fd_pr__pfet_01v8_NRXS53, sky130_fd_pr__pfet_01v8_CZ2BPM, sky130_fd_pr__nfet_01v8_WXMB3T, sky130_fd_pr__nfet_01v8_CQH6Q5, sky130_fd_pr__nfet_01v8_lvt_URSRNG, sky130_fd_pr__nfet_01v8_lvt_GVGYYV, sky130_fd_sc_hd__conb_1, sky130_fd_sc_hd__buf_4, sky130_fd_sc_hd__decap_3, sky130_fd_sc_hd__tapvpwrvgnd_1, 1bit_am_routed, sky130_fd_pr__res_xhigh_po_0p35_5GAX62, sky130_fd_pr__res_xhigh_po_0p35_LKZTYE, sky130_fd_pr__cap_mim_m3_1_ZYJU54, sky130_fd_sc_hd__inv_1, sky130_fd_sc_hd__clkbuf_16, high_speed_comp_top_routed, sky130_fd_pr__res_high_po_1p41_6PMYNV, flash_converter_routed.
-   Copying output for cell sky130_fd_sc_hd__clkinv_4 from $PDKPATH/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds
-   Copying output for cell sky130_fd_sc_hd__dfxtp_2 from $PDKPATH/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds
-   Generating output for cell sky130_fd_pr__pfet_01v8_5ETXLA
-   Generating output for cell sky130_fd_pr__nfet_01v8_D6NL62
-   Generating output for cell post_amplifier_routed
-   Generating output for cell sky130_fd_pr__pfet_01v8_MV5BJT
-   Generating output for cell sky130_fd_pr__pfet_01v8_7PVLUA
-   Generating output for cell sky130_fd_pr__pfet_01v8_NRXS53
-   Generating output for cell sky130_fd_pr__pfet_01v8_CZ2BPM
-   Generating output for cell sky130_fd_pr__nfet_01v8_WXMB3T
-   Generating output for cell sky130_fd_pr__nfet_01v8_CQH6Q5
-   Generating output for cell sky130_fd_pr__nfet_01v8_lvt_URSRNG
-   Generating output for cell sky130_fd_pr__nfet_01v8_lvt_GVGYYV
-   Generating output for cell strong_arm_latch_routed
-   Copying output for cell sky130_fd_sc_hd__decap_3 from $PDKPATH/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds
-   Copying output for cell sky130_fd_sc_hd__tapvpwrvgnd_1 from $PDKPATH/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds
-   Generating output for cell high_speed_comp_top_routed
-   Copying output for cell sky130_fd_sc_hd__conb_1 from $PDKPATH/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds
-   Copying output for cell sky130_fd_sc_hd__buf_4 from $PDKPATH/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds
-   Generating output for cell sky130_fd_pr__res_xhigh_po_0p35_5GAX62
-   Generating output for cell sky130_fd_pr__res_xhigh_po_0p35_LKZTYE
-   Generating output for cell sky130_fd_pr__cap_mim_m3_1_ZYJU54
-   Copying output for cell sky130_fd_sc_hd__inv_1 from $PDKPATH/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds
-   Generating output for cell 1bit_am_routed
-   Generating output for cell sky130_fd_pr__res_high_po_1p41_6PMYNV
-   Generating output for cell flash_converter_routed
-   Copying output for cell sky130_fd_sc_hd__clkbuf_16 from $PDKPATH/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds
-   Generating output for cell tt_um_jamesrosssharp_high_speed_comp
-Generating LEF output lef/tt_um_jamesrosssharp_high_speed_comp.lef for cell tt_um_jamesrosssharp_high_speed_comp:
-Diagnostic:  Write LEF header for cell tt_um_jamesrosssharp_high_speed_comp
-Diagnostic:  Writing LEF output for cell tt_um_jamesrosssharp_high_speed_comp
-Diagnostic:  Scale value is 0.005000
+Extracting sky130_fd_sc_hd__clkinv_4 into /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag/sky130_fd_sc_hd__clkinv_4.ext:
+Processing sky130_fd_sc_hd__clkinv_4
+Extracting sky130_fd_sc_hd__dfxtp_2 into /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag/sky130_fd_sc_hd__dfxtp_2.ext:
+Processing sky130_fd_sc_hd__dfxtp_2
+Extracting sky130_fd_pr__pfet_01v8_5ETXLA into sky130_fd_pr__pfet_01v8_5ETXLA.ext:
+Processing sky130_fd_pr__pfet_01v8_5ETXLA
+Extracting sky130_fd_pr__nfet_01v8_D6NL62 into sky130_fd_pr__nfet_01v8_D6NL62.ext:
+Processing sky130_fd_pr__nfet_01v8_D6NL62
+Extracting post_amplifier_routed into post_amplifier_routed.ext:
+Processing post_amplifier_routed
+Extracting sky130_fd_pr__pfet_01v8_MV5BJT into sky130_fd_pr__pfet_01v8_MV5BJT.ext:
+Processing sky130_fd_pr__pfet_01v8_MV5BJT
+Extracting sky130_fd_pr__pfet_01v8_7PVLUA into sky130_fd_pr__pfet_01v8_7PVLUA.ext:
+Processing sky130_fd_pr__pfet_01v8_7PVLUA
+Extracting sky130_fd_pr__pfet_01v8_NRXS53 into sky130_fd_pr__pfet_01v8_NRXS53.ext:
+Processing sky130_fd_pr__pfet_01v8_NRXS53
+Extracting sky130_fd_pr__pfet_01v8_CZ2BPM into sky130_fd_pr__pfet_01v8_CZ2BPM.ext:
+Processing sky130_fd_pr__pfet_01v8_CZ2BPM
+Extracting sky130_fd_pr__nfet_01v8_WXMB3T into sky130_fd_pr__nfet_01v8_WXMB3T.ext:
+Processing sky130_fd_pr__nfet_01v8_WXMB3T
+Extracting sky130_fd_pr__nfet_01v8_CQH6Q5 into sky130_fd_pr__nfet_01v8_CQH6Q5.ext:
+Processing sky130_fd_pr__nfet_01v8_CQH6Q5
+Extracting sky130_fd_pr__nfet_01v8_lvt_URSRNG into sky130_fd_pr__nfet_01v8_lvt_URSRNG.ext:
+Processing sky130_fd_pr__nfet_01v8_lvt_URSRNG
+Extracting sky130_fd_pr__nfet_01v8_lvt_GVGYYV into sky130_fd_pr__nfet_01v8_lvt_GVGYYV.ext:
+Processing sky130_fd_pr__nfet_01v8_lvt_GVGYYV
+Extracting strong_arm_latch_routed into strong_arm_latch_routed.ext:
+Processing strong_arm_latch_routed
+Extracting sky130_fd_sc_hd__decap_3 into /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag/sky130_fd_sc_hd__decap_3.ext:
+Processing sky130_fd_sc_hd__decap_3
+sky130_fd_sc_hd__decap_3: 2 warnings
+Extracting sky130_fd_sc_hd__tapvpwrvgnd_1 into /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag/sky130_fd_sc_hd__tapvpwrvgnd_1.ext:
+Processing sky130_fd_sc_hd__tapvpwrvgnd_1
+Extracting high_speed_comp_top_routed into high_speed_comp_top_routed.ext:
+Processing high_speed_comp_top_routed
+Extracting sky130_fd_sc_hd__conb_1 into /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag/sky130_fd_sc_hd__conb_1.ext:
+Processing sky130_fd_sc_hd__conb_1
+Extracting sky130_fd_sc_hd__buf_4 into /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag/sky130_fd_sc_hd__buf_4.ext:
+Processing sky130_fd_sc_hd__buf_4
+Extracting sky130_fd_pr__res_xhigh_po_0p35_5GAX62 into sky130_fd_pr__res_xhigh_po_0p35_5GAX62.ext:
+Processing sky130_fd_pr__res_xhigh_po_0p35_5GAX62
+Extracting sky130_fd_pr__res_xhigh_po_0p35_LKZTYE into sky130_fd_pr__res_xhigh_po_0p35_LKZTYE.ext:
+Processing sky130_fd_pr__res_xhigh_po_0p35_LKZTYE
+Extracting sky130_fd_pr__cap_mim_m3_1_ZYJU54 into sky130_fd_pr__cap_mim_m3_1_ZYJU54.ext:
+Processing sky130_fd_pr__cap_mim_m3_1_ZYJU54
+Extracting sky130_fd_sc_hd__inv_1 into /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag/sky130_fd_sc_hd__inv_1.ext:
+Processing sky130_fd_sc_hd__inv_1
+Extracting 1bit_am_routed into 1bit_am_routed.ext:
+Processing 1bit_am_routed
+Extracting sky130_fd_pr__res_high_po_1p41_6PMYNV into sky130_fd_pr__res_high_po_1p41_6PMYNV.ext:
+Processing sky130_fd_pr__res_high_po_1p41_6PMYNV
+Extracting flash_converter_routed into flash_converter_routed.ext:
+Processing flash_converter_routed
+Extracting sky130_fd_sc_hd__clkbuf_16 into /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag/sky130_fd_sc_hd__clkbuf_16.ext:
+Processing sky130_fd_sc_hd__clkbuf_16
+Extracting tt_um_jamesrosssharp_high_speed_comp into tt_um_jamesrosssharp_high_speed_comp.ext:
+Processing tt_um_jamesrosssharp_high_speed_comp
+exttospice finished.

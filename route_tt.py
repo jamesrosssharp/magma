@@ -188,7 +188,7 @@ b = p['self']['ui_in[0]'].centroid()
 
 r.begin(a[0], a[1], 'metal1')
 r.route('e', 1000, 100)
-r.routeTo('n', b[1] - 2000, 100) 
+r.routeTo('n', b[1] - 2400, 100) 
 r.routeTo('e', b[0], 100) 
 r.viaExpansion('metal2', 100, 100, 120, 120, 120, 120)
 r.viaExpansion('metal3', 100, 100, 120, 120, 120, 120)
@@ -379,7 +379,92 @@ for pp, c in cell_ports:
     r.viaExpansion('metal1', 100, 100, 120, 120, 120, 120)
     r.viaExpansion('locali', 34, 34, 120, 120, 34, 34)
 
-
     i += 1
+
+# Route buffers to pins
+
+cell_ports =   [
+                ('uio_out[0]', 'x27'), ('uio_out[1]', 'x28'), ('uio_out[2]', 'x29'), ('uio_out[3]', 'x30'),
+                ('uio_out[4]', 'x31'), ('uio_out[5]', 'x32'), ('uio_out[6]', 'x33'), ('uio_out[7]', 'x34'),
+              ]
+
+i = 0
+for pp, c in cell_ports:
+    a = p['self'][pp].centroid()
+    b = p['children'][c]['self']['X'].centroid()
+ 
+    arr = [0, 1, 1, 4, 3, 2, 1, 0]
+
+    rw = 60
+
+    r.begin(a[0], a[1], 'metal4')
+    r.route('s', 600 + arr[i]*150, rw)
+    r.routeTo('e', b[0], rw)
+    r.routeTo('s', b[1] + 100, rw)
+    r.viaExpansion('metal3', 100, 100, 120, 120, 120, 120)
+    r.viaExpansion('metal2', 100, 100, 120, 120, 120, 120)
+    r.routeTo('s', b[1], rw)
+    r.viaExpansion('metal1', 100, 100, 120, 120, 120, 120)
+    r.viaExpansion('locali', 34, 34, 120, 120, 34, 34)
+    i += 1
+
+# Route uo_out[2]..[7] to conb lo cells
+
+cell_ports =   [
+                ('uo_out[2]', 'x12'), ('uo_out[3]', 'x13'),
+                ('uo_out[4]', 'x14'), ('uo_out[5]', 'x15'), ('uo_out[6]', 'x16'), ('uo_out[7]', 'x17'),
+              ]
+
+i = 0
+for pp, c in cell_ports:
+    a = p['self'][pp].centroid()
+    b = p['children'][c]['self']['LO'].centroid()
+ 
+    arr = [2, 1, 1, 1, 2, 3]
+
+    rw = 60
+
+    r.begin(a[0], a[1], 'metal4')
+    r.route('s', 100 + arr[i]*120, rw)
+    r.routeTo('e', b[0], rw)
+    r.routeTo('s', b[1] + 100, rw)
+    r.viaExpansion('metal3', 100, 100, 120, 120, 120, 120)
+    r.viaExpansion('metal2', 100, 100, 120, 120, 120, 120)
+    r.routeTo('s', b[1], rw)
+    r.viaExpansion('metal1', 100, 100, 120, 120, 120, 120)
+    r.viaExpansion('locali', 34, 34, 120, 120, 34, 34)
+    i += 1
+
+# Route uio_oe[0] .. [7] to conb hi cells
+
+cell_ports =   [
+                ('uio_oe[0]', 'x3', True), ('uio_oe[1]', 'x4', True), ('uio_oe[2]', 'x5', True), ('uio_oe[3]', 'x6', False),
+                ('uio_oe[4]', 'x7', False), ('uio_oe[5]', 'x8', False), ('uio_oe[6]', 'x9', False), ('uio_oe[7]', 'x10', False),
+              ]
+
+i = 0
+for pp, c, dl in cell_ports:
+    a = p['self'][pp].centroid()
+    b = p['children'][c]['self']['HI'].centroid()
+ 
+    arr = [3, 2, 1, 2, 1, 1, 2, 3]
+
+    rw = 60
+
+    r.begin(a[0], a[1], 'metal4')
+    r.route('s', 100 + arr[i]*120, rw)
+    if dl:
+        r.route('w', 400, rw)
+        r.route('s', 400, rw)
+    r.routeTo('e', b[0], rw)
+    r.routeTo('s', b[1] + 50, rw)
+    r.viaExpansion('metal3', 100, 100, 120, 120, 120, 120)
+    r.viaExpansion('metal2', 100, 100, 120, 120, 120, 120)
+    r.routeTo('s', b[1], rw)
+    r.viaExpansion('metal1', 100, 100, 120, 120, 120, 120)
+    r.viaExpansion('locali', 34, 34, 120, 120, 34, 34)
+    i += 1
+
+
 
 top.writeMagFile(db, "tt/tt_um_jamesrosssharp_high_speed_comp.mag")
