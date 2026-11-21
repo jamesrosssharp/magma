@@ -52,8 +52,8 @@ for cell in ['x1', 'x11']:
         b = p['self'][vvv].centroid()
 
         r.begin(a[0], a[1], 'metal1')
-        r.viaExpansion('metal2', 200,200,240,240,240,240)
-        r.viaExpansion('metal3', 200,200,240,240,600,600)
+        r.viaExpansion('metal2', 400,400,500,500,500,500)
+        r.viaExpansion('metal3', 400,400,500,500,600,600)
         r.routeTo('w', b[0], 600)
         r.viaExpansion('metal4', 540, 540, 600, 600, 600, 600)
 
@@ -90,6 +90,13 @@ for v, vv in [('VPWR', 'VDPWR'), ('VGND', 'VGND')]:
         r.route('s', 400, 200)
     r.viaExpansion('metal4', 200, 200, 240, 240, 400, 400)
 
+r.begin(27900, 12400, 'metal4')
+r.route('s', 8400, 500)
+r.viaExpansion('metal3', 400, 400, 500, 500, 500, 500)
+r.viaExpansion('metal2', 400, 400, 500, 500, 500, 500)
+r.viaExpansion('metal1', 400, 400, 500, 500, 500, 500)
+ 
+
 # Route analog pins
 
 a = p['self']['ua[0]'].centroid()
@@ -114,6 +121,18 @@ r.viaExpansion('metal2', 100, 100, 120, 120, 120, 120)
 r.viaExpansion('metal1', 100, 100, 120, 120, 120, 120)
 r.routeTo('w', b[0], 100)
 
+a = p['self']['ua[0]'].centroid()
+b = p['children']['x2']['self']['VIN'].centroid()
+c = p['children']['x11']['self']['VINP'].centroid()
+
+r.begin(a[0], a[1], 'metal4')
+r.routeTo('n', c[1], 100)
+r.routeTo('e', b[0], 100)
+r.routeTo('n', b[1], 100)
+r.viaExpansion('metal3', 100, 100, 120, 120, 120, 120)
+r.viaExpansion('metal2', 100, 100, 120, 120, 120, 120)
+r.viaExpansion('metal1', 100, 100, 120, 120, 120, 120)
+
 # Route analog pins to 1bit AM fronted
 
 a = p['self']['ua[0]'].centroid()
@@ -122,7 +141,7 @@ b = p['children']['x1']['self']['VIN'].centroid()
 r.begin(a[0], a[1], 'metal4')
 r.route('n', 1500, 100)
 r.viaExpansion('metal3', 100, 100, 120, 120, 120, 120)
-r.routeTo('w', b[0] + 1000, 100)
+r.routeTo('w', b[0] + 1200, 100)
 r.viaExpansion('metal2', 100, 100, 120, 120, 120, 120)
 r.routeTo('n', b[1], 100)
 r.routeTo('w', b[0], 100)
@@ -134,7 +153,7 @@ b = p['children']['x1']['self']['VIN_MINUS'].centroid()
 r.begin(a[0], a[1], 'metal4')
 r.route('n', 1100, 100)
 r.viaExpansion('metal3', 100, 100, 120, 120, 120, 120)
-r.routeTo('w', b[0] + 800, 100)
+r.routeTo('w', b[0] + 1000, 100)
 r.viaExpansion('metal2', 100, 100, 120, 120, 120, 120)
 r.routeTo('n', b[1], 100)
 r.routeTo('w', b[0], 100)
@@ -199,17 +218,26 @@ r.routeTo('n', b[1], 100)
 # Route x11.CLK to x1.CLK
 a = p['children']['x11']['self']['CLK'].centroid()
 b = p['children']['x1']['self']['CLK'].centroid()
+c = p['children']['x2']['self']['CLK'].centroid()
 
 r.begin(a[0], a[1], 'metal1')
-r.route('w', 3200, 100)
+r.route('w', 3800, 100)
 r.route('n', b[1] - 9000, 100)
 r.viaExpansion('metal2', 100, 100, 120, 120, 120, 120)
 r.viaExpansion('metal3', 100, 100, 120, 120, 120, 120)
 r.viaExpansion('metal4', 100, 100, 120, 120, 120, 120)
 r.routeTo('n', b[1], 100)
+r.push()
 r.viaExpansion('metal3', 100, 100, 120, 120, 120, 120)
 r.viaExpansion('metal2', 100, 100, 120, 120, 120, 120)
 r.viaExpansion('metal1', 100, 100, 120, 120, 120, 120)
+r.pop()
+r.routeTo('e', c[0], 100)
+r.routeTo('n', c[1], 100)
+r.viaExpansion('metal3', 100, 100, 120, 120, 120, 120)
+r.viaExpansion('metal2', 100, 100, 120, 120, 120, 120)
+r.viaExpansion('metal1', 100, 100, 120, 120, 120, 120)
+
 
 # Route x11.COMP_OUT to x21.A
 
@@ -217,7 +245,7 @@ a = p['children']['x11']['self']['COMP_OUT'].centroid()
 b = p['children']['x21']['self']['A'].centroid()
 
 r.begin(a[0], a[1], 'metal1')
-r.route('w', 1650, 100)
+r.route('w', 2350, 100)
 r.viaExpansion('metal2', 100, 100, 120, 120, 120, 120)
 r.routeTo('n', b[1] - 300, 100)
 r.routeTo('w', b[0], 100)
@@ -251,5 +279,58 @@ r.viaExpansion('metal3', 100, 100, 120, 120, 120, 120)
 r.viaExpansion('metal2', 100, 100, 120, 120, 120, 120)
 r.viaExpansion('metal1', 100, 100, 120, 120, 120, 120)
 r.viaExpansion('locali', 34, 34, 120, 120, 34, 34)
+
+# Route XR11 to VDD and res top
+
+a = res['children']['XR11']['self'][0].contacts[0]
+b = p['children']['x2']['self']['RES_TOP'].centroid()
+
+r.begin(a[0], a[1], 'metal1')
+r.routeTo('e', b[0], 100)
+r.routeTo('n', b[1], 100)
+
+a = res['children']['XR11']['self'][0].contacts[1]
+b = p['children']['x11']['self']['VDD'].centroid()
+
+r.begin(a[0], a[1], 'metal1')
+r.routeTo('s', b[1], 100)
+r.routeTo('w', b[0], 100)
+
+# Route XR1, XR2, XR3 chain
+
+for i in range(0,2):
+
+    rr = f'XR{i+1}'
+    rrr = f'XR{i+2}'
+
+    a = res['children'][rr]['self'][0].contacts[0]
+    b = res['children'][rrr]['self'][0].contacts[1]
+
+    r.begin(a[0], a[1], 'metal1')
+    r.routeTo('n', ((a[1] + b[1]) / 2) + i*0, 100)
+    r.routeTo('e', b[0], 100)
+    r.routeTo('n', b[1], 100)
+
+# Route XR1 to VSS and XR3 to res out
+
+a = res['children']['XR3']['self'][0].contacts[0]
+b = p['children']['x2']['self']['RES_OUT'].centroid()
+
+r.begin(a[0], a[1], 'metal1')
+r.routeTo('e', b[0], 100)
+r.routeTo('n', b[1], 100)
+
+a = res['children']['XR1']['self'][0].contacts[1]
+b = p['children']['x11']['self']['VSS'].centroid()
+
+r.begin(a[0], a[1], 'metal1')
+r.route('w', 400, 100)
+r.routeTo('s', b[1] + 4800, 100)
+r.viaExpansion('metal2', 100, 100, 120, 120, 120, 120)
+r.routeTo('s', b[1], 100)
+r.viaExpansion('metal1', 100, 100, 120, 120, 120, 120)
+r.routeTo('w', b[0], 100)
+
+
 
 top.writeMagFile(db, "tt/tt_um_jamesrosssharp_high_speed_comp.mag")
