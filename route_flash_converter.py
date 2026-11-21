@@ -131,8 +131,6 @@ for i in range(0, 3):
 
 # Route resistor chain
 
-i = 0
-
 for i in range(0,7):
 
     rr = f'XR{i+1}'
@@ -146,7 +144,6 @@ for i in range(0,7):
     r.routeTo('e', b[0], 100)
     r.routeTo('n', b[1], 100)
 
-    i += 1
 
 # Route RES_TOP
 
