@@ -294,6 +294,7 @@ MACRO tt_um_jamesrosssharp_high_speed_comp
   PIN uio_out[0]
     DIRECTION OUTPUT ;
     USE SIGNAL ;
+    ANTENNADIFFAREA 0.891000 ;
     PORT
       LAYER met4 ;
         RECT 72.070 224.760 72.370 225.760 ;
@@ -302,6 +303,7 @@ MACRO tt_um_jamesrosssharp_high_speed_comp
   PIN uio_out[1]
     DIRECTION OUTPUT ;
     USE SIGNAL ;
+    ANTENNADIFFAREA 0.891000 ;
     PORT
       LAYER met4 ;
         RECT 69.310 224.760 69.610 225.760 ;
@@ -310,6 +312,7 @@ MACRO tt_um_jamesrosssharp_high_speed_comp
   PIN uio_out[2]
     DIRECTION OUTPUT ;
     USE SIGNAL ;
+    ANTENNADIFFAREA 0.891000 ;
     PORT
       LAYER met4 ;
         RECT 66.550 224.760 66.850 225.760 ;
@@ -318,6 +321,7 @@ MACRO tt_um_jamesrosssharp_high_speed_comp
   PIN uio_out[3]
     DIRECTION OUTPUT ;
     USE SIGNAL ;
+    ANTENNADIFFAREA 0.891000 ;
     PORT
       LAYER met4 ;
         RECT 63.790 224.760 64.090 225.760 ;
@@ -326,6 +330,7 @@ MACRO tt_um_jamesrosssharp_high_speed_comp
   PIN uio_out[4]
     DIRECTION OUTPUT ;
     USE SIGNAL ;
+    ANTENNADIFFAREA 0.891000 ;
     PORT
       LAYER met4 ;
         RECT 61.030 224.760 61.330 225.760 ;
@@ -334,6 +339,7 @@ MACRO tt_um_jamesrosssharp_high_speed_comp
   PIN uio_out[5]
     DIRECTION OUTPUT ;
     USE SIGNAL ;
+    ANTENNADIFFAREA 0.891000 ;
     PORT
       LAYER met4 ;
         RECT 58.270 224.760 58.570 225.760 ;
@@ -342,6 +348,7 @@ MACRO tt_um_jamesrosssharp_high_speed_comp
   PIN uio_out[6]
     DIRECTION OUTPUT ;
     USE SIGNAL ;
+    ANTENNADIFFAREA 0.891000 ;
     PORT
       LAYER met4 ;
         RECT 55.510 224.760 55.810 225.760 ;
@@ -350,6 +357,7 @@ MACRO tt_um_jamesrosssharp_high_speed_comp
   PIN uio_out[7]
     DIRECTION OUTPUT ;
     USE SIGNAL ;
+    ANTENNADIFFAREA 0.891000 ;
     PORT
       LAYER met4 ;
         RECT 52.750 224.760 53.050 225.760 ;
@@ -439,15 +447,15 @@ MACRO tt_um_jamesrosssharp_high_speed_comp
   END VGND
   OBS
       LAYER nwell ;
-        RECT 10.910 22.355 144.820 222.790 ;
+        RECT 10.910 22.355 144.820 220.790 ;
       LAYER li1 ;
-        RECT 11.100 22.545 154.575 222.685 ;
+        RECT 11.100 22.545 154.575 220.685 ;
       LAYER met1 ;
-        RECT 6.540 17.955 157.575 222.840 ;
+        RECT 6.540 17.955 157.575 220.840 ;
       LAYER met2 ;
-        RECT 6.830 5.700 157.375 222.950 ;
+        RECT 6.830 5.700 157.375 220.950 ;
       LAYER met3 ;
-        RECT 0.500 5.700 157.375 223.100 ;
+        RECT 0.500 5.700 157.375 221.100 ;
       LAYER met4 ;
         RECT 0.500 224.360 30.270 225.510 ;
         RECT 31.370 224.360 33.030 225.510 ;

@@ -364,93 +364,79 @@ sky130_fd_sc_hd__conb_1 (14)               |sky130_fd_sc_hd__conb_1 (14)
 sky130_fd_sc_hd__buf_4 (10)                |sky130_fd_sc_hd__buf_4 (10)                
 sky130_fd_sc_hd__clkbuf_16 (1)             |sky130_fd_sc_hd__clkbuf_16 (1)             
 Number of devices: 253                     |Number of devices: 253                     
-Number of nets: 172 **Mismatch**           |Number of nets: 178 **Mismatch**           
+Number of nets: 178                        |Number of nets: 178                        
 ---------------------------------------------------------------------------------------
-NET mismatches: Class fragments follow (with fanout counts):
-Circuit 1: tt_um_jamesrosssharp_high_speed |Circuit 2: tt_um_jamesrosssharp_high_speed 
-
----------------------------------------------------------------------------------------
-Net: VDPWR                                 |Net: VDPWR                                 
-  sky130_fd_pr__pfet_01v8/(1|3) = 80       |  sky130_fd_pr__pfet_01v8/(1|3) = 80       
-  sky130_fd_pr__pfet_01v8/4 = 100          |  sky130_fd_pr__pfet_01v8/4 = 100          
-  sky130_fd_sc_hd__dfxtp_2/VPB = 10        |  sky130_fd_sc_hd__dfxtp_2/VPB = 10        
-  sky130_fd_sc_hd__dfxtp_2/VPWR = 10       |  sky130_fd_sc_hd__dfxtp_2/VPWR = 10       
-  sky130_fd_sc_hd__clkinv_4/VPB = 10       |  sky130_fd_sc_hd__clkinv_4/VPB = 10       
-  sky130_fd_sc_hd__clkinv_4/VPWR = 10      |  sky130_fd_sc_hd__clkinv_4/VPWR = 10      
-  sky130_fd_sc_hd__decap_3/VPB = 1         |  sky130_fd_sc_hd__decap_3/VPB = 1         
-  sky130_fd_sc_hd__decap_3/VPWR = 1        |  sky130_fd_sc_hd__decap_3/VPWR = 1        
-  sky130_fd_pr__res_xhigh_po_0p35/(1|2) =  |  sky130_fd_pr__res_xhigh_po_0p35/(1|2) =  
-  sky130_fd_sc_hd__inv_1/VPB = 2           |  sky130_fd_sc_hd__inv_1/VPB = 2           
-  sky130_fd_sc_hd__inv_1/VPWR = 2          |  sky130_fd_sc_hd__inv_1/VPWR = 2          
-  sky130_fd_sc_hd__conb_1/VPB = 14         |  sky130_fd_sc_hd__conb_1/VPB = 14         
-  sky130_fd_sc_hd__conb_1/VPWR = 14        |  sky130_fd_sc_hd__conb_1/VPWR = 14        
-  sky130_fd_pr__res_high_po_1p41/(1|2) = 1 |  sky130_fd_pr__res_high_po_1p41/(1|2) = 1 
-  sky130_fd_sc_hd__clkbuf_16/VPB = 1       |  sky130_fd_sc_hd__clkbuf_16/VPB = 1       
-  sky130_fd_sc_hd__clkbuf_16/VPWR = 1      |  sky130_fd_sc_hd__clkbuf_16/VPWR = 1      
-  sky130_fd_sc_hd__buf_4/VPB = 10          |  sky130_fd_sc_hd__buf_4/VPB = 10          
-  sky130_fd_sc_hd__buf_4/VPWR = 10         |  sky130_fd_sc_hd__buf_4/VPWR = 10         
-  sky130_fd_sc_hd__conb_1/LO = 6           |                                           
-                                           |                                           
-Net: x3/LO                                 |Net: net16                                 
-  sky130_fd_sc_hd__conb_1/LO = 1           |  sky130_fd_sc_hd__conb_1/LO = 1           
-                                           |                                           
-Net: x4/LO                                 |Net: net17                                 
-  sky130_fd_sc_hd__conb_1/LO = 1           |  sky130_fd_sc_hd__conb_1/LO = 1           
-                                           |                                           
-Net: x5/LO                                 |Net: net18                                 
-  sky130_fd_sc_hd__conb_1/LO = 1           |  sky130_fd_sc_hd__conb_1/LO = 1           
-                                           |                                           
-Net: x6/LO                                 |Net: net19                                 
-  sky130_fd_sc_hd__conb_1/LO = 1           |  sky130_fd_sc_hd__conb_1/LO = 1           
-                                           |                                           
-Net: x7/LO                                 |Net: net20                                 
-  sky130_fd_sc_hd__conb_1/LO = 1           |  sky130_fd_sc_hd__conb_1/LO = 1           
-                                           |                                           
-Net: x8/LO                                 |Net: net21                                 
-  sky130_fd_sc_hd__conb_1/LO = 1           |  sky130_fd_sc_hd__conb_1/LO = 1           
-                                           |                                           
-Net: x9/LO                                 |Net: net22                                 
-  sky130_fd_sc_hd__conb_1/LO = 1           |  sky130_fd_sc_hd__conb_1/LO = 1           
-                                           |                                           
-Net: x10/LO                                |Net: uo_out[2]                             
-  sky130_fd_sc_hd__conb_1/LO = 1           |  sky130_fd_sc_hd__conb_1/LO = 1           
-                                           |                                           
-(no matching net)                          |Net: uo_out[3]                             
-                                           |  sky130_fd_sc_hd__conb_1/LO = 1           
-                                           |                                           
-(no matching net)                          |Net: uo_out[4]                             
-                                           |  sky130_fd_sc_hd__conb_1/LO = 1           
-                                           |                                           
-(no matching net)                          |Net: uo_out[5]                             
-                                           |  sky130_fd_sc_hd__conb_1/LO = 1           
-                                           |                                           
-(no matching net)                          |Net: uo_out[6]                             
-                                           |  sky130_fd_sc_hd__conb_1/LO = 1           
-                                           |                                           
-(no matching net)                          |Net: uo_out[7]                             
-                                           |  sky130_fd_sc_hd__conb_1/LO = 1           
-                                           |                                           
-(no matching net)                          |Net: net15                                 
-                                           |  sky130_fd_sc_hd__conb_1/LO = 1           
----------------------------------------------------------------------------------------
-Netlists do not match.
-Port matching may fail to disambiguate symmetries.
+Resolving symmetries by property value.
+Resolving symmetries by pin name.
+Resolving symmetries by net name.
+Netlists match with 1 symmetry with property errors.
+flash_converter_routed:x2/high_speed_comp_top_routed:x8/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM2/sky130_fd_pr__nfet_01v8_lvt:0 vs. flash_converter:2/high_speed_comp_top:8/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M2:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+flash_converter_routed:x2/high_speed_comp_top_routed:x2/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM2/sky130_fd_pr__nfet_01v8_lvt:0 vs. flash_converter:2/high_speed_comp_top:2/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M2:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+flash_converter_routed:x2/high_speed_comp_top_routed:x6/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM2/sky130_fd_pr__nfet_01v8_lvt:0 vs. flash_converter:2/high_speed_comp_top:6/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M2:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+flash_converter_routed:x2/high_speed_comp_top_routed:x4/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM2/sky130_fd_pr__nfet_01v8_lvt:0 vs. flash_converter:2/high_speed_comp_top:4/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M2:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+flash_converter_routed:x2/high_speed_comp_top_routed:x5/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM2/sky130_fd_pr__nfet_01v8_lvt:0 vs. flash_converter:2/high_speed_comp_top:5/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M2:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+flash_converter_routed:x2/high_speed_comp_top_routed:x3/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM2/sky130_fd_pr__nfet_01v8_lvt:0 vs. flash_converter:2/high_speed_comp_top:3/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M2:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+flash_converter_routed:x2/high_speed_comp_top_routed:x7/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM2/sky130_fd_pr__nfet_01v8_lvt:0 vs. flash_converter:2/high_speed_comp_top:7/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M2:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+flash_converter_routed:x2/high_speed_comp_top_routed:x1/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM2/sky130_fd_pr__nfet_01v8_lvt:0 vs. flash_converter:2/high_speed_comp_top:1/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M2:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+high_speed_comp_top_routed:x11/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM1/sky130_fd_pr__nfet_01v8_lvt:0 vs. high_speed_comp_top:11/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M1:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+flash_converter_routed:x2/high_speed_comp_top_routed:x1/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM1/sky130_fd_pr__nfet_01v8_lvt:0 vs. flash_converter:2/high_speed_comp_top:1/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M1:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+flash_converter_routed:x2/high_speed_comp_top_routed:x7/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM1/sky130_fd_pr__nfet_01v8_lvt:0 vs. flash_converter:2/high_speed_comp_top:7/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M1:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+flash_converter_routed:x2/high_speed_comp_top_routed:x3/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM1/sky130_fd_pr__nfet_01v8_lvt:0 vs. flash_converter:2/high_speed_comp_top:3/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M1:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+flash_converter_routed:x2/high_speed_comp_top_routed:x5/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM1/sky130_fd_pr__nfet_01v8_lvt:0 vs. flash_converter:2/high_speed_comp_top:5/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M1:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+flash_converter_routed:x2/high_speed_comp_top_routed:x4/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM1/sky130_fd_pr__nfet_01v8_lvt:0 vs. flash_converter:2/high_speed_comp_top:4/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M1:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+flash_converter_routed:x2/high_speed_comp_top_routed:x6/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM1/sky130_fd_pr__nfet_01v8_lvt:0 vs. flash_converter:2/high_speed_comp_top:6/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M1:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+flash_converter_routed:x2/high_speed_comp_top_routed:x2/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM1/sky130_fd_pr__nfet_01v8_lvt:0 vs. flash_converter:2/high_speed_comp_top:2/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M1:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+flash_converter_routed:x2/high_speed_comp_top_routed:x8/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM1/sky130_fd_pr__nfet_01v8_lvt:0 vs. flash_converter:2/high_speed_comp_top:8/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M1:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+high_speed_comp_top_routed:x11/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM2/sky130_fd_pr__nfet_01v8_lvt:0 vs. high_speed_comp_top:11/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M2:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+x1bit_am_routed:x1/high_speed_comp_top_routed:x1/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM2/sky130_fd_pr__nfet_01v8_lvt:0 vs. 1bit_am:1/high_speed_comp_top:1/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M2:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+x1bit_am_routed:x1/high_speed_comp_top_routed:x1/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_GVGYYV:XM1/sky130_fd_pr__nfet_01v8_lvt:0 vs. 1bit_am:1/high_speed_comp_top:1/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M1:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+high_speed_comp_top_routed:x11/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_URSRNG:XM3/sky130_fd_pr__nfet_01v8_lvt:0 vs. high_speed_comp_top:11/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M3:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+flash_converter_routed:x2/high_speed_comp_top_routed:x1/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_URSRNG:XM3/sky130_fd_pr__nfet_01v8_lvt:0 vs. flash_converter:2/high_speed_comp_top:1/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M3:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+flash_converter_routed:x2/high_speed_comp_top_routed:x7/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_URSRNG:XM3/sky130_fd_pr__nfet_01v8_lvt:0 vs. flash_converter:2/high_speed_comp_top:7/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M3:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+flash_converter_routed:x2/high_speed_comp_top_routed:x3/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_URSRNG:XM3/sky130_fd_pr__nfet_01v8_lvt:0 vs. flash_converter:2/high_speed_comp_top:3/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M3:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+flash_converter_routed:x2/high_speed_comp_top_routed:x5/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_URSRNG:XM3/sky130_fd_pr__nfet_01v8_lvt:0 vs. flash_converter:2/high_speed_comp_top:5/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M3:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+flash_converter_routed:x2/high_speed_comp_top_routed:x4/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_URSRNG:XM3/sky130_fd_pr__nfet_01v8_lvt:0 vs. flash_converter:2/high_speed_comp_top:4/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M3:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+flash_converter_routed:x2/high_speed_comp_top_routed:x6/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_URSRNG:XM3/sky130_fd_pr__nfet_01v8_lvt:0 vs. flash_converter:2/high_speed_comp_top:6/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M3:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+flash_converter_routed:x2/high_speed_comp_top_routed:x2/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_URSRNG:XM3/sky130_fd_pr__nfet_01v8_lvt:0 vs. flash_converter:2/high_speed_comp_top:2/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M3:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+flash_converter_routed:x2/high_speed_comp_top_routed:x8/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_URSRNG:XM3/sky130_fd_pr__nfet_01v8_lvt:0 vs. flash_converter:2/high_speed_comp_top:8/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M3:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
+x1bit_am_routed:x1/high_speed_comp_top_routed:x1/strong_arm_latch_routed:x1/sky130_fd_pr__nfet_01v8_lvt_URSRNG:XM3/sky130_fd_pr__nfet_01v8_lvt:0 vs. 1bit_am:1/high_speed_comp_top:1/strong_arm_latch:1/sky130_fd_pr__nfet_01v8_lvt:M3:
+ w circuit1: 10   circuit2: 5   (delta=66.7%, cutoff=1%)
 
 Subcircuit pins:
 Circuit 1: tt_um_jamesrosssharp_high_speed |Circuit 2: tt_um_jamesrosssharp_high_speed 
 -------------------------------------------|-------------------------------------------
-VDPWR                                      |(no pin, node is net15)                    
-clk                                        |clk                                        
-uo_out[1]                                  |uo_out[1]                                  
-uo_out[0]                                  |uo_out[0]                                  
-uio_out[0]                                 |uio_out[0]                                 
-uio_out[7]                                 |uio_out[7]                                 
-uio_out[1]                                 |uio_out[1]                                 
-uio_out[6]                                 |uio_out[6]                                 
-uio_out[2]                                 |uio_out[2]                                 
-uio_out[5]                                 |uio_out[5]                                 
-uio_out[4]                                 |uio_out[4]                                 
-uio_out[3]                                 |uio_out[3]                                 
+VGND                                       |VGND                                       
+ua[1]                                      |ua[1]                                      
+ui_in[0]                                   |ui_in[0]                                   
 uio_oe[0]                                  |uio_oe[0]                                  
 uio_oe[1]                                  |uio_oe[1]                                  
 uio_oe[2]                                  |uio_oe[2]                                  
@@ -459,10 +445,25 @@ uio_oe[4]                                  |uio_oe[4]
 uio_oe[5]                                  |uio_oe[5]                                  
 uio_oe[6]                                  |uio_oe[6]                                  
 uio_oe[7]                                  |uio_oe[7]                                  
-ui_in[0]                                   |ui_in[0]                                   
-VGND                                       |VGND                                       
-ua[1]                                      |ua[1]                                      
+uo_out[2]                                  |uo_out[2]                                  
+uo_out[3]                                  |uo_out[3]                                  
+uo_out[4]                                  |uo_out[4]                                  
+uo_out[5]                                  |uo_out[5]                                  
+uo_out[6]                                  |uo_out[6]                                  
+uo_out[7]                                  |uo_out[7]                                  
+clk                                        |clk                                        
+uo_out[0]                                  |uo_out[0]                                  
+uo_out[1]                                  |uo_out[1]                                  
+uio_out[0]                                 |uio_out[0]                                 
+uio_out[7]                                 |uio_out[7]                                 
+uio_out[1]                                 |uio_out[1]                                 
+uio_out[6]                                 |uio_out[6]                                 
+uio_out[2]                                 |uio_out[2]                                 
+uio_out[5]                                 |uio_out[5]                                 
+uio_out[4]                                 |uio_out[4]                                 
+uio_out[3]                                 |uio_out[3]                                 
 ua[0]                                      |ua[0]                                      
+VDPWR                                      |VDPWR                                      
 ena                                        |ena                                        
 rst_n                                      |rst_n                                      
 ua[2]                                      |ua[2]                                      
@@ -486,15 +487,12 @@ uio_in[4]                                  |uio_in[4]
 uio_in[5]                                  |uio_in[5]                                  
 uio_in[6]                                  |uio_in[6]                                  
 uio_in[7]                                  |uio_in[7]                                  
-(no pin, node is x10/LO)                   |uo_out[2]                                  
-(no pin, node is x10/LO)                   |uo_out[3]                                  
-(no pin, node is x10/LO)                   |uo_out[4]                                  
-(no pin, node is x10/LO)                   |uo_out[5]                                  
-(no pin, node is x10/LO)                   |uo_out[6]                                  
-(no pin, node is x10/LO)                   |uo_out[7]                                  
-(no pin, node is x10/LO)                   |VDPWR                                      
 ---------------------------------------------------------------------------------------
-Cell pin lists for tt_um_jamesrosssharp_high_speed_comp and tt_um_jamesrosssharp_high_speed_comp altered to match.
+Cell pin lists are equivalent.
 Device classes tt_um_jamesrosssharp_high_speed_comp and tt_um_jamesrosssharp_high_speed_comp are equivalent.
 
-Final result: Top level cell failed pin matching.
+Final result: Circuits match uniquely.
+Property errors were found.
+
+The following cells had property errors:
+ tt_um_jamesrosssharp_high_speed_comp

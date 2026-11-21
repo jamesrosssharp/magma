@@ -277,7 +277,8 @@ X39 X a_110_47# VGND VNB sky130_fd_pr__nfet_01v8 ad=0.0588 pd=0.7 as=0.05775 ps=
 + ui_in[7] uio_in[0] uio_in[1] uio_in[2] uio_in[3] uio_in[4] uio_in[5] uio_in[6] uio_in[7]
 + uio_oe[0] uio_oe[1] uio_oe[2] uio_oe[3] uio_oe[4] uio_oe[5] uio_oe[6] uio_oe[7]
 + uio_out[0] uio_out[1] uio_out[2] uio_out[3] uio_out[4] uio_out[5] uio_out[6] uio_out[7]
-+ uo_out[0] uo_out[1] VDPWR VGND
++ uo_out[0] uo_out[1] uo_out[2] uo_out[3] uo_out[4] uo_out[5] uo_out[6] uo_out[7]
++ VDPWR VGND
 Xx1 VDPWR x18/X ua[0] x22/A ui_in[0] ua[1] VGND x1bit_am_routed
 Xx2 ua[0] XR11/R1 XR3/R1 x27/A x28/A x29/A x30/A x31/A x32/A x33/A x34/A x18/X VDPWR
 + VGND flash_converter_routed
@@ -301,17 +302,17 @@ Xx22 x22/A VGND VGND VDPWR VDPWR uo_out[0] sky130_fd_sc_hd__buf_4
 Xx33 x33/A VGND VGND VDPWR VDPWR uio_out[6] sky130_fd_sc_hd__buf_4
 Xx11 ua[0] ua[1] x18/X x21/A VDPWR VGND high_speed_comp_top_routed
 Xx23 VGND VGND VDPWR VDPWR sky130_fd_sc_hd__decap_3
-Xx12 VGND VGND VDPWR VDPWR x12/HI VDPWR sky130_fd_sc_hd__conb_1
+Xx12 VGND VGND VDPWR VDPWR x12/HI uo_out[2] sky130_fd_sc_hd__conb_1
 Xx34 x34/A VGND VGND VDPWR VDPWR uio_out[7] sky130_fd_sc_hd__buf_4
-Xx13 VGND VGND VDPWR VDPWR x13/HI VDPWR sky130_fd_sc_hd__conb_1
+Xx13 VGND VGND VDPWR VDPWR x13/HI uo_out[3] sky130_fd_sc_hd__conb_1
 Xx35 VGND VGND VDPWR VDPWR sky130_fd_sc_hd__decap_3
 Xx25 VGND VGND VDPWR VDPWR sky130_fd_sc_hd__decap_3
 Xx37 VGND VGND VDPWR VDPWR sky130_fd_sc_hd__decap_3
-Xx15 VGND VGND VDPWR VDPWR x15/HI VDPWR sky130_fd_sc_hd__conb_1
-Xx14 VGND VGND VDPWR VDPWR x14/HI VDPWR sky130_fd_sc_hd__conb_1
-Xx16 VGND VGND VDPWR VDPWR x16/HI VDPWR sky130_fd_sc_hd__conb_1
+Xx15 VGND VGND VDPWR VDPWR x15/HI uo_out[5] sky130_fd_sc_hd__conb_1
+Xx14 VGND VGND VDPWR VDPWR x14/HI uo_out[4] sky130_fd_sc_hd__conb_1
+Xx16 VGND VGND VDPWR VDPWR x16/HI uo_out[6] sky130_fd_sc_hd__conb_1
 Xx27 x27/A VGND VGND VDPWR VDPWR uio_out[0] sky130_fd_sc_hd__buf_4
-Xx17 VGND VGND VDPWR VDPWR x17/HI VDPWR sky130_fd_sc_hd__conb_1
+Xx17 VGND VGND VDPWR VDPWR x17/HI uo_out[7] sky130_fd_sc_hd__conb_1
 Xx39 VGND VGND VDPWR VDPWR sky130_fd_sc_hd__decap_3
 Xx28 x28/A VGND VGND VDPWR VDPWR uio_out[1] sky130_fd_sc_hd__buf_4
 Xx18 clk VGND VGND VDPWR VDPWR x18/X sky130_fd_sc_hd__clkbuf_16

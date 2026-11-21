@@ -427,7 +427,7 @@ for pp, c in cell_ports:
     r.begin(a[0], a[1], 'metal4')
     r.route('s', 100 + arr[i]*120, rw)
     r.routeTo('e', b[0], rw)
-    r.routeTo('s', b[1] + 100, rw)
+    r.routeTo('s', b[1] + 10, rw)
     r.viaExpansion('metal3', 100, 100, 120, 120, 120, 120)
     r.viaExpansion('metal2', 100, 100, 120, 120, 120, 120)
     r.routeTo('s', b[1], rw)
