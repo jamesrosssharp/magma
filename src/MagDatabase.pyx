@@ -542,8 +542,8 @@ cdef class Cell:
 
         if 'xpolyres' in self.layers:
             l += self.layers['xpolyres']
-        #if 'nmoslvt' in self.layers:
-        #    l += self.layers['nmoslvt']
+        if 'ppolyres' in self.layers:
+            l += self.layers['ppolyres']
 
         if l != []:
             for r in l:

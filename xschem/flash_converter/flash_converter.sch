@@ -152,24 +152,16 @@ L=1.41
 model=res_high_po_1p41
 spiceprefix=X
 mult=1}
-C {vdd.sym} -350 -100 2 0 {name=l17 lab=VSS}
-C {vdd.sym} -480 -100 2 0 {name=l19 lab=VSS}
-C {vdd.sym} -350 -160 0 0 {name=l20 lab=VSS}
-C {vdd.sym} -480 -160 0 0 {name=l21 lab=VSS}
 C {sky130_fd_pr/res_high_po_1p41.sym} -630 -130 0 0 {name=R11
 L=1.41
 model=res_high_po_1p41
 spiceprefix=X
 mult=1}
-C {vdd.sym} -630 -100 2 0 {name=l22 lab=VSS}
-C {vdd.sym} -630 -160 0 0 {name=l23 lab=VSS}
 C {sky130_fd_pr/res_high_po_1p41.sym} -770 -130 0 0 {name=R12
 L=1.41
 model=res_high_po_1p41
 spiceprefix=X
 mult=1}
-C {vdd.sym} -770 -100 2 0 {name=l24 lab=VSS}
-C {vdd.sym} -770 -160 0 0 {name=l25 lab=VSS}
 C {vdd.sym} -160 -110 3 0 {name=l26 lab=VSS}
 C {vdd.sym} -160 60 3 0 {name=l27 lab=VSS}
 C {vdd.sym} -160 230 3 0 {name=l28 lab=VSS}
@@ -180,7 +172,6 @@ C {vdd.sym} -160 990 3 0 {name=l32 lab=VSS}
 C {vdd.sym} -160 1170 3 0 {name=l33 lab=VSS}
 C {vdd.sym} -370 -130 3 0 {name=l34 lab=VSS}
 C {vdd.sym} -500 -130 3 0 {name=l35 lab=VSS}
-C {vdd.sym} -650 -130 3 0 {name=l36 lab=VSS}
 C {vdd.sym} -790 -130 3 0 {name=l37 lab=VSS}
 C {lab_wire.sym} 40 -150 0 0 {name=p13 sig_type=std_logic lab=VDD}
 C {lab_wire.sym} 40 20 0 0 {name=p14 sig_type=std_logic lab=VDD}
@@ -202,3 +193,4 @@ C {ipin.sym} -560 80 0 0 {name=p29 lab=VDD}
 C {ipin.sym} -560 110 0 0 {name=p30 lab=VSS}
 C {lab_wire.sym} -470 80 0 0 {name=p31 sig_type=std_logic lab=VDD}
 C {lab_wire.sym} -470 110 0 0 {name=p32 sig_type=std_logic lab=VSS}
+C {vdd.sym} -650 -130 3 0 {name=l24 lab=VSS}
