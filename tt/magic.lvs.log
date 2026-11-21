@@ -16,7 +16,7 @@ The following types are not handled by extraction and will be treated as non-ele
 Scaled tech values by 2 / 1 to match internal grid scaling
 Loading sky130A Device Generator Menu ...
 Using technology "sky130A", version 1.0.588-105-g792ef67
-Cell tt_um_jamesrosssharp_high_speed_comp_routed read from current working directory
+Cell tt_um_jamesrosssharp_high_speed_comp read from current working directory
 Warning: cell <high_speed_comp_top_routed> from file high_speed_comp_top_routed.mag is not writeable
 Cell high_speed_comp_top_routed read from current working directory
 Cell sky130_fd_sc_hd__tapvpwrvgnd_1 read from path /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
@@ -92,8 +92,8 @@ Timestamp mismatches found in these cells: sky130_fd_sc_hd__clkinv_4, sky130_fd_
    Generating output for cell sky130_fd_pr__res_high_po_1p41_6PMYNV
    Generating output for cell flash_converter_routed
    Copying output for cell sky130_fd_sc_hd__clkbuf_16 from $PDKPATH/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds
-   Generating output for cell tt_um_jamesrosssharp_high_speed_comp_routed
-Generating LEF output lef/tt_um_jamesrosssharp_high_speed_comp.lef for cell tt_um_jamesrosssharp_high_speed_comp_routed:
-Diagnostic:  Write LEF header for cell tt_um_jamesrosssharp_high_speed_comp_routed
-Diagnostic:  Writing LEF output for cell tt_um_jamesrosssharp_high_speed_comp_routed
+   Generating output for cell tt_um_jamesrosssharp_high_speed_comp
+Generating LEF output lef/tt_um_jamesrosssharp_high_speed_comp.lef for cell tt_um_jamesrosssharp_high_speed_comp:
+Diagnostic:  Write LEF header for cell tt_um_jamesrosssharp_high_speed_comp
+Diagnostic:  Writing LEF output for cell tt_um_jamesrosssharp_high_speed_comp
 Diagnostic:  Scale value is 0.005000

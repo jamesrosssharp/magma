@@ -75,11 +75,18 @@ cdef class MagParser:
 
         cdef str cur_layer
 
+        cdef bool get_prop = False
+
         with open(filename) as f:
 
             for line in f:
 
                 s = line.strip()
+                if get_prop and not s.startswith("<<"):
+
+                    db.setCellProp(cell_name_str, line)
+                    continue
+
                 if s == "magic": 
                     continue
                 elif s.startswith("magscale"):
@@ -149,6 +156,12 @@ cdef class MagParser:
 
                         break
 
+                    elif s.split()[1] == "properties":
+
+                        get_prop = True
+
+                        continue
+
                     cur_layer = s.split()[1]
                     #print(f"Layer: {cur_layer}")
 
@@ -203,7 +216,7 @@ cdef class MagParser:
                     ss = s.split()
 
                     port = int(ss[1])
-                    directions = ss[2]
+                    directions = ss[2:]
                     
                     db.setLabelPort(cell_name_str, labname, port, directions)
 

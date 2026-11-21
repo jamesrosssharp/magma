@@ -236,6 +236,7 @@ cdef class Cell:
     cdef public list uses
     cdef public dict labels
     cdef public Rect bbox
+    cdef public list props
 
     def __init__(self):
         self.layers = {}
@@ -243,6 +244,7 @@ cdef class Cell:
         self.resistors = []
         self.capacitors = []
         self.uses = []
+        self.props = []
         self.labels = {}
         self.bbox = Rect(1e9, 1e9, -1e9, -1e9)
 
@@ -693,7 +695,13 @@ cdef class Cell:
 
             for k, v in self.labels.items():
                 f.write(f"flabel {v.layer} {v.r.xbot} {v.r.ybot} {v.r.xtop} {v.r.ytop} {v.pos} {v.font} {v.r2.xbot} {v.r2.ybot} {v.r2.xtop} {v.r2.ytop} {v.name}\n")
-                f.write(f"port {v.port} {v.directions}\n")
+                f.write(f"port {v.port} {" ".join(v.directions)}\n")
+
+            if (len(self.props)):
+                f.write("<< properties >>\n")
+                for p in self.props:
+                    f.write(p)
+
 
             f.write("<< end >>\n")
 
@@ -709,6 +717,9 @@ cdef class Cell:
 
         self.labels[labname].setPort(port, directions)
 
+    def setProp(self, prop):
+
+        self.props.append(prop)
 
 
 
@@ -849,3 +860,8 @@ cdef class MagDatabase:
     def getCellPins(self, cell_name_str):
 
         return self.cells[cell_name_str].getPins(self)
+
+    def setCellProp(self, cell_name_str, prop):
+
+        self.cells[cell_name_str].setProp(prop)
+
