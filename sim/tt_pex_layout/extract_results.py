@@ -61,7 +61,7 @@ def load_corner(corner):
             plt.show()
 
         
-for corner in ["tt", "ss", "fs", "sf", "ff"]:
+for corner in ["tt", "ss", "sf", "fs", "ff"]:
 #for corner in ["tt"]: #, "ss", "sf"]:
     load_corner(corner)
 

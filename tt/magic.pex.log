@@ -1,0 +1,303 @@
+
+Magic 8.3 revision 692 - Compiled on Thu Nov  5 01:04:03 UTC 2026.
+Starting magic under Tcl interpreter
+Using the terminal as the console.
+Using NULL graphics device.
+Processing system .magicrc file
+Switching to WIRING tool.
+Switching to NETLIST tool.
+Switching to PICK tool.
+Switching to BOX tool.
+Sourcing design .magicrc for technology sky130A ...
+2 Magic internal units = 1 Lambda
+Input style sky130(): scaleFactor=2, multiplier=2
+The following types are not handled by extraction and will be treated as non-electrical types:
+    ubm 
+Scaled tech values by 2 / 1 to match internal grid scaling
+Loading sky130A Device Generator Menu ...
+Using technology "sky130A", version 1.0.588-105-g792ef67
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )
+
+microns:   0.000 x 0.000   ( 0.000,  0.000), ( 0.000,  0.000)
+lambda:     0.00 x 0.00    (  0.00,  0.00 ), (  0.00,  0.00 )
+internal:      0 x 0       (     0,  0    ), (     0,  0    )
+Warning: cell <tt_um_jamesrosssharp_high_speed_comp> from file tt_um_jamesrosssharp_high_speed_comp.mag is not writeable
+Cell tt_um_jamesrosssharp_high_speed_comp read from current working directory
+Warning: cell <high_speed_comp_top_routed> from file high_speed_comp_top_routed.mag is not writeable
+Cell high_speed_comp_top_routed read from current working directory
+Cell sky130_fd_sc_hd__tapvpwrvgnd_1 read from path /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Warning: cell <sky130_fd_sc_hd__decap_3> from file /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag/sky130_fd_sc_hd__decap_3.mag is not writeable
+Cell sky130_fd_sc_hd__decap_3 read from path /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Warning: cell <sky130_fd_sc_hd__clkinv_4> from file /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag/sky130_fd_sc_hd__clkinv_4.mag is not writeable
+Cell sky130_fd_sc_hd__clkinv_4 read from path /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Warning: cell <sky130_fd_sc_hd__dfxtp_2> from file /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag/sky130_fd_sc_hd__dfxtp_2.mag is not writeable
+Cell sky130_fd_sc_hd__dfxtp_2 read from path /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Warning: cell <post_amplifier_routed> from file post_amplifier_routed.mag is not writeable
+Cell post_amplifier_routed read from current working directory
+Warning: cell <sky130_fd_pr__pfet_01v8_5ETXLA> from file sky130_fd_pr__pfet_01v8_5ETXLA.mag is not writeable
+Cell sky130_fd_pr__pfet_01v8_5ETXLA read from current working directory
+Warning: cell <sky130_fd_pr__nfet_01v8_D6NL62> from file sky130_fd_pr__nfet_01v8_D6NL62.mag is not writeable
+Cell sky130_fd_pr__nfet_01v8_D6NL62 read from current working directory
+Warning: cell <strong_arm_latch_routed> from file strong_arm_latch_routed.mag is not writeable
+Cell strong_arm_latch_routed read from current working directory
+Warning: cell <sky130_fd_pr__pfet_01v8_MV5BJT> from file sky130_fd_pr__pfet_01v8_MV5BJT.mag is not writeable
+Cell sky130_fd_pr__pfet_01v8_MV5BJT read from current working directory
+Warning: cell <sky130_fd_pr__pfet_01v8_7PVLUA> from file sky130_fd_pr__pfet_01v8_7PVLUA.mag is not writeable
+Cell sky130_fd_pr__pfet_01v8_7PVLUA read from current working directory
+Warning: cell <sky130_fd_pr__pfet_01v8_NRXS53> from file sky130_fd_pr__pfet_01v8_NRXS53.mag is not writeable
+Cell sky130_fd_pr__pfet_01v8_NRXS53 read from current working directory
+Warning: cell <sky130_fd_pr__pfet_01v8_CZ2BPM> from file sky130_fd_pr__pfet_01v8_CZ2BPM.mag is not writeable
+Cell sky130_fd_pr__pfet_01v8_CZ2BPM read from current working directory
+Warning: cell <sky130_fd_pr__nfet_01v8_WXMB3T> from file sky130_fd_pr__nfet_01v8_WXMB3T.mag is not writeable
+Cell sky130_fd_pr__nfet_01v8_WXMB3T read from current working directory
+Warning: cell <sky130_fd_pr__nfet_01v8_CQH6Q5> from file sky130_fd_pr__nfet_01v8_CQH6Q5.mag is not writeable
+Cell sky130_fd_pr__nfet_01v8_CQH6Q5 read from current working directory
+Warning: cell <sky130_fd_pr__nfet_01v8_lvt_URSRNG> from file sky130_fd_pr__nfet_01v8_lvt_URSRNG.mag is not writeable
+Cell sky130_fd_pr__nfet_01v8_lvt_URSRNG read from current working directory
+Warning: cell <sky130_fd_pr__nfet_01v8_lvt_GVGYYV> from file sky130_fd_pr__nfet_01v8_lvt_GVGYYV.mag is not writeable
+Cell sky130_fd_pr__nfet_01v8_lvt_GVGYYV read from current working directory
+Warning: cell <sky130_fd_sc_hd__conb_1> from file /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag/sky130_fd_sc_hd__conb_1.mag is not writeable
+Cell sky130_fd_sc_hd__conb_1 read from path /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Warning: cell <sky130_fd_sc_hd__buf_4> from file /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag/sky130_fd_sc_hd__buf_4.mag is not writeable
+Cell sky130_fd_sc_hd__buf_4 read from path /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Warning: cell <1bit_am_routed> from file 1bit_am_routed.mag is not writeable
+Cell 1bit_am_routed read from current working directory
+Warning: cell <sky130_fd_pr__res_xhigh_po_0p35_5GAX62> from file sky130_fd_pr__res_xhigh_po_0p35_5GAX62.mag is not writeable
+Cell sky130_fd_pr__res_xhigh_po_0p35_5GAX62 read from current working directory
+Warning: cell <sky130_fd_pr__res_xhigh_po_0p35_LKZTYE> from file sky130_fd_pr__res_xhigh_po_0p35_LKZTYE.mag is not writeable
+Cell sky130_fd_pr__res_xhigh_po_0p35_LKZTYE read from current working directory
+Warning: cell <sky130_fd_pr__cap_mim_m3_1_ZYJU54> from file sky130_fd_pr__cap_mim_m3_1_ZYJU54.mag is not writeable
+Cell sky130_fd_pr__cap_mim_m3_1_ZYJU54 read from current working directory
+Warning: cell <sky130_fd_sc_hd__inv_1> from file /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag/sky130_fd_sc_hd__inv_1.mag is not writeable
+Cell sky130_fd_sc_hd__inv_1 read from path /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Warning: cell <sky130_fd_sc_hd__clkbuf_16> from file /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag/sky130_fd_sc_hd__clkbuf_16.mag is not writeable
+Cell sky130_fd_sc_hd__clkbuf_16 read from path /opt/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Warning: cell <sky130_fd_pr__res_high_po_1p41_6PMYNV> from file sky130_fd_pr__res_high_po_1p41_6PMYNV.mag is not writeable
+Cell sky130_fd_pr__res_high_po_1p41_6PMYNV read from current working directory
+Warning: cell <flash_converter_routed> from file flash_converter_routed.mag is not writeable
+Cell flash_converter_routed read from current working directory
+Processing timestamp mismatches.
+Timestamp mismatches found in these cells: sky130_fd_sc_hd__clkinv_4, sky130_fd_sc_hd__dfxtp_2, post_amplifier_routed, sky130_fd_pr__pfet_01v8_5ETXLA, sky130_fd_pr__nfet_01v8_D6NL62, strong_arm_latch_routed, sky130_fd_pr__pfet_01v8_MV5BJT, sky130_fd_pr__pfet_01v8_7PVLUA, sky130_fd_pr__pfet_01v8_NRXS53, sky130_fd_pr__pfet_01v8_CZ2BPM, sky130_fd_pr__nfet_01v8_WXMB3T, sky130_fd_pr__nfet_01v8_CQH6Q5, sky130_fd_pr__nfet_01v8_lvt_URSRNG, sky130_fd_pr__nfet_01v8_lvt_GVGYYV, sky130_fd_sc_hd__conb_1, sky130_fd_sc_hd__buf_4, sky130_fd_sc_hd__decap_3, sky130_fd_sc_hd__tapvpwrvgnd_1, 1bit_am_routed, sky130_fd_pr__res_xhigh_po_0p35_5GAX62, sky130_fd_pr__res_xhigh_po_0p35_LKZTYE, sky130_fd_pr__cap_mim_m3_1_ZYJU54, sky130_fd_sc_hd__inv_1, sky130_fd_sc_hd__clkbuf_16, high_speed_comp_top_routed, sky130_fd_pr__res_high_po_1p41_6PMYNV, flash_converter_routed.
+Extracting tt_um_jamesrosssharp_high_speed_comp into extfiles/tt_um_jamesrosssharp_high_speed_comp.ext:
+Processing tt_um_jamesrosssharp_high_speed_comp
+tt_um_jamesrosssharp_high_speed_comp: 56 warnings
+Processing cell tt_um_jamesrosssharp_high_speed_comp for resistance extraction.
+Extracting a_9806_43597#
+Extracting x34.A
+Extracting a_10357_43597#
+Extracting x33.A
+Extracting a_10909_43597#
+Extracting x32.A
+Extracting a_11461_43597#
+Extracting x31.A
+Extracting a_12013_43597#
+Extracting x30.A
+Extracting a_13025_43597#
+Extracting x29.A
+Extracting a_13577_43597#
+Extracting x28.A
+Extracting a_14129_43597#
+Extracting x27.A
+Extracting x11.COMP_OUT
+Extracting a_18189_43623#
+Extracting x22.A
+Extracting a_18741_43623#
+Extracting a_27183_43597#
+Extracting x11.CLK
+Extracting a_21244_40162#
+Extracting a_21244_40078#
+Extracting x2.x8.x3.D
+Extracting a_21244_40257#
+Extracting x2.x8.x4.Y
+Extracting a_25217_40614#
+Extracting a_21244_40389#
+Extracting a_21244_39754#
+Extracting a_23160_40159#
+Extracting a_23186_39557#
+Extracting a_21244_39586#
+Extracting x2.x8.x2.VLAT_PLUS
+Extracting x2.x8.x2.VLAT_MINUS
+Extracting a_23160_39211#
+Extracting a_23901_39560#
+Extracting a_27167_38922#
+Extracting a_25217_38722#
+Extracting x2.x7.x4.Y
+Extracting a_25217_36394#
+Extracting x2.x7.x3.D
+Extracting a_23160_35941#
+Extracting a_21244_35188#
+Extracting x2.x7.x2.VLAT_MINUS
+Extracting a_23186_35023#
+Extracting a_21244_35398#
+Extracting x2.x7.x2.VLAT_PLUS
+Extracting a_23160_34993#
+Extracting a_21244_34565#
+Extracting a_21244_34660#
+Extracting a_21244_34763#
+Extracting a_21244_34895#
+Extracting a_27167_34715#
+Extracting a_23901_35020#
+Extracting a_25217_34502#
+Extracting a_21244_31762#
+Extracting a_21244_31678#
+Extracting x2.x6.x3.D
+Extracting a_21244_31857#
+Extracting x2.x6.x4.Y
+Extracting a_25217_32214#
+Extracting a_21244_31989#
+Extracting a_21244_31354#
+Extracting a_23160_31759#
+Extracting a_23186_31157#
+Extracting a_21244_31186#
+Extracting x2.x6.x2.VLAT_PLUS
+Extracting x2.x6.x2.VLAT_MINUS
+Extracting a_23160_30811#
+Extracting a_23901_31160#
+Extracting a_27167_30522#
+Extracting a_25217_30322#
+Extracting x2.x5.x4.Y
+Extracting a_25217_27994#
+Extracting x2.x5.x3.D
+Extracting a_23160_27541#
+Extracting a_21244_26788#
+Extracting x2.x5.x2.VLAT_MINUS
+Extracting a_23186_26623#
+Extracting a_21244_26998#
+Extracting x2.x5.x2.VLAT_PLUS
+Extracting a_23160_26593#
+Extracting a_21244_26165#
+Extracting a_12685_25707#
+Extracting a_21244_26260#
+Extracting a_21244_26363#
+Extracting a_6264_25822#
+Extracting a_6202_25081#
+Extracting a_12685_25813#
+Extracting a_21244_26495#
+Extracting x1.x1.x4.Y
+Extracting x1.x1.x3.D
+Extracting a_27167_26315#
+Extracting a_23901_26620#
+Extracting a_25217_26102#
+Extracting a_12685_25914#
+Extracting a_12685_26033#
+Extracting x1.x1.x2.VLAT_PLUS
+Extracting a_10304_25833#
+Extracting a_10330_25231#
+Extracting x1.x1.x2.VLAT_MINUS
+Extracting a_6264_24335#
+Extracting a_10304_24885#
+Extracting a_11045_25228#
+Extracting a_12685_25423#
+Extracting a_12685_25255#
+Extracting a_21244_23362#
+Extracting a_21244_23278#
+Extracting x2.x4.x3.D
+Extracting a_21244_23457#
+Extracting x2.x4.x4.Y
+Extracting a_25217_23814#
+Extracting a_21244_23589#
+Extracting a_21244_22954#
+Extracting a_23160_23359#
+Extracting a_23186_22757#
+Extracting a_21244_22786#
+Extracting x2.x4.x2.VLAT_PLUS
+Extracting x2.x4.x2.VLAT_MINUS
+Extracting a_23160_22411#
+Extracting a_23901_22760#
+Extracting a_27167_22122#
+Extracting a_25217_21922#
+Extracting x1.XR1.R2
+Extracting x2.x3.x4.Y
+Extracting a_25217_19594#
+Extracting x2.x3.x3.D
+Extracting a_23160_19141#
+Extracting a_21244_18388#
+Extracting x2.x3.x2.VLAT_MINUS
+Extracting a_23186_18223#
+Extracting a_21244_18598#
+Extracting x2.x3.x2.VLAT_PLUS
+Extracting a_23160_18193#
+Extracting a_21244_17765#
+Extracting a_21244_17860#
+Extracting a_21244_17963#
+Extracting a_21244_18095#
+Extracting a_27167_17915#
+Extracting a_23901_18220#
+Extracting a_25217_17702#
+Extracting a_21244_14962#
+Extracting a_21244_14878#
+Extracting x2.x2.x3.D
+Extracting a_21244_15057#
+Extracting x2.x2.x4.Y
+Extracting a_25217_15414#
+Extracting a_21244_15189#
+Extracting a_21244_14554#
+Extracting a_23160_14959#
+Extracting a_23186_14357#
+Extracting a_21244_14386#
+Extracting x2.x2.x2.VLAT_PLUS
+Extracting x2.x2.x2.VLAT_MINUS
+Extracting a_23160_14011#
+Extracting x1.x3.A
+Extracting a_23901_14360#
+Extracting a_27167_13722#
+Extracting a_25217_13522#
+Extracting x2.x1.x4.Y
+Extracting a_25217_11194#
+Extracting x2.x1.x3.D
+Extracting a_23160_10741#
+Extracting a_21244_9988#
+Extracting x2.x1.x2.VLAT_MINUS
+Extracting a_23186_9823#
+Extracting a_21244_10198#
+Extracting x2.x1.x2.VLAT_PLUS
+Extracting a_23160_9793#
+Extracting a_21244_9365#
+Extracting a_21244_9460#
+Extracting a_21244_9563#
+Extracting a_21244_9695#
+Extracting a_27167_9515#
+Extracting a_23901_9820#
+Extracting a_25217_9302#
+Extracting a_21244_6562#
+Extracting a_21244_6478#
+Extracting x11.x3.D
+Extracting a_21244_6657#
+Extracting x11.x4.Y
+Extracting a_25217_7014#
+Extracting a_21244_6789#
+Extracting a_21244_6154#
+Extracting a_23160_6559#
+Extracting a_23186_5957#
+Extracting a_21244_5986#
+Extracting x11.x2.VLAT_PLUS
+Extracting x11.x2.VLAT_MINUS
+Extracting a_23160_5611#
+Extracting a_23901_5960#
+Extracting a_27167_5322#
+Extracting a_25217_5122#
+Extracting VGND
+Extracting VDPWR
+Extracting uio_out[7]
+Extracting uio_out[6]
+Extracting uio_out[5]
+Extracting uio_out[4]
+Extracting uio_out[3]
+Extracting uio_out[2]
+Extracting uio_out[1]
+Extracting uio_out[0]
+Extracting clk
+Extracting uo_out[1]
+Extracting uo_out[0]
+Extracting ua[0]
+Extracting ua[1]
+Extracting ui_in[0]
+Total Nets: 395
+Nets extracted: 210 (0.531646)
+Nets output: 27 (0.068354)
+exttospice finished.
+device missing 1 terminal;
+ connecting remainder to node VGND
+device missing 1 terminal;
+ connecting remainder to node VDPWR
