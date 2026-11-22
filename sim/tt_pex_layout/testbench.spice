@@ -1,0 +1,49 @@
+** sch_path: /home/jrsharp/code/magma/xschem/tt/tt_um_jamesrosssharp_high_speed_comp_test.sch
+**.subckt tt_um_jamesrosssharp_high_speed_comp_test
+x1 CLK VGND VGND 
++ INP   INN     net3    net4    net5    net6    net7    net8 
++ PWM   VGND     VGND    VGND    VGND    VGND    VGND   VGND 
++ VGND VGND     VGND    VGND    VGND    VGND    VGND    VGND  
++ net2  net2    net2    net2    net2    net2    net2    net2 
++ OUT0 OUT1 OUT2 OUT3 OUT4 OUT5 OUT6 OUT7 
++ OUT8 OUT9 net1 net1 net1 net1 net1 net1 
++ VDPWR VGND tt_um_jamesrosssharp_high_speed_comp
+VPLUS INP GND sin(1.1 0.6 1Meg 0 0)
+VCLK1 CLK GND PULSE(0 1.8 0 1NS 1NS 10NS 20NS 0)
+V3 VDPWR GND 1.8
+V1 VGND GND 0
+R1 net1 GND 1Meg m=1
+R2 GND net2 1Meg m=1
+V2 VSS GND 0
+VCLK2 PWM GND PULSE(0 1.8 0 1NS 1NS 22NS 45NS 0)
+**** begin user architecture code
+
+.lib /home/jrsharp/.ciel/sky130A/libs.tech/combined/sky130.lib.spice ${CORNER}
+
+.inc /home/jrsharp/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice
+
+
+.inc ../../tt/tt_um_jamesrosssharp_high_speed_comp.pex.spice
+
+.control
+*  set filetype=ascii 
+  setseed  8
+  reset
+  let run = 1
+  save all
+  op
+  write ${RAW_FILE}
+  reset
+  set appendwrite
+  dowhile run < = 5
+    save vdd i(vvdd) temperat clk INP INN OUT0 OUT1 OUT2 OUT3 OUT4 OUT5 OUT6 OUT7 OUT8 OUT9
+    *save all
+    tran 2n 5u uic
+    write ${RAW_FILE}
+    let run = run + 1
+    reset
+  end
+  quit 0
+.endc
+
+.end
