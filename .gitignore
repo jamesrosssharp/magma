@@ -4,3 +4,4 @@ gemini/
 build/
 *.swp
 src/__pycache__/
+mag_parser.egg-info/

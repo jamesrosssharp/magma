@@ -471,21 +471,30 @@ for pp, c, dl in cell_ports:
 
 from PIL import Image
 
+#am_radio.png    hb_jrs_26_lv_am.png 
+#comparator.png  nao_am_js.png       
+
 # Load the PNG image
-img = Image.open("gds_art/tt1.png")
 
-im_left = 3000
-im_top  = 1000
+for file, im_left, im_top in [("nao_am_js.png", 3000, 1000),
+                              ("hb_jrs_26_lv_am.png", 3000, 4000),
+                              ("comparator.png", 13500, 2000),
+                              ("am_radio.png", 13500, 5000),]: 
 
-pixel_size = 100
+    img = Image.open(f"gds_art/{file}")
 
-im_w = 100
-im_h = 20
+    #im_left = 3000
+    #im_top  = 1000
 
-for x in range(0, im_w):
-    for y in range(0, im_h):
-        pixel = img.getpixel((x, y))
-        if (pixel == 0):
-            top.addRect('metal4', im_left + (x)*pixel_size, im_top + (im_h - y)*pixel_size,im_left+ ((x)+1)*pixel_size, im_top + ((im_h - y)+1)*pixel_size)            
+    pixel_size = 100
+
+    im_w = img.width
+    im_h = img.height
+
+    for x in range(0, im_w):
+        for y in range(0, im_h):
+            pixel = img.getpixel((x, y))
+            if (pixel == 0):
+                top.addRect('metal4', im_left + (x)*pixel_size, im_top + (im_h - y)*pixel_size,im_left+ ((x)+1)*pixel_size, im_top + ((im_h - y)+1)*pixel_size)            
 
 top.writeMagFile(db, "tt/tt_um_jamesrosssharp_high_speed_comp.mag")
