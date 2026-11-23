@@ -476,17 +476,17 @@ from PIL import Image
 
 # Load the PNG image
 
-for file, im_left, im_top in [("nao_am_js.png", 3000, 1000),
-                              ("hb_jrs_26_lv_am.png", 3000, 4000),
-                              ("comparator.png", 13500, 2000),
-                              ("am_radio.png", 13500, 5000),]: 
+for file, im_left, im_top in [("nao_am_js.png", 4800, 4500),
+                              ("hb_jrs_26_lv_am.png", 3000, 41000),
+                              ("comparator.png", 9000, 41500),
+                              ("am_radio.png", 10800, 5000),]: 
 
     img = Image.open(f"gds_art/{file}")
 
     #im_left = 3000
     #im_top  = 1000
 
-    pixel_size = 100
+    pixel_size = 60
 
     im_w = img.width
     im_h = img.height
